@@ -141,13 +141,6 @@ $(document).ready(function(){
               </li>
               <li><a href="<?php echo $country; ?>"><?php echo $text_country; ?></a></li>
               <li><a href="<?php echo $zone; ?>"><?php echo $text_zone; ?></a></li>
-              <li><a href="<?php echo $geo_zone; ?>"><?php echo $text_geo_zone; ?></a></li>
-              <li><a class="parent"><?php echo $text_tax; ?></a>
-                <ul>
-                  <li><a href="<?php echo $tax_class; ?>"><?php echo $text_tax_class; ?></a></li>
-                  <li><a href="<?php echo $tax_rate; ?>"><?php echo $text_tax_rate; ?></a></li>
-                </ul>
-              </li>
               <li><a href="<?php echo $length_class; ?>"><?php echo $text_length_class; ?></a></li>
               <li><a href="<?php echo $weight_class; ?>"><?php echo $text_weight_class; ?></a></li>
             </ul>
@@ -161,7 +154,6 @@ $(document).ready(function(){
           <li><a class="parent"><?php echo $text_sale; ?></a>
             <ul>
               <li><a href="<?php echo $report_sale_order; ?>"><?php echo $text_report_sale_order; ?></a></li>
-              <li><a href="<?php echo $report_sale_tax; ?>"><?php echo $text_report_sale_tax; ?></a></li>
               <li><a href="<?php echo $report_sale_shipping; ?>"><?php echo $text_report_sale_shipping; ?></a></li>
               <li><a href="<?php echo $report_sale_return; ?>"><?php echo $text_report_sale_return; ?></a></li>
               <li><a href="<?php echo $report_sale_coupon; ?>"><?php echo $text_report_sale_coupon; ?></a></li>
@@ -197,13 +189,7 @@ $(document).ready(function(){
       </li>
     </ul>
     <ul class="right">
-      <li id="store"><a onClick="window.open('<?php echo $store; ?>');" class="top"><?php echo $text_front; ?></a>
-        <ul>
-          <?php foreach ($stores as $stores) { ?>
-          <li><a onClick="window.open('<?php echo $stores['href']; ?>');"><?php echo $stores['name']; ?></a></li>
-          <?php } ?>
-        </ul>
-      </li>
+      <li id="store"><a onClick="window.open('<?php echo $store; ?>');" class="top"><?php echo $text_front; ?></a></li>
       <li id="store"><a class="top" href="<?php echo $logout; ?>"><?php echo $text_logout; ?></a></li>
     </ul>
     <script type="text/javascript"><!--

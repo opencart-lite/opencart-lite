@@ -158,7 +158,6 @@ class ControllerCatalogCategory extends Controller {
 		$this->data['entry_meta_keyword'] = $this->language->get('entry_meta_keyword');
 		$this->data['entry_meta_description'] = $this->language->get('entry_meta_description');
 		$this->data['entry_description'] = $this->language->get('entry_description');
-		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_keyword'] = $this->language->get('entry_keyword');
 		$this->data['entry_parent'] = $this->language->get('entry_parent');
 		$this->data['entry_image'] = $this->language->get('entry_image');
@@ -173,7 +172,6 @@ class ControllerCatalogCategory extends Controller {
 
     	$this->data['tab_general'] = $this->language->get('tab_general');
     	$this->data['tab_data'] = $this->language->get('tab_data');
-		$this->data['tab_design'] = $this->language->get('tab_design');
 		
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -247,19 +245,7 @@ class ControllerCatalogCategory extends Controller {
 		} else {
 			$this->data['parent_id'] = 0;
 		}
-						
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
-		
-		if (isset($this->request->post['category_store'])) {
-			$this->data['category_store'] = $this->request->post['category_store'];
-		} elseif (isset($this->request->get['category_id'])) {
-			$this->data['category_store'] = $this->model_catalog_category->getCategoryStores($this->request->get['category_id']);
-		} else {
-			$this->data['category_store'] = array(0);
-		}			
-		
+
 		if (isset($this->request->post['keyword'])) {
 			$this->data['keyword'] = $this->request->post['keyword'];
 		} elseif (!empty($category_info)) {
@@ -319,19 +305,7 @@ class ControllerCatalogCategory extends Controller {
 		} else {
 			$this->data['status'] = 1;
 		}
-				
-		if (isset($this->request->post['category_layout'])) {
-			$this->data['category_layout'] = $this->request->post['category_layout'];
-		} elseif (isset($this->request->get['category_id'])) {
-			$this->data['category_layout'] = $this->model_catalog_category->getCategoryLayouts($this->request->get['category_id']);
-		} else {
-			$this->data['category_layout'] = array();
-		}
 
-		$this->load->model('design/layout');
-		
-		$this->data['layouts'] = $this->model_design_layout->getLayouts();
-						
 		$this->template = 'catalog/category_form.tpl';
 		$this->children = array(
 			'common/header',

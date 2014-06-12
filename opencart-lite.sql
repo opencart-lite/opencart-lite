@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2014 at 09:19 PM
+-- Generation Time: Jun 13, 2014 at 12:14 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -32,10 +32,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   `firstname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `lastname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `company` varchar(32) COLLATE utf8_bin NOT NULL,
-  `company_id` varchar(32) COLLATE utf8_bin NOT NULL,
-  `tax_id` varchar(32) COLLATE utf8_bin NOT NULL,
-  `address_1` varchar(128) COLLATE utf8_bin NOT NULL,
-  `address_2` varchar(128) COLLATE utf8_bin NOT NULL,
+  `address` varchar(128) COLLATE utf8_bin NOT NULL,
   `city` varchar(128) COLLATE utf8_bin NOT NULL,
   `postcode` varchar(10) COLLATE utf8_bin NOT NULL,
   `country_id` int(11) NOT NULL DEFAULT '0',
@@ -61,15 +58,13 @@ CREATE TABLE IF NOT EXISTS `affiliate` (
   `salt` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT '',
   `company` varchar(32) COLLATE utf8_bin NOT NULL,
   `website` varchar(255) COLLATE utf8_bin NOT NULL,
-  `address_1` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `address_2` varchar(128) COLLATE utf8_bin NOT NULL,
+  `address` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '',
   `city` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '',
   `postcode` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT '',
   `country_id` int(11) NOT NULL,
   `zone_id` int(11) NOT NULL,
   `code` varchar(64) COLLATE utf8_bin NOT NULL,
   `commission` decimal(4,2) NOT NULL DEFAULT '0.00',
-  `tax` varchar(64) COLLATE utf8_bin NOT NULL,
   `payment` varchar(6) COLLATE utf8_bin NOT NULL,
   `cheque` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
   `paypal` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -407,19 +402,6 @@ INSERT INTO `category_description` (`category_id`, `language_id`, `name`, `descr
 (56, 1, 'test 24', '', '', ''),
 (57, 1, 'Tablets', '', '', ''),
 (58, 1, 'test 25', '', '', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `category_to_layout`
---
-
-CREATE TABLE IF NOT EXISTS `category_to_layout` (
-  `category_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL,
-  PRIMARY KEY (`category_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -770,7 +752,7 @@ CREATE TABLE IF NOT EXISTS `currency` (
 
 INSERT INTO `currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES
 (1, 'Pound Sterling', 'GBP', '£', '', '2', 0.59380001, 1, '2014-06-12 21:09:52'),
-(2, 'US Dollar', 'USD', '$', '', '2', 1.00000000, 1, '2014-06-12 21:11:04'),
+(2, 'US Dollar', 'USD', '$', '', '2', 1.00000000, 1, '2014-06-12 23:12:18'),
 (3, 'Euro', 'EUR', '', '€', '2', 0.73710001, 1, '2014-06-12 21:09:52');
 
 -- --------------------------------------------------------
@@ -781,7 +763,6 @@ INSERT INTO `currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_r
 
 CREATE TABLE IF NOT EXISTS `customer` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT,
-  `store_id` int(11) NOT NULL DEFAULT '0',
   `firstname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `lastname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `email` varchar(96) COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -811,10 +792,6 @@ CREATE TABLE IF NOT EXISTS `customer` (
 CREATE TABLE IF NOT EXISTS `customer_group` (
   `customer_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `approval` int(1) NOT NULL,
-  `company_id_display` int(1) NOT NULL,
-  `company_id_required` int(1) NOT NULL,
-  `tax_id_display` int(1) NOT NULL,
-  `tax_id_required` int(1) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`customer_group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
@@ -823,8 +800,8 @@ CREATE TABLE IF NOT EXISTS `customer_group` (
 -- Dumping data for table `customer_group`
 --
 
-INSERT INTO `customer_group` (`customer_group_id`, `approval`, `company_id_display`, `company_id_required`, `tax_id_display`, `tax_id_required`, `sort_order`) VALUES
-(1, 0, 1, 0, 0, 1, 1);
+INSERT INTO `customer_group` (`customer_group_id`, `approval`, `sort_order`) VALUES
+(1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -971,7 +948,6 @@ INSERT INTO `extension` (`extension_id`, `type`, `code`) VALUES
 (23, 'payment', 'cod'),
 (22, 'total', 'shipping'),
 (57, 'total', 'sub_total'),
-(58, 'total', 'tax'),
 (59, 'total', 'total'),
 (410, 'module', 'banner'),
 (426, 'module', 'carousel'),
@@ -1040,19 +1016,6 @@ INSERT INTO `information_description` (`information_id`, `language_id`, `title`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `information_to_layout`
---
-
-CREATE TABLE IF NOT EXISTS `information_to_layout` (
-  `information_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL,
-  PRIMARY KEY (`information_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `language`
 --
 
@@ -1115,7 +1078,6 @@ INSERT INTO `layout` (`layout_id`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `layout_route` (
   `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,
   `layout_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
   `route` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`layout_route_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=32 ;
@@ -1124,16 +1086,16 @@ CREATE TABLE IF NOT EXISTS `layout_route` (
 -- Dumping data for table `layout_route`
 --
 
-INSERT INTO `layout_route` (`layout_route_id`, `layout_id`, `store_id`, `route`) VALUES
-(30, 6, 0, 'account'),
-(17, 10, 0, 'affiliate/'),
-(29, 3, 0, 'product/category'),
-(26, 1, 0, 'common/home'),
-(20, 2, 0, 'product/product'),
-(24, 11, 0, 'information/information'),
-(22, 5, 0, 'product/manufacturer'),
-(23, 7, 0, 'checkout/'),
-(31, 8, 0, 'information/contact');
+INSERT INTO `layout_route` (`layout_route_id`, `layout_id`, `route`) VALUES
+(30, 6, 'account'),
+(17, 10, 'affiliate/'),
+(29, 3, 'product/category'),
+(26, 1, 'common/home'),
+(20, 2, 'product/product'),
+(24, 11, 'information/information'),
+(22, 5, 'product/manufacturer'),
+(23, 7, 'checkout/'),
+(31, 8, 'information/contact');
 
 -- --------------------------------------------------------
 
@@ -1343,7 +1305,6 @@ CREATE TABLE IF NOT EXISTS `order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `invoice_no` int(11) NOT NULL DEFAULT '0',
   `invoice_prefix` varchar(26) COLLATE utf8_bin NOT NULL,
-  `store_id` int(11) NOT NULL DEFAULT '0',
   `store_name` varchar(64) COLLATE utf8_bin NOT NULL,
   `store_url` varchar(255) COLLATE utf8_bin NOT NULL,
   `customer_id` int(11) NOT NULL DEFAULT '0',
@@ -1356,10 +1317,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   `payment_firstname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `payment_lastname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `payment_company` varchar(32) COLLATE utf8_bin NOT NULL,
-  `payment_company_id` varchar(32) COLLATE utf8_bin NOT NULL,
-  `payment_tax_id` varchar(32) COLLATE utf8_bin NOT NULL,
-  `payment_address_1` varchar(128) COLLATE utf8_bin NOT NULL,
-  `payment_address_2` varchar(128) COLLATE utf8_bin NOT NULL,
+  `payment_address` varchar(128) COLLATE utf8_bin NOT NULL,
   `payment_city` varchar(128) COLLATE utf8_bin NOT NULL,
   `payment_postcode` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT '',
   `payment_country` varchar(128) COLLATE utf8_bin NOT NULL,
@@ -1372,8 +1330,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   `shipping_firstname` varchar(32) COLLATE utf8_bin NOT NULL,
   `shipping_lastname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `shipping_company` varchar(32) COLLATE utf8_bin NOT NULL,
-  `shipping_address_1` varchar(128) COLLATE utf8_bin NOT NULL,
-  `shipping_address_2` varchar(128) COLLATE utf8_bin NOT NULL,
+  `shipping_address` varchar(128) COLLATE utf8_bin NOT NULL,
   `shipping_city` varchar(128) COLLATE utf8_bin NOT NULL,
   `shipping_postcode` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT '',
   `shipping_country` varchar(128) COLLATE utf8_bin NOT NULL,
@@ -1530,7 +1487,6 @@ CREATE TABLE IF NOT EXISTS `order_product` (
   `quantity` int(4) NOT NULL,
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `tax` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `reward` int(8) NOT NULL,
   PRIMARY KEY (`order_product_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
@@ -1631,7 +1587,6 @@ CREATE TABLE IF NOT EXISTS `product` (
   `shipping` tinyint(1) NOT NULL DEFAULT '1',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `points` int(8) NOT NULL DEFAULT '0',
-  `tax_class_id` int(11) NOT NULL,
   `date_available` date NOT NULL,
   `weight` decimal(15,8) NOT NULL DEFAULT '0.00000000',
   `weight_class_id` int(11) NOT NULL DEFAULT '0',
@@ -1653,26 +1608,26 @@ CREATE TABLE IF NOT EXISTS `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
-(28, 'Product 1', '', '', '', '', '', '', '', 939, 7, 'data/demo/htc_touch_hd_1.jpg', 5, 1, '100.0000', 200, 9, '2009-02-03', '146.40000000', 2, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:06:50', '2011-09-30 01:05:39', 0),
-(29, 'Product 2', '', '', '', '', '', '', '', 999, 6, 'data/demo/palm_treo_pro_1.jpg', 6, 1, '279.9900', 0, 9, '2009-02-03', '133.00000000', 2, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, '2009-02-03 16:42:17', '2011-09-30 01:06:08', 0),
-(30, 'Product 3', '', '', '', '', '', '', '', 7, 6, 'data/demo/canon_eos_5d_1.jpg', 9, 1, '100.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:59:00', '2011-09-30 01:05:23', 0),
-(31, 'Product 4', '', '', '', '', '', '', '', 1000, 6, 'data/demo/nikon_d300_1.jpg', 0, 1, '80.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, '2009-02-03 17:00:10', '2011-09-30 01:06:00', 0),
-(32, 'Product 5', '', '', '', '', '', '', '', 999, 6, 'data/demo/ipod_touch_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 17:07:26', '2011-09-30 01:07:22', 0),
-(33, 'Product 6', '', '', '', '', '', '', '', 1000, 6, 'data/demo/samsung_syncmaster_941bw.jpg', 0, 1, '200.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 17:08:31', '2011-09-30 01:06:29', 0),
-(34, 'Product 7', '', '', '', '', '', '', '', 1000, 6, 'data/demo/ipod_shuffle_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:07:54', '2011-09-30 01:07:17', 0),
-(35, 'Product 8', '', '', '', '', '', '', '', 1000, 5, '', 0, 0, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 18:08:31', '2011-09-30 01:06:17', 0),
-(36, 'Product 9', '', '', '', '', '', '', '', 994, 6, 'data/demo/ipod_nano_1.jpg', 8, 0, '100.0000', 100, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:09:19', '2011-09-30 01:07:12', 0),
-(40, 'product 11', '', '', '', '', '', '', '', 970, 5, 'data/demo/iphone_1.jpg', 8, 1, '101.0000', 0, 9, '2009-02-03', '10.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:12', '2011-09-30 01:06:53', 0),
-(41, 'Product 14', '', '', '', '', '', '', '', 977, 5, 'data/demo/imac_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:26', '2011-09-30 01:06:44', 0),
-(42, 'Product 15', '', '', '', '', '', '', '', 990, 5, 'data/demo/apple_cinema_30.jpg', 8, 1, '100.0000', 400, 9, '2009-02-04', '12.50000000', 1, '1.00000000', '2.00000000', '3.00000000', 1, 1, 2, 0, 1, '2009-02-03 21:07:37', '2011-09-30 00:46:19', 0),
-(43, 'Product 16', '', '', '', '', '', '', '', 929, 5, 'data/demo/macbook_1.jpg', 8, 0, '500.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:07:49', '2011-09-30 01:05:46', 0),
-(44, 'Product 17', '', '', '', '', '', '', '', 1000, 5, 'data/demo/macbook_air_1.jpg', 8, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:00', '2011-09-30 01:05:53', 0),
-(45, 'Product 18', '', '', '', '', '', '', '', 998, 5, 'data/demo/macbook_pro_1.jpg', 8, 1, '2000.0000', 0, 100, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:17', '2011-09-15 22:22:01', 0),
-(46, 'Product 19', '', '', '', '', '', '', '', 1000, 5, 'data/demo/sony_vaio_1.jpg', 10, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:29', '2011-09-30 01:06:39', 0),
-(47, 'Product 21', '', '', '', '', '', '', '', 1000, 5, 'data/demo/hp_1.jpg', 7, 1, '100.0000', 400, 9, '2009-02-03', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 0, 1, '2009-02-03 21:08:40', '2011-09-30 01:05:28', 0),
-(48, 'product 20', 'test 1', '', '', '', '', '', 'test 2', 995, 5, 'data/demo/ipod_classic_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-08', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-08 17:21:51', '2011-09-30 01:07:06', 0),
-(49, 'SAM1', '', '', '', '', '', '', '', 0, 8, 'data/demo/samsung_tab_1.jpg', 0, 1, '199.9900', 0, 9, '2011-04-25', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 1, 1, '2011-04-26 08:57:34', '2011-09-30 01:06:23', 0);
+INSERT INTO `product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
+(28, 'Product 1', '', '', '', '', '', '', '', 939, 7, 'data/demo/htc_touch_hd_1.jpg', 5, 1, '100.0000', 200, '2009-02-03', '146.40000000', 2, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:06:50', '2011-09-30 01:05:39', 0),
+(29, 'Product 2', '', '', '', '', '', '', '', 999, 6, 'data/demo/palm_treo_pro_1.jpg', 6, 1, '279.9900', 0, '2009-02-03', '133.00000000', 2, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, '2009-02-03 16:42:17', '2011-09-30 01:06:08', 0),
+(30, 'Product 3', '', '', '', '', '', '', '', 7, 6, 'data/demo/canon_eos_5d_1.jpg', 9, 1, '100.0000', 0, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:59:00', '2011-09-30 01:05:23', 0),
+(31, 'Product 4', '', '', '', '', '', '', '', 1000, 6, 'data/demo/nikon_d300_1.jpg', 0, 1, '80.0000', 0, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, '2009-02-03 17:00:10', '2011-09-30 01:06:00', 0),
+(32, 'Product 5', '', '', '', '', '', '', '', 999, 6, 'data/demo/ipod_touch_1.jpg', 8, 1, '100.0000', 0, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 17:07:26', '2011-09-30 01:07:22', 0),
+(33, 'Product 6', '', '', '', '', '', '', '', 1000, 6, 'data/demo/samsung_syncmaster_941bw.jpg', 0, 1, '200.0000', 0, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 17:08:31', '2011-09-30 01:06:29', 0),
+(34, 'Product 7', '', '', '', '', '', '', '', 1000, 6, 'data/demo/ipod_shuffle_1.jpg', 8, 1, '100.0000', 0, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:07:54', '2011-09-30 01:07:17', 0),
+(35, 'Product 8', '', '', '', '', '', '', '', 1000, 5, '', 0, 0, '100.0000', 0, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 18:08:31', '2011-09-30 01:06:17', 0),
+(36, 'Product 9', '', '', '', '', '', '', '', 994, 6, 'data/demo/ipod_nano_1.jpg', 8, 0, '100.0000', 100, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:09:19', '2011-09-30 01:07:12', 0),
+(40, 'product 11', '', '', '', '', '', '', '', 970, 5, 'data/demo/iphone_1.jpg', 8, 1, '101.0000', 0, '2009-02-03', '10.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:12', '2011-09-30 01:06:53', 0),
+(41, 'Product 14', '', '', '', '', '', '', '', 977, 5, 'data/demo/imac_1.jpg', 8, 1, '100.0000', 0, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:26', '2011-09-30 01:06:44', 0),
+(42, 'Product 15', '', '', '', '', '', '', '', 990, 5, 'data/demo/apple_cinema_30.jpg', 8, 1, '100.0000', 400, '2009-02-04', '12.50000000', 1, '1.00000000', '2.00000000', '3.00000000', 1, 1, 2, 0, 1, '2009-02-03 21:07:37', '2011-09-30 00:46:19', 0),
+(43, 'Product 16', '', '', '', '', '', '', '', 929, 5, 'data/demo/macbook_1.jpg', 8, 0, '500.0000', 0, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:07:49', '2011-09-30 01:05:46', 0),
+(44, 'Product 17', '', '', '', '', '', '', '', 1000, 5, 'data/demo/macbook_air_1.jpg', 8, 1, '1000.0000', 0, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:00', '2011-09-30 01:05:53', 0),
+(45, 'Product 18', '', '', '', '', '', '', '', 998, 5, 'data/demo/macbook_pro_1.jpg', 8, 1, '2000.0000', 0, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:17', '2011-09-15 22:22:01', 0),
+(46, 'Product 19', '', '', '', '', '', '', '', 1000, 5, 'data/demo/sony_vaio_1.jpg', 10, 1, '1000.0000', 0, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:29', '2011-09-30 01:06:39', 0),
+(47, 'Product 21', '', '', '', '', '', '', '', 1000, 5, 'data/demo/hp_1.jpg', 7, 1, '100.0000', 400, '2009-02-03', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 0, 1, '2009-02-03 21:08:40', '2011-09-30 01:05:28', 0),
+(48, 'product 20', 'test 1', '', '', '', '', '', 'test 2', 995, 5, 'data/demo/ipod_classic_1.jpg', 8, 1, '100.0000', 0, '2009-02-08', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-08 17:21:51', '2011-09-30 01:07:06', 0),
+(49, 'SAM1', '', '', '', '', '', '', '', 0, 8, 'data/demo/samsung_tab_1.jpg', 0, 1, '199.9900', 0, '2011-04-25', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 1, 1, '2011-04-26 08:57:34', '2011-09-30 01:06:23', 0);
 
 -- --------------------------------------------------------
 
@@ -2082,19 +2037,6 @@ CREATE TABLE IF NOT EXISTS `product_to_download` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_to_layout`
---
-
-CREATE TABLE IF NOT EXISTS `product_to_layout` (
-  `product_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `return`
 --
 
@@ -2233,7 +2175,6 @@ CREATE TABLE IF NOT EXISTS `review` (
 
 CREATE TABLE IF NOT EXISTS `setting` (
   `setting_id` int(11) NOT NULL AUTO_INCREMENT,
-  `store_id` int(11) NOT NULL DEFAULT '0',
   `group` varchar(32) COLLATE utf8_bin NOT NULL,
   `key` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
   `value` text COLLATE utf8_bin NOT NULL,
@@ -2245,133 +2186,133 @@ CREATE TABLE IF NOT EXISTS `setting` (
 -- Dumping data for table `setting`
 --
 
-INSERT INTO `setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `serialized`) VALUES
-(1, 0, 'shipping', 'shipping_sort_order', '3', 0),
-(2, 0, 'sub_total', 'sub_total_sort_order', '1', 0),
-(3, 0, 'sub_total', 'sub_total_status', '1', 0),
-(4, 0, 'tax', 'tax_status', '1', 0),
-(5, 0, 'total', 'total_sort_order', '9', 0),
-(6, 0, 'total', 'total_status', '1', 0),
-(7, 0, 'tax', 'tax_sort_order', '5', 0),
-(8, 0, 'free_checkout', 'free_checkout_sort_order', '1', 0),
-(9, 0, 'cod', 'cod_sort_order', '5', 0),
-(10, 0, 'cod', 'cod_total', '0.01', 0),
-(11, 0, 'cod', 'cod_order_status_id', '1', 0),
-(12, 0, 'cod', 'cod_geo_zone_id', '0', 0),
-(13, 0, 'cod', 'cod_status', '1', 0),
-(14, 0, 'shipping', 'shipping_status', '1', 0),
-(15, 0, 'shipping', 'shipping_estimator', '1', 0),
-(16, 0, 'config', 'config_google_analytics', '', 0),
-(17, 0, 'config', 'config_error_filename', 'error.txt', 0),
-(18, 0, 'config', 'config_error_log', '1', 0),
-(19, 0, 'config', 'config_error_display', '1', 0),
-(20, 0, 'config', 'config_compression', '0', 0),
-(129, 0, 'config', 'config_encryption', '6785ff246c23b6924757a4193db67500', 0),
-(22, 0, 'config', 'config_maintenance', '0', 0),
-(23, 0, 'config', 'config_account_mail', '0', 0),
-(24, 0, 'config', 'config_alert_emails', '', 0),
-(25, 0, 'config', 'config_use_ssl', '0', 0),
-(26, 0, 'config', 'config_seo_url', '0', 0),
-(27, 0, 'coupon', 'coupon_sort_order', '4', 0),
-(28, 0, 'coupon', 'coupon_status', '1', 0),
-(29, 0, 'config', 'config_alert_mail', '0', 0),
-(30, 0, 'config', 'config_smtp_username', '', 0),
-(31, 0, 'config', 'config_smtp_password', '', 0),
-(32, 0, 'config', 'config_smtp_port', '25', 0),
-(33, 0, 'config', 'config_smtp_timeout', '5', 0),
-(34, 0, 'flat', 'flat_sort_order', '1', 0),
-(35, 0, 'flat', 'flat_status', '1', 0),
-(36, 0, 'flat', 'flat_geo_zone_id', '0', 0),
-(37, 0, 'flat', 'flat_tax_class_id', '9', 0),
-(38, 0, 'carousel', 'carousel_module', 'a:1:{i:0;a:9:{s:9:"banner_id";s:1:"8";s:5:"limit";s:1:"5";s:6:"scroll";s:1:"3";s:5:"width";s:2:"80";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"1";s:10:"sort_order";s:2:"-1";}}', 1),
-(39, 0, 'featured', 'featured_product', '43,40,42,49,46,47,28', 0),
-(40, 0, 'featured', 'featured_module', 'a:1:{i:0;a:7:{s:5:"limit";s:1:"6";s:11:"image_width";s:2:"80";s:12:"image_height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:11:"content_top";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"2";}}', 1),
-(41, 0, 'flat', 'flat_cost', '5.00', 0),
-(42, 0, 'credit', 'credit_sort_order', '7', 0),
-(43, 0, 'credit', 'credit_status', '1', 0),
-(44, 0, 'config', 'config_smtp_host', '', 0),
-(45, 0, 'config', 'config_image_cart_height', '47', 0),
-(46, 0, 'config', 'config_mail_protocol', 'mail', 0),
-(47, 0, 'config', 'config_mail_parameter', '', 0),
-(48, 0, 'config', 'config_image_wishlist_height', '47', 0),
-(49, 0, 'config', 'config_image_cart_width', '47', 0),
-(50, 0, 'config', 'config_image_wishlist_width', '47', 0),
-(51, 0, 'config', 'config_image_compare_height', '90', 0),
-(52, 0, 'config', 'config_image_compare_width', '90', 0),
-(53, 0, 'reward', 'reward_sort_order', '2', 0),
-(54, 0, 'reward', 'reward_status', '1', 0),
-(55, 0, 'config', 'config_image_related_height', '80', 0),
-(56, 0, 'affiliate', 'affiliate_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:2:"10";s:8:"position";s:12:"column_right";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
-(57, 0, 'category', 'category_module', 'a:2:{i:0;a:5:{s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:5:"count";s:1:"0";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}i:1;a:5:{s:9:"layout_id";s:1:"2";s:8:"position";s:11:"column_left";s:5:"count";s:1:"0";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
-(58, 0, 'config', 'config_image_related_width', '80', 0),
-(59, 0, 'config', 'config_image_additional_height', '74', 0),
-(60, 0, 'account', 'account_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"6";s:8:"position";s:12:"column_right";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
-(61, 0, 'config', 'config_image_additional_width', '74', 0),
-(62, 0, 'config', 'config_image_manufacturer_height', '80', 0),
-(63, 0, 'config', 'config_image_manufacturer_width', '80', 0),
-(64, 0, 'config', 'config_image_category_height', '80', 0),
-(65, 0, 'config', 'config_image_category_width', '80', 0),
-(66, 0, 'config', 'config_image_product_height', '80', 0),
-(67, 0, 'config', 'config_image_product_width', '80', 0),
-(68, 0, 'config', 'config_image_popup_height', '500', 0),
-(69, 0, 'config', 'config_image_popup_width', '500', 0),
-(70, 0, 'config', 'config_image_thumb_height', '228', 0),
-(71, 0, 'config', 'config_image_thumb_width', '228', 0),
-(72, 0, 'config', 'config_icon', 'data/cart.png', 0),
-(73, 0, 'config', 'config_logo', 'data/logo.png', 0),
-(74, 0, 'config', 'config_cart_weight', '1', 0),
-(75, 0, 'config', 'config_upload_allowed', 'jpg, JPG, jpeg, gif, png, txt', 0),
-(76, 0, 'config', 'config_review_status', '1', 0),
-(77, 0, 'config', 'config_download', '1', 0),
-(78, 0, 'config', 'config_return_status_id', '2', 0),
-(79, 0, 'config', 'config_complete_status_id', '5', 0),
-(80, 0, 'config', 'config_order_status_id', '1', 0),
-(81, 0, 'config', 'config_stock_status_id', '5', 0),
-(82, 0, 'config', 'config_stock_checkout', '0', 0),
-(83, 0, 'config', 'config_stock_warning', '0', 0),
-(84, 0, 'config', 'config_stock_display', '0', 0),
-(85, 0, 'config', 'config_commission', '5', 0),
-(86, 0, 'config', 'config_affiliate_id', '4', 0),
-(87, 0, 'config', 'config_checkout_id', '5', 0),
-(88, 0, 'config', 'config_guest_checkout', '1', 0),
-(89, 0, 'config', 'config_account_id', '3', 0),
-(91, 0, 'config', 'config_customer_price', '0', 0),
-(92, 0, 'config', 'config_customer_group_id', '1', 0),
-(93, 0, 'voucher', 'voucher_sort_order', '8', 0),
-(94, 0, 'voucher', 'voucher_status', '1', 0),
-(95, 0, 'config', 'config_length_class_id', '1', 0),
-(96, 0, 'config', 'config_invoice_prefix', 'INV-2012-00', 0),
-(97, 0, 'config', 'config_tax', '1', 0),
-(98, 0, 'config', 'config_tax_customer', 'shipping', 0),
-(99, 0, 'config', 'config_tax_default', 'shipping', 0),
-(100, 0, 'config', 'config_admin_limit', '20', 0),
-(101, 0, 'config', 'config_catalog_limit', '15', 0),
-(102, 0, 'free_checkout', 'free_checkout_status', '1', 0),
-(103, 0, 'free_checkout', 'free_checkout_order_status_id', '1', 0),
-(104, 0, 'config', 'config_weight_class_id', '1', 0),
-(105, 0, 'config', 'config_currency_auto', '1', 0),
-(106, 0, 'config', 'config_currency', 'USD', 0),
-(107, 0, 'slideshow', 'slideshow_module', 'a:1:{i:0;a:7:{s:9:"banner_id";s:1:"7";s:5:"width";s:3:"980";s:6:"height";s:3:"280";s:9:"layout_id";s:1:"1";s:8:"position";s:11:"content_top";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
-(108, 0, 'banner', 'banner_module', 'a:1:{i:0;a:7:{s:9:"banner_id";s:1:"6";s:5:"width";s:3:"182";s:6:"height";s:3:"182";s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"3";}}', 1),
-(109, 0, 'config', 'config_name', 'Your Store', 0),
-(110, 0, 'config', 'config_owner', 'Your Name', 0),
-(111, 0, 'config', 'config_address', 'Address 1', 0),
-(127, 0, 'config', 'config_email', 'opencart.lite@gmail.com', 0),
-(113, 0, 'config', 'config_telephone', '123456789', 0),
-(114, 0, 'config', 'config_fax', '', 0),
-(115, 0, 'config', 'config_title', 'Your Store', 0),
-(116, 0, 'config', 'config_meta_description', 'My Store', 0),
-(117, 0, 'config', 'config_template', 'default', 0),
-(118, 0, 'config', 'config_layout_id', '4', 0),
-(119, 0, 'config', 'config_country_id', '222', 0),
-(120, 0, 'config', 'config_zone_id', '3563', 0),
-(121, 0, 'config', 'config_language', 'en', 0),
-(122, 0, 'config', 'config_admin_language', 'en', 0),
-(123, 0, 'config', 'config_order_edit', '100', 0),
-(124, 0, 'config', 'config_voucher_min', '1', 0),
-(125, 0, 'config', 'config_voucher_max', '1000', 0),
-(126, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:"1";}', 1),
-(128, 0, 'config', 'config_url', 'http://localhost/opencart-lite/', 0);
+INSERT INTO `setting` (`setting_id`, `group`, `key`, `value`, `serialized`) VALUES
+(1, 'shipping', 'shipping_sort_order', '3', 0),
+(2, 'sub_total', 'sub_total_sort_order', '1', 0),
+(3, 'sub_total', 'sub_total_status', '1', 0),
+(4, 'tax', 'tax_status', '1', 0),
+(5, 'total', 'total_sort_order', '9', 0),
+(6, 'total', 'total_status', '1', 0),
+(7, 'tax', 'tax_sort_order', '5', 0),
+(8, 'free_checkout', 'free_checkout_sort_order', '1', 0),
+(9, 'cod', 'cod_sort_order', '5', 0),
+(10, 'cod', 'cod_total', '0.01', 0),
+(11, 'cod', 'cod_order_status_id', '1', 0),
+(12, 'cod', 'cod_geo_zone_id', '0', 0),
+(13, 'cod', 'cod_status', '1', 0),
+(14, 'shipping', 'shipping_status', '1', 0),
+(15, 'shipping', 'shipping_estimator', '1', 0),
+(16, 'config', 'config_google_analytics', '', 0),
+(17, 'config', 'config_error_filename', 'error.txt', 0),
+(18, 'config', 'config_error_log', '1', 0),
+(19, 'config', 'config_error_display', '1', 0),
+(20, 'config', 'config_compression', '0', 0),
+(129, 'config', 'config_encryption', '6785ff246c23b6924757a4193db67500', 0),
+(22, 'config', 'config_maintenance', '0', 0),
+(23, 'config', 'config_account_mail', '0', 0),
+(24, 'config', 'config_alert_emails', '', 0),
+(25, 'config', 'config_use_ssl', '0', 0),
+(26, 'config', 'config_seo_url', '0', 0),
+(27, 'coupon', 'coupon_sort_order', '4', 0),
+(28, 'coupon', 'coupon_status', '1', 0),
+(29, 'config', 'config_alert_mail', '0', 0),
+(30, 'config', 'config_smtp_username', '', 0),
+(31, 'config', 'config_smtp_password', '', 0),
+(32, 'config', 'config_smtp_port', '25', 0),
+(33, 'config', 'config_smtp_timeout', '5', 0),
+(34, 'flat', 'flat_sort_order', '1', 0),
+(35, 'flat', 'flat_status', '1', 0),
+(36, 'flat', 'flat_geo_zone_id', '0', 0),
+(37, 'flat', 'flat_tax_class_id', '9', 0),
+(38, 'carousel', 'carousel_module', 'a:1:{i:0;a:9:{s:9:"banner_id";s:1:"8";s:5:"limit";s:1:"5";s:6:"scroll";s:1:"3";s:5:"width";s:2:"80";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"1";s:10:"sort_order";s:2:"-1";}}', 1),
+(39, 'featured', 'featured_product', '43,40,42,49,46,47,28', 0),
+(40, 'featured', 'featured_module', 'a:1:{i:0;a:7:{s:5:"limit";s:1:"6";s:11:"image_width";s:2:"80";s:12:"image_height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:11:"content_top";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"2";}}', 1),
+(41, 'flat', 'flat_cost', '5.00', 0),
+(42, 'credit', 'credit_sort_order', '7', 0),
+(43, 'credit', 'credit_status', '1', 0),
+(44, 'config', 'config_smtp_host', '', 0),
+(45, 'config', 'config_image_cart_height', '47', 0),
+(46, 'config', 'config_mail_protocol', 'mail', 0),
+(47, 'config', 'config_mail_parameter', '', 0),
+(48, 'config', 'config_image_wishlist_height', '47', 0),
+(49, 'config', 'config_image_cart_width', '47', 0),
+(50, 'config', 'config_image_wishlist_width', '47', 0),
+(51, 'config', 'config_image_compare_height', '90', 0),
+(52, 'config', 'config_image_compare_width', '90', 0),
+(53, 'reward', 'reward_sort_order', '2', 0),
+(54, 'reward', 'reward_status', '1', 0),
+(55, 'config', 'config_image_related_height', '80', 0),
+(56, 'affiliate', 'affiliate_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:2:"10";s:8:"position";s:12:"column_right";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
+(57, 'category', 'category_module', 'a:2:{i:0;a:5:{s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:5:"count";s:1:"0";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}i:1;a:5:{s:9:"layout_id";s:1:"2";s:8:"position";s:11:"column_left";s:5:"count";s:1:"0";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
+(58, 'config', 'config_image_related_width', '80', 0),
+(59, 'config', 'config_image_additional_height', '74', 0),
+(60, 'account', 'account_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"6";s:8:"position";s:12:"column_right";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
+(61, 'config', 'config_image_additional_width', '74', 0),
+(62, 'config', 'config_image_manufacturer_height', '80', 0),
+(63, 'config', 'config_image_manufacturer_width', '80', 0),
+(64, 'config', 'config_image_category_height', '80', 0),
+(65, 'config', 'config_image_category_width', '80', 0),
+(66, 'config', 'config_image_product_height', '80', 0),
+(67, 'config', 'config_image_product_width', '80', 0),
+(68, 'config', 'config_image_popup_height', '500', 0),
+(69, 'config', 'config_image_popup_width', '500', 0),
+(70, 'config', 'config_image_thumb_height', '228', 0),
+(71, 'config', 'config_image_thumb_width', '228', 0),
+(72, 'config', 'config_icon', 'data/cart.png', 0),
+(73, 'config', 'config_logo', 'data/logo.png', 0),
+(74, 'config', 'config_cart_weight', '1', 0),
+(75, 'config', 'config_upload_allowed', 'jpg, JPG, jpeg, gif, png, txt', 0),
+(76, 'config', 'config_review_status', '1', 0),
+(77, 'config', 'config_download', '1', 0),
+(78, 'config', 'config_return_status_id', '2', 0),
+(79, 'config', 'config_complete_status_id', '5', 0),
+(80, 'config', 'config_order_status_id', '1', 0),
+(81, 'config', 'config_stock_status_id', '5', 0),
+(82, 'config', 'config_stock_checkout', '0', 0),
+(83, 'config', 'config_stock_warning', '0', 0),
+(84, 'config', 'config_stock_display', '0', 0),
+(85, 'config', 'config_commission', '5', 0),
+(86, 'config', 'config_affiliate_id', '4', 0),
+(87, 'config', 'config_checkout_id', '5', 0),
+(88, 'config', 'config_guest_checkout', '1', 0),
+(89, 'config', 'config_account_id', '3', 0),
+(91, 'config', 'config_customer_price', '0', 0),
+(92, 'config', 'config_customer_group_id', '1', 0),
+(93, 'voucher', 'voucher_sort_order', '8', 0),
+(94, 'voucher', 'voucher_status', '1', 0),
+(95, 'config', 'config_length_class_id', '1', 0),
+(96, 'config', 'config_invoice_prefix', 'INV-2012-00', 0),
+(97, 'config', 'config_tax', '1', 0),
+(98, 'config', 'config_tax_customer', 'shipping', 0),
+(99, 'config', 'config_tax_default', 'shipping', 0),
+(100, 'config', 'config_admin_limit', '20', 0),
+(101, 'config', 'config_catalog_limit', '15', 0),
+(102, 'free_checkout', 'free_checkout_status', '1', 0),
+(103, 'free_checkout', 'free_checkout_order_status_id', '1', 0),
+(104, 'config', 'config_weight_class_id', '1', 0),
+(105, 'config', 'config_currency_auto', '1', 0),
+(106, 'config', 'config_currency', 'USD', 0),
+(107, 'slideshow', 'slideshow_module', 'a:1:{i:0;a:7:{s:9:"banner_id";s:1:"7";s:5:"width";s:3:"980";s:6:"height";s:3:"280";s:9:"layout_id";s:1:"1";s:8:"position";s:11:"content_top";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
+(108, 'banner', 'banner_module', 'a:1:{i:0;a:7:{s:9:"banner_id";s:1:"6";s:5:"width";s:3:"182";s:6:"height";s:3:"182";s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"3";}}', 1),
+(109, 'config', 'config_name', 'Your Store', 0),
+(110, 'config', 'config_owner', 'Your Name', 0),
+(111, 'config', 'config_address', 'Address 1', 0),
+(127, 'config', 'config_email', 'opencart.lite@gmail.com', 0),
+(113, 'config', 'config_telephone', '123456789', 0),
+(114, 'config', 'config_fax', '', 0),
+(115, 'config', 'config_title', 'Your Store', 0),
+(116, 'config', 'config_meta_description', 'My Store', 0),
+(117, 'config', 'config_template', 'default', 0),
+(118, 'config', 'config_layout_id', '4', 0),
+(119, 'config', 'config_country_id', '222', 0),
+(120, 'config', 'config_zone_id', '3563', 0),
+(121, 'config', 'config_language', 'en', 0),
+(122, 'config', 'config_admin_language', 'en', 0),
+(123, 'config', 'config_order_edit', '100', 0),
+(124, 'config', 'config_voucher_min', '1', 0),
+(125, 'config', 'config_voucher_max', '1000', 0),
+(126, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:"1";}', 1),
+(128, 'config', 'config_url', 'http://localhost/opencart-lite/', 0);
 
 -- --------------------------------------------------------
 
@@ -6571,30 +6512,6 @@ INSERT INTO `zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3967, 190, 'Obalno-kraška', '12', 1),
 (3968, 33, 'Ruse', '', 1),
 (3969, 101, 'Alborz', 'ALB', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `zone_to_geo_zone`
---
-
-CREATE TABLE IF NOT EXISTS `zone_to_geo_zone` (
-  `zone_to_geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
-  `country_id` int(11) NOT NULL,
-  `zone_id` int(11) NOT NULL DEFAULT '0',
-  `geo_zone_id` int(11) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`zone_to_geo_zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=66 ;
-
---
--- Dumping data for table `zone_to_geo_zone`
---
-
-INSERT INTO `zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id`, `geo_zone_id`, `date_added`, `date_modified`) VALUES
-(57, 222, 0, 3, '2010-02-26 22:33:24', '0000-00-00 00:00:00'),
-(65, 222, 0, 4, '2010-12-15 15:18:13', '0000-00-00 00:00:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

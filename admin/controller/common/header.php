@@ -43,7 +43,6 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_extension'] = $this->language->get('text_extension');
 		$this->data['text_feed'] = $this->language->get('text_feed');
 		$this->data['text_front'] = $this->language->get('text_front');
-		$this->data['text_geo_zone'] = $this->language->get('text_geo_zone');
 		$this->data['text_dashboard'] = $this->language->get('text_dashboard');
 		$this->data['text_help'] = $this->language->get('text_help');
 		$this->data['text_information'] = $this->language->get('text_information');
@@ -87,9 +86,6 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_setting'] = $this->language->get('text_setting');
 		$this->data['text_stock_status'] = $this->language->get('text_stock_status');
 		$this->data['text_system'] = $this->language->get('text_system');
-		$this->data['text_tax'] = $this->language->get('text_tax');
-		$this->data['text_tax_class'] = $this->language->get('text_tax_class');
-		$this->data['text_tax_rate'] = $this->language->get('text_tax_rate');
 		$this->data['text_total'] = $this->language->get('text_total');
 		$this->data['text_user'] = $this->language->get('text_user');
 		$this->data['text_user_group'] = $this->language->get('text_user_group');
@@ -123,7 +119,6 @@ class ControllerCommonHeader extends Controller {
 			$this->data['download'] = $this->url->link('catalog/download', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['error_log'] = $this->url->link('tool/error_log', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['feed'] = $this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL');			
-			$this->data['geo_zone'] = $this->url->link('localisation/geo_zone', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['information'] = $this->url->link('catalog/information', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['language'] = $this->url->link('localisation/language', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['layout'] = $this->url->link('design/layout', 'token=' . $this->session->data['token'], 'SSL');
@@ -157,8 +152,6 @@ class ControllerCommonHeader extends Controller {
 			$this->data['setting'] = $this->url->link('setting/store', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['store'] = HTTP_CATALOG;
 			$this->data['stock_status'] = $this->url->link('localisation/stock_status', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['tax_class'] = $this->url->link('localisation/tax_class', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['tax_rate'] = $this->url->link('localisation/tax_rate', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['total'] = $this->url->link('extension/total', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['user'] = $this->url->link('user/user', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['user_group'] = $this->url->link('user/user_permission', 'token=' . $this->session->data['token'], 'SSL');
@@ -168,18 +161,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['length_class'] = $this->url->link('localisation/length_class', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['zone'] = $this->url->link('localisation/zone', 'token=' . $this->session->data['token'], 'SSL');
 			
-			$this->data['stores'] = array();
-			
-			$this->load->model('setting/store');
-			
-			$results = $this->model_setting_store->getStores();
-			
-			foreach ($results as $result) {
-				$this->data['stores'][] = array(
-					'name' => $result['name'],
-					'href' => $result['url']
-				);
-			}			
+
 		}
 		
 		$this->template = 'common/header.tpl';
