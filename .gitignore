@@ -1,6 +1,5 @@
+.idea
 .htaccess
-config.php
-admin/config.php
 
 !index.html
 
