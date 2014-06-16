@@ -132,15 +132,15 @@ class ControllerCheckoutPaymentMethod extends Controller {
 		// Validate if payment address has been set.
 		$this->load->model('account/address');
 		
-		if ($this->customer->isLogged() && isset($this->session->data['payment_address_id'])) {
+		/*if ($this->customer->isLogged() && isset($this->session->data['payment_address_id'])) {
 			$payment_address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);		
 		} elseif (isset($this->session->data['guest'])) {
 			$payment_address = $this->session->data['guest']['payment'];
-		}	
+		}
 				
 		if (empty($payment_address)) {
 			$json['redirect'] = $this->url->link('checkout/checkout', '', 'SSL');
-		}		
+		}*/
 		
 		// Validate cart has products and has stock.			
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {

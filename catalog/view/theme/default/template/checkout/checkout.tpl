@@ -613,28 +613,31 @@ $('#button-shipping-method').live('click', function() {
 });
 
 $('#button-payment-method').live('click', function() {
+
 	$.ajax({
 		url: 'index.php?route=checkout/payment_method/validate', 
 		type: 'post',
 		data: $('#payment-method input[type=\'radio\']:checked, #payment-method input[type=\'checkbox\']:checked, #payment-method textarea'),
 		dataType: 'json',
 		beforeSend: function() {
+
 			$('#button-payment-method').attr('disabled', true);
 			$('#button-payment-method').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
 		},	
 		complete: function() {
+
 			$('#button-payment-method').attr('disabled', false);
 			$('.wait').remove();
 		},			
 		success: function(json) {
 			$('.warning, .error').remove();
-			
+
 			if (json['redirect']) {
 				location = json['redirect'];
 			} else if (json['error']) {
 				if (json['error']['warning']) {
 					$('#payment-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
-					
+
 					$('.warning').fadeIn('slow');
 				}			
 			} else {
@@ -642,6 +645,7 @@ $('#button-payment-method').live('click', function() {
 					url: 'index.php?route=checkout/confirm',
 					dataType: 'html',
 					success: function(html) {
+
 						$('#confirm .checkout-content').html(html);
 						
 						$('#payment-method .checkout-content').slideUp('slow');
