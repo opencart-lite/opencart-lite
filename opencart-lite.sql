@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2014 at 12:14 AM
+-- Generation Time: Jun 16, 2014 at 09:04 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -29,8 +29,6 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `address` (
   `address_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
-  `firstname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `lastname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `company` varchar(32) COLLATE utf8_bin NOT NULL,
   `address` varchar(128) COLLATE utf8_bin NOT NULL,
   `city` varchar(128) COLLATE utf8_bin NOT NULL,
@@ -39,7 +37,14 @@ CREATE TABLE IF NOT EXISTS `address` (
   `zone_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`address_id`),
   KEY `customer_id` (`customer_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `address`
+--
+
+INSERT INTO `address` (`address_id`, `customer_id`, `company`, `address`, `city`, `postcode`, `country_id`, `zone_id`) VALUES
+(2, 3, 'iouio', 'kkkkjjjj', 'kkjkl', '7868', 203, 3081);
 
 -- --------------------------------------------------------
 
@@ -235,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `banner_image` (
   `link` varchar(255) COLLATE utf8_bin NOT NULL,
   `image` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`banner_image_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=78 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=79 ;
 
 --
 -- Dumping data for table `banner_image`
@@ -243,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `banner_image` (
 
 INSERT INTO `banner_image` (`banner_image_id`, `banner_id`, `link`, `image`) VALUES
 (54, 7, 'index.php?route=product/product&amp;path=57&amp;product_id=49', 'data/demo/samsung_banner.jpg'),
-(77, 6, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=7', 'data/demo/hp_banner.jpg'),
+(78, 6, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=7', 'data/demo/hp_banner.jpg'),
 (75, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=5', 'data/demo/htc_logo.jpg'),
 (73, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=8', 'data/demo/apple_logo.jpg'),
 (74, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=9', 'data/demo/canon_logo.jpg'),
@@ -271,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `banner_image_description` (
 
 INSERT INTO `banner_image_description` (`banner_image_id`, `language_id`, `banner_id`, `title`) VALUES
 (54, 1, 7, 'Samsung Tab 10.1'),
-(77, 1, 6, 'HP Banner'),
+(78, 1, 6, 'HP Banner'),
 (75, 1, 8, 'HTC'),
 (74, 1, 8, 'Canon'),
 (73, 1, 8, 'Apple'),
@@ -305,7 +310,7 @@ CREATE TABLE IF NOT EXISTS `category` (
 INSERT INTO `category` (`category_id`, `image`, `parent_id`, `top`, `column`, `sort_order`, `status`, `date_added`, `date_modified`) VALUES
 (25, '', 0, 1, 1, 3, 1, '2009-01-31 01:04:25', '2011-05-30 12:14:55'),
 (27, '', 20, 0, 0, 2, 1, '2009-01-31 01:55:34', '2010-08-22 06:32:15'),
-(20, 'data/demo/compaq_presario.jpg', 0, 1, 1, 1, 1, '2009-01-05 21:49:43', '2011-07-16 02:14:42'),
+(20, 'data/demo/compaq_presario.jpg', 0, 1, 1, 1, 1, '2009-01-05 21:49:43', '2014-06-13 01:15:42'),
 (24, '', 0, 1, 1, 5, 1, '2009-01-20 02:36:26', '2011-05-30 12:15:18'),
 (18, 'data/demo/hp_2.jpg', 0, 1, 0, 2, 1, '2009-01-05 21:49:15', '2011-05-30 12:13:55'),
 (17, '', 0, 1, 1, 4, 1, '2009-01-03 21:08:57', '2011-05-30 12:15:11'),
@@ -751,9 +756,9 @@ CREATE TABLE IF NOT EXISTS `currency` (
 --
 
 INSERT INTO `currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES
-(1, 'Pound Sterling', 'GBP', '£', '', '2', 0.59380001, 1, '2014-06-12 21:09:52'),
-(2, 'US Dollar', 'USD', '$', '', '2', 1.00000000, 1, '2014-06-12 23:12:18'),
-(3, 'Euro', 'EUR', '', '€', '2', 0.73710001, 1, '2014-06-12 21:09:52');
+(1, 'Pound Sterling', 'GBP', '£', '', '2', 0.58939999, 1, '2014-06-13 21:16:26'),
+(2, 'US Dollar', 'USD', '$', '', '2', 1.00000000, 1, '2014-06-13 21:16:26'),
+(3, 'Euro', 'EUR', '', '€', '2', 0.73710001, 1, '2014-06-13 01:56:58');
 
 -- --------------------------------------------------------
 
@@ -773,7 +778,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `cart` text COLLATE utf8_bin,
   `wishlist` text COLLATE utf8_bin,
   `newsletter` tinyint(1) NOT NULL DEFAULT '0',
-  `address_id` int(11) NOT NULL DEFAULT '0',
+  `address_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
   `ip` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL,
@@ -781,7 +786,14 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `token` varchar(255) COLLATE utf8_bin NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`customer_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`customer_id`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `password`, `salt`, `cart`, `wishlist`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
+(3, 'uuu', 'iii', 'ion@ion.com', '6767878', '8888999', '6257b591b2459217e4dcb5eb891d66c2b6710aa7', 'cd3741401', 'a:1:{i:40;i:1;}', '', 0, 2, 1, '127.0.0.1', 1, 1, '', '2014-06-14 00:12:19');
 
 -- --------------------------------------------------------
 
@@ -837,7 +849,15 @@ CREATE TABLE IF NOT EXISTS `customer_ip` (
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`customer_ip_id`),
   KEY `ip` (`ip`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `customer_ip`
+--
+
+INSERT INTO `customer_ip` (`customer_ip_id`, `customer_id`, `ip`, `date_added`) VALUES
+(1, 2, '127.0.0.1', '2014-06-14 00:06:56'),
+(2, 3, '127.0.0.1', '2014-06-14 00:12:20');
 
 -- --------------------------------------------------------
 
@@ -1618,7 +1638,7 @@ INSERT INTO `product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`
 (34, 'Product 7', '', '', '', '', '', '', '', 1000, 6, 'data/demo/ipod_shuffle_1.jpg', 8, 1, '100.0000', 0, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:07:54', '2011-09-30 01:07:17', 0),
 (35, 'Product 8', '', '', '', '', '', '', '', 1000, 5, '', 0, 0, '100.0000', 0, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 18:08:31', '2011-09-30 01:06:17', 0),
 (36, 'Product 9', '', '', '', '', '', '', '', 994, 6, 'data/demo/ipod_nano_1.jpg', 8, 0, '100.0000', 100, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:09:19', '2011-09-30 01:07:12', 0),
-(40, 'product 11', '', '', '', '', '', '', '', 970, 5, 'data/demo/iphone_1.jpg', 8, 1, '101.0000', 0, '2009-02-03', '10.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:12', '2011-09-30 01:06:53', 0),
+(40, 'product 11', '', '', '', '', '', '', '', 970, 5, 'data/demo/iphone_1.jpg', 8, 1, '101.0000', 0, '2009-02-03', '10.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:12', '2011-09-30 01:06:53', 4),
 (41, 'Product 14', '', '', '', '', '', '', '', 977, 5, 'data/demo/imac_1.jpg', 8, 1, '100.0000', 0, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:26', '2011-09-30 01:06:44', 0),
 (42, 'Product 15', '', '', '', '', '', '', '', 990, 5, 'data/demo/apple_cinema_30.jpg', 8, 1, '100.0000', 400, '2009-02-04', '12.50000000', 1, '1.00000000', '2.00000000', '3.00000000', 1, 1, 2, 0, 1, '2009-02-03 21:07:37', '2011-09-30 00:46:19', 0),
 (43, 'Product 16', '', '', '', '', '', '', '', 929, 5, 'data/demo/macbook_1.jpg', 8, 0, '500.0000', 0, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:07:49', '2011-09-30 01:05:46', 0),
@@ -2190,10 +2210,8 @@ INSERT INTO `setting` (`setting_id`, `group`, `key`, `value`, `serialized`) VALU
 (1, 'shipping', 'shipping_sort_order', '3', 0),
 (2, 'sub_total', 'sub_total_sort_order', '1', 0),
 (3, 'sub_total', 'sub_total_status', '1', 0),
-(4, 'tax', 'tax_status', '1', 0),
 (5, 'total', 'total_sort_order', '9', 0),
 (6, 'total', 'total_status', '1', 0),
-(7, 'tax', 'tax_sort_order', '5', 0),
 (8, 'free_checkout', 'free_checkout_sort_order', '1', 0),
 (9, 'cod', 'cod_sort_order', '5', 0),
 (10, 'cod', 'cod_total', '0.01', 0),
@@ -2222,8 +2240,6 @@ INSERT INTO `setting` (`setting_id`, `group`, `key`, `value`, `serialized`) VALU
 (33, 'config', 'config_smtp_timeout', '5', 0),
 (34, 'flat', 'flat_sort_order', '1', 0),
 (35, 'flat', 'flat_status', '1', 0),
-(36, 'flat', 'flat_geo_zone_id', '0', 0),
-(37, 'flat', 'flat_tax_class_id', '9', 0),
 (38, 'carousel', 'carousel_module', 'a:1:{i:0;a:9:{s:9:"banner_id";s:1:"8";s:5:"limit";s:1:"5";s:6:"scroll";s:1:"3";s:5:"width";s:2:"80";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"1";s:10:"sort_order";s:2:"-1";}}', 1),
 (39, 'featured', 'featured_product', '43,40,42,49,46,47,28', 0),
 (40, 'featured', 'featured_module', 'a:1:{i:0;a:7:{s:5:"limit";s:1:"6";s:11:"image_width";s:2:"80";s:12:"image_height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:11:"content_top";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"2";}}', 1),
@@ -2282,9 +2298,6 @@ INSERT INTO `setting` (`setting_id`, `group`, `key`, `value`, `serialized`) VALU
 (94, 'voucher', 'voucher_status', '1', 0),
 (95, 'config', 'config_length_class_id', '1', 0),
 (96, 'config', 'config_invoice_prefix', 'INV-2012-00', 0),
-(97, 'config', 'config_tax', '1', 0),
-(98, 'config', 'config_tax_customer', 'shipping', 0),
-(99, 'config', 'config_tax_default', 'shipping', 0),
 (100, 'config', 'config_admin_limit', '20', 0),
 (101, 'config', 'config_catalog_limit', '15', 0),
 (102, 'free_checkout', 'free_checkout_status', '1', 0),
@@ -2348,7 +2361,7 @@ CREATE TABLE IF NOT EXISTS `url_alias` (
   `query` varchar(255) COLLATE utf8_bin NOT NULL,
   `keyword` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`url_alias_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=774 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=778 ;
 
 --
 -- Dumping data for table `url_alias`
@@ -2356,10 +2369,10 @@ CREATE TABLE IF NOT EXISTS `url_alias` (
 
 INSERT INTO `url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
 (704, 'product_id=48', 'ipod_classic'),
-(773, 'category_id=20', 'desktops'),
+(776, 'category_id=20', 'desktops'),
 (503, 'category_id=26', 'pc'),
 (505, 'category_id=27', 'mac'),
-(730, 'manufacturer_id=8', 'apple'),
+(777, 'manufacturer_id=8', 'apple'),
 (772, 'information_id=4', 'about_us'),
 (768, 'product_id=42', 'test'),
 (767, 'category_id=34', 'mp3-players'),

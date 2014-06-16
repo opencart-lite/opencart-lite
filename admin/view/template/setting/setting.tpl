@@ -91,18 +91,6 @@
               <td></td>
               <td id="template"></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_layout; ?></td>
-              <td><select name="config_layout_id">
-                  <?php foreach ($layouts as $layout) { ?>
-                  <?php if ($layout['layout_id'] == $config_layout_id) { ?>
-                  <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select></td>
-            </tr>
           </table>
         </div>
         <div id="tab-local">
@@ -282,69 +270,6 @@
                 <?php if ($error_voucher_max) { ?>
                 <span class="error"><?php echo $error_voucher_max; ?></span>
                 <?php } ?></td>
-            </tr>
-          </table>
-          <h2><?php echo $text_tax; ?></h2>
-          <table class="form">
-            <tr>
-              <td><?php echo $entry_tax; ?></td>
-              <td><?php if ($config_tax) { ?>
-                <input type="radio" name="config_tax" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_tax" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="config_tax" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_tax" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_vat; ?></td>
-              <td><?php if ($config_vat) { ?>
-                <input type="radio" name="config_vat" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_vat" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="config_vat" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_vat" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_tax_default; ?></td>
-              <td><select name="config_tax_default">
-                  <option value=""><?php echo $text_none; ?></option>
-                  <?php  if ($config_tax_default == 'shipping') { ?>
-                  <option value="shipping" selected="selected"><?php echo $text_shipping; ?></option>
-                  <?php } else { ?>
-                  <option value="shipping"><?php echo $text_shipping; ?></option>
-                  <?php } ?>
-                  <?php  if ($config_tax_default == 'payment') { ?>
-                  <option value="payment" selected="selected"><?php echo $text_payment; ?></option>
-                  <?php } else { ?>
-                  <option value="payment"><?php echo $text_payment; ?></option>
-                  <?php } ?>
-                </select></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_tax_customer; ?></td>
-              <td><select name="config_tax_customer">
-                  <option value=""><?php echo $text_none; ?></option>
-                  <?php  if ($config_tax_customer == 'shipping') { ?>
-                  <option value="shipping" selected="selected"><?php echo $text_shipping; ?></option>
-                  <?php } else { ?>
-                  <option value="shipping"><?php echo $text_shipping; ?></option>
-                  <?php } ?>
-                  <?php  if ($config_tax_customer == 'payment') { ?>
-                  <option value="payment" selected="selected"><?php echo $text_payment; ?></option>
-                  <?php } else { ?>
-                  <option value="payment"><?php echo $text_payment; ?></option>
-                  <?php } ?>
-                </select></td>
             </tr>
           </table>
           <h2><?php echo $text_account; ?></h2>

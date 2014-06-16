@@ -122,13 +122,6 @@
               <td class="left"><?php echo $customer['approved']; ?></td>
               <td class="left"><?php echo $customer['ip']; ?></td>
               <td class="left"><?php echo $customer['date_added']; ?></td>
-              <td class="left"><select onchange="((this.value !== '') ? window.open('index.php?route=sale/customer/login&token=<?php echo $token; ?>&customer_id=<?php echo $customer['customer_id']; ?>&store_id=' + this.value) : null); this.value = '';">
-                  <option value=""><?php echo $text_select; ?></option>
-                  <option value="0"><?php echo $text_default; ?></option>
-                  <?php foreach ($stores as $store) { ?>
-                  <option value="<?php echo $store['store_id']; ?>"><?php echo $store['name']; ?></option>
-                  <?php } ?>
-                </select></td>
               <td class="right"><?php foreach ($customer['action'] as $action) { ?>
                 [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
                 <?php } ?></td>

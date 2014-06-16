@@ -7,7 +7,7 @@ class ModelDesignLayout extends Model {
 		
 		if (isset($data['layout_route'])) {
 			foreach ($data['layout_route'] as $layout_route) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', store_id = '" . (int)$layout_route['store_id'] . "', route = '" . $this->db->escape($layout_route['route']) . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', route = '" . $this->db->escape($layout_route['route']) . "'");
 			}	
 		}
 	}
@@ -19,7 +19,7 @@ class ModelDesignLayout extends Model {
 		
 		if (isset($data['layout_route'])) {
 			foreach ($data['layout_route'] as $layout_route) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', store_id = '" . (int)$layout_route['store_id'] . "', route = '" . $this->db->escape($layout_route['route']) . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', route = '" . $this->db->escape($layout_route['route']) . "'");
 			}
 		}
 	}

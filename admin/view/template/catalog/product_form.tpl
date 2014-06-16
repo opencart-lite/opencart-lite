@@ -14,7 +14,7 @@
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-data"><?php echo $tab_data; ?></a><a href="#tab-links"><?php echo $tab_links; ?></a><a href="#tab-attribute"><?php echo $tab_attribute; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-discount"><?php echo $tab_discount; ?></a><a href="#tab-special"><?php echo $tab_special; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-reward"><?php echo $tab_reward; ?></a><a href="#tab-design"><?php echo $tab_design; ?></a></div>
+      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-data"><?php echo $tab_data; ?></a><a href="#tab-links"><?php echo $tab_links; ?></a><a href="#tab-attribute"><?php echo $tab_attribute; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-discount"><?php echo $tab_discount; ?></a><a href="#tab-special"><?php echo $tab_special; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-reward"><?php echo $tab_reward; ?></a></div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-general">
           <div id="languages" class="htabs">
@@ -92,19 +92,6 @@
             <tr>
               <td><?php echo $entry_price; ?></td>
               <td><input type="text" name="price" value="<?php echo $price; ?>" /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_tax_class; ?></td>
-              <td><select name="tax_class_id">
-                  <option value="0"><?php echo $text_none; ?></option>
-                  <?php foreach ($tax_classes as $tax_class) { ?>
-                  <?php if ($tax_class['tax_class_id'] == $tax_class_id) { ?>
-                  <option value="<?php echo $tax_class['tax_class_id']; ?>" selected="selected"><?php echo $tax_class['title']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $tax_class['tax_class_id']; ?>"><?php echo $tax_class['title']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select></td>
             </tr>
             <tr>
               <td><?php echo $entry_quantity; ?></td>
@@ -251,33 +238,6 @@
                   <?php } ?>
                 </div>
                 <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_store; ?></td>
-              <td><div class="scrollbox">
-                  <?php $class = 'even'; ?>
-                  <div class="<?php echo $class; ?>">
-                    <?php if (in_array(0, $product_store)) { ?>
-                    <input type="checkbox" name="product_store[]" value="0" checked="checked" />
-                    <?php echo $text_default; ?>
-                    <?php } else { ?>
-                    <input type="checkbox" name="product_store[]" value="0" />
-                    <?php echo $text_default; ?>
-                    <?php } ?>
-                  </div>
-                  <?php foreach ($stores as $store) { ?>
-                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                  <div class="<?php echo $class; ?>">
-                    <?php if (in_array($store['store_id'], $product_store)) { ?>
-                    <input type="checkbox" name="product_store[]" value="<?php echo $store['store_id']; ?>" checked="checked" />
-                    <?php echo $store['name']; ?>
-                    <?php } else { ?>
-                    <input type="checkbox" name="product_store[]" value="<?php echo $store['store_id']; ?>" />
-                    <?php echo $store['name']; ?>
-                    <?php } ?>
-                  </div>
-                  <?php } ?>
-                </div></td>
             </tr>
             <tr>
               <td><?php echo $entry_download; ?></td>
@@ -652,48 +612,6 @@
               <tr>
                 <td class="left"><?php echo $customer_group['name']; ?></td>
                 <td class="right"><input type="text" name="product_reward[<?php echo $customer_group['customer_group_id']; ?>][points]" value="<?php echo isset($product_reward[$customer_group['customer_group_id']]) ? $product_reward[$customer_group['customer_group_id']]['points'] : ''; ?>" /></td>
-              </tr>
-            </tbody>
-            <?php } ?>
-          </table>
-        </div>
-        <div id="tab-design">
-          <table class="list">
-            <thead>
-              <tr>
-                <td class="left"><?php echo $entry_store; ?></td>
-                <td class="left"><?php echo $entry_layout; ?></td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="left"><?php echo $text_default; ?></td>
-                <td class="left"><select name="product_layout[0][layout_id]">
-                    <option value=""></option>
-                    <?php foreach ($layouts as $layout) { ?>
-                    <?php if (isset($product_layout[0]) && $product_layout[0] == $layout['layout_id']) { ?>
-                    <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
-                    <?php } else { ?>
-                    <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
-                    <?php } ?>
-                    <?php } ?>
-                  </select></td>
-              </tr>
-            </tbody>
-            <?php foreach ($stores as $store) { ?>
-            <tbody>
-              <tr>
-                <td class="left"><?php echo $store['name']; ?></td>
-                <td class="left"><select name="product_layout[<?php echo $store['store_id']; ?>][layout_id]">
-                    <option value=""></option>
-                    <?php foreach ($layouts as $layout) { ?>
-                    <?php if (isset($product_layout[$store['store_id']]) && $product_layout[$store['store_id']] == $layout['layout_id']) { ?>
-                    <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
-                    <?php } else { ?>
-                    <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
-                    <?php } ?>
-                    <?php } ?>
-                  </select></td>
               </tr>
             </tbody>
             <?php } ?>

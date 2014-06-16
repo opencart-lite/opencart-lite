@@ -8,13 +8,7 @@ class ModelCatalogManufacturer extends Model {
 		if (isset($data['image'])) {
 			$this->db->query("UPDATE " . DB_PREFIX . "manufacturer SET image = '" . $this->db->escape(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8')) . "' WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
 		}
-		
-		if (isset($data['manufacturer_store'])) {
-			foreach ($data['manufacturer_store'] as $store_id) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_to_store SET manufacturer_id = '" . (int)$manufacturer_id . "', store_id = '" . (int)$store_id . "'");
-			}
-		}
-				
+
 		if ($data['keyword']) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'manufacturer_id=" . (int)$manufacturer_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
 		}
@@ -28,15 +22,7 @@ class ModelCatalogManufacturer extends Model {
 		if (isset($data['image'])) {
 			$this->db->query("UPDATE " . DB_PREFIX . "manufacturer SET image = '" . $this->db->escape(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8')) . "' WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
 		}
-		
-		$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer_to_store WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
 
-		if (isset($data['manufacturer_store'])) {
-			foreach ($data['manufacturer_store'] as $store_id) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_to_store SET manufacturer_id = '" . (int)$manufacturer_id . "', store_id = '" . (int)$store_id . "'");
-			}
-		}
-			
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'manufacturer_id=" . (int)$manufacturer_id. "'");
 		
 		if ($data['keyword']) {
@@ -48,7 +34,6 @@ class ModelCatalogManufacturer extends Model {
 	
 	public function deleteManufacturer($manufacturer_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer_to_store WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'manufacturer_id=" . (int)$manufacturer_id . "'");
 			
 		$this->cache->delete('manufacturer');
@@ -96,19 +81,7 @@ class ModelCatalogManufacturer extends Model {
 	
 		return $query->rows;
 	}
-	
-	public function getManufacturerStores($manufacturer_id) {
-		$manufacturer_store_data = array();
-		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer_to_store WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
 
-		foreach ($query->rows as $result) {
-			$manufacturer_store_data[] = $result['store_id'];
-		}
-		
-		return $manufacturer_store_data;
-	}
-	
 	public function getTotalManufacturersByImageId($image_id) {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "manufacturer WHERE image_id = '" . (int)$image_id . "'");
 

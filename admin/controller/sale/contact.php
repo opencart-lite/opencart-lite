@@ -18,7 +18,6 @@ class ControllerSaleContact extends Controller {
 		$this->data['text_affiliate'] = $this->language->get('text_affiliate');	
 		$this->data['text_product'] = $this->language->get('text_product');	
 
-		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_to'] = $this->language->get('entry_to');
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_customer'] = $this->language->get('entry_customer');
@@ -47,11 +46,7 @@ class ControllerSaleContact extends Controller {
    		);
 				
     	$this->data['cancel'] = $this->url->link('sale/contact', 'token=' . $this->session->data['token'], 'SSL');
-		
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
-		
+
 		$this->load->model('sale/customer_group');
 				
 		$this->data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups(0);
@@ -84,16 +79,9 @@ class ControllerSaleContact extends Controller {
 			}
 			
 			if (!$json) {
-				$this->load->model('setting/store');
-			
-				$store_info = $this->model_setting_store->getStore($this->request->post['store_id']);			
-				
-				if ($store_info) {
-					$store_name = $store_info['name'];
-				} else {
-					$store_name = $this->config->get('config_name');
-				}
-	
+
+				$store_name = $this->config->get('config_name');
+
 				$this->load->model('sale/customer');
 				
 				$this->load->model('sale/customer_group');

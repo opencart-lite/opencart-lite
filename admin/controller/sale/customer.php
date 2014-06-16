@@ -577,10 +577,6 @@ class ControllerSaleCustomer extends Controller {
 		
     	$this->data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();
 
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
-				
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
 		
@@ -621,10 +617,7 @@ class ControllerSaleCustomer extends Controller {
     	$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_company'] = $this->language->get('entry_company');
-		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
-		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');
-		$this->data['entry_address_1'] = $this->language->get('entry_address_1');
-		$this->data['entry_address_2'] = $this->language->get('entry_address_2');
+		$this->data['entry_address'] = $this->language->get('entry_address');
 		$this->data['entry_city'] = $this->language->get('entry_city');
 		$this->data['entry_postcode'] = $this->language->get('entry_postcode');
 		$this->data['entry_zone'] = $this->language->get('entry_zone');
@@ -708,17 +701,11 @@ class ControllerSaleCustomer extends Controller {
 		} else {
 			$this->data['error_address_lastname'] = '';
 		}
-		
-  		if (isset($this->error['address_tax_id'])) {
-			$this->data['error_address_tax_id'] = $this->error['address_tax_id'];
+
+		if (isset($this->error['address_address'])) {
+			$this->data['error_address_address'] = $this->error['address_address'];
 		} else {
-			$this->data['error_address_tax_id'] = '';
-		}
-				
-		if (isset($this->error['address_address_1'])) {
-			$this->data['error_address_address_1'] = $this->error['address_address_1'];
-		} else {
-			$this->data['error_address_address_1'] = '';
+			$this->data['error_address_address'] = '';
 		}
 		
 		if (isset($this->error['address_city'])) {
@@ -989,8 +976,8 @@ class ControllerSaleCustomer extends Controller {
 					$this->error['address_lastname'][$key] = $this->language->get('error_lastname');
 				}	
 				
-				if ((utf8_strlen($value['address_1']) < 3) || (utf8_strlen($value['address_1']) > 128)) {
-					$this->error['address_address_1'][$key] = $this->language->get('error_address_1');
+				if ((utf8_strlen($value['address']) < 3) || (utf8_strlen($value['address']) > 128)) {
+					$this->error['address_address'][$key] = $this->language->get('error_address');
 				}
 			
 				if ((utf8_strlen($value['city']) < 2) || (utf8_strlen($value['city']) > 128)) {
@@ -1005,13 +992,7 @@ class ControllerSaleCustomer extends Controller {
 					if ($country_info['postcode_required'] && (utf8_strlen($value['postcode']) < 2) || (utf8_strlen($value['postcode']) > 10)) {
 						$this->error['address_postcode'][$key] = $this->language->get('error_postcode');
 					}
-					
-					// VAT Validation
-					$this->load->helper('vat');
-					
-					if ($this->config->get('config_vat') && $value['tax_id'] && (vat_validation($country_info['iso_code_2'], $value['tax_id']) != 'invalid')) {
-						$this->error['address_tax_id'][$key] = $this->language->get('error_vat');
-					}
+
 				}
 			
 				if ($value['country_id'] == '') {
@@ -1065,21 +1046,9 @@ class ControllerSaleCustomer extends Controller {
 			
 			$this->model_sale_customer->editToken($customer_id, $token);
 			
-			if (isset($this->request->get['store_id'])) {
-				$store_id = $this->request->get['store_id'];
-			} else {
-				$store_id = 0;
-			}
-					
-			$this->load->model('setting/store');
-			
-			$store_info = $this->model_setting_store->getStore($store_id);
-			
-			if ($store_info) {
-				$this->redirect($store_info['url'] . 'index.php?route=account/login&token=' . $token);
-			} else { 
-				$this->redirect(HTTP_CATALOG . 'index.php?route=account/login&token=' . $token);
-			}
+
+			$this->redirect(HTTP_CATALOG . 'index.php?route=account/login&token=' . $token);
+
 		} else {
 			$this->load->language('error/not_found');
 

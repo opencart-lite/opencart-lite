@@ -1,6 +1,6 @@
 <?php
 class ModelTotalReward extends Model {
-	public function getTotal(&$total_data, &$total, &$taxes) {
+	public function getTotal(&$total_data, &$total) {
 		if (isset($this->session->data['reward'])) {
 			$this->load->language('total/reward');
 			
@@ -24,16 +24,7 @@ class ModelTotalReward extends Model {
 					
 					if ($product['points']) {
 						$discount = $product['total'] * ($this->session->data['reward'] / $points_total);
-						
-						if ($product['tax_class_id']) {
-							$tax_rates = $this->tax->getRates($product['total'] - ($product['total'] - $discount), $product['tax_class_id']);
-							
-							foreach ($tax_rates as $tax_rate) {
-								if ($tax_rate['type'] == 'P') {
-									$taxes[$tax_rate['tax_rate_id']] -= $tax_rate['amount'];
-								}
-							}	
-						}
+
 					}
 					
 					$discount_total += $discount;

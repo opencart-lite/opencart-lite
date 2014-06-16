@@ -19,20 +19,7 @@ class ControllerAccountRegister extends Controller {
 			$this->customer->login($this->request->post['email'], $this->request->post['password']);
 			
 			unset($this->session->data['guest']);
-			
-			// Default Shipping Address
-			if ($this->config->get('config_tax_customer') == 'shipping') {
-				$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
-				$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
-				$this->session->data['shipping_postcode'] = $this->request->post['postcode'];				
-			}
-			
-			// Default Payment Address
-			if ($this->config->get('config_tax_customer') == 'payment') {
-				$this->session->data['payment_country_id'] = $this->request->post['country_id'];
-				$this->session->data['payment_zone_id'] = $this->request->post['zone_id'];			
-			}
-							  	  
+
 	  		$this->redirect($this->url->link('account/success'));
     	} 
 
@@ -75,10 +62,7 @@ class ControllerAccountRegister extends Controller {
     	$this->data['entry_fax'] = $this->language->get('entry_fax');
 		$this->data['entry_company'] = $this->language->get('entry_company');
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
-		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
-		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');
-    	$this->data['entry_address_1'] = $this->language->get('entry_address_1');
-    	$this->data['entry_address_2'] = $this->language->get('entry_address_2');
+    	$this->data['entry_address'] = $this->language->get('entry_address');
     	$this->data['entry_postcode'] = $this->language->get('entry_postcode');
     	$this->data['entry_city'] = $this->language->get('entry_city');
     	$this->data['entry_country'] = $this->language->get('entry_country');
@@ -136,17 +120,11 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$this->data['error_company_id'] = '';
 		}
-		
-  		if (isset($this->error['tax_id'])) {
-			$this->data['error_tax_id'] = $this->error['tax_id'];
+
+  		if (isset($this->error['address'])) {
+			$this->data['error_address'] = $this->error['address'];
 		} else {
-			$this->data['error_tax_id'] = '';
-		}
-								
-  		if (isset($this->error['address_1'])) {
-			$this->data['error_address_1'] = $this->error['address_1'];
-		} else {
-			$this->data['error_address_1'] = '';
+			$this->data['error_address'] = '';
 		}
    		
 		if (isset($this->error['city'])) {
@@ -230,31 +208,11 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$this->data['customer_group_id'] = $this->config->get('config_customer_group_id');
 		}
-		
-		// Company ID
-		if (isset($this->request->post['company_id'])) {
-    		$this->data['company_id'] = $this->request->post['company_id'];
-		} else {
-			$this->data['company_id'] = '';
-		}
-		
-		// Tax ID
-		if (isset($this->request->post['tax_id'])) {
-    		$this->data['tax_id'] = $this->request->post['tax_id'];
-		} else {
-			$this->data['tax_id'] = '';
-		}
-						
-		if (isset($this->request->post['address_1'])) {
-    		$this->data['address_1'] = $this->request->post['address_1'];
-		} else {
-			$this->data['address_1'] = '';
-		}
 
-		if (isset($this->request->post['address_2'])) {
-    		$this->data['address_2'] = $this->request->post['address_2'];
+		if (isset($this->request->post['address'])) {
+    		$this->data['address'] = $this->request->post['address'];
 		} else {
-			$this->data['address_2'] = '';
+			$this->data['address'] = '';
 		}
 
 		if (isset($this->request->post['postcode'])) {
@@ -367,32 +325,9 @@ class ControllerAccountRegister extends Controller {
     	if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
       		$this->error['telephone'] = $this->language->get('error_telephone');
     	}
-		
-		// Customer Group
-		$this->load->model('account/customer_group');
-		
-		if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {
-			$customer_group_id = $this->request->post['customer_group_id'];
-		} else {
-			$customer_group_id = $this->config->get('config_customer_group_id');
-		}
 
-		$customer_group = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
-			
-		if ($customer_group) {	
-			// Company ID
-			if ($customer_group['company_id_display'] && $customer_group['company_id_required'] && empty($this->request->post['company_id'])) {
-				$this->error['company_id'] = $this->language->get('error_company_id');
-			}
-			
-			// Tax ID 
-			if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && empty($this->request->post['tax_id'])) {
-				$this->error['tax_id'] = $this->language->get('error_tax_id');
-			}						
-		}
-		
-    	if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
-      		$this->error['address_1'] = $this->language->get('error_address_1');
+    	if ((utf8_strlen($this->request->post['address']) < 3) || (utf8_strlen($this->request->post['address']) > 128)) {
+      		$this->error['address'] = $this->language->get('error_address');
     	}
 
     	if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
@@ -407,13 +342,7 @@ class ControllerAccountRegister extends Controller {
 			if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 				$this->error['postcode'] = $this->language->get('error_postcode');
 			}
-			
-			// VAT Validation
-			$this->load->helper('vat');
-			
-			if ($this->config->get('config_vat') && $this->request->post['tax_id'] && (vat_validation($country_info['iso_code_2'], $this->request->post['tax_id']) == 'invalid')) {
-				$this->error['tax_id'] = $this->language->get('error_vat');
-			}
+
 		}
 
     	if ($this->request->post['country_id'] == '') {

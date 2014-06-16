@@ -18,7 +18,6 @@ require_once(DIR_SYSTEM . 'startup.php');
 require_once(DIR_SYSTEM . 'library/customer.php');
 require_once(DIR_SYSTEM . 'library/affiliate.php');
 require_once(DIR_SYSTEM . 'library/currency.php');
-require_once(DIR_SYSTEM . 'library/tax.php');
 require_once(DIR_SYSTEM . 'library/weight.php');
 require_once(DIR_SYSTEM . 'library/length.php');
 require_once(DIR_SYSTEM . 'library/cart.php');
@@ -38,21 +37,8 @@ $registry->set('config', $config);
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 $registry->set('db', $db);
 
-// Store
-if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
-	$store_query = $db->query("SELECT * FROM " . DB_PREFIX . "store WHERE REPLACE(`ssl`, 'www.', '') = '" . $db->escape('https://' . str_replace('www.', '', $_SERVER['HTTP_HOST']) . rtrim(dirname($_SERVER['PHP_SELF']), '/.\\') . '/') . "'");
-} else {
-	$store_query = $db->query("SELECT * FROM " . DB_PREFIX . "store WHERE REPLACE(`url`, 'www.', '') = '" . $db->escape('http://' . str_replace('www.', '', $_SERVER['HTTP_HOST']) . rtrim(dirname($_SERVER['PHP_SELF']), '/.\\') . '/') . "'");
-}
-
-if ($store_query->num_rows) {
-	$config->set('config_store_id', $store_query->row['store_id']);
-} else {
-	$config->set('config_store_id', 0);
-}
-		
 // Settings
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0' OR store_id = '" . (int)$config->get('config_store_id') . "' ORDER BY store_id ASC");
+$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting");
 
 foreach ($query->rows as $setting) {
 	if (!$setting['serialized']) {
@@ -62,10 +48,10 @@ foreach ($query->rows as $setting) {
 	}
 }
 
-if (!$store_query->num_rows) {
+
 	$config->set('config_url', HTTP_SERVER);
 	$config->set('config_ssl', HTTPS_SERVER);	
-}
+
 
 // Url
 $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));	
@@ -196,9 +182,6 @@ if (isset($request->get['tracking']) && !isset($request->cookie['tracking'])) {
 		
 // Currency
 $registry->set('currency', new Currency($registry));
-
-// Tax
-$registry->set('tax', new Tax($registry));
 
 // Weight
 $registry->set('weight', new Weight($registry));

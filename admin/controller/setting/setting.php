@@ -21,7 +21,7 @@ class ControllerSettingSetting extends Controller {
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->redirect($this->url->link('setting/store', 'token=' . $this->session->data['token'], 'SSL'));
+			$this->redirect($this->url->link('setting/setting', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
@@ -33,7 +33,6 @@ class ControllerSettingSetting extends Controller {
 		$this->data['text_items'] = $this->language->get('text_items');
 		$this->data['text_product'] = $this->language->get('text_product');
 		$this->data['text_voucher'] = $this->language->get('text_voucher');
-		$this->data['text_tax'] = $this->language->get('text_tax');
 		$this->data['text_account'] = $this->language->get('text_account');
 		$this->data['text_checkout'] = $this->language->get('text_checkout');
 		$this->data['text_stock'] = $this->language->get('text_stock');
@@ -55,7 +54,6 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_fax'] = $this->language->get('entry_fax');		
 		$this->data['entry_title'] = $this->language->get('entry_title');
 		$this->data['entry_meta_description'] = $this->language->get('entry_meta_description');
-		$this->data['entry_layout'] = $this->language->get('entry_layout');
 		$this->data['entry_template'] = $this->language->get('entry_template');
 		$this->data['entry_country'] = $this->language->get('entry_country');
 		$this->data['entry_zone'] = $this->language->get('entry_zone');		
@@ -73,10 +71,6 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_upload_allowed'] = $this->language->get('entry_upload_allowed');
 		$this->data['entry_voucher_min'] = $this->language->get('entry_voucher_min');
 		$this->data['entry_voucher_max'] = $this->language->get('entry_voucher_max');
-		$this->data['entry_tax'] = $this->language->get('entry_tax');
-		$this->data['entry_vat'] = $this->language->get('entry_vat');
-		$this->data['entry_tax_default'] = $this->language->get('entry_tax_default');
-		$this->data['entry_tax_customer'] = $this->language->get('entry_tax_customer');
 		$this->data['entry_customer_online'] = $this->language->get('entry_customer_online');
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_customer_group_display'] = $this->language->get('entry_customer_group_display');
@@ -300,7 +294,7 @@ class ControllerSettingSetting extends Controller {
 
 		$this->data['action'] = $this->url->link('setting/setting', 'token=' . $this->session->data['token'], 'SSL');
 		
-		$this->data['cancel'] = $this->url->link('setting/store', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['cancel'] = $this->url->link('setting/setting', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$this->data['token'] = $this->session->data['token'];
 
@@ -351,17 +345,7 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_meta_description'] = $this->config->get('config_meta_description');
 		}
-		
-		if (isset($this->request->post['config_layout_id'])) {
-			$this->data['config_layout_id'] = $this->request->post['config_layout_id'];
-		} else {
-			$this->data['config_layout_id'] = $this->config->get('config_layout_id');
-		}
-				
-		$this->load->model('design/layout');
-		
-		$this->data['layouts'] = $this->model_design_layout->getLayouts();
-				
+
 		if (isset($this->request->post['config_template'])) {
 			$this->data['config_template'] = $this->request->post['config_template'];
 		} else {
@@ -491,31 +475,13 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_voucher_max'] = $this->config->get('config_voucher_max');
 		}				
-		
-		if (isset($this->request->post['config_tax'])) {
-			$this->data['config_tax'] = $this->request->post['config_tax'];
-		} else {
-			$this->data['config_tax'] = $this->config->get('config_tax');			
-		}
-		
+
 		if (isset($this->request->post['config_vat'])) {
 			$this->data['config_vat'] = $this->request->post['config_vat'];
 		} else {
 			$this->data['config_vat'] = $this->config->get('config_vat');			
 		}
-				
-		if (isset($this->request->post['config_tax_default'])) {
-			$this->data['config_tax_default'] = $this->request->post['config_tax_default'];
-		} else {
-			$this->data['config_tax_default'] = $this->config->get('config_tax_default');			
-		}	
-			
-		if (isset($this->request->post['config_tax_customer'])) {
-			$this->data['config_tax_customer'] = $this->request->post['config_tax_customer'];
-		} else {
-			$this->data['config_tax_customer'] = $this->config->get('config_tax_customer');			
-		}	
-		
+
 		if (isset($this->request->post['config_customer_online'])) {
 			$this->data['config_customer_online'] = $this->request->post['config_customer_online'];
 		} else {

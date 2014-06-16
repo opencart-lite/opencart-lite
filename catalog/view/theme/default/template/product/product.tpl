@@ -39,9 +39,6 @@
         <span class="price-old"><?php echo $price; ?></span> <span class="price-new"><?php echo $special; ?></span>
         <?php } ?>
         <br />
-        <?php if ($tax) { ?>
-        <span class="price-tax"><?php echo $text_tax; ?> <?php echo $tax; ?></span><br />
-        <?php } ?>
         <?php if ($points) { ?>
         <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
         <?php } ?>

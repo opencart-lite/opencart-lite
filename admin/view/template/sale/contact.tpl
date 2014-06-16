@@ -13,15 +13,6 @@
     <div class="content">
         <table id="mail" class="form">
           <tr>
-            <td><?php echo $entry_store; ?></td>
-            <td><select name="store_id">
-                <option value="0"><?php echo $text_default; ?></option>
-                <?php foreach ($stores as $store) { ?>
-                <option value="<?php echo $store['store_id']; ?>"><?php echo $store['name']; ?></option>
-                <?php } ?>
-              </select></td>
-          </tr>
-          <tr>
             <td><?php echo $entry_to; ?></td>
             <td><select name="to">
                 <option value="newsletter"><?php echo $text_newsletter; ?></option>

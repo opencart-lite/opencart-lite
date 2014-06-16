@@ -274,7 +274,6 @@ class ControllerCatalogManufacturer extends Controller {
 		$this->data['text_amount'] = $this->language->get('text_amount');
 				
 		$this->data['entry_name'] = $this->language->get('entry_name');
-		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_keyword'] = $this->language->get('entry_keyword');
     	$this->data['entry_image'] = $this->language->get('entry_image');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
@@ -346,19 +345,7 @@ class ControllerCatalogManufacturer extends Controller {
 		} else {	
       		$this->data['name'] = '';
     	}
-		
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
-		
-		if (isset($this->request->post['manufacturer_store'])) {
-			$this->data['manufacturer_store'] = $this->request->post['manufacturer_store'];
-		} elseif (isset($this->request->get['manufacturer_id'])) {
-			$this->data['manufacturer_store'] = $this->model_catalog_manufacturer->getManufacturerStores($this->request->get['manufacturer_id']);
-		} else {
-			$this->data['manufacturer_store'] = array(0);
-		}	
-		
+
 		if (isset($this->request->post['keyword'])) {
 			$this->data['keyword'] = $this->request->post['keyword'];
 		} elseif (!empty($manufacturer_info)) {

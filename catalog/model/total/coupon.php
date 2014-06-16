@@ -1,6 +1,6 @@
 <?php
 class ModelTotalCoupon extends Model {
-	public function getTotal(&$total_data, &$total, &$taxes) {
+	public function getTotal(&$total_data, &$total) {
 		if (isset($this->session->data['coupon'])) {
 			$this->load->language('total/coupon');
 			
@@ -46,31 +46,13 @@ class ModelTotalCoupon extends Model {
 						} elseif ($coupon_info['type'] == 'P') {
 							$discount = $product['total'] / 100 * $coupon_info['discount'];
 						}
-				
-						if ($product['tax_class_id']) {
-							$tax_rates = $this->tax->getRates($product['total'] - ($product['total'] - $discount), $product['tax_class_id']);
-							
-							foreach ($tax_rates as $tax_rate) {
-								if ($tax_rate['type'] == 'P') {
-									$taxes[$tax_rate['tax_rate_id']] -= $tax_rate['amount'];
-								}
-							}
-						}
+
 					}
 					
 					$discount_total += $discount;
 				}
 				
 				if ($coupon_info['shipping'] && isset($this->session->data['shipping_method'])) {
-					if (!empty($this->session->data['shipping_method']['tax_class_id'])) {
-						$tax_rates = $this->tax->getRates($this->session->data['shipping_method']['cost'], $this->session->data['shipping_method']['tax_class_id']);
-						
-						foreach ($tax_rates as $tax_rate) {
-							if ($tax_rate['type'] == 'P') {
-								$taxes[$tax_rate['tax_rate_id']] -= $tax_rate['amount'];
-							}
-						}
-					}
 					
 					$discount_total += $this->session->data['shipping_method']['cost'];				
 				}				

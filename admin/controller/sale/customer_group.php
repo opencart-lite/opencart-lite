@@ -270,10 +270,6 @@ class ControllerSaleCustomerGroup extends Controller {
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_description'] = $this->language->get('entry_description');
 		$this->data['entry_approval'] = $this->language->get('entry_approval');
-		$this->data['entry_company_id_display'] = $this->language->get('entry_company_id_display');
-		$this->data['entry_company_id_required'] = $this->language->get('entry_company_id_required');
-		$this->data['entry_tax_id_display'] = $this->language->get('entry_tax_id_display');
-		$this->data['entry_tax_id_required'] = $this->language->get('entry_tax_id_required');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		
 		$this->data['button_save'] = $this->language->get('button_save');
@@ -350,39 +346,7 @@ class ControllerSaleCustomerGroup extends Controller {
 		} else {
 			$this->data['approval'] = '';
 		}	
-					
-		if (isset($this->request->post['company_id_display'])) {
-			$this->data['company_id_display'] = $this->request->post['company_id_display'];
-		} elseif (!empty($customer_group_info)) {
-			$this->data['company_id_display'] = $customer_group_info['company_id_display'];
-		} else {
-			$this->data['company_id_display'] = '';
-		}			
-			
-		if (isset($this->request->post['company_id_required'])) {
-			$this->data['company_id_required'] = $this->request->post['company_id_required'];
-		} elseif (!empty($customer_group_info)) {
-			$this->data['company_id_required'] = $customer_group_info['company_id_required'];
-		} else {
-			$this->data['company_id_required'] = '';
-		}		
-		
-		if (isset($this->request->post['tax_id_display'])) {
-			$this->data['tax_id_display'] = $this->request->post['tax_id_display'];
-		} elseif (!empty($customer_group_info)) {
-			$this->data['tax_id_display'] = $customer_group_info['tax_id_display'];
-		} else {
-			$this->data['tax_id_display'] = '';
-		}			
-			
-		if (isset($this->request->post['tax_id_required'])) {
-			$this->data['tax_id_required'] = $this->request->post['tax_id_required'];
-		} elseif (!empty($customer_group_info)) {
-			$this->data['tax_id_required'] = $customer_group_info['tax_id_required'];
-		} else {
-			$this->data['tax_id_required'] = '';
-		}	
-		
+
 		if (isset($this->request->post['sort_order'])) {
 			$this->data['sort_order'] = $this->request->post['sort_order'];
 		} elseif (!empty($customer_group_info)) {
@@ -422,21 +386,14 @@ class ControllerSaleCustomerGroup extends Controller {
 		if (!$this->user->hasPermission('modify', 'sale/customer_group')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
-		
-		$this->load->model('setting/store');
+
 		$this->load->model('sale/customer');
       	
 		foreach ($this->request->post['selected'] as $customer_group_id) {
     		if ($this->config->get('config_customer_group_id') == $customer_group_id) {
 	  			$this->error['warning'] = $this->language->get('error_default');	
 			}  
-			
-			$store_total = $this->model_setting_store->getTotalStoresByCustomerGroupId($customer_group_id);
 
-			if ($store_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_store'), $store_total);
-			}
-			
 			$customer_total = $this->model_sale_customer->getTotalCustomersByCustomerGroupId($customer_group_id);
 
 			if ($customer_total) {

@@ -9,7 +9,6 @@ class Cart {
 		$this->customer = $registry->get('customer');
 		$this->session = $registry->get('session');
 		$this->db = $registry->get('db');
-		$this->tax = $registry->get('tax');
 		$this->weight = $registry->get('weight');
 
 		if (!isset($this->session->data['cart']) || !is_array($this->session->data['cart'])) {
@@ -234,7 +233,6 @@ class Cart {
 						'total'           => ($price + $option_price) * $quantity,
 						'reward'          => $reward * $quantity,
 						'points'          => ($product_query->row['points'] ? ($product_query->row['points'] + $option_points) * $quantity : 0),
-						'tax_class_id'    => $product_query->row['tax_class_id'],
 						'weight'          => ($product_query->row['weight'] + $option_weight) * $quantity,
 						'weight_class_id' => $product_query->row['weight_class_id'],
 						'length'          => $product_query->row['length'],
@@ -313,32 +311,12 @@ class Cart {
 
 		return $total;
   	}
-	
-	public function getTaxes() {
-		$tax_data = array();
-		
-		foreach ($this->getProducts() as $product) {
-			if ($product['tax_class_id']) {
-				$tax_rates = $this->tax->getRates($product['price'], $product['tax_class_id']);
-				
-				foreach ($tax_rates as $tax_rate) {
-					if (!isset($tax_data[$tax_rate['tax_rate_id']])) {
-						$tax_data[$tax_rate['tax_rate_id']] = ($tax_rate['amount'] * $product['quantity']);
-					} else {
-						$tax_data[$tax_rate['tax_rate_id']] += ($tax_rate['amount'] * $product['quantity']);
-					}
-				}
-			}
-		}
-		
-		return $tax_data;
-  	}
 
   	public function getTotal() {
 		$total = 0;
 		
 		foreach ($this->getProducts() as $product) {
-			$total += $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'];
+			$total += $product['price'] * $product['quantity'];
 		}
 
 		return $total;

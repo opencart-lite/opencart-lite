@@ -1,6 +1,6 @@
 <?php
 class ModelTotalSubTotal extends Model {
-	public function getTotal(&$total_data, &$total, &$taxes) {
+	public function getTotal(&$total_data, &$total) {
 		$this->load->language('total/sub_total');
 		
 		$sub_total = $this->cart->getSubTotal();
@@ -22,4 +22,3 @@ class ModelTotalSubTotal extends Model {
 		$total += $sub_total;
 	}
 }
-?>

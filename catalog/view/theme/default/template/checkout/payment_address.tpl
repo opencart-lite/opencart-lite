@@ -1,17 +1,3 @@
-<?php if ($addresses) { ?>
-<input type="radio" name="payment_address" value="existing" id="payment-address-existing" checked="checked" />
-<label for="payment-address-existing"><?php echo $text_address_existing; ?></label>
-<div id="payment-existing">
-  <select name="address_id" style="width: 100%; margin-bottom: 15px;" size="5">
-    <?php foreach ($addresses as $address) { ?>
-    <?php if ($address['address_id'] == $address_id) { ?>
-    <option value="<?php echo $address['address_id']; ?>" selected="selected"><?php echo $address['firstname']; ?> <?php echo $address['lastname']; ?>, <?php echo $address['address_1']; ?>, <?php echo $address['city']; ?>, <?php echo $address['zone']; ?>, <?php echo $address['country']; ?></option>
-    <?php } else { ?>
-    <option value="<?php echo $address['address_id']; ?>"><?php echo $address['firstname']; ?> <?php echo $address['lastname']; ?>, <?php echo $address['address_1']; ?>, <?php echo $address['city']; ?>, <?php echo $address['zone']; ?>, <?php echo $address['country']; ?></option>
-    <?php } ?>
-    <?php } ?>
-  </select>
-</div>
 <p>
   <input type="radio" name="payment_address" value="new" id="payment-address-new" />
   <label for="payment-address-new"><?php echo $text_address_new; ?></label>
@@ -20,42 +6,12 @@
 <div id="payment-new" style="display: <?php echo ($addresses ? 'none' : 'block'); ?>;">
   <table class="form">
     <tr>
-      <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
-      <td><input type="text" name="firstname" value="" class="large-field" /></td>
-    </tr>
-    <tr>
-      <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
-      <td><input type="text" name="lastname" value="" class="large-field" /></td>
-    </tr>
-    <tr>
       <td><?php echo $entry_company; ?></td>
       <td><input type="text" name="company" value="" class="large-field" /></td>
     </tr>
-    <?php if ($company_id_display) { ?>
     <tr>
-      <td><?php if ($company_id_required) { ?>
-        <span class="required">*</span>
-        <?php } ?>
-        <?php echo $entry_company_id; ?></td>
-      <td><input type="text" name="company_id" value="" class="large-field" /></td>
-    </tr>
-    <?php } ?>
-    <?php if ($tax_id_display) { ?>
-    <tr>
-      <td><?php if ($tax_id_required) { ?>
-        <span class="required">*</span>
-        <?php } ?>
-        <?php echo $entry_tax_id; ?></td>
-      <td><input type="text" name="tax_id" value="" class="large-field" /></td>
-    </tr>
-    <?php } ?>
-    <tr>
-      <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
-      <td><input type="text" name="address_1" value="" class="large-field" /></td>
-    </tr>
-    <tr>
-      <td><?php echo $entry_address_2; ?></td>
-      <td><input type="text" name="address_2" value="" class="large-field" /></td>
+      <td><span class="required">*</span> <?php echo $entry_address; ?></td>
+      <td><input type="text" name="address" value="" class="large-field" /></td>
     </tr>
     <tr>
       <td><span class="required">*</span> <?php echo $entry_city; ?></td>

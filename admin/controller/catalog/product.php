@@ -544,7 +544,6 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['entry_meta_description'] = $this->language->get('entry_meta_description');
 		$this->data['entry_meta_keyword'] = $this->language->get('entry_meta_keyword');
 		$this->data['entry_description'] = $this->language->get('entry_description');
-		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_keyword'] = $this->language->get('entry_keyword');
     	$this->data['entry_model'] = $this->language->get('entry_model');
 		$this->data['entry_sku'] = $this->language->get('entry_sku');
@@ -561,7 +560,6 @@ class ControllerCatalogProduct extends Controller {
     	$this->data['entry_quantity'] = $this->language->get('entry_quantity');
 		$this->data['entry_stock_status'] = $this->language->get('entry_stock_status');
     	$this->data['entry_price'] = $this->language->get('entry_price');
-		$this->data['entry_tax_class'] = $this->language->get('entry_tax_class');
 		$this->data['entry_points'] = $this->language->get('entry_points');
 		$this->data['entry_option_points'] = $this->language->get('entry_option_points');
 		$this->data['entry_subtract'] = $this->language->get('entry_subtract');
@@ -587,7 +585,6 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['entry_tag'] = $this->language->get('entry_tag');
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_reward'] = $this->language->get('entry_reward');
-		$this->data['entry_layout'] = $this->language->get('entry_layout');
 				
     	$this->data['button_save'] = $this->language->get('button_save');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -608,7 +605,6 @@ class ControllerCatalogProduct extends Controller {
     	$this->data['tab_image'] = $this->language->get('tab_image');		
 		$this->data['tab_links'] = $this->language->get('tab_links');
 		$this->data['tab_reward'] = $this->language->get('tab_reward');
-		$this->data['tab_design'] = $this->language->get('tab_design');
 		 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -784,18 +780,6 @@ class ControllerCatalogProduct extends Controller {
       		$this->data['location'] = '';
     	}
 
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
-		
-		if (isset($this->request->post['product_store'])) {
-			$this->data['product_store'] = $this->request->post['product_store'];
-		} elseif (isset($this->request->get['product_id'])) {
-			$this->data['product_store'] = $this->model_catalog_product->getProductStores($this->request->get['product_id']);
-		} else {
-			$this->data['product_store'] = array(0);
-		}	
-		
 		if (isset($this->request->post['keyword'])) {
 			$this->data['keyword'] = $this->request->post['keyword'];
 		} elseif (!empty($product_info)) {
@@ -849,19 +833,7 @@ class ControllerCatalogProduct extends Controller {
 		} else {
       		$this->data['price'] = '';
     	}
-		
-		$this->load->model('localisation/tax_class');
-		
-		$this->data['tax_classes'] = $this->model_localisation_tax_class->getTaxClasses();
-    	
-		if (isset($this->request->post['tax_class_id'])) {
-      		$this->data['tax_class_id'] = $this->request->post['tax_class_id'];
-    	} elseif (!empty($product_info)) {
-			$this->data['tax_class_id'] = $product_info['tax_class_id'];
-		} else {
-      		$this->data['tax_class_id'] = 0;
-    	}
-		      	
+
 		if (isset($this->request->post['date_available'])) {
        		$this->data['date_available'] = $this->request->post['date_available'];
 		} elseif (!empty($product_info)) {
@@ -1153,19 +1125,7 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$this->data['product_reward'] = array();
 		}
-		
-		if (isset($this->request->post['product_layout'])) {
-			$this->data['product_layout'] = $this->request->post['product_layout'];
-		} elseif (isset($this->request->get['product_id'])) {
-			$this->data['product_layout'] = $this->model_catalog_product->getProductLayouts($this->request->get['product_id']);
-		} else {
-			$this->data['product_layout'] = array();
-		}
 
-		$this->load->model('design/layout');
-		
-		$this->data['layouts'] = $this->model_design_layout->getLayouts();
-										
 		$this->template = 'catalog/product_form.tpl';
 		$this->children = array(
 			'common/header',

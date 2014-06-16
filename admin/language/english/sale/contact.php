@@ -15,7 +15,6 @@ $_['text_affiliate']       = 'Affiliates';
 $_['text_product']         = 'Products';
 
 // Entry
-$_['entry_store']          = 'From:';
 $_['entry_to']             = 'To:';
 $_['entry_customer_group'] = 'Customer Group:';
 $_['entry_customer']       = 'Customer:<br /><span class="help">Autocomplete</span>';

@@ -29,7 +29,6 @@ $_['entry_name']             = 'Product Name:';
 $_['entry_meta_keyword'] 	 = 'Meta Tag Keywords:';
 $_['entry_meta_description'] = 'Meta Tag Description:';
 $_['entry_description']      = 'Description:';
-$_['entry_store']            = 'Stores:';
 $_['entry_keyword']          = 'SEO Keyword:<br /><span class="help">Do not use spaces instead replace spaces with - and make sure the keyword is globally unique.</span>';
 $_['entry_model']            = 'Model:';
 $_['entry_sku']              = 'SKU:<br/><span class="help">Stock Keeping Unit</span>';
@@ -46,7 +45,6 @@ $_['entry_quantity']         = 'Quantity:';
 $_['entry_minimum']          = 'Minimum Quantity:<br/><span class="help">Force a minimum ordered amount</span>';
 $_['entry_stock_status']     = 'Out Of Stock Status:<br/><span class="help">Status shown when a product is out of stock</span>';
 $_['entry_price']            = 'Price:';
-$_['entry_tax_class']        = 'Tax Class:';
 $_['entry_points']           = 'Points:<br/><span class="help">Number of points needed to buy this item. If you don\'t want this product to be purchased with points leave as 0.</span>';
 $_['entry_option_points']    = 'Points:';
 $_['entry_subtract']         = 'Subtract Stock:';
@@ -72,7 +70,6 @@ $_['entry_download']         = 'Downloads:';
 $_['entry_related']          = 'Related Products:<br /><span class="help">(Autocomplete)</span>';
 $_['entry_tag']          	 = 'Product Tags:<br /><span class="help">comma separated</span>';
 $_['entry_reward']           = 'Reward Points:';
-$_['entry_layout']           = 'Layout Override:';
 
 // Error
 $_['error_warning']          = 'Warning: Please check the form carefully for errors!';

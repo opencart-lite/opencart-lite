@@ -14,7 +14,6 @@ class ControllerModuleCart extends Controller {
 		
 		$total_data = array();					
 		$total = 0;
-		$taxes = $this->cart->getTaxes();
 		
 		// Display prices
 		if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
@@ -32,7 +31,7 @@ class ControllerModuleCart extends Controller {
 				if ($this->config->get($result['code'] . '_status')) {
 					$this->load->model('total/' . $result['code']);
 		
-					$this->{'model_total_' . $result['code']}->getTotal($total_data, $total, $taxes);
+					$this->{'model_total_' . $result['code']}->getTotal($total_data, $total);
 				}
 				
 				$sort_order = array(); 
@@ -87,14 +86,14 @@ class ControllerModuleCart extends Controller {
 			
 			// Display prices
 			if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-				$price = $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')));
+				$price = $this->currency->format($product['price']);
 			} else {
 				$price = false;
 			}
 			
 			// Display prices
 			if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-				$total = $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity']);
+				$total = $this->currency->format($product['price'] * $product['quantity']);
 			} else {
 				$total = false;
 			}

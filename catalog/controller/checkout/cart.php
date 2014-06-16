@@ -217,14 +217,14 @@ class ControllerCheckoutCart extends Controller {
 				
 				// Display prices
 				if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-					$price = $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')));
+					$price = $this->currency->format($product['price']);
 				} else {
 					$price = false;
 				}
 				
 				// Display prices
 				if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-					$total = $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity']);
+					$total = $this->currency->format($product['price'] * $product['quantity']);
 				} else {
 					$total = false;
 				}
@@ -338,7 +338,6 @@ class ControllerCheckoutCart extends Controller {
 			
 			$total_data = array();					
 			$total = 0;
-			$taxes = $this->cart->getTaxes();
 			
 			// Display prices
 			if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
@@ -356,7 +355,7 @@ class ControllerCheckoutCart extends Controller {
 					if ($this->config->get($result['code'] . '_status')) {
 						$this->load->model('total/' . $result['code']);
 			
-						$this->{'model_total_' . $result['code']}->getTotal($total_data, $total, $taxes);
+						$this->{'model_total_' . $result['code']}->getTotal($total_data, $total);
 					}
 					
 					$sort_order = array(); 
@@ -552,7 +551,6 @@ class ControllerCheckoutCart extends Controller {
 				
 				$total_data = array();					
 				$total = 0;
-				$taxes = $this->cart->getTaxes();
 				
 				// Display prices
 				if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
@@ -570,7 +568,7 @@ class ControllerCheckoutCart extends Controller {
 						if ($this->config->get($result['code'] . '_status')) {
 							$this->load->model('total/' . $result['code']);
 				
-							$this->{'model_total_' . $result['code']}->getTotal($total_data, $total, $taxes);
+							$this->{'model_total_' . $result['code']}->getTotal($total_data, $total);
 						}
 						
 						$sort_order = array(); 
@@ -622,13 +620,8 @@ class ControllerCheckoutCart extends Controller {
 		}
 						
 		if (!$json) {		
-			$this->tax->setShippingAddress($this->request->post['country_id'], $this->request->post['zone_id']);
-		
-			// Default Shipping Address
-			$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
-			$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
-			$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
-		
+
+
 			if ($country_info) {
 				$country = $country_info['name'];
 				$iso_code_2 = $country_info['iso_code_2'];
