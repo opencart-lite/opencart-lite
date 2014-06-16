@@ -1,6 +1,6 @@
 <?php 
 class ModelPaymentFreeCheckout extends Model {
-  	public function getMethod($address, $total) {
+  	public function getMethod($total) {
 		$this->load->language('payment/free_checkout');
 		
 		if ($total <= 0) {
@@ -8,7 +8,10 @@ class ModelPaymentFreeCheckout extends Model {
 		} else {
 			$status = false;
 		}
-		
+
+        //$status = true;
+		file_put_contents(DIR_LOGS . 'ddlg.log', var_export($status, true));
+
 		$method_data = array();
 			
 		if ($status) {  
