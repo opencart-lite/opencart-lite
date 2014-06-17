@@ -4,7 +4,7 @@ class ModelAccountOrder extends Model {
 		$order_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "' AND customer_id = '" . (int)$this->customer->getId() . "' AND order_status_id > '0'");
 	
 		if ($order_query->num_rows) {
-			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$order_query->row['payment_country_id'] . "'");
+			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$order_query->row['country_id'] . "'");
 			
 			if ($country_query->num_rows) {
 				$iso_code_2 = $country_query->row['iso_code_2'];
@@ -14,7 +14,7 @@ class ModelAccountOrder extends Model {
 				$iso_code_3 = '';
 			}
 			
-			$zone_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone` WHERE zone_id = '" . (int)$order_query->row['payment_zone_id'] . "'");
+			$zone_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone` WHERE zone_id = '" . (int)$order_query->row['zone_id'] . "'");
 			
 			if ($zone_query->num_rows) {
 				$zone_code = $zone_query->row['code'];
