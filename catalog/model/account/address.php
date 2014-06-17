@@ -1,17 +1,6 @@
 <?php
 class ModelAccountAddress extends Model {
-	public function addAddress($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$this->customer->getId() . "', company = '" . $this->db->escape($data['company']) . "', address = '" . $this->db->escape($data['address']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', city = '" . $this->db->escape($data['city']) . "', zone_id = '" . (int)$data['zone_id'] . "', country_id = '" . (int)$data['country_id'] . "'");
-		
-		$address_id = $this->db->getLastId();
-		
-		if (!empty($data['default'])) {
-			$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
-		}
-		
-		return $address_id;
-	}
-	
+
 	public function editAddress($address_id, $data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "address SET company = '" . $this->db->escape($data['company']) . "', address = '" . $this->db->escape($data['address']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', city = '" . $this->db->escape($data['city']) . "', zone_id = '" . (int)$data['zone_id'] . "', country_id = '" . (int)$data['country_id'] . "' WHERE address_id  = '" . (int)$address_id . "' AND customer_id = '" . (int)$this->customer->getId() . "'");
 	
@@ -19,11 +8,7 @@ class ModelAccountAddress extends Model {
 			$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 		}
 	}
-	
-	public function deleteAddress($address_id) {
-		$this->db->query("DELETE FROM " . DB_PREFIX . "address WHERE address_id = '" . (int)$address_id . "' AND customer_id = '" . (int)$this->customer->getId() . "'");
-	}	
-	
+
 	public function getAddress($address_id) {
 		$address_query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "address WHERE address_id = '" . (int)$address_id . "' AND customer_id = '" . (int)$this->customer->getId() . "'");
 		
@@ -53,6 +38,7 @@ class ModelAccountAddress extends Model {
 			}		
 			
 			$address_data = array(
+                'address_id' => $address_query->row['address_id'],
 				'company'        => $address_query->row['company'],
 				'address'      => $address_query->row['address'],
 				'postcode'       => $address_query->row['postcode'],
