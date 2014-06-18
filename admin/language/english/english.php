@@ -92,6 +92,7 @@ $_['tab_module']              = 'Module';
 $_['tab_order']               = 'Order Details';
 $_['tab_order_history']       = 'Order History';
 $_['tab_payment']             = 'Payment Details';
+$_['tab_details']             = 'Details';
 $_['tab_product']             = 'Products';
 $_['tab_return']              = 'Return Details';
 $_['tab_return_history']      = 'Return History';

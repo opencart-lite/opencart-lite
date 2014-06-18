@@ -11,10 +11,7 @@
       <div class="buttons"><a onclick="window.open('<?php echo $invoice; ?>');" class="button"><?php echo $button_invoice; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-      <div class="vtabs"><a href="#tab-order"><?php echo $tab_order; ?></a><a href="#tab-payment"><?php echo $tab_payment; ?></a>
-        <?php if ($shipping_method) { ?>
-        <a href="#tab-shipping"><?php echo $tab_shipping; ?></a>
-        <?php } ?>
+      <div class="vtabs"><a href="#tab-order"><?php echo $tab_order; ?></a><a href="#tab-details"><?php echo $tab_details; ?></a>
         <a href="#tab-product"><?php echo $tab_product; ?></a><a href="#tab-history"><?php echo $tab_order_history; ?></a>
         <?php if ($maxmind_id) { ?>
         <a href="#tab-fraud"><?php echo $tab_fraud; ?></a>
@@ -156,134 +153,62 @@
           </tr>
         </table>
       </div>
-      <div id="tab-payment" class="vtabs-content">
+      <div id="tab-details" class="vtabs-content">
         <table class="form">
           <tr>
             <td><?php echo $text_firstname; ?></td>
-            <td><?php echo $payment_firstname; ?></td>
+            <td><?php echo $firstname; ?></td>
           </tr>
           <tr>
             <td><?php echo $text_lastname; ?></td>
-            <td><?php echo $payment_lastname; ?></td>
+            <td><?php echo $lastname; ?></td>
           </tr>
-          <?php if ($payment_company) { ?>
+          <?php if ($company) { ?>
           <tr>
             <td><?php echo $text_company; ?></td>
-            <td><?php echo $payment_company; ?></td>
+            <td><?php echo $company; ?></td>
           </tr>
           <?php } ?>
-          <?php if ($payment_company_id) { ?>
           <tr>
-            <td><?php echo $text_company_id; ?></td>
-            <td><?php echo $payment_company_id; ?></td>
+            <td><?php echo $text_address; ?></td>
+            <td><?php echo $address; ?></td>
           </tr>
-          <?php } ?>          
-          <?php if ($payment_tax_id) { ?>
-          <tr>
-            <td><?php echo $text_tax_id; ?></td>
-            <td><?php echo $payment_tax_id; ?></td>
-          </tr>
-          <?php } ?>            
-          <tr>
-            <td><?php echo $text_address_1; ?></td>
-            <td><?php echo $payment_address_1; ?></td>
-          </tr>
-          <?php if ($payment_address_2) { ?>
-          <tr>
-            <td><?php echo $text_address_2; ?></td>
-            <td><?php echo $payment_address_2; ?></td>
-          </tr>
-          <?php } ?>
           <tr>
             <td><?php echo $text_city; ?></td>
-            <td><?php echo $payment_city; ?></td>
+            <td><?php echo $city; ?></td>
           </tr>
-          <?php if ($payment_postcode) { ?>
+          <?php if ($postcode) { ?>
           <tr>
             <td><?php echo $text_postcode; ?></td>
-            <td><?php echo $payment_postcode; ?></td>
+            <td><?php echo $postcode; ?></td>
           </tr>
           <?php } ?>
           <tr>
             <td><?php echo $text_zone; ?></td>
-            <td><?php echo $payment_zone; ?></td>
+            <td><?php echo $zone; ?></td>
           </tr>
-          <?php if ($payment_zone_code) { ?>
+          <?php if ($zone_code) { ?>
           <tr>
             <td><?php echo $text_zone_code; ?></td>
-            <td><?php echo $payment_zone_code; ?></td>
+            <td><?php echo $zone_code; ?></td>
           </tr>
           <?php } ?>
           <tr>
             <td><?php echo $text_country; ?></td>
-            <td><?php echo $payment_country; ?></td>
+            <td><?php echo $country; ?></td>
           </tr>
           <tr>
             <td><?php echo $text_payment_method; ?></td>
             <td><?php echo $payment_method; ?></td>
           </tr>
+            <?php if ($shipping_method) { ?>
+            <tr>
+                <td><?php echo $text_shipping_method; ?></td>
+                <td><?php echo $shipping_method; ?></td>
+            </tr>
+            <?php } ?>
         </table>
       </div>
-      <?php if ($shipping_method) { ?>
-      <div id="tab-shipping" class="vtabs-content">
-        <table class="form">
-          <tr>
-            <td><?php echo $text_firstname; ?></td>
-            <td><?php echo $shipping_firstname; ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $text_lastname; ?></td>
-            <td><?php echo $shipping_lastname; ?></td>
-          </tr>
-          <?php if ($shipping_company) { ?>
-          <tr>
-            <td><?php echo $text_company; ?></td>
-            <td><?php echo $shipping_company; ?></td>
-          </tr>
-          <?php } ?>
-          <tr>
-            <td><?php echo $text_address_1; ?></td>
-            <td><?php echo $shipping_address_1; ?></td>
-          </tr>
-          <?php if ($shipping_address_2) { ?>
-          <tr>
-            <td><?php echo $text_address_2; ?></td>
-            <td><?php echo $shipping_address_2; ?></td>
-          </tr>
-          <?php } ?>
-          <tr>
-            <td><?php echo $text_city; ?></td>
-            <td><?php echo $shipping_city; ?></td>
-          </tr>
-          <?php if ($shipping_postcode) { ?>
-          <tr>
-            <td><?php echo $text_postcode; ?></td>
-            <td><?php echo $shipping_postcode; ?></td>
-          </tr>
-          <?php } ?>
-          <tr>
-            <td><?php echo $text_zone; ?></td>
-            <td><?php echo $shipping_zone; ?></td>
-          </tr>
-          <?php if ($shipping_zone_code) { ?>
-          <tr>
-            <td><?php echo $text_zone_code; ?></td>
-            <td><?php echo $shipping_zone_code; ?></td>
-          </tr>
-          <?php } ?>
-          <tr>
-            <td><?php echo $text_country; ?></td>
-            <td><?php echo $shipping_country; ?></td>
-          </tr>
-          <?php if ($shipping_method) { ?>
-          <tr>
-            <td><?php echo $text_shipping_method; ?></td>
-            <td><?php echo $shipping_method; ?></td>
-          </tr>
-          <?php } ?>
-        </table>
-      </div>
-      <?php } ?>
       <div id="tab-product" class="vtabs-content">
         <table class="list">
           <thead>
