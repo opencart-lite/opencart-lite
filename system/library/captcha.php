@@ -1,4 +1,5 @@
-<?php
+<?php namespace System\Library;
+
 class Captcha {
 	protected $code;
 	protected $width = 35;

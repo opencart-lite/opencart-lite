@@ -1,5 +1,6 @@
-<?php
-abstract class Controller {
+<?php namespace System\Engine;
+
+abstract class Controller implements iController{
 	protected $registry;	
 	protected $id;
 	protected $layout;
@@ -32,20 +33,21 @@ abstract class Controller {
 	
 	protected function getChild($child, $args = array()) {
 		$action = new Action($child, $args);
-	
-		if (file_exists($action->getFile())) {
-			require_once($action->getFile());
 
-			$class = $action->getClass();
+        if(class_exists($action->getController())) {
 
-			$controller = new $class($this->registry);
+            $front = Front::getInstance($this->registry);
 
-			$controller->{$action->getMethod()}($action->getArgs());
-			
+            $controller = $front->dispatch($action, '');
+
 			return $controller->output;
 		} else {
-			trigger_error('Error: Could not load controller ' . $child . '!');
-			exit();					
+
+            try{
+                throw new CoreException($this->registry, 'Error: Could not load controller ' . $child . '!');
+            }
+            catch (CoreException $e) {exit();}
+
 		}		
 	}
 	
@@ -67,8 +69,12 @@ abstract class Controller {
       		
 			return $this->output;
     	} else {
-			trigger_error('Error: Could not load template ' . DIR_TEMPLATE . $this->template . '!');
-			exit();				
+
+            try{
+                throw new CoreException($this->registry, 'Error: Could not load template ' . DIR_TEMPLATE . $this->template . '!');
+            }
+            catch (CoreException $e) {exit();}
+
     	}
 	}
 }

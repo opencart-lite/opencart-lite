@@ -1,4 +1,5 @@
-<?php
+<?php namespace System\Library;
+
 class Template {
 	public $data = array();
 	

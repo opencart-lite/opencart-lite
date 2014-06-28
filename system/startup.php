@@ -3,8 +3,8 @@
 error_reporting(E_ALL ^ E_DEPRECATED);
 
 // Check Version
-if (version_compare(phpversion(), '5.1.0', '<') == true) {
-	exit('PHP5.1+ Required');
+if (version_compare(phpversion(), '5.4.0', '<') == true) {
+	exit('PHP5.4+ Required');
 }
 
 // Register Globals
@@ -69,32 +69,19 @@ if (!isset($_SERVER['REQUEST_URI'])) {
 	} 
 }
 
+//Dynamic Classes [engine context]
+set_include_path(get_include_path()
+    . PATH_SEPARATOR . DIR_SYSTEM
+    . PATH_SEPARATOR . DIR_APPLICATION
+    . PATH_SEPARATOR . DIR_ADMIN
+);
+
+//Static includes
 // Helper
-require_once(DIR_SYSTEM . 'helper/json.php'); 
-require_once(DIR_SYSTEM . 'helper/utf8.php'); 
+require_once(DIR_SYSTEM . 'helper/json.php');
+require_once(DIR_SYSTEM . 'helper/utf8.php');
 
-// Engine
-require_once(DIR_SYSTEM . 'engine/action.php'); 
-require_once(DIR_SYSTEM . 'engine/controller.php');
-require_once(DIR_SYSTEM . 'engine/front.php');
-require_once(DIR_SYSTEM . 'engine/loader.php'); 
-require_once(DIR_SYSTEM . 'engine/model.php');
-require_once(DIR_SYSTEM . 'engine/registry.php');
-
-// Common
-require_once(DIR_SYSTEM . 'library/cache.php');
-require_once(DIR_SYSTEM . 'library/url.php');
-require_once(DIR_SYSTEM . 'library/config.php');
-require_once(DIR_SYSTEM . 'library/db.php');
-require_once(DIR_SYSTEM . 'library/document.php');
-require_once(DIR_SYSTEM . 'library/encryption.php');
-require_once(DIR_SYSTEM . 'library/image.php');
-require_once(DIR_SYSTEM . 'library/language.php');
-require_once(DIR_SYSTEM . 'library/log.php');
-require_once(DIR_SYSTEM . 'library/mail.php');
-require_once(DIR_SYSTEM . 'library/pagination.php');
-require_once(DIR_SYSTEM . 'library/request.php');
-require_once(DIR_SYSTEM . 'library/response.php');
-require_once(DIR_SYSTEM . 'library/session.php');
-require_once(DIR_SYSTEM . 'library/template.php');
-?>
+//Autoload Dynamic classes [engine context]
+spl_autoload_register(function ($class) {
+    spl_autoload($class);
+});

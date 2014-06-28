@@ -1,4 +1,5 @@
-<?php
+<?php namespace System\Library;
+
 class Language {
 	private $default = 'english';
 	private $directory;
