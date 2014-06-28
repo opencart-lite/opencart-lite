@@ -10,6 +10,7 @@ define('HTTPS_IMAGE', 'http://localhost/opencart-lite/image/');
 
 // DIR
 define('DIR_APPLICATION', 'D:\wamp\www\opencart-lite/catalog/');
+define('DIR_ADMIN', '');
 define('DIR_SYSTEM', 'D:\wamp\www\opencart-lite/system/');
 define('DIR_DATABASE', 'D:\wamp\www\opencart-lite/system/database/');
 define('DIR_LANGUAGE', 'D:\wamp\www\opencart-lite/catalog/language/');

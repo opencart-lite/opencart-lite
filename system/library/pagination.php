@@ -1,4 +1,5 @@
-<?php
+<?php namespace System\Library;
+
 class Pagination {
 	public $total = 0;
 	public $page = 1;

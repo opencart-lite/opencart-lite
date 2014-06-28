@@ -1,64 +1,44 @@
-<?php
+<?php namespace System\Engine;
+
 final class Action {
-	protected $file;
-	protected $class;
-	protected $method;
-	protected $args = array();
+    protected $_ns = '\Controller';
+    protected $_ns_separator = '\\';
+	protected $_controller;
+	protected $_method;
+	protected $_args = array();
 
 	public function __construct($route, $args = array()) {
-		$path = '';
-		
 		$parts = explode('/', str_replace('../', '', (string)$route));
-		
-		foreach ($parts as $part) { 
-			$path .= $part;
-			
-			if (is_dir(DIR_APPLICATION . 'controller/' . $path)) {
-				$path .= '/';
-				
-				array_shift($parts);
-				
-				continue;
-			}
-			
-			if (is_file(DIR_APPLICATION . 'controller/' . str_replace(array('../', '..\\', '..'), '', $path) . '.php')) {
-				$this->file = DIR_APPLICATION . 'controller/' . str_replace(array('../', '..\\', '..'), '', $path) . '.php';
-				
-				$this->class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', $path);
 
-				array_shift($parts);
-				
-				break;
-			}
-		}
-		
+        $this->_controller =  $this->_ns
+                            . $this->_ns_separator
+                            . ucfirst(array_shift($parts))
+                            . $this->_ns_separator
+                            . ucfirst(array_shift($parts));
+
 		if ($args) {
-			$this->args = $args;
+			$this->_args = $args;
 		}
 			
 		$method = array_shift($parts);
 				
 		if ($method) {
-			$this->method = $method;
+			$this->_method = $method;
 		} else {
-			$this->method = 'index';
+			$this->_method = 'index';
 		}
 	}
-	
-	public function getFile() {
-		return $this->file;
-	}
-	
-	public function getClass() {
-		return $this->class;
+
+	public function getController() {
+		return $this->_controller;
 	}
 	
 	public function getMethod() {
-		return $this->method;
+		return $this->_method;
 	}
 	
 	public function getArgs() {
-		return $this->args;
+		return $this->_args;
 	}
 }
 ?>

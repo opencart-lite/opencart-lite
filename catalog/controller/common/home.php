@@ -1,5 +1,8 @@
-<?php  
-class ControllerCommonHome extends Controller {
+<?php  namespace Controller\Common;
+
+use System\Engine\Controller;
+
+class Home extends Controller {
 	public function index() {
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
@@ -14,11 +17,11 @@ class ControllerCommonHome extends Controller {
 		
 		$this->children = array(
 			'common/column_left',
-			'common/column_right',
-			'common/content_top',
-			'common/content_bottom',
-			'common/footer',
-			'common/header'
+			//'common/column_right',
+			//'common/content_top',
+			//'common/content_bottom',
+			//'common/footer',
+			//'common/header'
 		);
 										
 		$this->response->setOutput($this->render());
