@@ -1,8 +1,11 @@
 <?php  namespace Controller\Payment;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Sagepay_us extends Controller {
+class Sagepay_us implements iController {
+    use Controller;
+
 	public function index() {
     	$this->language->load('payment/sagepay_us');
 		

@@ -1,8 +1,11 @@
 <?php  namespace Controller\Payment;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Pp_express extends Controller {
+class Pp_express implements iController {
+    use Controller;
+
 	public function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');
 

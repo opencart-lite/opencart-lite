@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Ups extends Model {
+class Ups {
+    use Model;
     public function getQuote($address) {
 		$this->load->language('shipping/ups');
 		

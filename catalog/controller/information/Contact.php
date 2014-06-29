@@ -2,8 +2,11 @@
 
 use System\Engine\Controller;
 use System\Library\Captcha;
+use System\Engine\iController;
 
-class Contact extends Controller {
+class Contact implements iController {
+    use Controller;
+
 	private $error = array(); 
 	    
   	public function index() {

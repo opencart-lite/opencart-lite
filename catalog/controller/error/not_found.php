@@ -1,6 +1,7 @@
 <?php namespace Controller\Common;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
 class Not_found extends Controller
 {

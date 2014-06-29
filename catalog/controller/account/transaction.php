@@ -2,8 +2,11 @@
 
 use System\Engine\Controller;
 use System\Library\Pagination;
+use System\Engine\iController;
 
-class Transaction extends Controller {
+class Transaction implements iController {
+    use Controller;
+
 	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/transaction', '', 'SSL');

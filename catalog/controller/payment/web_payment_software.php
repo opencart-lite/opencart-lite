@@ -1,8 +1,11 @@
 <?php namespace Controller\Payment;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Web_payment_software extends Controller {
+class Web_payment_software implements iController {
+    use Controller;
+
 	public function index() {
 		$this->language->load('payment/web_payment_software');
 		

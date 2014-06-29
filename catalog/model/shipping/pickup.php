@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Pickup extends Model {
+class Pickup {
+    use Model;
     public function getQuote($address) {
 		$this->load->language('shipping/pickup');
 		

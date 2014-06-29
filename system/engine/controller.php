@@ -1,13 +1,13 @@
 <?php namespace System\Engine;
 
-abstract class Controller implements iController{
+trait Controller {
 	protected $registry;	
 	protected $id;
 	protected $layout;
 	protected $template;
 	protected $children = array();
 	protected $data = array();
-	protected $output;
+    public $output;
 	
 	public function __construct($registry) {
 		$this->registry = $registry;
@@ -20,7 +20,7 @@ abstract class Controller implements iController{
 	public function __set($key, $value) {
 		$this->registry->set($key, $value);
 	}
-			
+
 	protected function forward($route, $args = array()) {
 		return new Action($route, $args);
 	}
@@ -30,7 +30,7 @@ abstract class Controller implements iController{
 		header('Location: ' . str_replace(array('&amp;', "\n", "\r"), array('&', '', ''), $url));
 		exit();				
 	}
-	
+
 	protected function getChild($child, $args = array()) {
 		$action = new Action($child, $args);
 
@@ -50,12 +50,12 @@ abstract class Controller implements iController{
 
 		}		
 	}
-	
+
 	protected function render() {
 		foreach ($this->children as $child) {
 			$this->data[basename($child)] = $this->getChild($child);
 		}
-		
+
 		if (file_exists(DIR_TEMPLATE . $this->template)) {
 			extract($this->data);
 			

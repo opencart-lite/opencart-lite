@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Zone extends Model {
+class Zone {
+    use Model;
 	public function getZone($zone_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone WHERE zone_id = '" . (int)$zone_id . "' AND status = '1'");
 		

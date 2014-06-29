@@ -1,8 +1,11 @@
 <?php   namespace Controller\Module;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Latest extends Controller {
+class Latest implements iController {
+    use Controller;
+
     public function index($setting) {
 		$this->language->load('module/latest');
 		

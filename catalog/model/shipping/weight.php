@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Weight extends Model {
+class Weight {
+    use Model;
   	public function getQuote($address) {
 		$this->load->language('shipping/weight');
 		

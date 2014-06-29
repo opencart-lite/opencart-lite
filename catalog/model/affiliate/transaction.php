@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Transaction extends Model {
+class Transaction {
+    use Model;
 	public function getTransactions($data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "affiliate_transaction` WHERE affiliate_id = '" . (int)$this->affiliate->getId() . "'";
 		   

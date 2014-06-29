@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Auspost extends Model {
+class Auspost {
+    use Model;
 	public function getQuote($address) {
 		$this->load->language('shipping/auspost');
 

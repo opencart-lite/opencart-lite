@@ -1,8 +1,11 @@
 <?php  namespace Controller\Product;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Compare extends Controller {
+class Compare implements iController {
+    use Controller;
+
 	public function index() { 
 		$this->language->load('product/compare');
 		

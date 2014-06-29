@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Extension extends Model {
+class Extension {
+    use Model;
 	function getExtensions($type) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "extension WHERE `type` = " . $this->db->quote($type));
 

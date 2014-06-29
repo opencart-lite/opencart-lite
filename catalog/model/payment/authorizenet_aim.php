@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Authorizenet_aim extends Model {
+class Authorizenet_aim {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/authorizenet_aim');
 		

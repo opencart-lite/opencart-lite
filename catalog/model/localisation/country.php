@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Country extends Model {
+class Country {
+    use Model;
 	public function getCountry($country_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE country_id = '" . (int)$country_id . "' AND status = '1'");
 		

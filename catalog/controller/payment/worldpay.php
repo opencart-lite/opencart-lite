@@ -1,5 +1,8 @@
-<?php
-class Worldpay extends Controller {
+<?phpuse System\Engine\iController;
+
+class Worldpay implements iController {
+    use Controller;
+
 	public function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');
 

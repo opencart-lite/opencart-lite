@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Klarna_pp extends Model {
+class Klarna_pp {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/klarna_pp');
 		

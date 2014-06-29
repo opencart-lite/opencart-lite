@@ -1,8 +1,11 @@
 <?php  namespace Controller\Module;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Welcome extends Controller {
+class Welcome implements iController {
+    use Controller;
+
     public function index($setting) {
 		$this->language->load('module/welcome');
 		

@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Cheque extends Model {
+class Cheque {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/cheque');
 		

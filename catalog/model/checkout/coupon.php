@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Coupon extends Model {
+class Coupon {
+    use Model;
 	public function getCoupon($code) {
 		$status = true;
 		

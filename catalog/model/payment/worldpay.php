@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Worldpay extends Model {
+class Worldpay {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/worldpay');
 		

@@ -1,8 +1,11 @@
 <?php  namespace Controller\Affiliate;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Logout extends Controller {
+class Logout implements iController {
+    use Controller;
+
 	public function index() {
     	if ($this->affiliate->isLogged()) {
       		$this->affiliate->logout();

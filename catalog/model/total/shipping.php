@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Shipping extends Model {
+class Shipping {
+    use Model;
 	public function getTotal(&$total_data, &$total) {
 		if ($this->cart->hasShipping() && isset($this->session->data['shipping_method'])) {
 			$total_data[] = array( 

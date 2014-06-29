@@ -2,8 +2,11 @@
 
 use System\Engine\Controller;
 use System\Library\User;
+use System\Engine\iController;
 
-class Manual extends Controller {
+class Manual implements iController {
+    use Controller;
+
 	public function index() {
 		$this->load->language('checkout/manual');
 		

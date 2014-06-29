@@ -1,8 +1,11 @@
 <?php  namespace Controller\Information;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Sitemap extends Controller {
+class Sitemap implements iController {
+    use Controller;
+
 	public function index() {
     	$this->language->load('information/sitemap');
  

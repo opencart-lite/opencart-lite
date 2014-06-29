@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Fedex extends Model {
+class Fedex {
+    use Model;
     public function getQuote($address) {
 		$this->load->language('shipping/fedex');
 		

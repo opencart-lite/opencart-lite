@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Nochex extends Model {
+class Nochex {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/nochex');
 		

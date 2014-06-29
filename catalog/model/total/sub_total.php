@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Sub_total extends Model {
+class Sub_total {
+    use Model;
 	public function getTotal(&$total_data, &$total) {
 		$this->load->language('total/sub_total');
 		

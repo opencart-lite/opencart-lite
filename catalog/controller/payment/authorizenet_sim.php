@@ -2,8 +2,11 @@
 
 use System\Engine\Controller;
 use System\Library\Hash;
+use System\Engine\iController;
 
-class Authorizenet_sim extends Controller {
+class Authorizenet_sim implements iController {
+    use Controller;
+
 	public function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');
 		

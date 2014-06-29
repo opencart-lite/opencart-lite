@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Affiliate extends Model {
+class Affiliate {
+    use Model;
 	public function addAffiliate($data) {
       	$this->db->query("INSERT INTO " . DB_PREFIX . "affiliate SET firstname = " . $this->db->quote($data['firstname']) . ", lastname = " . $this->db->quote($data['lastname']) . ", email = " . $this->db->quote($data['email']) . ", telephone = " . $this->db->quote($data['telephone']) . ", fax = " . $this->db->quote($data['fax']) . ", salt = " . $this->db->quote($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . ", password = " . $this->db->quote(sha1($salt . sha1($salt . sha1($data['password'])))) . ", company = " . $this->db->quote($data['company']) . ", address_1 = " . $this->db->quote($data['address_1']) . ", address_2 = " . $this->db->quote($data['address_2']) . ", city = " . $this->db->quote($data['city']) . ", postcode = " . $this->db->quote($data['postcode']) . ", country_id = '" . (int)$data['country_id'] . "', zone_id = '" . (int)$data['zone_id'] . "', code = " . $this->db->quote(uniqid()) . ", commission = '" . (float)$this->config->get('config_commission') . "', tax = " . $this->db->quote($data['tax']) . ", payment = " . $this->db->quote($data['payment']) . ", cheque = " . $this->db->quote($data['cheque']) . ", paypal = " . $this->db->quote($data['paypal']) . ", bank_name = " . $this->db->quote($data['bank_name']) . ", bank_branch_number = " . $this->db->quote($data['bank_branch_number']) . ", bank_swift_code = " . $this->db->quote($data['bank_swift_code']) . ", bank_account_name = " . $this->db->quote($data['bank_account_name']) . ", bank_account_number = " . $this->db->quote($data['bank_account_number']) . ", status = '1', date_added = NOW()");
 	

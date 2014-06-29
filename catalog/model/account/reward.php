@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Reward extends Model {
+class Reward {
+    use Model;
 	public function getRewards($data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "customer_reward` WHERE customer_id = '" . (int)$this->customer->getId() . "'";
 		   
