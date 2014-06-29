@@ -19,8 +19,10 @@ class Template {
 
       		return $content;
     	} else {
-			trigger_error('Error: Could not load template ' . $file . '!');
-			exit();				
+            try{
+                throw new CoreException($this->registry, 'Error: Could not load template ' . $file . '!');
+            }
+            catch (CoreException $e) {exit();}
     	}	
 	}
 }

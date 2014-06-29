@@ -3,7 +3,7 @@
 use System\Engine\Controller;
 
 class Authorizenet_Aim extends Controller {
-	protected function index() {
+    public function index() {
 		$this->language->load('payment/authorizenet_aim');
 		
 		$this->data['text_credit_card'] = $this->language->get('text_credit_card');

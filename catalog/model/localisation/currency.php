@@ -4,7 +4,7 @@ use System\Engine\Model;
 
 class Currency extends Model {
 	public function getCurrencyByCode($currency) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "currency WHERE code = '" . $this->db->escape($currency) . "'");
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "currency WHERE code = " . $this->db->quote($currency));
 	
 		return $query->row;
 	}

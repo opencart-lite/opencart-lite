@@ -49,28 +49,38 @@ class Mail {
 
 	public function send() {
 		if (!$this->to) {
-			trigger_error('Error: E-Mail to required!');
-			exit();			
+            try{
+                throw new CoreException($this->registry, 'Error: E-Mail to required!');
+            }
+            catch (CoreException $e) {exit();}
 		}
 
 		if (!$this->from) {
-			trigger_error('Error: E-Mail from required!');
-			exit();					
+            try{
+                throw new CoreException($this->registry, 'Error: E-Mail from required!');
+            }
+            catch (CoreException $e) {exit();}
 		}
 
 		if (!$this->sender) {
-			trigger_error('Error: E-Mail sender required!');
-			exit();					
+            try{
+                throw new CoreException($this->registry, 'Error: E-Mail sender required!');
+            }
+            catch (CoreException $e) {exit();}
 		}
 
 		if (!$this->subject) {
-			trigger_error('Error: E-Mail subject required!');
-			exit();					
+            try{
+                throw new CoreException($this->registry, 'Error: E-Mail subject required!');
+            }
+            catch (CoreException $e) {exit();}
 		}
 
 		if ((!$this->text) && (!$this->html)) {
-			trigger_error('Error: E-Mail message required!');
-			exit();					
+            try{
+                throw new CoreException($this->registry, 'Error: E-Mail message required!');
+            }
+            catch (CoreException $e) {exit();}
 		}
 
 		if (is_array($this->to)) {
@@ -154,8 +164,10 @@ class Mail {
 			$handle = fsockopen($this->hostname, $this->port, $errno, $errstr, $this->timeout);
 
 			if (!$handle) {
-				trigger_error('Error: ' . $errstr . ' (' . $errno . ')');
-				exit();					
+                try{
+                    throw new CoreException($this->registry, 'Error: ' . $errstr . ' (' . $errno . ')');
+                }
+                catch (CoreException $e) {exit();}
 			} else {
 				if (substr(PHP_OS, 0, 3) != 'WIN') {
 					socket_set_timeout($handle, $this->timeout, 0);
@@ -170,6 +182,8 @@ class Mail {
 				if (substr($this->hostname, 0, 3) == 'tls') {
 					fputs($handle, 'STARTTLS' . $this->crlf);
 
+                    $reply = '';
+
 					while ($line = fgets($handle, 515)) {
 						$reply .= $line;
 
@@ -179,8 +193,10 @@ class Mail {
 					}
 
 					if (substr($reply, 0, 3) != 220) {
-						trigger_error('Error: STARTTLS not accepted from server!');
-						exit();								
+                        try{
+                            throw new CoreException($this->registry, 'Error: STARTTLS not accepted from server!');
+                        }
+                        catch (CoreException $e) {exit();}
 					}
 				}
 
@@ -198,8 +214,10 @@ class Mail {
 					}
 
 					if (substr($reply, 0, 3) != 250) {
-						trigger_error('Error: EHLO not accepted from server!');
-						exit();								
+                        try{
+                            throw new CoreException($this->registry, 'Error: EHLO not accepted from server!');
+                        }
+                        catch (CoreException $e) {exit();}
 					}
 
 					fputs($handle, 'AUTH LOGIN' . $this->crlf);
@@ -215,8 +233,10 @@ class Mail {
 					}
 
 					if (substr($reply, 0, 3) != 334) {
-						trigger_error('Error: AUTH LOGIN not accepted from server!');
-						exit();						
+                        try{
+                            throw new CoreException($this->registry, 'Error: AUTH LOGIN not accepted from server!');
+                        }
+                        catch (CoreException $e) {exit();}
 					}
 
 					fputs($handle, base64_encode($this->username) . $this->crlf);
@@ -232,8 +252,10 @@ class Mail {
 					}
 
 					if (substr($reply, 0, 3) != 334) {
-						trigger_error('Error: Username not accepted from server!');
-						exit();								
+                        try{
+                            throw new CoreException($this->registry, 'Error: Username not accepted from server!');
+                        }
+                        catch (CoreException $e) {exit();}
 					}
 
 					fputs($handle, base64_encode($this->password) . $this->crlf);
@@ -249,8 +271,10 @@ class Mail {
 					}
 
 					if (substr($reply, 0, 3) != 235) {
-						trigger_error('Error: Password not accepted from server!');
-						exit();								
+                        try{
+                            throw new CoreException($this->registry, 'Error: Password not accepted from server!');
+                        }
+                        catch (CoreException $e) {exit();}
 					}
 				} else {
 					fputs($handle, 'HELO ' . getenv('SERVER_NAME') . $this->crlf);
@@ -266,8 +290,10 @@ class Mail {
 					}
 
 					if (substr($reply, 0, 3) != 250) {
-						trigger_error('Error: HELO not accepted from server!');
-						exit();							
+                        try{
+                            throw new CoreException($this->registry, 'Error: HELO not accepted from server!');
+                        }
+                        catch (CoreException $e) {exit();}
 					}
 				}
 
@@ -288,8 +314,10 @@ class Mail {
 				}
 
 				if (substr($reply, 0, 3) != 250) {
-					trigger_error('Error: MAIL FROM not accepted from server!');
-					exit();							
+                    try{
+                        throw new CoreException($this->registry, 'Error: MAIL FROM not accepted from server!');
+                    }
+                    catch (CoreException $e) {exit();}
 				}
 
 				if (!is_array($this->to)) {
@@ -306,8 +334,10 @@ class Mail {
 					}
 
 					if ((substr($reply, 0, 3) != 250) && (substr($reply, 0, 3) != 251)) {
-						trigger_error('Error: RCPT TO not accepted from server!');
-						exit();							
+                        try{
+                            throw new CoreException($this->registry, 'Error: RCPT TO not accepted from server!');
+                        }
+                        catch (CoreException $e) {exit();}
 					}
 				} else {
 					foreach ($this->to as $recipient) {
@@ -324,8 +354,10 @@ class Mail {
 						}
 
 						if ((substr($reply, 0, 3) != 250) && (substr($reply, 0, 3) != 251)) {
-							trigger_error('Error: RCPT TO not accepted from server!');
-							exit();								
+                            try{
+                                throw new CoreException($this->registry, 'Error: RCPT TO not accepted from server!');
+                            }
+                            catch (CoreException $e) {exit();}
 						}
 					}
 				}
@@ -343,8 +375,10 @@ class Mail {
 				}
 
 				if (substr($reply, 0, 3) != 354) {
-					trigger_error('Error: DATA not accepted from server!');
-					exit();						
+                    try{
+                        throw new CoreException($this->registry, 'Error: DATA not accepted from server!');
+                    }
+                    catch (CoreException $e) {exit();}
 				}
             	
 				// According to rfc 821 we should not send more than 1000 including the CRLF
@@ -378,8 +412,10 @@ class Mail {
 				}
 
 				if (substr($reply, 0, 3) != 250) {
-					trigger_error('Error: DATA not accepted from server!');
-					exit();						
+                    try{
+                        throw new CoreException($this->registry, 'Error: DATA not accepted from server!');
+                    }
+                    catch (CoreException $e) {exit();}
 				}
 				
 				fputs($handle, 'QUIT' . $this->crlf);
@@ -395,8 +431,10 @@ class Mail {
 				}
 
 				if (substr($reply, 0, 3) != 221) {
-					trigger_error('Error: QUIT not accepted from server!');
-					exit();						
+                    try{
+                        throw new CoreException($this->registry, 'Error: QUIT not accepted from server!');
+                    }
+                    catch (CoreException $e) {exit();}
 				}
 
 				fclose($handle);

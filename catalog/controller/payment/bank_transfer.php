@@ -3,7 +3,7 @@
 use System\Engine\Controller;
 
 class Bank_transfer extends Controller {
-	protected function index() {
+	public function index() {
 		$this->language->load('payment/bank_transfer');
 		
 		$this->data['text_instruction'] = $this->language->get('text_instruction');

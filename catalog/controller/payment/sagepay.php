@@ -3,7 +3,7 @@
 use System\Engine\Controller;
 
 class Sagepay extends Controller {
-	protected function index() {
+	public function index() {
 		$this->language->load('payment/sagepay');
 		
 		$this->data['button_confirm'] = $this->language->get('button_confirm');

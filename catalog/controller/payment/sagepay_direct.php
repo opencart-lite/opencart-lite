@@ -3,7 +3,7 @@
 use System\Engine\Controller;
 
 class Sagepay_direct extends Controller {
-	protected function index() {
+	public function index() {
 		$this->language->load('payment/sagepay_direct');
 		
 		$this->data['text_credit_card'] = $this->language->get('text_credit_card');

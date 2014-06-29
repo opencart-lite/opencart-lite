@@ -3,7 +3,7 @@
 use System\Engine\Controller;
 
 class Pp_pro extends Controller {
-	protected function index() {
+	public function index() {
     	$this->language->load('payment/pp_pro');
 		
 		$this->data['text_credit_card'] = $this->language->get('text_credit_card');
