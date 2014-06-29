@@ -1,4 +1,5 @@
-<?php
+<?php namespace System\Engine;
+
 final class Registry {
 	private $data = array();
 
@@ -14,4 +15,3 @@ final class Registry {
     	return isset($this->data[$key]);
   	}
 }
-?>

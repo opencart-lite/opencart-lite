@@ -1,4 +1,4 @@
-<?php
+<?php namespace System\Engine;
 final class Loader {
 	protected $registry;
 	

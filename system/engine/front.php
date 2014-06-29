@@ -1,57 +1,93 @@
-<?php
+<?php namespace System\Engine;
+
+use ReflectionClass;
+
 final class Front {
+    protected static $_instance;
 	protected $registry;
 	protected $pre_action = array();
 	protected $error;
-	
-	public function __construct($registry) {
+
+    private function __construct($registry)
+    {
 		$this->registry = $registry;
 	}
-	
-	public function addPreAction($pre_action) {
+
+    public function addPreAction(Actio $pre_action)
+    {
 		$this->pre_action[] = $pre_action;
 	}
-	
-  	public function dispatch($action, $error) {
+
+    public function dispatch(Action $action, $error)
+    {
 		$this->error = $error;
-			
-		foreach ($this->pre_action as $pre_action) {
-			$result = $this->execute($pre_action);
-					
-			if ($result) {
-				$action = $result;
-				
-				break;
-			}
-		}
-			
-		while ($action) {
-			$action = $this->execute($action);
-		}
+
+        /*foreach ($this->pre_action as $pre_action) {
+            $result = $this->execute($pre_action);
+
+            if ($result) {
+                $action = $result;
+
+                break;
+            }
+        }
+
+        while ($action) {
+            //$action = $this->execute($action);
+        }
+        */
+
+        return $this->execute($action);
+
   	}
     
 	private function execute($action) {
-		if (file_exists($action->getFile())) {
-			require_once($action->getFile());
-			
-			$class = $action->getClass();
+        if (class_exists($action->getController())) {
 
-			$controller = new $class($this->registry);
-			
-			if (is_callable(array($controller, $action->getMethod()))) {
-				$action = call_user_func_array(array($controller, $action->getMethod()), $action->getArgs());
-			} else {
-				$action = $this->error;
-			
-				$this->error = '';
-			}
+            $reflection = new ReflectionClass($action->getController());
+
+            if ($reflection->implementsInterface('System\Engine\IController')) {
+
+                if ($reflection->hasMethod($action->getMethod())) {
+                    $controller = $reflection->newInstance($this->registry);
+                    $method = $reflection->getMethod($action->getMethod());
+                    $method->invoke($controller, $action->getArgs());
+                    //$method->invokeArgs($controller, $action->getArgs());
+
+                } else {
+                    try {
+                        throw new CoreException($this->registry, 'METHOD ' . $action->getMethod() . ' NOT FOUND');
+                    } catch (CoreException $e) {
+                    }
+
+                }
+
+            } else {
+                try {
+                    throw new CoreException($this->registry, "INTERFACE IController NOT FOUND");
+                } catch (CoreException $e) {
+                }
+
+            }
+
 		} else {
-			$action = $this->error;
-			
-			$this->error = '';
+
+            try {
+                throw new CoreException($this->registry, 'CONTROLLER ' . $action->getController() . ' NOT FOUND');
+            } catch (CoreException $e) {
+            }
+
 		}
-		
-		return $action;
+
+        return $controller;
 	}
+
+    //Singleton
+    public static function getInstance($registry)
+    {
+        self::$_instance = !(self::$_instance instanceof self) ? new self($registry) : self::$_instance;
+        return self::$_instance;
+    }
+
 }
 ?>

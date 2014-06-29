@@ -1,4 +1,5 @@
-<?php
+<?php namespace System\Library;
+
 class Cache { 
 	private $expire = 3600; 
 

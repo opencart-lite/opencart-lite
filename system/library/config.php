@@ -1,4 +1,5 @@
-<?php
+<?php namespace System\Library;
+
 class Config {
 	private $data = array();
 

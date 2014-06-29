@@ -1,4 +1,5 @@
-<?php
+<?php namespace System\Library;
+
 class User {
 	private $user_id;
 	private $username;

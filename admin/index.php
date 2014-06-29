@@ -1,6 +1,6 @@
-<?php
+<?php namespace OpencartLite;
 // Version
-define('VERSION', '1.5.4');
+define('VERSION', '1.0.0');
 
 // Configuration
 require_once('config.php');
