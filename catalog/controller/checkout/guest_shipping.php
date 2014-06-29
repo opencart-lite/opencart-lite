@@ -1,5 +1,8 @@
-<?php 
-class ControllerCheckoutGuestShipping extends Controller {
+<?php  namespace Controller\Checkout;
+
+use System\Engine\Controller;
+
+class Guest_shipping extends Controller {
   	public function index() {	
 		$this->language->load('checkout/checkout');
 		

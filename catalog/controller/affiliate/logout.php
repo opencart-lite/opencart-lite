@@ -1,5 +1,8 @@
-<?php 
-class ControllerAffiliateLogout extends Controller {
+<?php  namespace Controller\Affiliate;
+
+use System\Engine\Controller;
+
+class Logout extends Controller {
 	public function index() {
     	if ($this->affiliate->isLogged()) {
       		$this->affiliate->logout();

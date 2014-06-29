@@ -1,5 +1,8 @@
-<?php 
-class ModelSettingSetting extends Model {
+<?php  namespace Model\Setting;
+
+use System\Engine\Model;
+
+class Setting extends Model {
 	public function getSetting($group) {
 		$data = array(); 
 		

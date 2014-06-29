@@ -1,5 +1,8 @@
-<?php
-class ModelToolImage extends Model {
+<?php  namespace Model\Tool;
+
+use System\Engine\Model;
+
+class Image extends Model {
 	public function resize($filename, $width, $height) {
 		if (!file_exists(DIR_IMAGE . $filename) || !is_file(DIR_IMAGE . $filename)) {
 			return;
@@ -27,7 +30,7 @@ class ModelToolImage extends Model {
 			list($width_orig, $height_orig) = getimagesize(DIR_IMAGE . $old_image);
 
 			if ($width_orig != $width || $height_orig != $height) {
-				$image = new Image(DIR_IMAGE . $old_image);
+				$image = new \System\Library\Image(DIR_IMAGE . $old_image);
 				$image->resize($width, $height);
 				$image->save(DIR_IMAGE . $new_image);
 			} else {

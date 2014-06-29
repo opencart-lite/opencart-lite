@@ -1,6 +1,9 @@
-<?php  
-class ControllerModuleAccount extends Controller {
-	protected function index() {
+<?php  namespace Controller\Module;
+
+use System\Engine\Controller;
+
+class Account extends Controller {
+    public function index() {
 		$this->language->load('module/account');
 		
     	$this->data['heading_title'] = $this->language->get('heading_title');
@@ -30,7 +33,7 @@ class ControllerModuleAccount extends Controller {
 		$this->data['wishlist'] = $this->url->link('account/wishlist');
 		$this->data['order'] = $this->url->link('account/order', '', 'SSL');
 		$this->data['download'] = $this->url->link('account/download', '', 'SSL');
-		$this->data['return'] = $this->url->link('account/return', '', 'SSL');
+		$this->data['return'] = $this->url->link('account/returns', '', 'SSL');
 		$this->data['transaction'] = $this->url->link('account/transaction', '', 'SSL');
 		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
 

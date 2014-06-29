@@ -1,6 +1,9 @@
-<?php
-class ControllerModuleLatest extends Controller {
-	protected function index($setting) {
+<?php   namespace Controller\Module;
+
+use System\Engine\Controller;
+
+class Latest extends Controller {
+    public function index($setting) {
 		$this->language->load('module/latest');
 		
       	$this->data['heading_title'] = $this->language->get('heading_title');

@@ -1,5 +1,8 @@
-<?php 
-class ControllerAffiliateTracking extends Controller { 
+<?php  namespace Controller\Affiliate;
+
+use System\Engine\Controller;
+
+class Tracking extends Controller {
 	public function index() {
 		if (!$this->affiliate->isLogged()) {
 	  		$this->session->data['redirect'] = $this->url->link('affiliate/tracking', '', 'SSL');

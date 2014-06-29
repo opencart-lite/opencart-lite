@@ -1,15 +1,20 @@
-<?php 
-class ControllerAccountReturn extends Controller { 
+<?php  namespace Controller\Account;
+
+use System\Engine\Controller;
+use System\Library\Pagination;
+use System\Library\Captcha;
+
+class Returns extends Controller {
 	private $error = array();
 	
 	public function index() {
     	if (!$this->customer->isLogged()) {
-      		$this->session->data['redirect'] = $this->url->link('account/return', '', 'SSL');
+      		$this->session->data['redirect'] = $this->url->link('account/returns', '', 'SSL');
 
 	  		$this->redirect($this->url->link('account/login', '', 'SSL'));
     	}
  
-    	$this->language->load('account/return');
+    	$this->language->load('account/returns');
 
     	$this->document->setTitle($this->language->get('heading_title'));
 			
@@ -35,7 +40,7 @@ class ControllerAccountReturn extends Controller {
 				
       	$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('account/return', $url, 'SSL'),        	
+			'href'      => $this->url->link('account/returns', $url, 'SSL'),
         	'separator' => $this->language->get('text_separator')
       	);
 
@@ -51,7 +56,7 @@ class ControllerAccountReturn extends Controller {
 		$this->data['button_view'] = $this->language->get('button_view');
 		$this->data['button_continue'] = $this->language->get('button_continue');
 		
-		$this->load->model('account/return');
+		$this->load->model('account/returns');
 		
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
@@ -61,9 +66,9 @@ class ControllerAccountReturn extends Controller {
 		
 		$this->data['returns'] = array();
 		
-		$return_total = $this->model_account_return->getTotalReturns();
+		$return_total = $this->model_account_returns->getTotalReturns();
 		
-		$results = $this->model_account_return->getReturns(($page - 1) * 10, 10);
+		$results = $this->model_account_returns->getReturns(($page - 1) * 10, 10);
 		
 		foreach ($results as $result) {
 			$this->data['returns'][] = array(
@@ -72,7 +77,7 @@ class ControllerAccountReturn extends Controller {
 				'name'       => $result['firstname'] . ' ' . $result['lastname'],
 				'status'     => $result['status'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-				'href'       => $this->url->link('account/return/info', 'return_id=' . $result['return_id'] . $url, 'SSL')
+				'href'       => $this->url->link('account/returns/info', 'return_id=' . $result['return_id'] . $url, 'SSL')
 			);
 		}
 
@@ -106,7 +111,7 @@ class ControllerAccountReturn extends Controller {
 	}
 	
 	public function info() {
-		$this->load->language('account/return');
+		$this->load->language('account/returns');
 		
 		if (isset($this->request->get['return_id'])) {
 			$return_id = $this->request->get['return_id'];
@@ -115,14 +120,14 @@ class ControllerAccountReturn extends Controller {
 		}
     	
 		if (!$this->customer->isLogged()) {
-			$this->session->data['redirect'] = $this->url->link('account/return/info', 'return_id=' . $return_id, 'SSL');
+			$this->session->data['redirect'] = $this->url->link('account/returns/info', 'return_id=' . $return_id, 'SSL');
 			
 			$this->redirect($this->url->link('account/login', '', 'SSL'));
     	}
 		
-		$this->load->model('account/return');
+		$this->load->model('account/returns');
 						
-		$return_info = $this->model_account_return->getReturn($return_id);
+		$return_info = $this->model_account_returns->getReturn($return_id);
 
 		if ($return_info) {
 			$this->document->setTitle($this->language->get('text_return'));
@@ -149,13 +154,13 @@ class ControllerAccountReturn extends Controller {
 					
 			$this->data['breadcrumbs'][] = array(
 				'text'      => $this->language->get('heading_title'),
-				'href'      => $this->url->link('account/return', $url, 'SSL'),
+				'href'      => $this->url->link('account/returns', $url, 'SSL'),
 				'separator' => $this->language->get('text_separator')
 			);
 						
 			$this->data['breadcrumbs'][] = array(
 				'text'      => $this->language->get('text_return'),
-				'href'      => $this->url->link('account/return/info', 'return_id=' . $this->request->get['return_id'] . $url, 'SSL'),
+				'href'      => $this->url->link('account/returns/info', 'return_id=' . $this->request->get['return_id'] . $url, 'SSL'),
 				'separator' => $this->language->get('text_separator')
 			);			
 			
@@ -204,7 +209,7 @@ class ControllerAccountReturn extends Controller {
 						
 			$this->data['histories'] = array();
 			
-			$results = $this->model_account_return->getReturnHistories($this->request->get['return_id']);
+			$results = $this->model_account_returns->getReturnHistories($this->request->get['return_id']);
 			
       		foreach ($results as $result) {
         		$this->data['histories'][] = array(
@@ -214,7 +219,7 @@ class ControllerAccountReturn extends Controller {
         		);
       		}
 			
-			$this->data['continue'] = $this->url->link('account/return', $url, 'SSL');
+			$this->data['continue'] = $this->url->link('account/returns', $url, 'SSL');
 
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/return_info.tpl')) {
 				$this->template = $this->config->get('config_template') . '/template/account/return_info.tpl';
@@ -251,7 +256,7 @@ class ControllerAccountReturn extends Controller {
 			
 			$this->data['breadcrumbs'][] = array(
 				'text'      => $this->language->get('heading_title'),
-				'href'      => $this->url->link('account/return', '', 'SSL'),
+				'href'      => $this->url->link('account/returns', '', 'SSL'),
 				'separator' => $this->language->get('text_separator')
 			);
 			
@@ -263,7 +268,7 @@ class ControllerAccountReturn extends Controller {
 									
 			$this->data['breadcrumbs'][] = array(
 				'text'      => $this->language->get('text_return'),
-				'href'      => $this->url->link('account/return/info', 'return_id=' . $return_id . $url, 'SSL'),
+				'href'      => $this->url->link('account/returns/info', 'return_id=' . $return_id . $url, 'SSL'),
 				'separator' => $this->language->get('text_separator')
 			);
 			
@@ -273,7 +278,7 @@ class ControllerAccountReturn extends Controller {
 
 			$this->data['button_continue'] = $this->language->get('button_continue');
 
-			$this->data['continue'] = $this->url->link('account/return', '', 'SSL');
+			$this->data['continue'] = $this->url->link('account/returns', '', 'SSL');
 
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
 				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
@@ -295,14 +300,14 @@ class ControllerAccountReturn extends Controller {
 	}
 		
 	public function insert() {
-		$this->language->load('account/return');
+		$this->language->load('account/returns');
 
-		$this->load->model('account/return');
+		$this->load->model('account/returns');
 
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_account_return->addReturn($this->request->post);
+			$this->model_account_returns->addReturn($this->request->post);
 	  		
-			$this->redirect($this->url->link('account/return/success', '', 'SSL'));
+			$this->redirect($this->url->link('account/returns/success', '', 'SSL'));
     	} 
 							
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -323,7 +328,7 @@ class ControllerAccountReturn extends Controller {
 		
       	$this->data['breadcrumbs'][] = array(       	
         	'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('account/return/insert', '', 'SSL'),
+			'href'      => $this->url->link('account/returns/insert', '', 'SSL'),
         	'separator' => $this->language->get('text_separator')
       	);
 		
@@ -412,7 +417,7 @@ class ControllerAccountReturn extends Controller {
 			$this->data['error_captcha'] = '';
 		}	
 
-		$this->data['action'] = $this->url->link('account/return/insert', '', 'SSL');
+		$this->data['action'] = $this->url->link('account/returns/insert', '', 'SSL');
 	
 		$this->load->model('account/order');
 		
@@ -545,7 +550,7 @@ class ControllerAccountReturn extends Controller {
   	}
 	
   	public function success() {
-		$this->language->load('account/return');
+		$this->language->load('account/returns');
 
 		$this->document->setTitle($this->language->get('heading_title')); 
       
@@ -559,7 +564,7 @@ class ControllerAccountReturn extends Controller {
 
       	$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('account/return', '', 'SSL'),
+			'href'      => $this->url->link('account/returns', '', 'SSL'),
         	'separator' => $this->language->get('text_separator')
       	);	
 				
@@ -634,7 +639,6 @@ class ControllerAccountReturn extends Controller {
   	}
 	
 	public function captcha() {
-		$this->load->library('captcha');
 		
 		$captcha = new Captcha();
 		

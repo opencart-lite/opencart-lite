@@ -1,5 +1,8 @@
-<?php
-class ControllerPaymentWebPaymentSoftware extends Controller {
+<?php namespace Controller\Payment;
+
+use System\Engine\Controller;
+
+class Web_payment_software extends Controller {
 	protected function index() {
 		$this->language->load('payment/web_payment_software');
 		

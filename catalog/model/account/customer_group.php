@@ -1,5 +1,8 @@
-<?php
-class ModelAccountCustomerGroup extends Model {
+<?php  namespace Model\Account;
+
+use System\Engine\Model;
+
+class Customer_group extends Model {
 	public function getCustomerGroup($customer_group_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "customer_group WHERE customer_group_id = '" . (int)$customer_group_id . "'");
 		

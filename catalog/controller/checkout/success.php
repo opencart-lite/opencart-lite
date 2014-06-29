@@ -1,5 +1,8 @@
-<?php
-class ControllerCheckoutSuccess extends Controller { 
+<?php  namespace Controller\Checkout;
+
+use System\Engine\Controller;
+
+class Success extends Controller {
 	public function index() { 	
 		
 		if ( isset($this->session->data['order_id']) && ( ! empty($this->session->data['order_id']))  ) {

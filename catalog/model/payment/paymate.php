@@ -1,5 +1,8 @@
-<?php 
-class ModelPaymentPayMate extends Model {
+<?php  namespace Model\Payment;
+
+use System\Engine\Model;
+
+class Paymate extends Model {
   	public function getMethod($address, $total) {
 		$this->load->language('payment/paymate');
 	

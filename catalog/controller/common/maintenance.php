@@ -1,6 +1,7 @@
 <?php namespace Controller\Common;
 
 use System\Engine\Controller;
+use System\Library\User;
 
 class Maintenance extends Controller {
     public function index() {
@@ -17,7 +18,6 @@ class Maintenance extends Controller {
 			}
 			
 			// Show site if logged in as admin
-			$this->load->library('user');
 
 			$this->user = new User($this->registry);
 

@@ -1,5 +1,8 @@
-<?php 
-class ModelPaymentBankTransfer extends Model {
+<?php  namespace Model\Payment;
+
+use System\Engine\Model;
+
+class Bank_transfer extends Model {
   	public function getMethod($address, $total) {
 		$this->load->language('payment/bank_transfer');
 		

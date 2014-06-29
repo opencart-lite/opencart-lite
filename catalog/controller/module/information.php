@@ -1,6 +1,9 @@
-<?php  
-class ControllerModuleInformation extends Controller {
-	protected function index() {
+<?php   namespace Controller\Module;
+
+use System\Engine\Controller;
+
+class Information extends Controller {
+    public function index() {
 		$this->language->load('module/information');
 		
     	$this->data['heading_title'] = $this->language->get('heading_title');

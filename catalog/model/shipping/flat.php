@@ -1,5 +1,8 @@
-<?php
-class ModelShippingFlat extends Model {
+<?php   namespace Model\Shipping;
+
+use System\Engine\Model;
+
+class Flat extends Model {
 	function getQuote() {
 		$this->load->language('shipping/flat');
 		

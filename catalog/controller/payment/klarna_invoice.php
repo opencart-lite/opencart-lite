@@ -1,5 +1,8 @@
-<?php
-class ControllerPaymentKlarnaInvoice extends Controller {
+<?php  namespace Controller\Payment;
+
+use System\Engine\Controller;
+
+class Klarna_invoice extends Controller {
 	protected function index() {
 		$this->language->load('payment/klarna_invoice');
 		

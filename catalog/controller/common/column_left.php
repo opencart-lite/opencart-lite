@@ -4,7 +4,7 @@ use System\Engine\Controller;
 
 class Column_left extends Controller {
 	public function index() {
-		/*$this->load->model('design/layout');
+		$this->load->model('design/layout');
 		$this->load->model('catalog/category');
 		$this->load->model('catalog/product');
 		$this->load->model('catalog/information');
@@ -64,7 +64,7 @@ class Column_left extends Controller {
 				$this->data['modules'][] = $module;
 			}
 		}
-		*/
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/column_left.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/column_left.tpl';
 		} else {

@@ -1,6 +1,9 @@
-<?php  
-class ControllerModuleGoogleTalk extends Controller {
-	protected function index() {
+<?php   namespace Controller\Module;
+
+use System\Engine\Controller;
+
+class Google_talk extends Controller {
+    public function index() {
 		$this->language->load('module/google_talk');
 
       	$this->data['heading_title'] = $this->language->get('heading_title');

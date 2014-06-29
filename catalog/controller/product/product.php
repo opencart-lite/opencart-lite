@@ -1,5 +1,10 @@
-<?php  
-class ControllerProductProduct extends Controller {
+<?php  namespace Controller\Product;
+
+use System\Engine\Controller;
+use System\Library\Pagination;
+use System\Library\Captcha;
+
+class Product extends Controller {
 	private $error = array(); 
 	
 	public function index() { 
@@ -507,8 +512,6 @@ class ControllerProductProduct extends Controller {
 	}
 	
 	public function captcha() {
-		$this->load->library('captcha');
-		
 		$captcha = new Captcha();
 		
 		$this->session->data['captcha'] = $captcha->getCode();

@@ -299,9 +299,9 @@ $('#button-register').live('click', function() {
 					url: 'index.php?route=checkout/payment_address',
 					dataType: 'html',
 					success: function(html) {
-						$('#payment-address .checkout-content').html(html);
+						$('#address .checkout-content').html(html);
 							
-						$('#payment-address .checkout-heading span').html('<?php echo $text_checkout_payment_address; ?>');
+						$('#address .checkout-heading span').html('<?php echo $text_checkout_address; ?>');
 					},
 					error: function(xhr, ajaxOptions, thrownError) {
 						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

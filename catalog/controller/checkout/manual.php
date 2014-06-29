@@ -1,11 +1,13 @@
-<?php 
-class ControllerCheckoutManual extends Controller {
+<?php namespace Controller\Checkout;
+
+use System\Engine\Controller;
+use System\Library\User;
+
+class Manual extends Controller {
 	public function index() {
 		$this->load->language('checkout/manual');
 		
 		$json = array();
-			
-		$this->load->library('user');
 		
 		$this->user = new User($this->registry);
 				
