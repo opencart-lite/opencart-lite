@@ -1,8 +1,11 @@
 <?php  namespace Controller\Checkout;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Checkout extends Controller {
+class Checkout implements iController {
+    use Controller;
+
 	public function index() {
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {

@@ -1,8 +1,11 @@
 <?php  namespace Controller\Affiliate;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Payment extends Controller {
+class Payment implements iController {
+    use Controller;
+
 	private $error = array();
 
 	public function index() {

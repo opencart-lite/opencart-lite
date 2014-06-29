@@ -1,8 +1,11 @@
 <?php  namespace Controller\Affiliate;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Success extends Controller {
+class Success implements iController {
+    use Controller;
+
 	public function index() {
     	$this->language->load('affiliate/success');
   

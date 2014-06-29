@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Returns extends Model {
+class Returns {
+    use Model;
 	public function addReturn($data) {			      	
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "return` SET order_id = '" . (int)$data['order_id'] . "', customer_id = '" . (int)$this->customer->getId() . "', firstname = " . $this->db->quote($data['firstname']) . ", lastname = " . $this->db->quote($data['lastname']) . ", email = " . $this->db->quote($data['email']) . ", telephone = " . $this->db->quote($data['telephone']) . ", product = " . $this->db->quote($data['product']) . ", model = " . $this->db->quote($data['model']) . ", quantity = '" . (int)$data['quantity'] . "', opened = '" . (int)$data['opened'] . "', return_reason_id = '" . (int)$data['return_reason_id'] . "', return_status_id = '" . (int)$this->config->get('config_return_status_id') . "', comment = " . $this->db->quote($data['comment']) . ", date_ordered = " . $this->db->quote($data['date_ordered']) . ", date_added = NOW(), date_modified = NOW()");
 	}

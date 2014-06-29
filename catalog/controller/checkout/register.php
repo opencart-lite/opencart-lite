@@ -1,8 +1,11 @@
 <?php  namespace Controller\Checkout;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Register extends Controller {
+class Register implements iController {
+    use Controller;
+
   	public function index() {
 		$this->language->load('checkout/checkout');
 		

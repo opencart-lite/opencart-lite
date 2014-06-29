@@ -2,8 +2,11 @@
 
 use System\Engine\Controller;
 use System\Library\Pagination;
+use System\Engine\iController;
 
-class Order extends Controller {
+class Order implements iController {
+    use Controller;
+
 	private $error = array();
 		
 	public function index() {

@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Free extends Model {
+class Free {
+    use Model;
     public function getQuote($address) {
 		$this->load->language('shipping/free');
 		

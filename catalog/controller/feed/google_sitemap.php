@@ -1,8 +1,11 @@
 <?php  namespace Controller\Feed;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Google_sitemap extends Controller {
+class Google_sitemap implements iController {
+    use Controller;
+
    public function index() {
 	  if ($this->config->get('google_sitemap_status')) {
 		 $output  = '<?xml version="1.0" encoding="UTF-8"?>';

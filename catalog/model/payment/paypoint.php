@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Paypoint extends Model {
+class Paypoint {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/paypoint');
 		

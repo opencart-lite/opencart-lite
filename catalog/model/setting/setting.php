@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Setting extends Model {
+class Setting {
+    use Model;
 	public function getSetting($group) {
 		$data = array(); 
 		

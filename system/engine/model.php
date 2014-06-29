@@ -1,6 +1,6 @@
 <?php namespace System\Engine;
 
-abstract class Model {
+trait Model {
 	protected $registry;
 	
 	public function __construct($registry) {

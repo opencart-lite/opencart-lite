@@ -3,8 +3,11 @@
 use System\Engine\Controller;
 use System\Library\Pagination;
 use System\Library\Captcha;
+use System\Engine\iController;
 
-class Returns extends Controller {
+class Returns implements iController {
+    use Controller;
+
 	private $error = array();
 	
 	public function index() {

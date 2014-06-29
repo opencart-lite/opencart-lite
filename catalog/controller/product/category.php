@@ -2,8 +2,11 @@
 
 use System\Engine\Controller;
 use System\Library\Pagination;
+use System\Engine\iController;
 
-class Category extends Controller {
+class Category implements iController {
+    use Controller;
+
 	public function index() { 
 		$this->language->load('product/category');
 		

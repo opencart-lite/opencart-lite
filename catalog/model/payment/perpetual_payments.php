@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Perpetual_payments extends Model {
+class Perpetual_payments {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/perpetual_payments');
 		

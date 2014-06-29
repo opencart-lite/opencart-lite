@@ -1,8 +1,11 @@
 <?php namespace Controller\Payment;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Pp_standard extends Controller {
+class Pp_standard implements iController {
+    use Controller;
+
 	public function index() {
 		$this->language->load('payment/pp_standard');
 		

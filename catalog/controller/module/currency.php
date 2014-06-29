@@ -1,8 +1,11 @@
 <?php   namespace Controller\Module;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Currency extends Controller {
+class Currency implements iController {
+    use Controller;
+
 	public function index() {
 		if (isset($this->request->post['currency_code'])) {
       		$this->currency->set($this->request->post['currency_code']);

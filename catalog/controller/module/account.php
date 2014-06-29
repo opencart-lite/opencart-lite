@@ -1,8 +1,11 @@
 <?php  namespace Controller\Module;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Account extends Controller {
+class Account implements iController {
+    use Controller;
+
     public function index() {
 		$this->language->load('module/account');
 		

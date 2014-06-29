@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Cod extends Model {
+class Cod {
+    use Model;
   	public function getMethod($total) {
 		$this->load->language('payment/cod');
 

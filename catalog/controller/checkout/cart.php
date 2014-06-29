@@ -1,8 +1,11 @@
 <?php  namespace Controller\Checkout;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Cart extends Controller {
+class Cart implements iController {
+    use Controller;
+
 	private $error = array();
 	
 	public function index() {

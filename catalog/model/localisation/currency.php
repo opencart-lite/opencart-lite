@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Currency extends Model {
+class Currency {
+    use Model;
 	public function getCurrencyByCode($currency) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "currency WHERE code = " . $this->db->quote($currency));
 	

@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Parcelforce48 extends Model {
+class Parcelforce48 {
+    use Model;
     public function getQuote($address) {
 		$this->load->language('shipping/parcelforce_48');
 		

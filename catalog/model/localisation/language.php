@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Language extends Model {
+class Language {
+    use Model;
 	public function getLanguage($language_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "language WHERE language_id = '" . (int)$language_id . "'");
 		

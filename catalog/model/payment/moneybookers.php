@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Moneybookers extends Model {
+class Moneybookers {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/moneybookers');
 		

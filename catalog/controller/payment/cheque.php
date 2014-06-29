@@ -1,8 +1,11 @@
 <?php  namespace Controller\Payment;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Cheque extends Controller {
+class Cheque implements iController {
+    use Controller;
+
 	public function index() {
 		$this->language->load('payment/cheque');
 		

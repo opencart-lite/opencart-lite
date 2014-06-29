@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Address extends Model {
+class Address {
+    use Model;
 
 	public function editAddress($address_id, $data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "address SET company = " . $this->db->quote($data['company']) . ", address = " . $this->db->quote($data['address']) . ", postcode = " . $this->db->quote($data['postcode']) . ", city = " . $this->db->quote($data['city']) . ", zone_id = '" . (int)$data['zone_id'] . "', country_id = '" . (int)$data['country_id'] . "' WHERE address_id  = '" . (int)$address_id . "' AND customer_id = '" . (int)$this->customer->getId() . "'");

@@ -1,8 +1,11 @@
 <?php  namespace Controller\Payment;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Moneybookers extends Controller {
+class Moneybookers implements iController {
+    use Controller;
+
 	public function index() {
 		$this->load->model('checkout/order');
 		

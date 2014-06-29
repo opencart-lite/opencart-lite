@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Web_payment_software extends Model {
+class Web_payment_software {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/web_payment_software');
 		
