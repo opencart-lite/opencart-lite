@@ -1,5 +1,8 @@
-<?php 
-class ModelPaymentKlarnaPP extends Model {
+<?php  namespace Model\Payment;
+
+use System\Engine\Model;
+
+class Klarna_pp extends Model {
   	public function getMethod($address, $total) {
 		$this->load->language('payment/klarna_pp');
 		

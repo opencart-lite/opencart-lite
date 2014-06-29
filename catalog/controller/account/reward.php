@@ -1,5 +1,8 @@
-<?php
-class ControllerAccountReward extends Controller {
+<?php  namespace Controller\Account;
+
+use System\Engine\Controller;
+
+class Reward extends Controller {
 	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/reward', '', 'SSL');

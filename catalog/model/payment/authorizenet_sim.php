@@ -1,5 +1,8 @@
-<?php 
-class ModelPaymentAuthorizeNetSim extends Model {
+<?php  namespace Model\Payment;
+
+use System\Engine\Model;
+
+class Authorizenet_sim extends Model {
   	public function getMethod($address, $total) {
 		$this->load->language('payment/authorizenet_sim');
 		

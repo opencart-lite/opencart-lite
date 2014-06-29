@@ -1,5 +1,8 @@
-<?php
-class ModelAccountDownload extends Model {
+<?php  namespace Model\Account;
+
+use System\Engine\Model;
+
+class Download extends Model {
 	public function getDownload($order_download_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_download od LEFT JOIN `" . DB_PREFIX . "order` o ON (od.order_id = o.order_id) WHERE o.customer_id = '" . (int)$this->customer->getId(). "' AND o.order_status_id > '0' AND o.order_status_id = '" . (int)$this->config->get('config_complete_status_id') . "' AND od.order_download_id = '" . (int)$order_download_id . "' AND od.remaining > 0");
 		 

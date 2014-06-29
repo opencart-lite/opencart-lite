@@ -1,5 +1,8 @@
-<?php
-class ControllerAccountDownload extends Controller {
+<?php  namespace Controller\Account;
+
+use System\Engine\Controller;
+
+class Download extends Controller {
 	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/download', '', 'SSL');

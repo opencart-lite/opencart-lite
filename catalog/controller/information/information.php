@@ -1,5 +1,8 @@
-<?php 
-class ControllerInformationInformation extends Controller {
+<?php  namespace Controller\Information;
+
+use System\Engine\Controller;
+
+class Information extends Controller {
 	public function index() {  
     	$this->language->load('information/information');
 		

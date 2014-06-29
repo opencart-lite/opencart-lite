@@ -1,5 +1,8 @@
-<?php 
-class ModelPaymentWorldPay extends Model {
+<?php  namespace Model\Payment;
+
+use System\Engine\Model;
+
+class Worldpay extends Model {
   	public function getMethod($address, $total) {
 		$this->load->language('payment/worldpay');
 		

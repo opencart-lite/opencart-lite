@@ -1,5 +1,8 @@
-<?php
-class ModelAccountReward extends Model {	
+<?php  namespace Model\Account;
+
+use System\Engine\Model;
+
+class Reward extends Model {
 	public function getRewards($data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "customer_reward` WHERE customer_id = '" . (int)$this->customer->getId() . "'";
 		   

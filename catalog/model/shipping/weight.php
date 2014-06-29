@@ -1,5 +1,8 @@
-<?php 
-class ModelShippingWeight extends Model {    
+<?php  namespace Model\Shipping;
+
+use System\Engine\Model;
+
+class Weight extends Model {
   	public function getQuote($address) {
 		$this->load->language('shipping/weight');
 		

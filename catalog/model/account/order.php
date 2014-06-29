@@ -1,5 +1,8 @@
-<?php
-class ModelAccountOrder extends Model {
+<?php  namespace Model\Account;
+
+use System\Engine\Model;
+
+class Order extends Model {
 	public function getOrder($order_id) {
 		$order_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "' AND customer_id = '" . (int)$this->customer->getId() . "' AND order_status_id > '0'");
 	

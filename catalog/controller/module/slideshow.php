@@ -1,6 +1,9 @@
-<?php  
-class ControllerModuleSlideshow extends Controller {
-	protected function index($setting) {
+<?php   namespace Controller\Module;
+
+use System\Engine\Controller;
+
+class Slideshow extends Controller {
+	public function index($setting) {
 		static $module = 0;
 		
 		$this->load->model('design/banner');

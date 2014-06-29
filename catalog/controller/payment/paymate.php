@@ -1,5 +1,8 @@
-<?php 
-class ControllerPaymentPaymate extends Controller {
+<?php  namespace Controller\Payment;
+
+use System\Engine\Controller;
+
+class Paymate extends Controller {
 	protected function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');
 

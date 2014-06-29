@@ -1,5 +1,9 @@
-<?php 
-class ControllerAccountOrder extends Controller {
+<?php  namespace Controller\Account;
+
+use System\Engine\Controller;
+use System\Library\Pagination;
+
+class Order extends Controller {
 	private $error = array();
 		
 	public function index() {
@@ -295,7 +299,7 @@ class ControllerAccountOrder extends Controller {
           			'quantity' => $product['quantity'],
           			'price'    => $this->currency->format($product['price'], $order_info['currency_code'], $order_info['currency_value']),
 					'total'    => $this->currency->format($product['total'], $order_info['currency_code'], $order_info['currency_value']),
-					'return'   => $this->url->link('account/return/insert', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], 'SSL')
+					'return'   => $this->url->link('account/returns/insert', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], 'SSL')
         		);
       		}
 

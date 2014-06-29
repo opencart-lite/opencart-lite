@@ -1,6 +1,9 @@
-<?php
-class ControllerModuleBestSeller extends Controller {
-	protected function index($setting) {
+<?php   namespace Controller\Module;
+
+use System\Engine\Controller;
+
+class Bestseller extends Controller {
+    public function index($setting) {
 		$this->language->load('module/bestseller');
  
       	$this->data['heading_title'] = $this->language->get('heading_title');

@@ -1,5 +1,8 @@
-<?php 
-class ModelPaymentCOD extends Model {
+<?php  namespace Model\Payment;
+
+use System\Engine\Model;
+
+class Cod extends Model {
   	public function getMethod($total) {
 		$this->load->language('payment/cod');
 

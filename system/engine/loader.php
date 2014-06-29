@@ -1,4 +1,5 @@
 <?php namespace System\Engine;
+
 final class Loader {
 	protected $registry;
 	
@@ -14,7 +15,7 @@ final class Loader {
 		$this->registry->set($key, $value);
 	}
 	
-	public function library($library) {
+	/*public function library($library) {
 		$file = DIR_SYSTEM . 'library/' . $library . '.php';
 		
 		if (file_exists($file)) {
@@ -23,7 +24,7 @@ final class Loader {
 			trigger_error('Error: Could not load library ' . $library . '!');
 			exit();					
 		}
-	}
+	}*/
 	
 	public function helper($helper) {
 		$file = DIR_SYSTEM . 'helper/' . $helper . '.php';
@@ -37,17 +38,21 @@ final class Loader {
 	}
 		
 	public function model($model) {
-		$file  = DIR_APPLICATION . 'model/' . $model . '.php';
-		$class = 'Model' . preg_replace('/[^a-zA-Z0-9]/', '', $model);
-		
-		if (file_exists($file)) {
-			include_once($file);
-			
-			$this->registry->set('model_' . str_replace('/', '_', $model), new $class($this->registry));
-		} else {
-			trigger_error('Error: Could not load model ' . $model . '!');
-			exit();					
-		}
+
+        $parts = explode('/', trim((string)$model,'/'));
+
+        $ns = $parts ? '\Model\\' . ucfirst(array_shift($parts)) . '\\' : NULL;
+        $class = $parts ? $ns . ucfirst(array_shift($parts)) : NULL;
+
+        if ($class && class_exists($class)) {
+            $this->registry->set('model_' . str_replace('/', '_', $model), new $class($this->registry));
+        } else {
+            try{
+                throw new CoreException($this->registry, 'Error: Could not load model ' . $model . '!');
+            }
+            catch (CoreException $e) {exit();}
+        }
+
 	}
 	 
 	public function database($driver, $hostname, $username, $password, $database, $prefix = NULL, $charset = 'UTF8') {

@@ -1,5 +1,8 @@
-<?php 
-class ModelPaymentKlarnaInvoice extends Model {
+<?php  namespace Model\Payment;
+
+use System\Engine\Model;
+
+class Klarna_invoice extends Model {
   	public function getMethod($address, $total) {
 		$this->load->language('payment/klarna_invoice');
 		

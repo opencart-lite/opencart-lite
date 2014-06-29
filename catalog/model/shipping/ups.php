@@ -1,5 +1,8 @@
-<?php
-class ModelShippingUps extends Model {
+<?php   namespace Model\Shipping;
+
+use System\Engine\Model;
+
+class Ups extends Model {
 	function getQuote($address) {
 		$this->load->language('shipping/ups');
 		

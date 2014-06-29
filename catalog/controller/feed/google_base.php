@@ -1,5 +1,8 @@
-<?php 
-class ControllerFeedGoogleBase extends Controller {
+<?php  namespace Controller\Feed;
+
+use System\Engine\Controller;
+
+class Google_base extends Controller {
 	public function index() {
 		if ($this->config->get('google_base_status')) { 
 			$output  = '<?xml version="1.0" encoding="UTF-8" ?>';

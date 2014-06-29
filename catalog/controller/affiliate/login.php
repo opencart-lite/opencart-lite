@@ -1,5 +1,8 @@
-<?php 
-class ControllerAffiliateLogin extends Controller {
+<?php  namespace Controller\Affiliate;
+
+use System\Engine\Controller;
+
+class Login extends Controller {
 	private $error = array();
 	
 	public function index() {
