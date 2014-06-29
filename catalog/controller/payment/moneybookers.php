@@ -1,5 +1,8 @@
-<?php
-class ControllerPaymentMoneybookers extends Controller {
+<?php  namespace Controller\Payment;
+
+use System\Engine\Controller;
+
+class Moneybookers extends Controller {
 	protected function index() {
 		$this->load->model('checkout/order');
 		

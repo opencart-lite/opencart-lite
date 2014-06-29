@@ -1,5 +1,8 @@
-<?php 
-class ControllerAccountSuccess extends Controller {  
+<?php  namespace Controller\Account;
+
+use System\Engine\Controller;
+
+class Success extends Controller {
 	public function index() {
     	$this->language->load('account/success');
   

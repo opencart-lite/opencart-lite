@@ -1,5 +1,8 @@
-<?php
-class ModelAccountTransaction extends Model {	
+<?php  namespace Model\Account;
+
+use System\Engine\Model;
+
+class Transaction extends Model {
 	public function getTransactions($data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "customer_transaction` WHERE customer_id = '" . (int)$this->customer->getId() . "'";
 		   

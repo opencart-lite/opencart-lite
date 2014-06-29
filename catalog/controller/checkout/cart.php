@@ -1,5 +1,8 @@
-<?php 
-class ControllerCheckoutCart extends Controller {
+<?php  namespace Controller\Checkout;
+
+use System\Engine\Controller;
+
+class Cart extends Controller {
 	private $error = array();
 	
 	public function index() {

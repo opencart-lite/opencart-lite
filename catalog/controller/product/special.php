@@ -1,5 +1,9 @@
-<?php 
-class ControllerProductSpecial extends Controller { 	
+<?php  namespace Controller\Product;
+
+use System\Engine\Controller;
+use System\Library\Pagination;
+
+class Special extends Controller {
 	public function index() { 
     	$this->language->load('product/special');
 		

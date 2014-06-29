@@ -1,5 +1,8 @@
-<?php
-class ControllerPaymentPayza extends Controller {
+<?php  namespace Controller\Payment;
+
+use System\Engine\Controller;
+
+class Payza extends Controller {
 	protected function index() {
 		$this->data['button_confirm'] = $this->language->get('button_confirm');
 

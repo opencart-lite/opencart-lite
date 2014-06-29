@@ -1,5 +1,8 @@
-<?php
-class ModelCatalogProduct extends Model {
+<?php namespace Model\Catalog;
+
+use System\Engine\Model;
+
+class Product extends Model {
 	public function updateViewed($product_id) {
 		$this->db->query("UPDATE " . DB_PREFIX . "product SET viewed = (viewed + 1) WHERE product_id = '" . (int)$product_id . "'");
 	}

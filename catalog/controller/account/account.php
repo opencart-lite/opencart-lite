@@ -1,5 +1,8 @@
-<?php 
-class ControllerAccountAccount extends Controller { 
+<?php  namespace Controller\Account;
+
+use System\Engine\Controller;
+
+class Account extends Controller {
 	public function index() {
 		if (!$this->customer->isLogged()) {
 	  		$this->session->data['redirect'] = $this->url->link('account/account', '', 'SSL');
@@ -55,7 +58,7 @@ class ControllerAccountAccount extends Controller {
 		$this->data['wishlist'] = $this->url->link('account/wishlist');
     	$this->data['order'] = $this->url->link('account/order', '', 'SSL');
     	$this->data['download'] = $this->url->link('account/download', '', 'SSL');
-		$this->data['return'] = $this->url->link('account/return', '', 'SSL');
+		$this->data['return'] = $this->url->link('account/returns', '', 'SSL');
 		$this->data['transaction'] = $this->url->link('account/transaction', '', 'SSL');
 		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
 		

@@ -1,5 +1,8 @@
-<?php
-class ControllerPaymentCod extends Controller {
+<?php namespace Controller\Payment;
+
+use System\Engine\Controller;
+
+class Cod extends Controller {
 	protected function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');
 

@@ -1,5 +1,8 @@
-<?php
-class ModelShippingParcelforce48 extends Model {
+<?php   namespace Model\Shipping;
+
+use System\Engine\Model;
+
+class Parcelforce48 extends Model {
 	function getQuote($address) {
 		$this->load->language('shipping/parcelforce_48');
 		

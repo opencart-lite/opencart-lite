@@ -1,6 +1,9 @@
-<?php
-class ControllerModuleFeatured extends Controller {
-	protected function index($setting) {
+<?php   namespace Controller\Module;
+
+use System\Engine\Controller;
+
+class Featured extends Controller {
+    public function index($setting) {
 		$this->language->load('module/featured'); 
 
       	$this->data['heading_title'] = $this->language->get('heading_title');

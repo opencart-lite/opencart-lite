@@ -1,5 +1,8 @@
-<?php
-class ControllerPaymentAuthorizeNetAim extends Controller {
+<?php  namespace Controller\Payment;
+
+use System\Engine\Controller;
+
+class Authorizenet_Aim extends Controller {
 	protected function index() {
 		$this->language->load('payment/authorizenet_aim');
 		

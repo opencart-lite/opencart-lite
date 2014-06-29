@@ -1,5 +1,8 @@
-<?php
-class ModelTotalVoucher extends Model {
+<?php   namespace Model\Total;
+
+use System\Engine\Model;
+
+class Voucher extends Model {
 	public function getTotal(&$total_data, &$total) {
 		if (isset($this->session->data['voucher'])) {
 			$this->load->language('total/voucher');

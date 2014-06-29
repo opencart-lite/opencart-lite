@@ -1,5 +1,8 @@
-<?php
-class ModelCatalogCategory extends Model {
+<?php  namespace Model\Catalog;
+
+use System\Engine\Model;
+
+class Category extends Model {
 	public function getCategory($category_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE c.category_id = '" . (int)$category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c.status = '1'");
 		

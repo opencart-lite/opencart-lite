@@ -1,5 +1,8 @@
-<?php 
-class ModelPaymentGoogleCheckout extends Model {
+<?php  namespace Model\Payment;
+
+use System\Engine\Model;
+
+class Google_checkout extends Model {
   	public function getMethod($address, $total) {
 		$this->load->language('payment/google_checkout');
 		

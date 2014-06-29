@@ -1,5 +1,8 @@
-<?php 
-class ModelPaymentPPPro extends Model {
+<?php  namespace Model\Payment;
+
+use System\Engine\Model;
+
+class Pp_pro extends Model {
   	public function getMethod($address, $total) { 
 		$this->load->language('payment/pp_pro');
 		

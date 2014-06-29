@@ -1,5 +1,8 @@
-<?php 
-class ControllerAccountVoucher extends Controller { 
+<?php  namespace Controller\Account;
+
+use System\Engine\Controller;
+
+class Voucher extends Controller {
 	private $error = array();
 	
 	public function index() {

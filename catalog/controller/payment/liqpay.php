@@ -1,5 +1,8 @@
-<?php
-class ControllerPaymentLiqPay extends Controller {
+<?php  namespace Controller\Payment;
+
+use System\Engine\Controller;
+
+class Liqpay extends Controller {
 	protected function index() {
 		$this->data['button_confirm'] = $this->language->get('button_confirm');
 		

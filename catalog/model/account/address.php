@@ -1,5 +1,8 @@
-<?php
-class ModelAccountAddress extends Model {
+<?php  namespace Model\Account;
+
+use System\Engine\Model;
+
+class Address extends Model {
 
 	public function editAddress($address_id, $data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "address SET company = '" . $this->db->escape($data['company']) . "', address = '" . $this->db->escape($data['address']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', city = '" . $this->db->escape($data['city']) . "', zone_id = '" . (int)$data['zone_id'] . "', country_id = '" . (int)$data['country_id'] . "' WHERE address_id  = '" . (int)$address_id . "' AND customer_id = '" . (int)$this->customer->getId() . "'");

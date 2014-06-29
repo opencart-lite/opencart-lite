@@ -1,5 +1,8 @@
-<?php
-class ModelTotalKlarnaFee extends Model {
+<?php   namespace Model\Total;
+
+use System\Engine\Model;
+
+class Klarna_fee extends Model {
 	public function getTotal(&$total_data, &$total) {
 		if (($this->cart->getSubTotal() < $this->config->get('klarna_fee_total')) && ($this->cart->getSubTotal() > 0) && isset($this->session->data['payment_method']['code']) && $this->session->data['payment_method']['code'] == 'klarna_invoice' || $this->session->data['payment_method']['code'] == 'klarna_pp') {
 			$this->load->language('total/klarna_fee');

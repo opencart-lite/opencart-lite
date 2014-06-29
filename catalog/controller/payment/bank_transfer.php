@@ -1,5 +1,8 @@
-<?php
-class ControllerPaymentBankTransfer extends Controller {
+<?php  namespace Controller\Payment;
+
+use System\Engine\Controller;
+
+class Bank_transfer extends Controller {
 	protected function index() {
 		$this->language->load('payment/bank_transfer');
 		

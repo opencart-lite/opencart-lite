@@ -1,5 +1,8 @@
-<?php
-class ModelShippingRoyalMail extends Model {
+<?php  namespace Model\Shipping;
+
+use System\Engine\Model;
+
+class Royal_mail extends Model {
 	function getQuote($address) {
 		$this->load->language('shipping/royal_mail');
 		

@@ -1,5 +1,8 @@
-<?php
-class ModelCheckoutFraud extends Model {
+<?php  namespace Model\Checkout;
+
+use System\Engine\Model;
+
+class Fraud extends Model {
 	public function getFraudScore($data) {
 		$risk_score = 0;
 		

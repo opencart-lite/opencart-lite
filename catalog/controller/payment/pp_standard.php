@@ -1,5 +1,8 @@
-<?php
-class ControllerPaymentPPStandard extends Controller {
+<?php namespace Controller\Payment;
+
+use System\Engine\Controller;
+
+class Pp_standard extends Controller {
 	protected function index() {
 		$this->language->load('payment/pp_standard');
 		

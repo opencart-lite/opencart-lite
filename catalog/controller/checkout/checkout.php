@@ -1,5 +1,8 @@
-<?php  
-class ControllerCheckoutCheckout extends Controller { 
+<?php  namespace Controller\Checkout;
+
+use System\Engine\Controller;
+
+class Checkout extends Controller {
 	public function index() {
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
@@ -51,6 +54,7 @@ class ControllerCheckoutCheckout extends Controller {
 		
 		$this->data['text_checkout_option'] = $this->language->get('text_checkout_option');
 		$this->data['text_checkout_account'] = $this->language->get('text_checkout_account');
+		$this->data['text_checkout_address'] = $this->language->get('text_checkout_address');
 		$this->data['text_checkout_shipping_method'] = $this->language->get('text_checkout_shipping_method');
 		$this->data['text_checkout_payment_method'] = $this->language->get('text_checkout_payment_method');		
 		$this->data['text_checkout_confirm'] = $this->language->get('text_checkout_confirm');

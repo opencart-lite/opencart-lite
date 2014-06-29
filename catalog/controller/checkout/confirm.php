@@ -1,5 +1,8 @@
-<?php 
-class ControllerCheckoutConfirm extends Controller { 
+<?php  namespace Controller\Checkout;
+
+use System\Engine\Controller;
+
+class Confirm extends Controller {
 	public function index() {
 		$redirect = '';
 		

@@ -1,5 +1,8 @@
-<?php  
-class ControllerModuleCurrency extends Controller {
+<?php   namespace Controller\Module;
+
+use System\Engine\Controller;
+
+class Currency extends Controller {
 	public function index() {
 		if (isset($this->request->post['currency_code'])) {
       		$this->currency->set($this->request->post['currency_code']);

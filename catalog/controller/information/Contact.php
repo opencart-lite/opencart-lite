@@ -1,5 +1,9 @@
-<?php 
-class ControllerInformationContact extends Controller {
+<?php namespace Controller\Information;
+
+use System\Engine\Controller;
+use System\Library\Captcha;
+
+class Contact extends Controller {
 	private $error = array(); 
 	    
   	public function index() {
@@ -197,7 +201,6 @@ class ControllerInformationContact extends Controller {
   	}
 
 	public function captcha() {
-		$this->load->library('captcha');
 		
 		$captcha = new Captcha();
 		

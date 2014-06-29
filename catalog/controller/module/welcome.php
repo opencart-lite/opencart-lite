@@ -1,6 +1,9 @@
-<?php  
-class ControllerModuleWelcome extends Controller {
-	protected function index($setting) {
+<?php  namespace Controller\Module;
+
+use System\Engine\Controller;
+
+class Welcome extends Controller {
+    public function index($setting) {
 		$this->language->load('module/welcome');
 		
     	$this->data['heading_title'] = sprintf($this->language->get('heading_title'), $this->config->get('config_name'));

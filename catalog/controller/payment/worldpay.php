@@ -1,5 +1,5 @@
 <?php
-class ControllerPaymentWorldPay extends Controller {
+class Worldpay extends Controller {
 	protected function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');
 

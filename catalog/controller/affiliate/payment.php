@@ -1,5 +1,8 @@
-<?php
-class ControllerAffiliatePayment extends Controller {
+<?php  namespace Controller\Affiliate;
+
+use System\Engine\Controller;
+
+class Payment extends Controller {
 	private $error = array();
 
 	public function index() {

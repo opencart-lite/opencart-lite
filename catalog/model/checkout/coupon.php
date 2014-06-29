@@ -1,5 +1,8 @@
-<?php
-class ModelCheckoutCoupon extends Model {
+<?php  namespace Model\Checkout;
+
+use System\Engine\Model;
+
+class Coupon extends Model {
 	public function getCoupon($code) {
 		$status = true;
 		

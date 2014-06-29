@@ -1,6 +1,9 @@
-<?php  
-class ControllerCommonFooter extends Controller {
-	protected function index() {
+<?php  namespace Controller\Common;
+
+use System\Engine\Controller;
+
+class Footer extends Controller {
+	public function index() {
 		$this->language->load('common/footer');
 		
 		$this->data['text_information'] = $this->language->get('text_information');
@@ -32,7 +35,7 @@ class ControllerCommonFooter extends Controller {
     	}
 
 		$this->data['contact'] = $this->url->link('information/contact');
-		$this->data['return'] = $this->url->link('account/return/insert', '', 'SSL');
+		$this->data['return'] = $this->url->link('account/returns/insert', '', 'SSL');
     	$this->data['sitemap'] = $this->url->link('information/sitemap');
 		$this->data['manufacturer'] = $this->url->link('product/manufacturer');
 		$this->data['voucher'] = $this->url->link('account/voucher', '', 'SSL');
