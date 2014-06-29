@@ -14,26 +14,17 @@ final class Loader {
 	public function __set($key, $value) {
 		$this->registry->set($key, $value);
 	}
-	
-	/*public function library($library) {
-		$file = DIR_SYSTEM . 'library/' . $library . '.php';
-		
-		if (file_exists($file)) {
-			include_once($file);
-		} else {
-			trigger_error('Error: Could not load library ' . $library . '!');
-			exit();					
-		}
-	}*/
-	
+
 	public function helper($helper) {
 		$file = DIR_SYSTEM . 'helper/' . $helper . '.php';
 		
 		if (file_exists($file)) {
 			include_once($file);
 		} else {
-			trigger_error('Error: Could not load helper ' . $helper . '!');
-			exit();					
+            try{
+                throw new CoreException($this->registry, 'Error: Could not load helper ' . $helper . '!');
+            }
+            catch (CoreException $e) {exit();}
 		}
 	}
 		
@@ -64,8 +55,10 @@ final class Loader {
 			
 			$this->registry->set(str_replace('/', '_', $driver), new $class());
 		} else {
-			trigger_error('Error: Could not load database ' . $driver . '!');
-			exit();				
+            try{
+                throw new CoreException($this->registry, 'Error: Could not load database ' . $driver . '!');
+            }
+            catch (CoreException $e) {exit();}
 		}
 	}
 	

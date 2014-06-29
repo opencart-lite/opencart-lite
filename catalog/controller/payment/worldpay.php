@@ -1,6 +1,6 @@
 <?php
 class Worldpay extends Controller {
-	protected function index() {
+	public function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');
 
 		$this->load->model('checkout/order');

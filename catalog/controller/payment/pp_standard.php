@@ -3,7 +3,7 @@
 use System\Engine\Controller;
 
 class Pp_standard extends Controller {
-	protected function index() {
+	public function index() {
 		$this->language->load('payment/pp_standard');
 		
 		$this->data['text_testmode'] = $this->language->get('text_testmode');		

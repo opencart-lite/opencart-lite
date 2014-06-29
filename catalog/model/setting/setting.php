@@ -6,7 +6,7 @@ class Setting extends Model {
 	public function getSetting($group) {
 		$data = array(); 
 		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE AND `group` = '" . $this->db->escape($group) . "'");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE AND `group` = " . $this->db->quote($group));
 		
 		foreach ($query->rows as $result) {
 			if (!$result['serialized']) {

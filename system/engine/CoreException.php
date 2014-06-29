@@ -8,12 +8,12 @@ class CoreException extends Exception
     public function __construct($registry, $errstr = '')
     {
 
+        if(!is_object($registry)) exit($registry . "\n" . $errstr);
+
         $config = $registry->get('config');
         $log = $registry->get('log');
         $traces = $this->getTrace();
         $str_log = $str_display = '';
-
-        if (!$config || !$log) exit('SETTING ERROR! Check database connection.');
 
         $trace = array_shift($traces);
 

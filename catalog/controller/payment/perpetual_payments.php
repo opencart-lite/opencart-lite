@@ -3,7 +3,7 @@
 use System\Engine\Controller;
 
 class Perpetual_payments extends Controller {
-	protected function index() {
+	public function index() {
     	$this->language->load('payment/perpetual_payments');
 		
 		$this->data['text_credit_card'] = $this->language->get('text_credit_card');

@@ -3,7 +3,7 @@
 use System\Engine\Model;
 
 class Flat extends Model {
-	function getQuote() {
+    public function getQuote() {
 		$this->load->language('shipping/flat');
 		
 

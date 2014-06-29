@@ -3,7 +3,7 @@
 use System\Engine\Controller;
 
 class Klarna_pp extends Controller {
-	protected function index() {
+	public function index() {
 		$this->language->load('payment/klarna_invoice');
 		
 		$this->data['text_information'] = $this->language->get('text_information');

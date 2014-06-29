@@ -3,7 +3,7 @@
 use System\Engine\Controller;
 
 class Cod extends Controller {
-	protected function index() {
+	public function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');
 
 		$this->data['continue'] = $this->url->link('checkout/success');

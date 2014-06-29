@@ -3,7 +3,7 @@
 use System\Engine\Controller;
 
 class Paymate extends Controller {
-	protected function index() {
+	public function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');
 
 		if (!$this->config->get('paymate_test')) {

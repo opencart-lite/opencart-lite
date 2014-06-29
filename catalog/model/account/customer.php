@@ -14,11 +14,11 @@ class Customer extends Model {
 		
 		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
 		
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', newsletter = '" . (isset($data['newsletter']) ? (int)$data['newsletter'] : 0) . "', customer_group_id = '" . (int)$customer_group_id . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', status = '1', approved = '" . (int)!$customer_group_info['approval'] . "', date_added = NOW()");
+      	$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET firstname = " . $this->db->quote($data['firstname']) . ", lastname = " . $this->db->quote($data['lastname']) . ", email = " . $this->db->quote($data['email']) . ", telephone = " . $this->db->quote($data['telephone']) . ", fax = " . $this->db->quote($data['fax']) . ", salt = " . $this->db->quote($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . ", password = " . $this->db->quote(sha1($salt . sha1($salt . sha1($data['password'])))) . ", newsletter = '" . (isset($data['newsletter']) ? (int)$data['newsletter'] : 0) . "', customer_group_id = '" . (int)$customer_group_id . "', ip = " . $this->db->quote($this->request->server['REMOTE_ADDR']) . ", status = '1', approved = '" . (int)!$customer_group_info['approval'] . "', date_added = NOW()");
       	
 		$customer_id = $this->db->getLastId();
 			
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$customer_id . "', company = '" . $this->db->escape($data['company']) . "', address = '" . $this->db->escape($data['address']) . "', city = '" . $this->db->escape($data['city']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', country_id = '" . (int)$data['country_id'] . "', zone_id = '" . (int)$data['zone_id'] . "'");
+      	$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$customer_id . "', company = " . $this->db->quote($data['company']) . ", address = " . $this->db->quote($data['address']) . ", city = " . $this->db->quote($data['city']) . ", postcode = " . $this->db->quote($data['postcode']) . ", country_id = '" . (int)$data['country_id'] . "', zone_id = '" . (int)$data['zone_id'] . "'");
 
 		$address_id = $this->db->getLastId();
 
@@ -74,11 +74,11 @@ class Customer extends Model {
 	}
 	
 	public function editCustomer($data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = " . $this->db->quote($data['firstname']) . ", lastname = " . $this->db->quote($data['lastname']) . ", email = " . $this->db->quote($data['email']) . ", telephone = " . $this->db->quote($data['telephone']) . ", fax = " . $this->db->quote($data['fax']) . " WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 	}
 
 	public function editPassword($email, $password) {
-      	$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($password)))) . "' WHERE email = '" . $this->db->escape($email) . "'");
+      	$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = " . $this->db->quote($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . ", password = " . $this->db->quote(sha1($salt . sha1($salt . sha1($password)))) . " WHERE email = " . $this->db->quote($email));
 	}
 
 	public function editNewsletter($newsletter) {
@@ -92,13 +92,13 @@ class Customer extends Model {
 	}
 	
 	public function getCustomerByEmail($email) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE email = '" . $this->db->escape($email) . "'");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE email = " . $this->db->quote($email));
 		
 		return $query->row;
 	}
 		
 	public function getCustomerByToken($token) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE token = '" . $this->db->escape($token) . "' AND token != ''");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE token = " . $this->db->quote($token) . " AND token != ''");
 		
 		$this->db->query("UPDATE " . DB_PREFIX . "customer SET token = ''");
 		
@@ -111,15 +111,15 @@ class Customer extends Model {
 		$implode = array();
 		
 		if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
-			$implode[] = "LCASE(CONCAT(c.firstname, ' ', c.lastname)) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
+			$implode[] = "LCASE(CONCAT(c.firstname, ' ', c.lastname)) LIKE " . $this->db->quote(utf8_strtolower($data['filter_name']). "%");
 		}
 		
 		if (isset($data['filter_email']) && !is_null($data['filter_email'])) {
-			$implode[] = "c.email = '" . $this->db->escape($data['filter_email']) . "'";
+			$implode[] = "c.email = " . $this->db->quote($data['filter_email']);
 		}
 		
 		if (isset($data['filter_customer_group_id']) && !is_null($data['filter_customer_group_id'])) {
-			$implode[] = "cg.customer_group_id = '" . $this->db->escape($data['filter_customer_group_id']) . "'";
+			$implode[] = "cg.customer_group_id = " . $this->db->quote($data['filter_customer_group_id']);
 		}	
 		
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
@@ -131,11 +131,11 @@ class Customer extends Model {
 		}	
 			
 		if (isset($data['filter_ip']) && !is_null($data['filter_ip'])) {
-			$implode[] = "c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($data['filter_ip']) . "')";
+			$implode[] = "c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = " . $this->db->quote($data['filter_ip']) . ")";
 		}	
 				
 		if (isset($data['filter_date_added']) && !is_null($data['filter_date_added'])) {
-			$implode[] = "DATE(c.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+			$implode[] = "DATE(c.date_added) = DATE(" . $this->db->quote($data['filter_date_added']) . ")";
 		}
 		
 		if ($implode) {
@@ -181,7 +181,7 @@ class Customer extends Model {
 	}
 		
 	public function getTotalCustomersByEmail($email) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer WHERE LOWER(email) = '" . $this->db->escape(strtolower($email)) . "'");
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer WHERE LOWER(email) = " . $this->db->quote(strtolower($email)));
 		
 		return $query->row['total'];
 	}
@@ -193,7 +193,7 @@ class Customer extends Model {
 	}	
 	
 	public function isBlacklisted($ip) {
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_ip_blacklist` WHERE ip = '" . $this->db->escape($ip) . "'");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_ip_blacklist` WHERE ip = " . $this->db->quote($ip));
 		
 		return $query->num_rows;
 	}	

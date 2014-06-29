@@ -22,7 +22,9 @@ define('DIR_DOWNLOAD', 'D:\wamp\www\opencart-lite/download/');
 define('DIR_LOGS', 'D:\wamp\www\opencart-lite/system/logs/');
 
 // DB
-define('DB_DRIVER', 'mysql');
+define('DB_DRIVER', 'PDO');
+define('DB_PDO_DRIVER', 'mysql');
+
 define('DB_HOSTNAME', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');

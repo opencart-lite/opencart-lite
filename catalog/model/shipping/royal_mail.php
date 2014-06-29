@@ -3,7 +3,7 @@
 use System\Engine\Model;
 
 class Royal_mail extends Model {
-	function getQuote($address) {
+    public function getQuote($address) {
 		$this->load->language('shipping/royal_mail');
 		
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('royal_mail_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
