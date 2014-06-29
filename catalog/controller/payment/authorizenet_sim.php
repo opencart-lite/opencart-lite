@@ -4,7 +4,7 @@ use System\Engine\Controller;
 use System\Library\Hash;
 
 class Authorizenet_sim extends Controller {
-	protected function index() {
+	public function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');
 		
 		$this->data['action'] = $this->config->get('authorizenet_sim_url');

@@ -3,7 +3,7 @@
 use System\Engine\Controller;
 
 class Moneybookers extends Controller {
-	protected function index() {
+	public function index() {
 		$this->load->model('checkout/order');
 		
 		$this->language->load('payment/moneybookers');

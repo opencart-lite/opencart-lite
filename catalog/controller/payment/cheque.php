@@ -3,7 +3,7 @@
 use System\Engine\Controller;
 
 class Cheque extends Controller {
-	protected function index() {
+	public function index() {
 		$this->language->load('payment/cheque');
 		
 		$this->data['text_instruction'] = $this->language->get('text_instruction');
