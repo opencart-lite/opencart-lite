@@ -1,8 +1,11 @@
 <?php   namespace Controller\Module;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Language extends Controller {
+class Language implements iController {
+    use Controller;
+
     public function index() {
     	if (isset($this->request->post['language_code'])) {
 			$this->session->data['language'] = $this->request->post['language_code'];

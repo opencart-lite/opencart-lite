@@ -1,8 +1,11 @@
 <?php  namespace Controller\Payment;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Authorizenet_Aim extends Controller {
+class Authorizenet_Aim implements iController {
+    use Controller;
+
     public function index() {
 		$this->language->load('payment/authorizenet_aim');
 		

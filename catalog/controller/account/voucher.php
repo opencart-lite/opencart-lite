@@ -1,8 +1,11 @@
 <?php  namespace Controller\Account;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Voucher extends Controller {
+class Voucher implements iController {
+    use Controller;
+
 	private $error = array();
 	
 	public function index() {

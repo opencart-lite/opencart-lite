@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Pp_pro extends Model {
+class Pp_pro {
+    use Model;
   	public function getMethod($address, $total) { 
 		$this->load->language('payment/pp_pro');
 		

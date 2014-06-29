@@ -1,8 +1,11 @@
 <?php  namespace Controller\Common;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Content_top extends Controller {
+class Content_top implements iController {
+    use Controller;
+
 	public function index() {
 		$this->load->model('design/layout');
 		$this->load->model('catalog/category');

@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Return_reason extends Model {
+class Return_reason {
+    use Model;
 	public function addReturnReason($data) {
 		foreach ($data['return_reason'] as $language_id => $value) {
 			if (isset($return_reason_id)) {

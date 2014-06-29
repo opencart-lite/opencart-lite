@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Twocheckout extends Model {
+class Twocheckout {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/twocheckout');
 		

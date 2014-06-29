@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Handling extends Model {
+class Handling {
+    use Model;
 	public function getTotal(&$total_data, &$total) {
 		if (($this->cart->getSubTotal() < $this->config->get('handling_total')) && ($this->cart->getSubTotal() > 0)) {
 			$this->load->language('total/handling');

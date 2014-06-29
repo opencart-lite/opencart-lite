@@ -1,8 +1,11 @@
 <?php  namespace Controller\Payment;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Paymate extends Controller {
+class Paymate implements iController {
+    use Controller;
+
 	public function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');
 

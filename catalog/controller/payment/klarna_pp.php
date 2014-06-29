@@ -1,8 +1,11 @@
 <?php  namespace Controller\Payment;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Klarna_pp extends Controller {
+class Klarna_pp implements iController {
+    use Controller;
+
 	public function index() {
 		$this->language->load('payment/klarna_invoice');
 		

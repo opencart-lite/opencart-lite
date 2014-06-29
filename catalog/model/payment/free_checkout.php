@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Free_checkout extends Model {
+class Free_checkout {
+    use Model;
   	public function getMethod($total) {
 		$this->load->language('payment/free_checkout');
 		

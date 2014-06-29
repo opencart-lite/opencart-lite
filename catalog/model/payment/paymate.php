@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Paymate extends Model {
+class Paymate {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/paymate');
 	

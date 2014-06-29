@@ -1,8 +1,11 @@
 <?php  namespace Controller\Account;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Logout extends Controller {
+class Logout implements iController {
+    use Controller;
+
 	public function index() {
     	if ($this->customer->isLogged()) {
       		$this->customer->logout();

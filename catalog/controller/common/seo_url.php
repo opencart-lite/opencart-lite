@@ -1,8 +1,11 @@
 <?php  namespace Controller\Common;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Seo_url extends Controller {
+class Seo_url implements iController {
+    use Controller;
+
 	public function index() {
 		// Add rewrite to url class
 		if ($this->config->get('config_seo_url')) {

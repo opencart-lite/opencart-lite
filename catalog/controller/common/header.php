@@ -1,8 +1,11 @@
 <?php  namespace Controller\Common;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Header extends Controller {
+class Header implements iController {
+    use Controller;
+
 	public function index() {
 		$this->data['title'] = $this->document->getTitle();
 		

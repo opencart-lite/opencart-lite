@@ -1,8 +1,11 @@
 <?php  namespace Controller\Feed;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Google_base extends Controller {
+class Google_base implements iController {
+    use Controller;
+
 	public function index() {
 		if ($this->config->get('google_base_status')) { 
 			$output  = '<?xml version="1.0" encoding="UTF-8" ?>';

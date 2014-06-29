@@ -1,8 +1,11 @@
 <?php  namespace Controller\Payment;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Google_checkout extends Controller {
+class Google_checkout implements iController {
+    use Controller;
+
 	public function index() {
 		$this->data['button_confirm'] = $this->language->get('button_confirm');
 				

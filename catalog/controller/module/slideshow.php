@@ -1,8 +1,11 @@
 <?php   namespace Controller\Module;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Slideshow extends Controller {
+class Slideshow implements iController {
+    use Controller;
+
 	public function index($setting) {
 		static $module = 0;
 		

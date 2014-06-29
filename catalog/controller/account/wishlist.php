@@ -1,8 +1,11 @@
 <?php  namespace Controller\Account;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class WishList extends Controller {
+class WishList implements iController {
+    use Controller;
+
 	public function index() {
     	if (!$this->customer->isLogged()) {
 	  		$this->session->data['redirect'] = $this->url->link('account/wishlist', '', 'SSL');

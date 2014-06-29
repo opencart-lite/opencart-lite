@@ -1,8 +1,11 @@
 <?php  namespace Controller\Checkout;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Confirm extends Controller {
+class Confirm implements iController {
+    use Controller;
+
 	public function index() {
 		$redirect = '';
 		

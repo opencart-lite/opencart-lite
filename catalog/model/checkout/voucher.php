@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Voucher extends Model {
+class Voucher {
+    use Model;
 	public function addVoucher($order_id, $data) {
       	$this->db->query("INSERT INTO " . DB_PREFIX . "voucher SET order_id = '" . (int)$order_id . "', code = " . $this->db->quote($data['code']) . ", from_name = " . $this->db->quote($data['from_name']) . ", from_email = " . $this->db->quote($data['from_email']) . ", to_name = " . $this->db->quote($data['to_name']) . ", to_email = " . $this->db->quote($data['to_email']) . ", voucher_theme_id = '" . (int)$data['voucher_theme_id'] . "', message = " . $this->db->quote($data['message']) . ", amount = '" . (float)$data['amount'] . "', status = '1', date_added = NOW()");
 	

@@ -1,8 +1,11 @@
 <?php  namespace Controller\Common;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Column_right extends Controller {
+class Column_right implements iController {
+    use Controller;
+
 	public function index() {
 		$this->load->model('design/layout');
 		$this->load->model('catalog/category');

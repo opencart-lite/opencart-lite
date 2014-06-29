@@ -2,8 +2,11 @@
 
 use System\Engine\Controller;
 use System\Library\Pagination;
+use System\Engine\iController;
 
-class Special extends Controller {
+class Special implements iController {
+    use Controller;
+
 	public function index() { 
     	$this->language->load('product/special');
 		

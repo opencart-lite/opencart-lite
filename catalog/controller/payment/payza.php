@@ -1,8 +1,11 @@
 <?php  namespace Controller\Payment;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Payza extends Controller {
+class Payza implements iController {
+    use Controller;
+
 	public function index() {
 		$this->data['button_confirm'] = $this->language->get('button_confirm');
 

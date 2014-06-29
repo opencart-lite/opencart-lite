@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Payza extends Model {
+class Payza {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/payza');
 		

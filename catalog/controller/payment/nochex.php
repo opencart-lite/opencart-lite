@@ -3,8 +3,11 @@
 use System\Engine\Controller;
 
 // Nochex via form will work for both simple "Seller" account and "Merchant" account holders
-// Nochex via APC maybe only avaiable to "Merchant" account holders only - site docs a bit vague on this point
-class Nochex extends Controller {
+// Nochex via APC maybe only avaiable to "Merchant" account holders only - site docs a bit vague on this pointuse System\Engine\iController;
+
+class Nochex implements iController {
+    use Controller;
+
 	public function index() {
 		$this->load->language('payment/nochex');
 		

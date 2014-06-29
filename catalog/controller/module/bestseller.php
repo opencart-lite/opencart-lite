@@ -1,8 +1,11 @@
 <?php   namespace Controller\Module;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Bestseller extends Controller {
+class Bestseller implements iController {
+    use Controller;
+
     public function index($setting) {
 		$this->language->load('module/bestseller');
  

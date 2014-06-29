@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Credit extends Model {
+class Credit {
+    use Model;
 	public function getTotal(&$total_data, &$total) {
 		if ($this->config->get('credit_status')) {
 			$this->load->language('total/credit');

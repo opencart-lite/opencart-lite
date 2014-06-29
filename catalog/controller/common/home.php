@@ -1,9 +1,13 @@
 <?php  namespace Controller\Common;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Home extends Controller {
+class Home implements iController {
+    use Controller;
+
 	public function index() {
+
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
@@ -23,6 +27,7 @@ class Home extends Controller {
 			'common/footer',
 			'common/header'
 		);
+
 										
 		$this->response->setOutput($this->render());
 	}

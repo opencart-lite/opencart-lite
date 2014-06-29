@@ -1,8 +1,11 @@
 <?php   namespace Controller\Module;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Carousel extends Controller {
+class Carousel implements iController {
+    use Controller;
+
     public function index($setting) {
 		static $module = 0;
 		

@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Citylink extends Model {
+class Citylink {
+    use Model;
     public function getQuote($address) {
 		$this->load->language('shipping/citylink');
 		

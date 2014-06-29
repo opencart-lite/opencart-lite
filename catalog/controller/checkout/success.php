@@ -1,8 +1,11 @@
 <?php  namespace Controller\Checkout;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Success extends Controller {
+class Success implements iController {
+    use Controller;
+
 	public function index() { 	
 		
 		if ( isset($this->session->data['order_id']) && ( ! empty($this->session->data['order_id']))  ) {

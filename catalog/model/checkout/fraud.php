@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Fraud extends Model {
+class Fraud {
+    use Model;
 	public function getFraudScore($data) {
 		$risk_score = 0;
 		

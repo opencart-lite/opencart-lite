@@ -2,8 +2,11 @@
 
 use System\Engine\Controller;
 use System\Library\User;
+use System\Engine\iController;
 
-class Maintenance extends Controller {
+class Maintenance implements iController {
+    use Controller;
+
     public function index() {
 
         if ($this->config->get('config_maintenance')) {

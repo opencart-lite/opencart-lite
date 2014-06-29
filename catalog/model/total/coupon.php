@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Coupon extends Model {
+class Coupon {
+    use Model;
 	public function getTotal(&$total_data, &$total) {
 		if (isset($this->session->data['coupon'])) {
 			$this->load->language('total/coupon');

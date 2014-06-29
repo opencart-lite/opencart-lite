@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Sage_pay_us extends Model {
+class Sage_pay_us {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/sagepay_us');
 		

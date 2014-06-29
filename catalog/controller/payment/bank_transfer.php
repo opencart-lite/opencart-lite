@@ -1,8 +1,11 @@
 <?php  namespace Controller\Payment;
 
 use System\Engine\Controller;
+use System\Engine\iController;
 
-class Bank_transfer extends Controller {
+class Bank_transfer implements iController {
+    use Controller;
+
 	public function index() {
 		$this->language->load('payment/bank_transfer');
 		

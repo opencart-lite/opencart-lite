@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Item extends Model {
+class Item {
+    use Model;
     public function getQuote($address) {
 		$this->load->language('shipping/item');
 		

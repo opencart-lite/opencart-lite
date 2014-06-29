@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Pp_express extends Model {
+class Pp_express {
+    use Model;
   	public function getMethod($address, $total) {
 		$this->load->language('payment/pp_express');
 		

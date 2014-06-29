@@ -2,7 +2,8 @@
 
 use System\Engine\Model;
 
-class Flat extends Model {
+class Flat {
+    use Model;
     public function getQuote() {
 		$this->load->language('shipping/flat');
 		
