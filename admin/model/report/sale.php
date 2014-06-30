@@ -1,5 +1,10 @@
-<?php
-class ModelReportSale extends Model {
+<?php namespace Model\Report;
+
+use Engine\Model;
+
+class Sale {
+    use Model;
+
 	public function getOrders($data = array()) {
 		$sql = "SELECT MIN(tmp.date_added) AS date_start, MAX(tmp.date_added) AS date_end, COUNT(tmp.order_id) AS `orders`, SUM(tmp.products) AS products, SUM(tmp.tax) AS tax, SUM(tmp.total) AS total FROM (SELECT o.order_id, (SELECT SUM(op.quantity) FROM `" . DB_PREFIX . "order_product` op WHERE op.order_id = o.order_id GROUP BY op.order_id) AS products, (SELECT SUM(ot.value) FROM `" . DB_PREFIX . "order_total` ot WHERE ot.order_id = o.order_id AND ot.code = 'tax' GROUP BY ot.order_id) AS tax, o.total, o.date_added FROM `" . DB_PREFIX . "order` o"; 
 
@@ -10,11 +15,11 @@ class ModelReportSale extends Model {
 		}
 		
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(o.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(o.date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(o.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(o.date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 		
 		$sql .= " GROUP BY o.order_id) tmp";
@@ -90,11 +95,11 @@ class ModelReportSale extends Model {
 		}
 				
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 
 		$query = $this->db->query($sql);
@@ -112,11 +117,11 @@ class ModelReportSale extends Model {
 		}
 		
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(o.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(o.date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(o.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(o.date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 		
 		if (!empty($data['filter_group'])) {
@@ -168,11 +173,11 @@ class ModelReportSale extends Model {
 		}
 				
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 		
 		if (!empty($data['filter_group'])) {
@@ -214,11 +219,11 @@ class ModelReportSale extends Model {
 		}
 		
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 		
 		if (!empty($data['filter_group'])) {
@@ -270,11 +275,11 @@ class ModelReportSale extends Model {
 		}
 				
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 		
 		if (!empty($data['filter_group'])) {

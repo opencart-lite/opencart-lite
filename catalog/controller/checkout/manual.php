@@ -1,8 +1,8 @@
 <?php namespace Controller\Checkout;
 
-use System\Engine\Controller;
-use System\Library\User;
-use System\Engine\iController;
+use Engine\Controller;
+use Library\User;
+use Engine\iController;
 
 class Manual implements iController {
     use Controller;

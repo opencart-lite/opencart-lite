@@ -1,11 +1,16 @@
-<?php 
-class ModelLocalisationReturnStatus extends Model {
+<?php namespace Model\Localisation;
+
+use Engine\Model;
+
+class Return_status {
+    use Model;
+
 	public function addReturnStatus($data) {
 		foreach ($data['return_status'] as $language_id => $value) {
 			if (isset($return_status_id)) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "return_status SET return_status_id = '" . (int)$return_status_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "return_status SET return_status_id = '" . (int)$return_status_id . "', language_id = '" . (int)$language_id . "', name = " . $this->db->quote($value['name']));
 			} else {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "return_status SET language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "return_status SET language_id = '" . (int)$language_id . "', name = " . $this->db->quote($value['name']));
 				
 				$return_status_id = $this->db->getLastId();
 			}
@@ -18,7 +23,7 @@ class ModelLocalisationReturnStatus extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "return_status WHERE return_status_id = '" . (int)$return_status_id . "'");
 
 		foreach ($data['return_status'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "return_status SET return_status_id = '" . (int)$return_status_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "return_status SET return_status_id = '" . (int)$return_status_id . "', language_id = '" . (int)$language_id . "', name = " . $this->db->quote($value['name']));
 		}
 				
 		$this->cache->delete('return_status');

@@ -1,5 +1,11 @@
-<?php
-class ControllerCommonReset extends Controller {
+<?php namespace Controller\Common;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Reset implements iController {
+    use Controller;
+
 	private $error = array();
 	
 	public function index() {

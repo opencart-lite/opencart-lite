@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentSagepayDirect extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Sagepay_direct implements iController {
+    use Controller;
+
 	private $error = array(); 
 
 	public function index() {

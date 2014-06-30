@@ -1,5 +1,9 @@
-<?php
-class ControllerModuleBanner extends Controller {
+<?php namespace Controller\Module;
+
+use Engine\Controller;
+use Engine\iController;
+
+class ControllerModuleBanner implements iController {
 	private $error = array(); 
 	
 	public function index() {   

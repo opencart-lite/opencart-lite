@@ -1,5 +1,11 @@
-<?php
-class ControllerShippingFlat extends Controller {
+<?php namespace Controller\Shipping;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Flat implements iController {
+    use Controller;
+
 	private $error = array(); 
 	
 	public function index() {   

@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentPPProUK extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Pp_pro_uk implements iController {
+    use Controller;
+
 	private $error = array(); 
 
 	public function index() {

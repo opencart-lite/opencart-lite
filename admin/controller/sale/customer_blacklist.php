@@ -1,5 +1,11 @@
-<?php    
-class ControllerSaleCustomerBlacklist extends Controller { 
+<?php namespace Controller\Sale;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Customer_blacklist implements iController {
+    use Controller;
+
 	private $error = array();
   
   	public function index() {

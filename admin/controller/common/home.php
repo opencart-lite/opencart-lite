@@ -1,5 +1,11 @@
-<?php   
-class ControllerCommonHome extends Controller {   
+<?php  namespace Controller\Common;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Home implements iController {
+    use Controller;
+
 	public function index() {
     	$this->load->language('common/home');
 	 

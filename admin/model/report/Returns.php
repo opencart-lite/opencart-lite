@@ -1,5 +1,10 @@
-<?php
-class ModelReportReturn extends Model {
+<?php namespace Model\Report;
+
+use Engine\Model;
+
+class Returns {
+    use Model;
+
 	public function getReturns($data = array()) {
 		$sql = "SELECT MIN(r.date_added) AS date_start, MAX(r.date_added) AS date_end, COUNT(r.return_id) AS `returns` FROM `" . DB_PREFIX . "return` r"; 
 
@@ -10,11 +15,11 @@ class ModelReportReturn extends Model {
 		}
 		
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(r.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(r.date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(r.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(r.date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 		
 		if (isset($data['filter_group'])) {
@@ -86,11 +91,11 @@ class ModelReportReturn extends Model {
 		}
 				
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 
 		$query = $this->db->query($sql);

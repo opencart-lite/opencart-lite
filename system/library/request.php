@@ -1,4 +1,4 @@
-<?php namespace System\Library;
+<?php namespace Library;
 
 class Request {
 	public $get = array();

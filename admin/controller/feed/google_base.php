@@ -1,5 +1,11 @@
-<?php 
-class ControllerFeedGoogleBase extends Controller {
+<?php  namespace Controller\Feed;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Google_base implements iController {
+    use Controller;
+
 	private $error = array(); 
 	
 	public function index() {

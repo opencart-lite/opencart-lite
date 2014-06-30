@@ -1,4 +1,4 @@
-<?php namespace System\Engine;
+<?php namespace Engine;
 
 use ReflectionClass;
 
@@ -42,7 +42,7 @@ final class Front {
 
             $reflection = new ReflectionClass($action->getController());
 
-            if ($reflection->implementsInterface('System\Engine\IController')) {
+            if ($reflection->implementsInterface('Engine\IController')) {
 
                 if ($reflection->hasMethod($action->getMethod())) {
                     $controller = $reflection->newInstance();

@@ -1,6 +1,6 @@
 <?php  namespace Model\Setting;
 
-use System\Engine\Model;
+use Engine\Model;
 
 class Extension {
     use Model;

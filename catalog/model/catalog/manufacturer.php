@@ -1,6 +1,6 @@
 <?php  namespace Model\Catalog;
 
-use System\Engine\Model;
+use Engine\Model;
 
 class Manufacturer {
     use Model;

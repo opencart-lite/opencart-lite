@@ -1,5 +1,11 @@
-<?php
-class ControllerCommonForgotten extends Controller {
+<?php namespace Controller\Common;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Forgotten implements iController {
+    use Controller;
+
 	private $error = array();
 
 	public function index() {

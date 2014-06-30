@@ -1,5 +1,11 @@
-<?php 
-class ControllerToolErrorLog extends Controller { 
+<?php namespace Controller\Tool;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Error_log implements iController {
+    use Controller;
+
 	private $error = array();
 	
 	public function index() {		

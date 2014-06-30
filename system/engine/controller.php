@@ -1,4 +1,4 @@
-<?php namespace System\Engine;
+<?php namespace Engine;
 
 trait Controller {
 	protected $id;

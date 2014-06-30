@@ -1,16 +1,21 @@
-<?php
-class ModelReportCoupon extends Model {
+<?php namespace Model\Report;
+
+use Engine\Model;
+
+class Coupon {
+    use Model;
+
 	public function getCoupons($data = array()) {
 		$sql = "SELECT ch.coupon_id, c.name, c.code, COUNT(DISTINCT ch.order_id) AS `orders`, SUM(ch.amount) AS total FROM `" . DB_PREFIX . "coupon_history` ch LEFT JOIN `" . DB_PREFIX . "coupon` c ON (ch.coupon_id = c.coupon_id)"; 
 
 		$implode = array();
 		
 		if (!empty($data['filter_date_start'])) {
-			$implode[] = "DATE(c.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$implode[] = "DATE(c.date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$implode[] = "DATE(c.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$implode[] = "DATE(c.date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 
 		if ($implode) {
@@ -42,11 +47,11 @@ class ModelReportCoupon extends Model {
 		$implode = array();
 		
 		if (!empty($data['filter_date_start'])) {
-			$implode[] = "DATE(date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$implode[] = "DATE(date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$implode[] = "DATE(date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$implode[] = "DATE(date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 
 		if ($implode) {

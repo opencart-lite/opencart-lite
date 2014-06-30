@@ -1,7 +1,7 @@
 <?php namespace Controller\Payment;
 
-use System\Engine\Controller;
-use System\Engine\iController;
+use Engine\Controller;
+use Engine\iController;
 
 class Pp_pro_uk implements iController {
     use Controller;

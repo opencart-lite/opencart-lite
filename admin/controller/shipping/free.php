@@ -1,5 +1,9 @@
-<?php
-class ControllerShippingFree extends Controller {
+<?php namespace Controller\Shipping;
+
+use Engine\Controller;
+use Engine\iController;
+
+class ControllerShippingFree implements iController {
 	private $error = array(); 
 	
 	public function index() {   

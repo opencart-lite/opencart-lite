@@ -1,5 +1,11 @@
-<?php
-class ControllerReportAffiliateCommission extends Controller {
+<?php namespace Controller\Report;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Affiliate_commission implements iController {
+    use Controller;
+
 	public function index() {     
 		$this->load->language('report/affiliate_commission');
 

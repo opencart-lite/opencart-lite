@@ -1,5 +1,11 @@
-<?php 
-class ControllerTotalKlarnaFee extends Controller { 
+<?php namespace Controller\Total;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Klarna_fee implements iController {
+    use Controller;
+
 	private $error = array(); 
 	 
 	public function index() { 

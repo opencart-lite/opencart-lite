@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentPayMate extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Paymate implements iController {
+    use Controller;
+
 	private $error = array(); 
 
 	public function index() {

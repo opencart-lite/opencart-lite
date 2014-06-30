@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentLiqPay extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Liqpay implements iController {
+    use Controller;
+
 	private $error = array(); 
 
 	public function index() {

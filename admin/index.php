@@ -1,11 +1,15 @@
 <?php namespace OpencartLite;
+
+use Engine;
+use Library;
+
 // Version
 define('VERSION', '1.0.0');
 
 // Configuration
 require_once('config.php');
 
-// Install 
+// Install
 if (!defined('DIR_APPLICATION')) {
 	header('Location: ../install/index.php');
 	exit;
@@ -14,26 +18,17 @@ if (!defined('DIR_APPLICATION')) {
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 
-// Application Classes
-require_once(DIR_SYSTEM . 'library/currency.php');
-require_once(DIR_SYSTEM . 'library/user.php');
-require_once(DIR_SYSTEM . 'library/weight.php');
-require_once(DIR_SYSTEM . 'library/length.php');
-
-// Registry
-$registry = new Registry();
-
 // Loader
-$loader = new Loader($registry);
-$registry->set('load', $loader);
+$loader = new Engine\Loader();
+Engine\Registry::set('load', $loader);
 
 // Config
-$config = new Config();
-$registry->set('config', $config);
+$config = new Library\Config();
+Engine\Registry::set('config', $config);
 
 // Database
-$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-$registry->set('db', $db);
+$db = new Library\DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+Engine\Registry::set('db', $db);
 
 // Settings
 $query = $db->query("SELECT * FROM " . DB_PREFIX . "setting");
@@ -47,64 +42,29 @@ foreach ($query->rows as $setting) {
 }
 
 // Url
-$url = new Url(HTTP_SERVER, $config->get('config_use_ssl') ? HTTPS_SERVER : HTTP_SERVER);
-$registry->set('url', $url);
+$url = new Library\Url(HTTP_SERVER, $config->get('config_use_ssl') ? HTTPS_SERVER : HTTP_SERVER);
+Engine\Registry::set('url', $url);
 
 // Log
-$log = new Log($config->get('config_error_filename'));
-$registry->set('log', $log);
-
-function error_handler($errno, $errstr, $errfile, $errline) {
-	global $log, $config;
-
-	switch ($errno) {
-		case E_NOTICE:
-		case E_USER_NOTICE:
-			$error = 'Notice';
-			break;
-		case E_WARNING:
-		case E_USER_WARNING:
-			$error = 'Warning';
-			break;
-		case E_ERROR:
-		case E_USER_ERROR:
-			$error = 'Fatal Error';
-			break;
-		default:
-			$error = 'Unknown';
-			break;
-	}
-
-	if ($config->get('config_error_display')) {
-		echo '<b>' . $error . '</b>: ' . $errstr . ' in <b>' . $errfile . '</b> on line <b>' . $errline . '</b>';
-	}
-
-	if ($config->get('config_error_log')) {
-		$log->write('PHP ' . $error . ':  ' . $errstr . ' in ' . $errfile . ' on line ' . $errline);
-	}
-
-	return true;
-}
-
-// Error Handler
-set_error_handler('error_handler');
+$log = new Library\Log($config->get('config_error_filename'));
+Engine\Registry::set('log', $log);
 
 // Request
-$request = new Request();
-$registry->set('request', $request);
+$request = new Library\Request();
+Engine\Registry::set('request', $request);
 
 // Response
-$response = new Response();
+$response = new Library\Response();
 $response->addHeader('Content-Type: text/html; charset=utf-8');
-$registry->set('response', $response);
+Engine\Registry::set('response', $response);
 
 // Cache
-$cache = new Cache();
-$registry->set('cache', $cache);
+$cache = new Library\Cache();
+Engine\Registry::set('cache', $cache);
 
 // Session
-$session = new Session();
-$registry->set('session', $session);
+$session = new Library\Session();
+Engine\Registry::set('session', $session);
 
 // Language
 $languages = array();
@@ -118,43 +78,43 @@ foreach ($query->rows as $result) {
 $config->set('config_language_id', $languages[$config->get('config_admin_language')]['language_id']);
 
 // Language
-$language = new Language($languages[$config->get('config_admin_language')]['directory']);
+$language = new Library\Language($languages[$config->get('config_admin_language')]['directory']);
 $language->load($languages[$config->get('config_admin_language')]['filename']);
-$registry->set('language', $language);
+Engine\Registry::set('language', $language);
 
 // Document
-$registry->set('document', new Document());
+Engine\Registry::set('document', new Library\Document());
 
 // Currency
-$registry->set('currency', new Currency($registry));
+Engine\Registry::set('currency', new Library\Currency());
 
 // Weight
-$registry->set('weight', new Weight($registry));
+Engine\Registry::set('weight', new Library\Weight());
 
 // Length
-$registry->set('length', new Length($registry));
+Engine\Registry::set('length', new Library\Length());
 
 // User
-$registry->set('user', new User($registry));
+Engine\Registry::set('user', new Library\User());
 
 // Front Controller
-$controller = new Front($registry);
+$front = Engine\Front::getInstance();
 
 // Login
-$controller->addPreAction(new Action('common/home/login'));
+//$front->addPreAction(new Action('common/home/login'));
 
 // Permission
-$controller->addPreAction(new Action('common/home/permission'));
+//$front->addPreAction(new Action('common/home/permission'));
 
 // Router
 if (isset($request->get['route'])) {
-	$action = new Action($request->get['route']);
+	$action = new Engine\Action($request->get['route']);
 } else {
-	$action = new Action('common/home');
+	$action = new Engine\Action('common/home');
 }
 
 // Dispatch
-$controller->dispatch($action, new Action('error/not_found'));
+$front->dispatch($action, new Engine\Action('error/not_found'));
 
 // Output
 $response->output();

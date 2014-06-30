@@ -1,11 +1,16 @@
-<?php 
-class ModelLocalisationReturnAction extends Model {
+<?php namespace Model\Localisation;
+
+use Engine\Model;
+
+class Return_action {
+    use Model;
+
 	public function addReturnAction($data) {
 		foreach ($data['return_action'] as $language_id => $value) {
 			if (isset($return_action_id)) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "return_action SET return_action_id = '" . (int)$return_action_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "return_action SET return_action_id = '" . (int)$return_action_id . "', language_id = '" . (int)$language_id . "', name = " . $this->db->quote($value['name']));
 			} else {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "return_action SET language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "return_action SET language_id = '" . (int)$language_id . "', name = " . $this->db->quote($value['name']));
 				
 				$return_action_id = $this->db->getLastId();
 			}
@@ -18,7 +23,7 @@ class ModelLocalisationReturnAction extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "return_action WHERE return_action_id = '" . (int)$return_action_id . "'");
 
 		foreach ($data['return_action'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "return_action SET return_action_id = '" . (int)$return_action_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "return_action SET return_action_id = '" . (int)$return_action_id . "', language_id = '" . (int)$language_id . "', name = " . $this->db->quote($value['name']));
 		}
 				
 		$this->cache->delete('return_action');

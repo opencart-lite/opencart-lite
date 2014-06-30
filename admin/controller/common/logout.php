@@ -1,5 +1,11 @@
-<?php       
-class ControllerCommonLogout extends Controller {   
+<?php  namespace Controller\Common;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Logout implements iController {
+    use Controller;
+
 	public function index() { 
     	$this->user->logout();
  

@@ -1,5 +1,11 @@
-<?php
-class ControllerExtensionPayment extends Controller {
+<?php namespace Controller\Extension;
+
+use Engine\Controller;
+use Engine\iController;
+
+class ControllerExtensionPayment implements iController {
+    use Controller;
+
 	public function index() {
 		$this->load->language('extension/payment');
 		 

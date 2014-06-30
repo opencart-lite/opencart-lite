@@ -1,5 +1,11 @@
-<?php
-class ControllerCommonFileManager extends Controller {
+<?php  namespace Controller\Common;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Filemanager implements iController {
+    use Controller;
+
 	private $error = array();
 	
 	public function index() {

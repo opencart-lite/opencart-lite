@@ -1,5 +1,11 @@
-<?php
-class ControllerLocalisationLengthClass extends Controller {
+<?php namespace Controller\Localisation;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Length_class implements iController {
+    use Controller;
+
 	private $error = array();  
  
 	public function index() {

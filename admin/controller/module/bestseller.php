@@ -1,5 +1,11 @@
-<?php
-class ControllerModuleBestSeller extends Controller {
+<?php namespace Controller\Module;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Bestseller implements iController {
+    use Controller;
+
 	private $error = array(); 
 	
 	public function index() {   

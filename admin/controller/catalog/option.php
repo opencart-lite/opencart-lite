@@ -1,5 +1,11 @@
-<?php
-class ControllerCatalogOption extends Controller {
+<?php  namespace Controller\Catalog;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Option implements iController {
+    use Controller;
+
 	private $error = array();  
  
 	public function index() {
