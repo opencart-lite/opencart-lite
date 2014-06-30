@@ -2,7 +2,7 @@
 
 use Engine\Model;
 
-class LengthClass {
+class Length_class {
     use Model;
 
 	public function addLengthClass($data) {

@@ -1,7 +1,8 @@
-<?php namespace Controller\Account;
+<?php namespace Controller\Catalog;
 
 use Engine\Controller;
 use Engine\iController;
+use Library\Pagination;
 
 class Attribute implements iController {
     use Controller;

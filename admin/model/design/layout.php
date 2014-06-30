@@ -2,7 +2,7 @@
 
 use Engine\Model;
 
-class ModelDesignLayout {
+class Layout {
     use Model;
 
 	public function addLayout($data) {

@@ -8,7 +8,7 @@ class Login implements iController {
 
 	private $error = array();
 	          
-	public function index() { 
+	public function index() {
     	$this->load->language('common/login');
 
 		$this->document->setTitle($this->language->get('heading_title'));
