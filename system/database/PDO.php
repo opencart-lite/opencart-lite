@@ -2,7 +2,7 @@
 
 use stdClass;
 use PDOException;
-use System\Engine\CoreException;
+use Engine\CoreException;
 
 class PDO {
     private $link;

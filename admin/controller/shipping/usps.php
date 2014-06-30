@@ -1,5 +1,11 @@
-<?php
-class ControllerShippingUsps extends Controller {
+<?php namespace Controller\Shipping;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Usps implements iController {
+    use Controller;
+
 	private $error = array();
 
 	public function index() {

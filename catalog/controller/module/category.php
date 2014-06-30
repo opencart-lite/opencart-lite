@@ -1,7 +1,7 @@
 <?php   namespace Controller\Module;
 
-use System\Engine\Controller;
-use System\Engine\iController;
+use Engine\Controller;
+use Engine\iController;
 
 class Category implements iController {
     use Controller;

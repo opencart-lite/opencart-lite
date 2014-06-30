@@ -1,6 +1,6 @@
 <?php  namespace Model\Localisation;
 
-use System\Engine\Model;
+use Engine\Model;
 
 class Language {
     use Model;

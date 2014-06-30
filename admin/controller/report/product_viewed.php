@@ -1,5 +1,11 @@
-<?php
-class ControllerReportProductViewed extends Controller {
+<?php namespace Controller\Report;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Product_viewed implements iController {
+    use Controller;
+
 	public function index() {     
 		$this->load->language('report/product_viewed');
 

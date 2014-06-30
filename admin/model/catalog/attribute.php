@@ -1,12 +1,17 @@
-<?php 
-class ModelCatalogAttribute extends Model {
+<?php  namespace Model\Catalog;
+
+use Engine\Model;
+
+class Attribute {
+    use Model;
+
 	public function addAttribute($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "attribute SET attribute_group_id = '" . (int)$data['attribute_group_id'] . "', sort_order = '" . (int)$data['sort_order'] . "'");
 		
 		$attribute_id = $this->db->getLastId();
 		
 		foreach ($data['attribute_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "attribute_description SET attribute_id = '" . (int)$attribute_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "attribute_description SET attribute_id = '" . (int)$attribute_id . "', language_id = '" . (int)$language_id . "', name = " . $this->db->quote($value['name']));
 		}
 	}
 
@@ -16,7 +21,7 @@ class ModelCatalogAttribute extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "attribute_description WHERE attribute_id = '" . (int)$attribute_id . "'");
 
 		foreach ($data['attribute_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "attribute_description SET attribute_id = '" . (int)$attribute_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "attribute_description SET attribute_id = '" . (int)$attribute_id . "', language_id = '" . (int)$language_id . "', name = " . $this->db->quote($value['name']));
 		}
 	}
 	
@@ -35,11 +40,11 @@ class ModelCatalogAttribute extends Model {
 		$sql = "SELECT *, (SELECT agd.name FROM " . DB_PREFIX . "attribute_group_description agd WHERE agd.attribute_group_id = a.attribute_group_id AND agd.language_id = '" . (int)$this->config->get('config_language_id') . "') AS attribute_group FROM " . DB_PREFIX . "attribute a LEFT JOIN " . DB_PREFIX . "attribute_description ad ON (a.attribute_id = ad.attribute_id) WHERE ad.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND LCASE(ad.name) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
+			$sql .= " AND LCASE(ad.name) LIKE " . $this->db->quote(utf8_strtolower($data['filter_name']) . "%");
 		}
 
 		if (!empty($data['filter_attribute_group_id'])) {
-			$sql .= " AND a.attribute_group_id = '" . $this->db->escape($data['filter_attribute_group_id']) . "'";
+			$sql .= " AND a.attribute_group_id = " . $this->db->quote($data['filter_attribute_group_id']);
 		}
 								
 		$sort_data = array(
@@ -93,11 +98,11 @@ class ModelCatalogAttribute extends Model {
 		$sql = "SELECT *, (SELECT agd.name FROM " . DB_PREFIX . "attribute_group_description agd WHERE agd.attribute_group_id = a.attribute_group_id AND agd.language_id = '" . (int)$this->config->get('config_language_id') . "') AS attribute_group FROM " . DB_PREFIX . "attribute a LEFT JOIN " . DB_PREFIX . "attribute_description ad ON (a.attribute_id = ad.attribute_id) WHERE ad.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND LCASE(ad.name) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
+			$sql .= " AND LCASE(ad.name) LIKE " . $this->db->quote(utf8_strtolower($data['filter_name']) . "%");
 		}
 
 		if (!empty($data['filter_attribute_group_id'])) {
-			$sql .= " AND a.attribute_group_id = '" . $this->db->escape($data['filter_attribute_group_id']) . "'";
+			$sql .= " AND a.attribute_group_id = " . $this->db->quote($data['filter_attribute_group_id']);
 		}
 								
 		$sort_data = array(

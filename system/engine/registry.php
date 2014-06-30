@@ -1,4 +1,4 @@
-<?php namespace System\Engine;
+<?php namespace Engine;
 
 
 final class Registry {

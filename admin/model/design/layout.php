@@ -1,25 +1,30 @@
-<?php
-class ModelDesignLayout extends Model {
+<?php namespace Model\Design;
+
+use Engine\Model;
+
+class ModelDesignLayout {
+    use Model;
+
 	public function addLayout($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "layout SET name = '" . $this->db->escape($data['name']) . "'");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "layout SET name = " . $this->db->quote($data['name']));
 	
 		$layout_id = $this->db->getLastId();
 		
 		if (isset($data['layout_route'])) {
 			foreach ($data['layout_route'] as $layout_route) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', route = '" . $this->db->escape($layout_route['route']) . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', route = " . $this->db->quote($layout_route['route']));
 			}	
 		}
 	}
 	
 	public function editLayout($layout_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "layout SET name = '" . $this->db->escape($data['name']) . "' WHERE layout_id = '" . (int)$layout_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "layout SET name = " . $this->db->quote($data['name']) . " WHERE layout_id = '" . (int)$layout_id . "'");
 		
 		$this->db->query("DELETE FROM " . DB_PREFIX . "layout_route WHERE layout_id = '" . (int)$layout_id . "'");
 		
 		if (isset($data['layout_route'])) {
 			foreach ($data['layout_route'] as $layout_route) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', route = '" . $this->db->escape($layout_route['route']) . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', route = " . $this->db->quote($layout_route['route']));
 			}
 		}
 	}

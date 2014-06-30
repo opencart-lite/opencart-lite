@@ -1,5 +1,11 @@
-<?php
-class ControllerReportSaleCoupon extends Controller {
+<?php namespace Controller\Report;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Sale_coupon implements iController {
+    use Controller;
+
 	public function index() {     
 		$this->load->language('report/sale_coupon');
 

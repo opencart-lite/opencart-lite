@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentFreeCheckout extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Free_checkout implements iController {
+    use Controller;
+
 	private $error = array(); 
 	 
 	public function index() { 

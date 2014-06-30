@@ -1,6 +1,6 @@
-<?php namespace System\Library;
+<?php namespace Library;
 
-use System\Engine\Registry;
+use Engine\Registry;
 
 class Customer {
 	private $customer_id;

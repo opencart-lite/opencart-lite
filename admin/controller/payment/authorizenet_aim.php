@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentAuthorizenetAim extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Authorizenet_aim implements iController {
+    use Controller;
+
 	private $error = array(); 
 
 	public function index() {

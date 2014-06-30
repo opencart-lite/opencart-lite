@@ -1,6 +1,6 @@
 <?php   namespace Model\Total;
 
-use System\Engine\Model;
+use Engine\Model;
 
 class Voucher {
     use Model;

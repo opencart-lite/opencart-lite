@@ -1,4 +1,4 @@
-<?php namespace System\Library;
+<?php namespace Library;
 
 class Captcha {
 	protected $code;

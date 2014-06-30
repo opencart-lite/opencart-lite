@@ -1,3 +1,3 @@
-<?php namespace System\Engine;
+<?php namespace Engine;
 
 interface iController {}

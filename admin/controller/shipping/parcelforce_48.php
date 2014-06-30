@@ -1,5 +1,11 @@
-<?php
-class ControllerShippingParcelforce48 extends Controller {
+<?php namespace Controller\Shipping;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Parcelforce48 implements iController {
+    use Controller;
+
 	private $error = array(); 
 	
 	public function index() {   

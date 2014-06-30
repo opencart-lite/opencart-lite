@@ -1,7 +1,7 @@
 <?php  namespace Controller\Feed;
 
-use System\Engine\Controller;
-use System\Engine\iController;
+use Engine\Controller;
+use Engine\iController;
 
 class Google_sitemap implements iController {
     use Controller;

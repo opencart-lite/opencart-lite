@@ -1,12 +1,17 @@
-<?php
-class ModelLocalisationLengthClass extends Model {
+<?php namespace Model\Localisation;
+
+use Engine\Model;
+
+class LengthClass {
+    use Model;
+
 	public function addLengthClass($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "length_class SET value = '" . (float)$data['value'] . "'");
 
 		$length_class_id = $this->db->getLastId();
 		
 		foreach ($data['length_class_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "length_class_description SET length_class_id = '" . (int)$length_class_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', unit = '" . $this->db->escape($value['unit']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "length_class_description SET length_class_id = '" . (int)$length_class_id . "', language_id = '" . (int)$language_id . "', title = " . $this->db->quote($value['title']) . ", unit = " . $this->db->quote($value['unit']));
 		}
 		
 		$this->cache->delete('length_class');
@@ -18,7 +23,7 @@ class ModelLocalisationLengthClass extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "length_class_description WHERE length_class_id = '" . (int)$length_class_id . "'");
 
 		foreach ($data['length_class_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "length_class_description SET length_class_id = '" . (int)$length_class_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', unit = '" . $this->db->escape($value['unit']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "length_class_description SET length_class_id = '" . (int)$length_class_id . "', language_id = '" . (int)$language_id . "', title = " . $this->db->quote($value['title']) . ", unit = " . $this->db->quote($value['unit']));
 		}
 		
 		$this->cache->delete('length_class');	
@@ -90,7 +95,7 @@ class ModelLocalisationLengthClass extends Model {
 	}
 
 	public function getLengthClassDescriptionByUnit($unit) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "length_class_description WHERE unit = '" . $this->db->escape($unit) . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "length_class_description WHERE unit = " . $this->db->quote($unit) . " AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
 		
 		return $query->row;
 	}

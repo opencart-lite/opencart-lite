@@ -1,6 +1,6 @@
-<?php  namespace Model\Account;
+<?php namespace Model\Account;
 
-use System\Engine\Model;
+use Engine\Model;
 
 class Address {
     use Model;

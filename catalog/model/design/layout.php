@@ -1,6 +1,6 @@
 <?php  namespace Model\Design;
 
-use System\Engine\Model;
+use Engine\Model;
 
 class Layout {
     use Model;

@@ -1,6 +1,6 @@
 <?php  namespace Model\Shipping;
 
-use System\Engine\Model;
+use Engine\Model;
 
 class Free {
     use Model;

@@ -1,5 +1,9 @@
-<?php 
-class ControllerLocalisationReturnReason extends Controller { 
+<?php namespace Controller\Localisation;
+
+use Engine\Controller;
+use Engine\iController;
+
+class ControllerLocalisationReturnReason implements iController {
 	private $error = array();
    
   	public function index() {

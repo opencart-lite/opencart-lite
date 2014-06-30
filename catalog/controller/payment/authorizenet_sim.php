@@ -1,8 +1,8 @@
 <?php namespace Controller\Payment;
 
-use System\Engine\Controller;
-use System\Library\Hash;
-use System\Engine\iController;
+use Engine\Controller;
+use Library\Hash;
+use Engine\iController;
 
 class Authorizenet_sim implements iController {
     use Controller;

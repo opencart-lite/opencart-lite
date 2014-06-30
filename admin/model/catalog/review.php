@@ -1,13 +1,18 @@
-<?php
-class ModelCatalogReview extends Model {
+<?php namespace Model\Catalog;
+
+use Engine\Model;
+
+class Review {
+    use Model;
+
 	public function addReview($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "review SET author = '" . $this->db->escape($data['author']) . "', product_id = '" . $this->db->escape($data['product_id']) . "', text = '" . $this->db->escape(strip_tags($data['text'])) . "', rating = '" . (int)$data['rating'] . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "review SET author = " . $this->db->quote($data['author']) . ", product_id = '" . (int)($data['product_id']) . "', text = " . $this->db->quote(strip_tags($data['text'])) . ", rating = '" . (int)$data['rating'] . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
 	
 		$this->cache->delete('product');
 	}
 	
 	public function editReview($review_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "review SET author = '" . $this->db->escape($data['author']) . "', product_id = '" . $this->db->escape($data['product_id']) . "', text = '" . $this->db->escape(strip_tags($data['text'])) . "', rating = '" . (int)$data['rating'] . "', status = '" . (int)$data['status'] . "', date_added = NOW() WHERE review_id = '" . (int)$review_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "review SET author = " . $this->db->quote($data['author']) . ", product_id = '" . (int)($data['product_id']) . "', text = " . $this->db->quote(strip_tags($data['text'])) . ", rating = '" . (int)$data['rating'] . "', status = '" . (int)$data['status'] . "', date_added = NOW() WHERE review_id = '" . (int)$review_id . "'");
 	
 		$this->cache->delete('product');
 	}

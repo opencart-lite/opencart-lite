@@ -1,5 +1,11 @@
-<?php
-class ControllerModuleAccount extends Controller {
+<?php namespace Controller\Module;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Account implements iController {
+    use Controller;
+
 	private $error = array(); 
 	
 	public function index() {   

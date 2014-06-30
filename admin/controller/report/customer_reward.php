@@ -1,5 +1,11 @@
-<?php
-class ControllerReportCustomerReward extends Controller {
+<?php namespace Controller\Report;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Customer_reward implements iController {
+    use Controller;
+
 	public function index() {     
 		$this->load->language('report/customer_reward');
 

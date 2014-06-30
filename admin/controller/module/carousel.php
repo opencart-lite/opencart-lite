@@ -1,5 +1,9 @@
-<?php
-class ControllerModuleCarousel extends Controller {
+<?php namespace Controller\Module;
+
+use Engine\Controller;
+use Engine\iController;
+
+class ControllerModuleCarousel implements iController {
 	private $error = array(); 
 	
 	public function index() {   

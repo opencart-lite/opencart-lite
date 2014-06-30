@@ -1,6 +1,6 @@
 <?php  namespace Model\Tool;
 
-use System\Engine\Model;
+use Engine\Model;
 
 class Online {
     use Model;

@@ -1,8 +1,8 @@
 <?php namespace Controller\Common;
 
-use System\Engine\Controller;
-use System\Library\User;
-use System\Engine\iController;
+use Engine\Controller;
+use Library\User;
+use Engine\iController;
 
 class Maintenance implements iController {
     use Controller;

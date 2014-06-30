@@ -1,5 +1,11 @@
-<?php 
-class ControllerCatalogAttributeGroup extends Controller { 
+<?php namespace Controller\Catalog;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Attribute_group implements iController {
+    use Controller;
+
 	private $error = array();
    
   	public function index() {

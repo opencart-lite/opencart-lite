@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentWorldPay extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Worldpay implements iController {
+    use Controller;
+
 	private $error = array(); 
 
 	public function index() {

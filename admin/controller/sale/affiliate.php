@@ -1,5 +1,11 @@
-<?php    
-class ControllerSaleAffiliate extends Controller { 
+<?php namespace Controller\Sale;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Affiliate implements iController {
+    use Controller;
+
 	private $error = array();
   
   	public function index() {

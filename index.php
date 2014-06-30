@@ -1,4 +1,8 @@
 <?php namespace OpencartLite;
+
+use Engine;
+use Library;
+
 // Version
 define('VERSION', '1.0.0');
 
@@ -16,21 +20,17 @@ if (!defined('DIR_APPLICATION')) {
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 
-// Registry
-//$registry = new \System\Engine\Registry();
-
 // Loader
-$loader = new \System\Engine\Loader();
-\System\Engine\Registry::set('load', $loader);
-//$registry->set('load', $loader);
+$loader = new Engine\Loader();
+Engine\Registry::set('load', $loader);
 
 // Config
-$config = new \System\Library\Config();
-\System\Engine\Registry::set('config', $config);
+$config = new Library\Config();
+Engine\Registry::set('config', $config);
 
 // Database 
-$db = new \System\Library\DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-\System\Engine\Registry::set('db', $db);
+$db = new Library\DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+Engine\Registry::set('db', $db);
 
 // Settings
 $query = $db->query("SELECT * FROM " . DB_PREFIX . "setting");
@@ -48,30 +48,30 @@ foreach ($query->rows as $setting) {
 	$config->set('config_ssl', HTTPS_SERVER);	
 
 // Url
-$url = new \System\Library\Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));
-\System\Engine\Registry::set('url', $url);
+$url = new Library\Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));
+Engine\Registry::set('url', $url);
 
 // Log 
-$log = new \System\Library\Log($config->get('config_error_filename'));
-\System\Engine\Registry::set('log', $log);
+$log = new Library\Log($config->get('config_error_filename'));
+Engine\Registry::set('log', $log);
 
 // Request
-$request = new \System\Library\Request();
-\System\Engine\Registry::set('request', $request);
+$request = new Library\Request();
+Engine\Registry::set('request', $request);
  
 // Response
-$response = new \System\Library\Response();
+$response = new Library\Response();
 $response->addHeader('Content-Type: text/html; charset=utf-8');
 $response->setCompression($config->get('config_compression'));
-\System\Engine\Registry::set('response', $response);
+Engine\Registry::set('response', $response);
 
 // Cache
-$cache = new \System\Library\Cache();
-\System\Engine\Registry::set('cache', $cache);
+$cache = new Library\Cache();
+Engine\Registry::set('cache', $cache);
 
 // Session
-$session = new \System\Library\Session();
-\System\Engine\Registry::set('session', $session);
+$session = new Library\Session();
+Engine\Registry::set('session', $session);
 
 // Language Detection
 $languages = array();
@@ -122,56 +122,56 @@ $config->set('config_language_id', $languages[$code]['language_id']);
 $config->set('config_language', $languages[$code]['code']);
 
 // Language
-$language = new \System\Library\Language($languages[$code]['directory']);
+$language = new Library\Language($languages[$code]['directory']);
 $language->load($languages[$code]['filename']);
-\System\Engine\Registry::set('language', $language);
+Engine\Registry::set('language', $language);
 
 // Document
-\System\Engine\Registry::set('document', new \System\Library\Document());
+Engine\Registry::set('document', new Library\Document());
 
 // Customer
-\System\Engine\Registry::set('customer', new \System\Library\Customer());
+Engine\Registry::set('customer', new Library\Customer());
 
 // Affiliate
-\System\Engine\Registry::set('affiliate', new \System\Library\Affiliate());
+Engine\Registry::set('affiliate', new Library\Affiliate());
 
 if (isset($request->get['tracking']) && !isset($request->cookie['tracking'])) {
 	setcookie('tracking', $request->get['tracking'], time() + 3600 * 24 * 1000, '/');
 }
 
 // Currency
-\System\Engine\Registry::set('currency', new \System\Library\Currency());
+Engine\Registry::set('currency', new Library\Currency());
 
 // Weight
-\System\Engine\Registry::set('weight', new \System\Library\Weight());
+Engine\Registry::set('weight', new Library\Weight());
 
 // Length
-\System\Engine\Registry::set('length', new \System\Library\Length());
+Engine\Registry::set('length', new Library\Length());
 
 // Cart
-\System\Engine\Registry::set('cart', new \System\Library\Cart());
+Engine\Registry::set('cart', new Library\Cart());
 
 //  Encryption
-\System\Engine\Registry::set('encryption', new \System\Library\Encryption($config->get('config_encryption')));
+Engine\Registry::set('encryption', new Library\Encryption($config->get('config_encryption')));
 
 // Front Controller
-$front = \System\Engine\Front::getInstance();
+$front = Engine\Front::getInstance();
 
 // Maintenance Mode
-//$controller->addPreAction(new \System\Engine\Action('common/maintenance'));
+//$controller->addPreAction(new Engine\Action('common/maintenance'));
 
 // SEO URL's
-//$controller->addPreAction(new \System\Engine\Action('common/seo_url'));
+//$controller->addPreAction(new Engine\Action('common/seo_url'));
 
 // Router
 if (isset($request->get['route'])) {
-	$action = new \System\Engine\Action($request->get['route']);
+	$action = new Engine\Action($request->get['route']);
 } else {
-	$action = new \System\Engine\Action('common/home');
+	$action = new Engine\Action('common/home');
 }
 
 // Dispatch
-$front->dispatch($action, new \System\Engine\Action('error/not_found'));
-//var_dump($controller);
+$front->dispatch($action, new Engine\Action('error/not_found'));
+
 // Output
 $response->output();

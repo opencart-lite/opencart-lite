@@ -1,5 +1,11 @@
-<?php  
-class ControllerReportCustomerOnline extends Controller {  
+<?php namespace Controller\Report;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Customer_online implements iController {
+    use Controller;
+
   	public function index() {
 		$this->load->language('report/customer_online');
 		

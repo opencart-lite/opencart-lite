@@ -1,5 +1,11 @@
-<?php
-class ControllerExtensionModule extends Controller {
+<?php namespace Controller\Extension;
+
+use Engine\Controller;
+use Engine\iController;
+
+class ControllerExtensionModule implements iController {
+    use Controller;
+
 	public function index() {
 		$this->load->language('extension/module');
 		 

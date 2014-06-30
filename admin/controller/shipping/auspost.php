@@ -1,6 +1,12 @@
-<?php
-class ControllerShippingAusPost extends Controller {
-	private $error = array(); 
+<?php namespace Controller\Shipping;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Auspost implements iController {
+    use Controller;
+
+	private $error = array();
 	
 	public function index() {   
 		$this->load->language('shipping/auspost');
