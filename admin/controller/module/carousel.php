@@ -3,7 +3,9 @@
 use Engine\Controller;
 use Engine\iController;
 
-class ControllerModuleCarousel implements iController {
+class Carousel implements iController {
+    use Controller;
+
 	private $error = array(); 
 	
 	public function index() {   

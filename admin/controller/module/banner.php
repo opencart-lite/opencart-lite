@@ -3,7 +3,9 @@
 use Engine\Controller;
 use Engine\iController;
 
-class ControllerModuleBanner implements iController {
+class Banner implements iController {
+    use Controller;
+
 	private $error = array(); 
 	
 	public function index() {   

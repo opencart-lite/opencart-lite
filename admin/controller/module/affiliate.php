@@ -3,7 +3,9 @@
 use Engine\Controller;
 use Engine\iController;
 
-class ControllerModuleAffiliate implements iController {
+class Affiliate implements iController {
+    use Controller;
+
 	private $error = array(); 
 	
 	public function index() {   
