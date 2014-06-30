@@ -1,7 +1,6 @@
 <?php namespace System\Engine;
 
 trait Controller {
-	protected $registry;	
 	protected $id;
 	protected $layout;
 	protected $template;
@@ -9,17 +8,15 @@ trait Controller {
 	protected $data = array();
     public $output;
 	
-	public function __construct($registry) {
-		$this->registry = $registry;
-	}
-	
-	public function __get($key) {
-		return $this->registry->get($key);
-	}
-	
-	public function __set($key, $value) {
-		$this->registry->set($key, $value);
-	}
+	public function __construct() {}
+
+    public function __get($key) {
+        return Registry::get($key);
+    }
+
+    public function __set($key, $value) {
+        Registry::set($key, $value);
+    }
 
 	protected function forward($route, $args = array()) {
 		return new Action($route, $args);
@@ -36,7 +33,7 @@ trait Controller {
 
         if(class_exists($action->getController())) {
 
-            $front = Front::getInstance($this->registry);
+            $front = Front::getInstance();
 
             $controller = $front->dispatch($action, '');
 
@@ -44,7 +41,7 @@ trait Controller {
 		} else {
 
             try{
-                throw new CoreException($this->registry, 'Error: Could not load controller ' . $child . '!');
+                throw new CoreException('Error: Could not load controller ' . $child . '!');
             }
             catch (CoreException $e) {exit();}
 
@@ -71,7 +68,7 @@ trait Controller {
     	} else {
 
             try{
-                throw new CoreException($this->registry, 'Error: Could not load template ' . DIR_TEMPLATE . $this->template . '!');
+                throw new CoreException('Error: Could not load template ' . DIR_TEMPLATE . $this->template . '!');
             }
             catch (CoreException $e) {exit();}
 

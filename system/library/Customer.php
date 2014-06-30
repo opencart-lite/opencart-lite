@@ -1,5 +1,7 @@
 <?php namespace System\Library;
 
+use System\Engine\Registry;
+
 class Customer {
 	private $customer_id;
 	private $firstname;
@@ -11,11 +13,11 @@ class Customer {
 	private $customer_group_id;
 	private $address_id;
 	
-  	public function __construct($registry) {
-		$this->config = $registry->get('config');
-		$this->db = $registry->get('db');
-		$this->request = $registry->get('request');
-		$this->session = $registry->get('session');
+  	public function __construct() {
+		$this->config = Registry::get('config');
+		$this->db = Registry::get('db');
+		$this->request = Registry::get('request');
+		$this->session = Registry::get('session');
 				
 		if (isset($this->session->data['customer_id'])) { 
 			$customer_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$this->session->data['customer_id'] . "' AND status = '1'");

@@ -1,17 +1,27 @@
 <?php namespace System\Engine;
 
+
 final class Registry {
-	private $data = array();
+    private static $data = array();
 
-	public function get($key) {
-		return (isset($this->data[$key]) ? $this->data[$key] : NULL);
-	}
+    public static function get($key)
+    {
+        return (isset(self::$data[$key]) ? self::$data[$key] : NULL);
+    }
 
-	public function set($key, $value) {
-		$this->data[$key] = $value;
-	}
+    public static function set($key, $value)
+    {
+        self::$data[$key] = $value;
+    }
 
-	public function has($key) {
-    	return isset($this->data[$key]);
-  	}
+    public static function has($key)
+    {
+        return isset(self::$data[$key]);
+    }
+
+    public function __get($key) {}
+    public function __set($key, $value) {}
+    private function __construct() {}
+    private function __clone() {}
+
 }

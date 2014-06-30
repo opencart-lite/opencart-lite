@@ -1,5 +1,7 @@
 <?php namespace System\Library;
 
+use System\Engine\Registry;
+
 class Affiliate {
 	private $affiliate_id;
 	private $firstname;
@@ -9,11 +11,11 @@ class Affiliate {
 	private $fax;
 	private $code;
 	
-  	public function __construct($registry) {
-		$this->config = $registry->get('config');
-		$this->db = $registry->get('db');
-		$this->request = $registry->get('request');
-		$this->session = $registry->get('session');
+  	public function __construct() {
+		$this->config = Registry::get('config');
+		$this->db = Registry::get('db');
+		$this->request = Registry::get('request');
+		$this->session = Registry::get('session');
 				
 		if (isset($this->session->data['affiliate_id'])) { 
 			$affiliate_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate WHERE affiliate_id = '" . (int)$this->session->data['affiliate_id'] . "' AND status = '1'");

@@ -20,7 +20,7 @@ class Template {
       		return $content;
     	} else {
             try{
-                throw new CoreException($this->registry, 'Error: Could not load template ' . $file . '!');
+                throw new CoreException('Error: Could not load template ' . $file . '!');
             }
             catch (CoreException $e) {exit();}
     	}	
