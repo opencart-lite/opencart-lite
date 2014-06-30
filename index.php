@@ -6,8 +6,6 @@ use Library;
 // Version
 define('VERSION', '1.0.0');
 
-set_time_limit(0);
-
 // Configuration
 require_once('config.php');
    
@@ -158,10 +156,10 @@ Engine\Registry::set('encryption', new Library\Encryption($config->get('config_e
 $front = Engine\Front::getInstance();
 
 // Maintenance Mode
-//$controller->addPreAction(new Engine\Action('common/maintenance'));
+$front->addPreAction(new Engine\Action('common/maintenance'));
 
 // SEO URL's
-//$controller->addPreAction(new Engine\Action('common/seo_url'));
+$front->addPreAction(new Engine\Action('common/seo_url'));
 
 // Router
 if (isset($request->get['route'])) {
