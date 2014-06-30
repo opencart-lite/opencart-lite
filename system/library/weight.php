@@ -1,11 +1,13 @@
 <?php namespace System\Library;
 
+use System\Engine\Registry;
+
 class Weight {
 	private $weights = array();
 	
-	public function __construct($registry) {
-		$this->db = $registry->get('db');
-		$this->config = $registry->get('config');
+	public function __construct() {
+		$this->db = Registry::get('db');
+		$this->config = Registry::get('config');
 		
 		$weight_class_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "weight_class wc LEFT JOIN " . DB_PREFIX . "weight_class_description wcd ON (wc.weight_class_id = wcd.weight_class_id) WHERE wcd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
     	

@@ -1,14 +1,16 @@
 <?php namespace System\Library;
 
+use System\Engine\Registry;
+
 class User {
 	private $user_id;
 	private $username;
   	private $permission = array();
 
-  	public function __construct($registry) {
-		$this->db = $registry->get('db');
-		$this->request = $registry->get('request');
-		$this->session = $registry->get('session');
+  	public function __construct() {
+		$this->db = Registry::get('db');
+		$this->request = Registry::get('request');
+		$this->session = Registry::get('session');
 		
     	if (isset($this->session->data['user_id'])) {
 			$user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE user_id = '" . (int)$this->session->data['user_id'] . "' AND status = '1'");

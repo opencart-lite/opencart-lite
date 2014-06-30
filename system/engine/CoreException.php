@@ -5,13 +5,10 @@ use Exception;
 class CoreException extends Exception
 {
 
-    public function __construct($registry, $errstr = '')
+    public function __construct($errstr = '')
     {
-
-        if(!is_object($registry)) exit($registry . "\n" . $errstr);
-
-        $config = $registry->get('config');
-        $log = $registry->get('log');
+        $config = Registry::get('config');
+        $log = Registry::get('log');
         $traces = $this->getTrace();
         $str_log = $str_display = '';
 

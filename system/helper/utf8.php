@@ -15,7 +15,7 @@ function utf8_strpos($string, $needle, $offset = NULL) {
     } else {
         if (!is_int($offset)) {
             try{
-                throw new CoreException($this->registry, 'WARNING: utf8_strpos: Offset must be an integer');
+                throw new CoreException('WARNING: utf8_strpos: Offset must be an integer');
             }
             catch (CoreException $e) {}
             
@@ -48,7 +48,7 @@ function utf8_strrpos($string, $needle, $offset = NULL) {
     } else {
         if (!is_int($offset)) {
             try{
-                throw new CoreException($this->registry, 'WARNING: utf8_strrpos expects parameter 3 to be long');
+                throw new CoreException('WARNING: utf8_strrpos expects parameter 3 to be long');
             }
             catch (CoreException $e) {}
            
@@ -711,7 +711,7 @@ function utf8_to_unicode($str) {
 				 * octet of a multi-octet sequence.
 				 */
                 try{
-                    throw new CoreException($this->registry, 'WARNING: utf8_to_unicode: Illegal sequence identifier in UTF-8 at byte.');
+                    throw new CoreException('WARNING: utf8_to_unicode: Illegal sequence identifier in UTF-8 at byte.');
                 }
                 catch (CoreException $e) {}
 				
@@ -749,7 +749,7 @@ function utf8_to_unicode($str) {
 						// Codepoints outside the Unicode range are illegal
 						($mUcs4 > 0x10FFFF)) {
                         try{
-                            throw new CoreException($this->registry, 'WARNING: utf8_to_unicode: Illegal sequence or codepoint in UTF-8 at byte');
+                            throw new CoreException('WARNING: utf8_to_unicode: Illegal sequence or codepoint in UTF-8 at byte');
                         }
                         catch (CoreException $e) {}
 						
@@ -774,7 +774,7 @@ function utf8_to_unicode($str) {
 				* Incomplete multi-octet sequence.
 				*/
                 try{
-                    throw new CoreException($this->registry, 'WARNING: utf8_to_unicode: Incomplete multi-octet sequence in UTF-8 at byte');
+                    throw new CoreException('WARNING: utf8_to_unicode: Incomplete multi-octet sequence in UTF-8 at byte');
                 }
                 catch (CoreException $e) {}
 				return false;
@@ -800,7 +800,7 @@ function utf8_from_unicode($data) {
 		# Test for illegal surrogates
 		} elseif ($data[$key] >= 0xD800 && $data[$key] <= 0xDFFF) {
             try{
-                throw new CoreException($this->registry, 'utf8_from_unicode: Illegal surrogate at index: ' . $key . ', value: ' . $data[$key]);
+                throw new CoreException('utf8_from_unicode: Illegal surrogate at index: ' . $key . ', value: ' . $data[$key]);
             }
             catch (CoreException $e) {}
 			
@@ -816,7 +816,7 @@ function utf8_from_unicode($data) {
 			echo chr(0x80 | ($data[$key] & 0x3f));
 		} else {
             try{
-                throw new CoreException($this->registry, 'utf8_from_unicode: Codepoint out of Unicode range at index: ' . $key . ', value: ' . $data[$key]);
+                throw new CoreException('utf8_from_unicode: Codepoint out of Unicode range at index: ' . $key . ', value: ' . $data[$key]);
             }
             catch (CoreException $e) {}
 			

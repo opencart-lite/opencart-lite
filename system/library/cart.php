@@ -1,16 +1,18 @@
 <?php namespace System\Library;
 
+use System\Engine\Registry;
+
 class Cart {
 	private $config;
 	private $db;
 	private $data = array();
 	
-  	public function __construct($registry) {
-		$this->config = $registry->get('config');
-		$this->customer = $registry->get('customer');
-		$this->session = $registry->get('session');
-		$this->db = $registry->get('db');
-		$this->weight = $registry->get('weight');
+  	public function __construct() {
+		$this->config = Registry::get('config');
+		$this->customer = Registry::get('customer');
+		$this->session = Registry::get('session');
+		$this->db = Registry::get('db');
+		$this->weight = Registry::get('weight');
 
 		if (!isset($this->session->data['cart']) || !is_array($this->session->data['cart'])) {
       		$this->session->data['cart'] = array();
