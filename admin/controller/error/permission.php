@@ -3,7 +3,7 @@
 use Engine\Controller;
 use Engine\iController;
 
-class ControllerErrorPermission implements iController {
+class Permission implements iController {
     use Controller;
 
 	public function index() { 

@@ -3,7 +3,7 @@
 use Engine\Controller;
 use Engine\iController;
 
-class ControllerExtensionTotal implements iController {
+class Total implements iController {
     use Controller;
 
 	public function index() {

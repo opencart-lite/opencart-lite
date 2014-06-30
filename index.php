@@ -175,3 +175,14 @@ $front->dispatch($action, new Engine\Action('error/not_found'));
 
 // Output
 $response->output();
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//$ccc = glob(DIR_APPLICATION . "controller/*/*.php");
+//$i = 0;
+//foreach (glob(DIR_APPLICATION . "controller/*/*.php") as $filename) {
+//    $old_filename =  $ccc[$i];
+//    $new_filename = str_replace(basename($filename), ucfirst(basename($filename)), $old_filename);
+//    //var_dump($new_filename);
+//    rename($old_filename, $new_filename);
+//    $i++;
+//}

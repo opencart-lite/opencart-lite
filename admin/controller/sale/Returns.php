@@ -2,6 +2,7 @@
 
 use Engine\Controller;
 use Engine\iController;
+use Library\Pagination;
 
 class Returns implements iController {
     use Controller;
@@ -13,7 +14,7 @@ class Returns implements iController {
 		 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
-		$this->load->model('sale/return');
+		$this->load->model('sale/returns');
 		
     	$this->getList();
   	}
@@ -23,10 +24,10 @@ class Returns implements iController {
 
     	$this->document->setTitle($this->language->get('heading_title'));
 		
-		$this->load->model('sale/return');
+		$this->load->model('sale/returns');
 			
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-      	  	$this->model_sale_return->addReturn($this->request->post);
+      	  	$this->model_sale_returns->addReturn($this->request->post);
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 		  
@@ -87,10 +88,10 @@ class Returns implements iController {
 
     	$this->document->setTitle($this->language->get('heading_title'));
 		
-		$this->load->model('sale/return');
+		$this->load->model('sale/returns');
 		
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_sale_return->editReturn($this->request->get['return_id'], $this->request->post);
+			$this->model_sale_returns->editReturn($this->request->get['return_id'], $this->request->post);
 	  		
 			$this->session->data['success'] = $this->language->get('text_success');
 	  
@@ -151,11 +152,11 @@ class Returns implements iController {
 
     	$this->document->setTitle($this->language->get('heading_title'));
 		
-		$this->load->model('sale/return');
+		$this->load->model('sale/returns');
 			
     	if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $return_id) {
-				$this->model_sale_return->deleteReturn($return_id);
+				$this->model_sale_returns->deleteReturn($return_id);
 			}
 			
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -359,9 +360,9 @@ class Returns implements iController {
 			'limit'                   => $this->config->get('config_admin_limit')
 		);
 		
-		$return_total = $this->model_sale_return->getTotalReturns($data);
+		$return_total = $this->model_sale_returns->getTotalReturns($data);
 	
-		$results = $this->model_sale_return->getReturns($data);
+		$results = $this->model_sale_returns->getReturns($data);
  
     	foreach ($results as $result) {
 			$action = array();
@@ -705,7 +706,7 @@ class Returns implements iController {
     	$this->data['cancel'] = $this->url->link('sale/return', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
     	if (isset($this->request->get['return_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-      		$return_info = $this->model_sale_return->getReturn($this->request->get['return_id']);
+      		$return_info = $this->model_sale_returns->getReturn($this->request->get['return_id']);
     	}
 				
     	if (isset($this->request->post['order_id'])) {
@@ -866,7 +867,7 @@ class Returns implements iController {
 	}
 	
 	public function info() {
-		$this->load->model('sale/return');
+		$this->load->model('sale/returns');
     	
 		if (isset($this->request->get['return_id'])) {
 			$return_id = $this->request->get['return_id'];
@@ -874,7 +875,7 @@ class Returns implements iController {
 			$return_id = 0;
 		}
 				
-		$return_info = $this->model_sale_return->getReturn($return_id);
+		$return_info = $this->model_sale_returns->getReturn($return_id);
 		
 		if ($return_info) {
 			$this->load->language('sale/return');
@@ -1150,11 +1151,11 @@ class Returns implements iController {
 			}
 		
 			if (!$json) { 
-				$this->load->model('sale/return');
+				$this->load->model('sale/returns');
 			
 				$json['success'] = $this->language->get('text_success');
 				
-				$this->model_sale_return->editReturnAction($this->request->get['return_id'], $this->request->post['return_action_id']);
+				$this->model_sale_returns->editReturnAction($this->request->get['return_id'], $this->request->post['return_action_id']);
 			}
 		}
 		
@@ -1167,7 +1168,7 @@ class Returns implements iController {
 		$this->data['error'] = '';
 		$this->data['success'] = '';
 				
-		$this->load->model('sale/return');
+		$this->load->model('sale/returns');
 
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 			if (!$this->user->hasPermission('modify', 'sale/return')) { 
@@ -1175,7 +1176,7 @@ class Returns implements iController {
 			}
 			
 			if (!$this->data['error']) { 
-				$this->model_sale_return->addReturnHistory($this->request->get['return_id'], $this->request->post);
+				$this->model_sale_returns->addReturnHistory($this->request->get['return_id'], $this->request->post);
 				
 				$this->data['success'] = $this->language->get('text_success');
 			}
@@ -1196,7 +1197,7 @@ class Returns implements iController {
 		
 		$this->data['histories'] = array();
 			
-		$results = $this->model_sale_return->getReturnHistories($this->request->get['return_id'], ($page - 1) * 10, 10);
+		$results = $this->model_sale_returns->getReturnHistories($this->request->get['return_id'], ($page - 1) * 10, 10);
       		
 		foreach ($results as $result) {
         	$this->data['histories'][] = array(
@@ -1207,7 +1208,7 @@ class Returns implements iController {
         	);
       	}			
 		
-		$history_total = $this->model_sale_return->getTotalReturnHistories($this->request->get['return_id']);
+		$history_total = $this->model_sale_returns->getTotalReturnHistories($this->request->get['return_id']);
 			
 		$pagination = new Pagination();
 		$pagination->total = $history_total;

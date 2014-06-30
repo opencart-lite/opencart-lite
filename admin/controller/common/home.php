@@ -8,7 +8,7 @@ class Home implements iController {
 
 	public function index() {
     	$this->load->language('common/home');
-	 
+
 		$this->document->setTitle($this->language->get('heading_title'));
 		
     	$this->data['heading_title'] = $this->language->get('heading_title');
@@ -326,7 +326,7 @@ class Home implements iController {
 	
 	public function login() {
 		$route = '';
-		
+
 		if (isset($this->request->get['route'])) {
 			$part = explode('/', $this->request->get['route']);
 			
@@ -346,7 +346,8 @@ class Home implements iController {
 		);	
 					
 		if (!$this->user->isLogged() && !in_array($route, $ignore)) {
-			return $this->forward('common/login');
+            exit($this->forward('common/login'));
+			//return $this->forward('common/login');
 		}
 		
 		if (isset($this->request->get['route'])) {
@@ -368,11 +369,13 @@ class Home implements iController {
 			$ignore = array_merge($ignore, $config_ignore);
 						
 			if (!in_array($route, $ignore) && (!isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token']))) {
-				return $this->forward('common/login');
+				//return $this->forward('common/login');
+                exit($this->forward('common/login'));
 			}
 		} else {
 			if (!isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
-				return $this->forward('common/login');
+				//return $this->forward('common/login');
+                exit($this->forward('common/login'));
 			}
 		}
 	}
@@ -402,7 +405,8 @@ class Home implements iController {
 			);			
 						
 			if (!in_array($route, $ignore) && !$this->user->hasPermission('access', $route)) {
-				return $this->forward('error/permission');
+                exit($this->forward('error/permission'));
+				//return $this->forward('error/permission');
 			}
 		}
 	}	

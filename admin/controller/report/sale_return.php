@@ -2,6 +2,7 @@
 
 use Engine\Controller;
 use Engine\iController;
+use Library\Pagination;
 
 class Sale_return implements iController {
     use Controller;
@@ -77,7 +78,7 @@ class Sale_return implements iController {
       		'separator' => ' :: '
    		);		
 		
-		$this->load->model('report/return');
+		$this->load->model('report/returns');
 		
 		$this->data['returns'] = array();
 		
@@ -90,9 +91,9 @@ class Sale_return implements iController {
 			'limit'                   => $this->config->get('config_admin_limit')
 		);
 		
-		$return_total = $this->model_report_return->getTotalReturns($data);
-		
-		$results = $this->model_report_return->getReturns($data);
+		$return_total = $this->model_report_returns->getTotalReturns($data);
+
+		$results = $this->model_report_returns->getReturns($data);
 		
 		foreach ($results as $result) {
 			$this->data['returns'][] = array(

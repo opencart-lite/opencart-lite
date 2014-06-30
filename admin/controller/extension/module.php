@@ -3,7 +3,7 @@
 use Engine\Controller;
 use Engine\iController;
 
-class ControllerExtensionModule implements iController {
+class Module implements iController {
     use Controller;
 
 	public function index() {
