@@ -1,4 +1,4 @@
-<?php   namespace Controller\Module;
+<?php namespace Controller\Module;
 
 use Engine\Controller;
 use Engine\iController;
