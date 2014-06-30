@@ -6,8 +6,6 @@ use Library;
 // Version
 define('VERSION', '1.0.0');
 
-set_time_limit(0);
-
 // Configuration
 require_once('config.php');
    
@@ -158,10 +156,10 @@ Engine\Registry::set('encryption', new Library\Encryption($config->get('config_e
 $front = Engine\Front::getInstance();
 
 // Maintenance Mode
-//$controller->addPreAction(new Engine\Action('common/maintenance'));
+$front->addPreAction(new Engine\Action('common/maintenance'));
 
 // SEO URL's
-//$controller->addPreAction(new Engine\Action('common/seo_url'));
+$front->addPreAction(new Engine\Action('common/seo_url'));
 
 // Router
 if (isset($request->get['route'])) {
@@ -175,3 +173,14 @@ $front->dispatch($action, new Engine\Action('error/not_found'));
 
 // Output
 $response->output();
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//$ccc = glob(DIR_APPLICATION . "controller/*/*.php");
+//$i = 0;
+//foreach (glob(DIR_APPLICATION . "controller/*/*.php") as $filename) {
+//    $old_filename =  $ccc[$i];
+//    $new_filename = str_replace(basename($filename), ucfirst(basename($filename)), $old_filename);
+//    //var_dump($new_filename);
+//    rename($old_filename, $new_filename);
+//    $i++;
+//}

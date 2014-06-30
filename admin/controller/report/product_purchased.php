@@ -2,6 +2,7 @@
 
 use Engine\Controller;
 use Engine\iController;
+use Library\Pagination;
 
 class Product_purchased implements iController {
     use Controller;

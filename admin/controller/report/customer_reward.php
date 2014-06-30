@@ -2,6 +2,7 @@
 
 use Engine\Controller;
 use Engine\iController;
+use Library\Pagination;
 
 class Customer_reward implements iController {
     use Controller;

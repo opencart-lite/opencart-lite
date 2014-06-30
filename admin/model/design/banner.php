@@ -2,7 +2,7 @@
 
 use Engine\Model;
 
-class ModelBanner {
+class Banner {
     use Model;
 
 	public function addBanner($data) {

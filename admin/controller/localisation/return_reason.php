@@ -2,8 +2,11 @@
 
 use Engine\Controller;
 use Engine\iController;
+use Library\Pagination;
 
-class ControllerLocalisationReturnReason implements iController {
+class Return_reason implements iController {
+    use Controller;
+
 	private $error = array();
    
   	public function index() {

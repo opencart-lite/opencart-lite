@@ -19,7 +19,12 @@ trait Controller {
     }
 
 	protected function forward($route, $args = array()) {
-		return new Action($route, $args);
+
+        $front = Front::getInstance();
+
+        $controller = $front->dispatch(new Action($route, $args), '');
+
+        return $controller->output;
 	}
 
 	protected function redirect($url, $status = 302) {
@@ -38,6 +43,7 @@ trait Controller {
             $controller = $front->dispatch($action, '');
 
 			return $controller->output;
+
 		} else {
 
             try{

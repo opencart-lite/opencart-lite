@@ -9,7 +9,7 @@ final class Front {
 
     private function __construct(){}
 
-    public function addPreAction(Actio $pre_action)
+    public function addPreAction(Action $pre_action)
     {
 		$this->pre_action[] = $pre_action;
 	}
@@ -18,20 +18,9 @@ final class Front {
     {
 		$this->error = $error;
 
-        /*foreach ($this->pre_action as $pre_action) {
-            $result = $this->execute($pre_action);
-
-            if ($result) {
-                $action = $result;
-
-                break;
-            }
+        while ($result = array_shift($this->pre_action)) {
+            $this->execute($result);
         }
-
-        while ($action) {
-            //$action = $this->execute($action);
-        }
-        */
 
         return $this->execute($action);
 

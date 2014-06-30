@@ -2,6 +2,7 @@
 
 use Engine\Controller;
 use Engine\iController;
+use Library\Pagination;
 
 class Banner implements iController {
     use Controller;

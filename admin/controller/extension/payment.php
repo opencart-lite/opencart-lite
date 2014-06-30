@@ -3,7 +3,7 @@
 use Engine\Controller;
 use Engine\iController;
 
-class ControllerExtensionPayment implements iController {
+class Payment implements iController {
     use Controller;
 
 	public function index() {

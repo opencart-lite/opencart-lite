@@ -2,6 +2,7 @@
 
 use Engine\Controller;
 use Engine\iController;
+use Library\Pagination;
 
 class Order implements iController {
     use Controller;

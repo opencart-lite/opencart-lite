@@ -101,10 +101,10 @@ Engine\Registry::set('user', new Library\User());
 $front = Engine\Front::getInstance();
 
 // Login
-//$front->addPreAction(new Action('common/home/login'));
+$front->addPreAction(new Engine\Action('common/home/login'));
 
 // Permission
-//$front->addPreAction(new Action('common/home/permission'));
+$front->addPreAction(new Engine\Action('common/home/permission'));
 
 // Router
 if (isset($request->get['route'])) {
@@ -118,3 +118,4 @@ $front->dispatch($action, new Engine\Action('error/not_found'));
 
 // Output
 $response->output();
+

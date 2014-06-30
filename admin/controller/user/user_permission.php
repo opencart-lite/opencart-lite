@@ -2,6 +2,7 @@
 
 use Engine\Controller;
 use Engine\iController;
+use Library\Pagination;
 
 class User_permission implements iController {
     use Controller;
@@ -357,8 +358,9 @@ class User_permission implements iController {
 		foreach ($files as $file) {
 			$data = explode('/', dirname($file));
 			
-			$permission = end($data) . '/' . basename($file, '.php');
-			
+			//$permission = end($data) . '/' . basename($file, '.php');
+            $permission = end($data) . '/' . strtolower(basename($file, '.php'));
+
 			if (!in_array($permission, $ignore)) {
 				$this->data['permissions'][] = $permission;
 			}
