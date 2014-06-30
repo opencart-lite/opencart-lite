@@ -26,7 +26,7 @@ class Config {
 	  		$this->data = array_merge($this->data, $_);
 		} else {
             try{
-                throw new CoreException($this->registry, 'Error: Could not load config ' . $filename . '!');
+                throw new CoreException('Error: Could not load config ' . $filename . '!');
             }
             catch (CoreException $e) {exit();}
 		}

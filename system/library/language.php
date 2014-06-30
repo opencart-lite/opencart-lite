@@ -38,7 +38,7 @@ class Language {
 			return $this->data;
 		} else {
             try{
-                throw new CoreException($this->registry, 'Error: Could not load language ' . $filename . '!');
+                throw new CoreException('Error: Could not load language ' . $filename . '!');
             }
             catch (CoreException $e) {exit();}
 		}

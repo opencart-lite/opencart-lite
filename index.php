@@ -17,19 +17,20 @@ if (!defined('DIR_APPLICATION')) {
 require_once(DIR_SYSTEM . 'startup.php');
 
 // Registry
-$registry = new \System\Engine\Registry();
+//$registry = new \System\Engine\Registry();
 
 // Loader
-$loader = new \System\Engine\Loader($registry);
-$registry->set('load', $loader);
+$loader = new \System\Engine\Loader();
+\System\Engine\Registry::set('load', $loader);
+//$registry->set('load', $loader);
 
 // Config
 $config = new \System\Library\Config();
-$registry->set('config', $config);
+\System\Engine\Registry::set('config', $config);
 
 // Database 
 $db = new \System\Library\DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-$registry->set('db', $db);
+\System\Engine\Registry::set('db', $db);
 
 // Settings
 $query = $db->query("SELECT * FROM " . DB_PREFIX . "setting");
@@ -48,29 +49,29 @@ foreach ($query->rows as $setting) {
 
 // Url
 $url = new \System\Library\Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));
-$registry->set('url', $url);
+\System\Engine\Registry::set('url', $url);
 
 // Log 
 $log = new \System\Library\Log($config->get('config_error_filename'));
-$registry->set('log', $log);
+\System\Engine\Registry::set('log', $log);
 
 // Request
 $request = new \System\Library\Request();
-$registry->set('request', $request);
+\System\Engine\Registry::set('request', $request);
  
 // Response
 $response = new \System\Library\Response();
 $response->addHeader('Content-Type: text/html; charset=utf-8');
 $response->setCompression($config->get('config_compression'));
-$registry->set('response', $response);
+\System\Engine\Registry::set('response', $response);
 
 // Cache
 $cache = new \System\Library\Cache();
-$registry->set('cache', $cache);
+\System\Engine\Registry::set('cache', $cache);
 
 // Session
 $session = new \System\Library\Session();
-$registry->set('session', $session);
+\System\Engine\Registry::set('session', $session);
 
 // Language Detection
 $languages = array();
@@ -123,38 +124,38 @@ $config->set('config_language', $languages[$code]['code']);
 // Language
 $language = new \System\Library\Language($languages[$code]['directory']);
 $language->load($languages[$code]['filename']);
-$registry->set('language', $language);
+\System\Engine\Registry::set('language', $language);
 
 // Document
-$registry->set('document', new \System\Library\Document());
+\System\Engine\Registry::set('document', new \System\Library\Document());
 
 // Customer
-$registry->set('customer', new \System\Library\Customer($registry));
+\System\Engine\Registry::set('customer', new \System\Library\Customer());
 
 // Affiliate
-$registry->set('affiliate', new \System\Library\Affiliate($registry));
+\System\Engine\Registry::set('affiliate', new \System\Library\Affiliate());
 
 if (isset($request->get['tracking']) && !isset($request->cookie['tracking'])) {
 	setcookie('tracking', $request->get['tracking'], time() + 3600 * 24 * 1000, '/');
 }
 
 // Currency
-$registry->set('currency', new \System\Library\Currency($registry));
+\System\Engine\Registry::set('currency', new \System\Library\Currency());
 
 // Weight
-$registry->set('weight', new \System\Library\Weight($registry));
+\System\Engine\Registry::set('weight', new \System\Library\Weight());
 
 // Length
-$registry->set('length', new \System\Library\Length($registry));
+\System\Engine\Registry::set('length', new \System\Library\Length());
 
 // Cart
-$registry->set('cart', new \System\Library\Cart($registry));
+\System\Engine\Registry::set('cart', new \System\Library\Cart());
 
 //  Encryption
-$registry->set('encryption', new \System\Library\Encryption($config->get('config_encryption')));
+\System\Engine\Registry::set('encryption', new \System\Library\Encryption($config->get('config_encryption')));
 
 // Front Controller
-$front = \System\Engine\Front::getInstance($registry);
+$front = \System\Engine\Front::getInstance();
 
 // Maintenance Mode
 //$controller->addPreAction(new \System\Engine\Action('common/maintenance'));

@@ -1,5 +1,7 @@
 <?php namespace System\Library;
 
+use System\Engine\Registry;
+
 class Mail {
 	protected $to;
 	protected $from;
@@ -50,35 +52,35 @@ class Mail {
 	public function send() {
 		if (!$this->to) {
             try{
-                throw new CoreException($this->registry, 'Error: E-Mail to required!');
+                throw new CoreException('Error: E-Mail to required!');
             }
             catch (CoreException $e) {exit();}
 		}
 
 		if (!$this->from) {
             try{
-                throw new CoreException($this->registry, 'Error: E-Mail from required!');
+                throw new CoreException('Error: E-Mail from required!');
             }
             catch (CoreException $e) {exit();}
 		}
 
 		if (!$this->sender) {
             try{
-                throw new CoreException($this->registry, 'Error: E-Mail sender required!');
+                throw new CoreException('Error: E-Mail sender required!');
             }
             catch (CoreException $e) {exit();}
 		}
 
 		if (!$this->subject) {
             try{
-                throw new CoreException($this->registry, 'Error: E-Mail subject required!');
+                throw new CoreException('Error: E-Mail subject required!');
             }
             catch (CoreException $e) {exit();}
 		}
 
 		if ((!$this->text) && (!$this->html)) {
             try{
-                throw new CoreException($this->registry, 'Error: E-Mail message required!');
+                throw new CoreException('Error: E-Mail message required!');
             }
             catch (CoreException $e) {exit();}
 		}
@@ -165,7 +167,7 @@ class Mail {
 
 			if (!$handle) {
                 try{
-                    throw new CoreException($this->registry, 'Error: ' . $errstr . ' (' . $errno . ')');
+                    throw new CoreException('Error: ' . $errstr . ' (' . $errno . ')');
                 }
                 catch (CoreException $e) {exit();}
 			} else {
@@ -194,7 +196,7 @@ class Mail {
 
 					if (substr($reply, 0, 3) != 220) {
                         try{
-                            throw new CoreException($this->registry, 'Error: STARTTLS not accepted from server!');
+                            throw new CoreException('Error: STARTTLS not accepted from server!');
                         }
                         catch (CoreException $e) {exit();}
 					}
@@ -215,7 +217,7 @@ class Mail {
 
 					if (substr($reply, 0, 3) != 250) {
                         try{
-                            throw new CoreException($this->registry, 'Error: EHLO not accepted from server!');
+                            throw new CoreException('Error: EHLO not accepted from server!');
                         }
                         catch (CoreException $e) {exit();}
 					}
@@ -234,7 +236,7 @@ class Mail {
 
 					if (substr($reply, 0, 3) != 334) {
                         try{
-                            throw new CoreException($this->registry, 'Error: AUTH LOGIN not accepted from server!');
+                            throw new CoreException('Error: AUTH LOGIN not accepted from server!');
                         }
                         catch (CoreException $e) {exit();}
 					}
@@ -253,7 +255,7 @@ class Mail {
 
 					if (substr($reply, 0, 3) != 334) {
                         try{
-                            throw new CoreException($this->registry, 'Error: Username not accepted from server!');
+                            throw new CoreException('Error: Username not accepted from server!');
                         }
                         catch (CoreException $e) {exit();}
 					}
@@ -272,7 +274,7 @@ class Mail {
 
 					if (substr($reply, 0, 3) != 235) {
                         try{
-                            throw new CoreException($this->registry, 'Error: Password not accepted from server!');
+                            throw new CoreException('Error: Password not accepted from server!');
                         }
                         catch (CoreException $e) {exit();}
 					}
@@ -291,7 +293,7 @@ class Mail {
 
 					if (substr($reply, 0, 3) != 250) {
                         try{
-                            throw new CoreException($this->registry, 'Error: HELO not accepted from server!');
+                            throw new CoreException('Error: HELO not accepted from server!');
                         }
                         catch (CoreException $e) {exit();}
 					}
@@ -315,7 +317,7 @@ class Mail {
 
 				if (substr($reply, 0, 3) != 250) {
                     try{
-                        throw new CoreException($this->registry, 'Error: MAIL FROM not accepted from server!');
+                        throw new CoreException('Error: MAIL FROM not accepted from server!');
                     }
                     catch (CoreException $e) {exit();}
 				}
@@ -335,7 +337,7 @@ class Mail {
 
 					if ((substr($reply, 0, 3) != 250) && (substr($reply, 0, 3) != 251)) {
                         try{
-                            throw new CoreException($this->registry, 'Error: RCPT TO not accepted from server!');
+                            throw new CoreException('Error: RCPT TO not accepted from server!');
                         }
                         catch (CoreException $e) {exit();}
 					}
@@ -355,7 +357,7 @@ class Mail {
 
 						if ((substr($reply, 0, 3) != 250) && (substr($reply, 0, 3) != 251)) {
                             try{
-                                throw new CoreException($this->registry, 'Error: RCPT TO not accepted from server!');
+                                throw new CoreException('Error: RCPT TO not accepted from server!');
                             }
                             catch (CoreException $e) {exit();}
 						}
@@ -376,7 +378,7 @@ class Mail {
 
 				if (substr($reply, 0, 3) != 354) {
                     try{
-                        throw new CoreException($this->registry, 'Error: DATA not accepted from server!');
+                        throw new CoreException('Error: DATA not accepted from server!');
                     }
                     catch (CoreException $e) {exit();}
 				}
@@ -413,7 +415,7 @@ class Mail {
 
 				if (substr($reply, 0, 3) != 250) {
                     try{
-                        throw new CoreException($this->registry, 'Error: DATA not accepted from server!');
+                        throw new CoreException('Error: DATA not accepted from server!');
                     }
                     catch (CoreException $e) {exit();}
 				}
@@ -432,7 +434,7 @@ class Mail {
 
 				if (substr($reply, 0, 3) != 221) {
                     try{
-                        throw new CoreException($this->registry, 'Error: QUIT not accepted from server!');
+                        throw new CoreException('Error: QUIT not accepted from server!');
                     }
                     catch (CoreException $e) {exit();}
 				}
