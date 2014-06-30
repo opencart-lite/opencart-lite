@@ -1,5 +1,11 @@
-<?php
-class ControllerModuleGoogleTalk extends Controller {
+<?php namespace Controller\Module;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Google_talk implements iController {
+    use Controller;
+
 	private $error = array(); 
 	
 	public function index() {   

@@ -1,5 +1,11 @@
-<?php
-class ControllerExtensionShipping extends Controller {
+<?php namespace Controller\Extension;
+
+use Engine\Controller;
+use Engine\iController;
+
+class ControllerExtensionShipping implements iController {
+    use Controller;
+
 	public function index() {
 		$this->load->language('extension/shipping');
 		 

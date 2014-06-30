@@ -1,16 +1,21 @@
-<?php
-class ModelReportAffiliate extends Model {
+<?php namespace Model\Report;
+
+use Engine\Model;
+
+class Affiliate {
+    use Model;
+
 	public function getCommission($data = array()) { 
 		$sql = "SELECT at.affiliate_id, CONCAT(a.firstname, ' ', a.lastname) AS affiliate, a.email, a.status, SUM(at.amount) AS commission, COUNT(o.order_id) AS orders, SUM(o.total) AS total FROM " . DB_PREFIX . "affiliate_transaction at LEFT JOIN `" . DB_PREFIX . "affiliate` a ON (at.affiliate_id = a.affiliate_id) LEFT JOIN `" . DB_PREFIX . "order` o ON (at.order_id = o.order_id)";
 		
 		$implode = array();
 		
 		if (!empty($data['filter_date_start'])) {
-			$implode[] = "DATE(at.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$implode[] = "DATE(at.date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$implode[] = "DATE(at.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$implode[] = "DATE(at.date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 
 		if ($implode) {
@@ -42,11 +47,11 @@ class ModelReportAffiliate extends Model {
 		$implode = array();
 		
 		if (!empty($data['filter_date_start'])) {
-			$implode[] = "DATE(at.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$implode[] = "DATE(at.date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$implode[] = "DATE(at.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$implode[] = "DATE(at.date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 		
 		if ($implode) {
@@ -76,11 +81,11 @@ class ModelReportAffiliate extends Model {
 		$implode = array();
 		
 		if (!empty($data['filter_date_start'])) {
-			$implode[] = "DATE(at.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$implode[] = "DATE(at.date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$implode[] = "DATE(at.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$implode[] = "DATE(at.date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 
 		if ($implode) {
@@ -112,11 +117,11 @@ class ModelReportAffiliate extends Model {
 		$implode = array();
 		
 		if (!empty($data['filter_date_start'])) {
-			$implode[] = "DATE(at.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$implode[] = "DATE(at.date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$implode[] = "DATE(at.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$implode[] = "DATE(at.date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 		
 		if ($implode) {

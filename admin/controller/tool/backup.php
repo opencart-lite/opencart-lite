@@ -1,5 +1,11 @@
-<?php 
-class ControllerToolBackup extends Controller { 
+<?php namespace Controller\Tool;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Backup implements iController {
+    use Controller;
+
 	private $error = array();
 	
 	public function index() {		

@@ -1,6 +1,6 @@
 <?php  namespace Model\Payment;
 
-use System\Engine\Model;
+use Engine\Model;
 
 class Klarna_invoice {
     use Model;

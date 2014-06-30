@@ -1,5 +1,11 @@
-<?php
-class ControllerUserUserPermission extends Controller {
+<?php namespace Controller\User;
+
+use Engine\Controller;
+use Engine\iController;
+
+class User_permission implements iController {
+    use Controller;
+
 	private $error = array();
  
 	public function index() {

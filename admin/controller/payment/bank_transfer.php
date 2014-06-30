@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentBankTransfer extends Controller {
+<?php  namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Bank_transfer implements iController {
+    use Controller;
+
 	private $error = array(); 
 
 	public function index() {

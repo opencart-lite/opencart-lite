@@ -1,5 +1,9 @@
-<?php
-class ControllerShippingCitylink extends Controller {
+<?php namespace Controller\Shipping;
+
+use Engine\Controller;
+use Engine\iController;
+
+class ControllerShippingCitylink implements iController {
 	private $error = array(); 
 	
 	public function index() {   

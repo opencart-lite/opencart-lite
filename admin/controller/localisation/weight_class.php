@@ -1,5 +1,11 @@
-<?php
-class ControllerLocalisationWeightClass extends Controller {
+<?php namespace Controller\Localisation;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Weight_class implements iController {
+    use Controller;
+
 	private $error = array();  
  
 	public function index() {

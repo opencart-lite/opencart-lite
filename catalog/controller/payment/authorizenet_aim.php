@@ -1,7 +1,7 @@
 <?php  namespace Controller\Payment;
 
-use System\Engine\Controller;
-use System\Engine\iController;
+use Engine\Controller;
+use Engine\iController;
 
 class Authorizenet_Aim implements iController {
     use Controller;

@@ -1,6 +1,12 @@
-<?php
-class ControllerReportCustomerOrder extends Controller {
-	public function index() {     
+<?php namespace Controller\Report;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Customer_order implements iController {
+    use Controller;
+
+	public function index() {
 		$this->load->language('report/customer_order');
 
 		$this->document->setTitle($this->language->get('heading_title'));

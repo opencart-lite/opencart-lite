@@ -1,5 +1,11 @@
-<?php    
-class ControllerErrorPermission extends Controller {    
+<?php namespace Controller\Error;
+
+use Engine\Controller;
+use Engine\iController;
+
+class ControllerErrorPermission implements iController {
+    use Controller;
+
 	public function index() { 
     	$this->load->language('error/permission');
   

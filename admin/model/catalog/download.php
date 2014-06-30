@@ -1,12 +1,17 @@
-<?php
-class ModelCatalogDownload extends Model {
+<?php namespace Model\Catalog;
+
+use Engine\Model;
+
+class Download {
+    use Model;
+
 	public function addDownload($data) {
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "download SET filename = '" . $this->db->escape($data['filename']) . "', mask = '" . $this->db->escape($data['mask']) . "', remaining = '" . (int)$data['remaining'] . "', date_added = NOW()");
+      	$this->db->query("INSERT INTO " . DB_PREFIX . "download SET filename = " . $this->db->quote($data['filename']) . ", mask = " . $this->db->quote($data['mask']) . ", remaining = '" . (int)$data['remaining'] . "', date_added = NOW()");
 
       	$download_id = $this->db->getLastId(); 
 
       	foreach ($data['download_description'] as $language_id => $value) {
-        	$this->db->query("INSERT INTO " . DB_PREFIX . "download_description SET download_id = '" . (int)$download_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
+        	$this->db->query("INSERT INTO " . DB_PREFIX . "download_description SET download_id = '" . (int)$download_id . "', language_id = '" . (int)$language_id . "', name = " . $this->db->quote($value['name']));
       	}	
 	}
 	
@@ -15,16 +20,16 @@ class ModelCatalogDownload extends Model {
 			$download_info = $this->getDownload($download_id);
         	
 			if ($download_info) {
-      			$this->db->query("UPDATE " . DB_PREFIX . "order_download SET `filename` = '" . $this->db->escape($data['filename']) . "', mask = '" . $this->db->escape($data['mask']) . "', remaining = '" . (int)$data['remaining'] . "' WHERE `filename` = '" . $this->db->escape($download_info['filename']) . "'");
+      			$this->db->query("UPDATE " . DB_PREFIX . "order_download SET `filename` = " . $this->db->quote($data['filename']) . ", mask = " . $this->db->quote($data['mask']) . ", remaining = '" . (int)$data['remaining'] . "' WHERE `filename` = " . $this->db->quote($download_info['filename']));
 			}
 		}		
 		
-        $this->db->query("UPDATE " . DB_PREFIX . "download SET filename = '" . $this->db->escape($data['filename']) . "', mask = '" . $this->db->escape($data['mask']) . "', remaining = '" . (int)$data['remaining'] . "' WHERE download_id = '" . (int)$download_id . "'");
+        $this->db->query("UPDATE " . DB_PREFIX . "download SET filename = " . $this->db->quote($data['filename']) . ", mask = " . $this->db->quote($data['mask']) . ", remaining = '" . (int)$data['remaining'] . "' WHERE download_id = '" . (int)$download_id . "'");
 
       	$this->db->query("DELETE FROM " . DB_PREFIX . "download_description WHERE download_id = '" . (int)$download_id . "'");
 
       	foreach ($data['download_description'] as $language_id => $value) {
-        	$this->db->query("INSERT INTO " . DB_PREFIX . "download_description SET download_id = '" . (int)$download_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
+        	$this->db->query("INSERT INTO " . DB_PREFIX . "download_description SET download_id = '" . (int)$download_id . "', language_id = '" . (int)$language_id . "', name = " . $this->db->quote($value['name']));
       	}
 	}
 	

@@ -1,6 +1,6 @@
 <?php  namespace Model\Payment;
 
-use System\Engine\Model;
+use Engine\Model;
 
 class Liqpay {
     use Model;

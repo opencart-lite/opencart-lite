@@ -1,5 +1,11 @@
-<?php  
-class ControllerUserUser extends Controller {  
+<?php namespace Controller\User;
+
+use Engine\Controller;
+use Engine\iController;
+
+class User implements iController {
+    use Controller;
+
 	private $error = array();
    
   	public function index() {

@@ -1,5 +1,11 @@
-<?php 
-class ControllerDesignLayout extends Controller {
+<?php  namespace Controller\Design;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Layout implements iController {
+    use Controller;
+
 	private $error = array();
  
 	public function index() {

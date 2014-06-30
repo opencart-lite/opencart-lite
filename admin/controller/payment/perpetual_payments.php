@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentPerpetualPayments extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Perpetual_payments implements iController {
+    use Controller;
+
 	private $error = array(); 
 
 	public function index() {

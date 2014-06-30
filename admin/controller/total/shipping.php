@@ -1,5 +1,11 @@
-<?php 
-class ControllerTotalShipping extends Controller { 
+<?php namespace Controller\Total;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Shipping implements iController {
+    use Controller;
+
 	private $error = array(); 
 	 
 	public function index() { 

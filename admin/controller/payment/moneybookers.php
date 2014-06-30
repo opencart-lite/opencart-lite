@@ -1,5 +1,11 @@
-<?php
-class ControllerPaymentMoneyBookers extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Moneybookers implements iController {
+    use Controller;
+
 	private $error = array(); 
 	
 	public function index() {

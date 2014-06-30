@@ -1,7 +1,7 @@
 <?php  namespace Controller\Common;
 
-use System\Engine\Controller;
-use System\Engine\iController;
+use Engine\Controller;
+use Engine\iController;
 
 class Seo_url implements iController {
     use Controller;

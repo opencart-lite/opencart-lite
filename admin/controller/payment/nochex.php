@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentNOCHEX extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Nochex implements iController {
+    use Controller;
+
 	private $error = array(); 
 
 	public function index() {

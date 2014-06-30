@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentWebPaymentSoftware extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Web_payment_software implements iController {
+    use Controller;
+
 	private $error = array(); 
 
 	public function index() {

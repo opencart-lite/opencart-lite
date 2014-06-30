@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentSagepay extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Sagepay implements iController {
+    use Controller;
+
 	private $error = array(); 
 
 	public function index() {

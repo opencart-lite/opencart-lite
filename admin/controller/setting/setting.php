@@ -1,5 +1,11 @@
-<?php
-class ControllerSettingSetting extends Controller {
+<?php namespace Controller\Setting;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Setting implements iController {
+    use Controller;
+
 	private $error = array();
  
 	public function index() {

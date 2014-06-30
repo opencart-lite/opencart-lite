@@ -1,8 +1,8 @@
 <?php  namespace Controller\Product;
 
-use System\Engine\Controller;
-use System\Library\Pagination;
-use System\Engine\iController;
+use Engine\Controller;
+use Library\Pagination;
+use Engine\iController;
 
 class Category implements iController {
     use Controller;

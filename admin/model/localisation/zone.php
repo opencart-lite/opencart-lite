@@ -1,13 +1,18 @@
-<?php
-class ModelLocalisationZone extends Model {
+<?php namespace Model\Localisation;
+
+use Engine\Model;
+
+class Zone {
+    use Model;
+
 	public function addZone($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "zone SET status = '" . (int)$data['status'] . "', name = '" . $this->db->escape($data['name']) . "', code = '" . $this->db->escape($data['code']) . "', country_id = '" . (int)$data['country_id'] . "'");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "zone SET status = '" . (int)$data['status'] . "', name = " . $this->db->quote($data['name']) . ", code = " . $this->db->quote($data['code']) . ", country_id = '" . (int)$data['country_id'] . "'");
 			
 		$this->cache->delete('zone');
 	}
 	
 	public function editZone($zone_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "zone SET status = '" . (int)$data['status'] . "', name = '" . $this->db->escape($data['name']) . "', code = '" . $this->db->escape($data['code']) . "', country_id = '" . (int)$data['country_id'] . "' WHERE zone_id = '" . (int)$zone_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "zone SET status = '" . (int)$data['status'] . "', name = " . $this->db->quote($data['name']) . ", code = " . $this->db->quote($data['code']) . ", country_id = '" . (int)$data['country_id'] . "' WHERE zone_id = '" . (int)$zone_id . "'");
 
 		$this->cache->delete('zone');
 	}

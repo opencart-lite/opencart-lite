@@ -1,6 +1,6 @@
 <?php  namespace Model\Account;
 
-use System\Engine\Model;
+use Engine\Model;
 
 class Reward {
     use Model;

@@ -72,8 +72,9 @@ if (!isset($_SERVER['REQUEST_URI'])) {
 //Dynamic Classes [engine context]
 set_include_path(get_include_path()
     . PATH_SEPARATOR . DIR_SYSTEM
+    . PATH_SEPARATOR . DIR_LIBRARY
+    . PATH_SEPARATOR . DIR_ENGINE
     . PATH_SEPARATOR . DIR_APPLICATION
-    . PATH_SEPARATOR . DIR_ADMIN
 );
 
 //Static includes
@@ -83,5 +84,6 @@ require_once(DIR_SYSTEM . 'helper/utf8.php');
 
 //Autoload Dynamic classes [engine context]
 spl_autoload_register(function ($class) {
-    spl_autoload($class);
+
+    spl_autoload( $class);
 });

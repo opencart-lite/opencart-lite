@@ -1,7 +1,7 @@
 <?php  namespace Controller\Affiliate;
 
-use System\Engine\Controller;
-use System\Engine\iController;
+use Engine\Controller;
+use Engine\iController;
 
 class Login implements iController {
     use Controller;

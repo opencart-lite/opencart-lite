@@ -1,9 +1,9 @@
 <?php  namespace Controller\Product;
 
-use System\Engine\Controller;
-use System\Library\Pagination;
-use System\Library\Captcha;
-use System\Engine\iController;
+use Engine\Controller;
+use Library\Pagination;
+use Library\Captcha;
+use Engine\iController;
 
 class Product implements iController {
     use Controller;

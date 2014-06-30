@@ -1,5 +1,11 @@
-<?php 
-class ControllerPaymentTwoCheckout extends Controller {
+<?php namespace Controller\Payment;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Twocheckout implements iController {
+    use Controller;
+
 	private $error = array(); 
 
 	public function index() {

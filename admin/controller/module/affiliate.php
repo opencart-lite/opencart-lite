@@ -1,5 +1,9 @@
-<?php
-class ControllerModuleAffiliate extends Controller {
+<?php namespace Controller\Module;
+
+use Engine\Controller;
+use Engine\iController;
+
+class ControllerModuleAffiliate implements iController {
 	private $error = array(); 
 	
 	public function index() {   

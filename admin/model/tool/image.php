@@ -1,5 +1,10 @@
-<?php
-class ModelToolImage extends Model {
+<?php namespace Model\Tool;
+
+use Engine\Model;
+
+class Image {
+    use Model;
+
 	public function resize($filename, $width, $height) {
 		if (!file_exists(DIR_IMAGE . $filename) || !is_file(DIR_IMAGE . $filename)) {
 			return;

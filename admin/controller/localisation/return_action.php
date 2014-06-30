@@ -1,5 +1,11 @@
-<?php 
-class ControllerLocalisationReturnAction extends Controller { 
+<?php namespace Controller\Localisation;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Return_action implements iController {
+    use Controller;
+
 	private $error = array();
    
   	public function index() {

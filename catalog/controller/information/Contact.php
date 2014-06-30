@@ -1,8 +1,8 @@
 <?php namespace Controller\Information;
 
-use System\Engine\Controller;
-use System\Library\Captcha;
-use System\Engine\iController;
+use Engine\Controller;
+use Library\Captcha;
+use Engine\iController;
 
 class Contact implements iController {
     use Controller;

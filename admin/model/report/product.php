@@ -1,5 +1,10 @@
-<?php
-class ModelReportProduct extends Model {
+<?php namespace Model\Report;
+
+use Engine\Model;
+
+class Product {
+    use Model;
+
 	public function getProductsViewed($data = array()) {
 		$sql = "SELECT pd.name, p.model, p.viewed FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.viewed > 0 ORDER BY p.viewed DESC";
 					
@@ -46,11 +51,11 @@ class ModelReportProduct extends Model {
 		}
 		
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(o.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(o.date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(o.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(o.date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 		
 		$sql .= " GROUP BY op.model ORDER BY total DESC";
@@ -82,11 +87,11 @@ class ModelReportProduct extends Model {
 		}
 		
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(o.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(o.date_added) >= " . $this->db->quote($data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(o.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(o.date_added) <= " . $this->db->quote($data['filter_date_end']);
 		}
 		
 		$query = $this->db->query($sql);

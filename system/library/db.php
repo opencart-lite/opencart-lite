@@ -1,7 +1,7 @@
-<?php namespace System\Library;
+<?php namespace Library;
 
 use PDO;
-use System\Engine\CoreException;
+use Engine\CoreException;
 
 class DB {
     private $driver;

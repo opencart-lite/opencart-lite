@@ -1,5 +1,11 @@
-<?php    
-class ControllerSaleReturn extends Controller { 
+<?php namespace Controller\Sale;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Returns implements iController {
+    use Controller;
+
 	private $error = array();
    
   	public function index() {

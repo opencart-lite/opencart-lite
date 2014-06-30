@@ -1,12 +1,17 @@
-<?php
-class ModelLocalisationWeightClass extends Model {
+<?php namespace Model\Localisation;
+
+use Engine\Model;
+
+class Weight_class {
+    use Model;
+
 	public function addWeightClass($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "weight_class SET value = '" . (float)$data['value'] . "'");
 		
 		$weight_class_id = $this->db->getLastId();
 		
 		foreach ($data['weight_class_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "weight_class_description SET weight_class_id = '" . (int)$weight_class_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', unit = '" . $this->db->escape($value['unit']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "weight_class_description SET weight_class_id = '" . (int)$weight_class_id . "', language_id = '" . (int)$language_id . "', title = " . $this->db->quote($value['title']) . ", unit = " . $this->db->quote($value['unit']));
 		}
 		
 		$this->cache->delete('weight_class');
@@ -18,7 +23,7 @@ class ModelLocalisationWeightClass extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "weight_class_description WHERE weight_class_id = '" . (int)$weight_class_id . "'");
 
 		foreach ($data['weight_class_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "weight_class_description SET weight_class_id = '" . (int)$weight_class_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', unit = '" . $this->db->escape($value['unit']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "weight_class_description SET weight_class_id = '" . (int)$weight_class_id . "', language_id = '" . (int)$language_id . "', title = " . $this->db->quote($value['title']) . ", unit = " . $this->db->quote($value['unit']));
 		}
 		
 		$this->cache->delete('weight_class');	
@@ -90,7 +95,7 @@ class ModelLocalisationWeightClass extends Model {
 	}
 
 	public function getWeightClassDescriptionByUnit($unit) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "weight_class_description WHERE unit = '" . $this->db->escape($unit) . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "weight_class_description WHERE unit = " . $this->db->quote($unit) . " AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
 		
 		return $query->row;
 	}

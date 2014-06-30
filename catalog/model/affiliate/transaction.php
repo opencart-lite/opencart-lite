@@ -1,6 +1,6 @@
 <?php  namespace Model\Affiliate;
 
-use System\Engine\Model;
+use Engine\Model;
 
 class Transaction {
     use Model;

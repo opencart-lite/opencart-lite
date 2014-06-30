@@ -1,5 +1,11 @@
-<?php  
-class ControllerSaleVoucher extends Controller {
+<?php namespace Controller\Sale;
+
+use Engine\Controller;
+use Engine\iController;
+
+class Voucher implements iController {
+    use Controller;
+
 	private $error = array();
      
   	public function index() {
