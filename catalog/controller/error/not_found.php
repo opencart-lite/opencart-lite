@@ -1,10 +1,11 @@
-<?php namespace Controller\Common;
+<?php namespace Controller\Error;
 
 use Engine\Controller;
 use Engine\iController;
 
-class Not_found extends Controller
-{
+class Not_found implements iController {
+    use Controller;
+
 	public function index() {		
 		$this->language->load('error/not_found');
 		
@@ -70,7 +71,7 @@ class Not_found extends Controller
 			'common/footer',
 			'common/header'
 		);
-		
+
 		$this->response->setOutput($this->render());
   	}
 }

@@ -1,5 +1,7 @@
 <?php namespace Library;
 
+use Engine\Registry;
+
 class Url {
 	private $url;
 	private $ssl;
@@ -20,9 +22,12 @@ class Url {
 		} else {
 			$url = $this->ssl;	
 		}
-		
-		$url .= 'index.php?route=' . $route;
-			
+
+        $session = Registry::get('session');
+
+		//$url .= 'index.php?route=' . $route;
+		$url .=  'index.php?l=' . $session->data['language'] . '&route=' . $route;
+
 		if ($args) {
 			$url .= str_replace('&', '&amp;', '&' . ltrim($args, '&')); 
 		}
