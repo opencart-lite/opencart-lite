@@ -43,7 +43,7 @@ foreach ($query->rows as $setting) {
 
 
 	$config->set('config_url', HTTP_SERVER);
-	$config->set('config_ssl', HTTPS_SERVER);	
+	$config->set('config_ssl', HTTPS_SERVER);
 
 // Url
 $url = new Library\Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));
