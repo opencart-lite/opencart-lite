@@ -14,7 +14,11 @@ class Category implements iController {
 		
 		$this->load->model('catalog/product');
 		
-		$this->load->model('tool/image'); 
+		$this->load->model('tool/image');
+
+        $this->document->addScript('catalog/view/plugins/flex-slider/jquery.flexslider.js');
+
+        $this->document->addStyle('catalog/view/plugins/flex-slider/flexslider.css');
 		
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
@@ -160,11 +164,30 @@ class Category implements iController {
 			$results = $this->model_catalog_product->getProducts($data);
 			
 			foreach ($results as $result) {
+                $images = array();
 				if ($result['image']) {
-					$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
-				} else {
-					$image = false;
+                    $images[] = array(
+                        'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'))
+                    );
 				}
+
+                $rsts = $this->model_catalog_product->getProductImages($result['product_id']);
+
+                foreach ($rsts as $rst) {
+                    $images[] = array(
+                        'thumb' => $this->model_tool_image->resize($rst['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'))
+                    );
+                }
+
+                $out_tags = array();
+                $tags = ($result['tag']) ? explode(',', $result['tag']) : array();
+
+                foreach ($tags as $tag) {
+                    $out_tags[] = array(
+                        'tag'  => trim($tag),
+                        'href' => $this->url->link('content/search', 'filter_tag=' . trim($tag))
+                    );
+                }
 				
 				if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
 					$price = $this->currency->format($result['price']);
@@ -186,7 +209,8 @@ class Category implements iController {
 								
 				$this->data['products'][] = array(
 					'product_id'  => $result['product_id'],
-					'thumb'       => $image,
+                    'images' => $images,
+                    'tags'  => $out_tags,
 					'name'        => $result['name'],
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 100) . '..',
 					'price'       => $price,
