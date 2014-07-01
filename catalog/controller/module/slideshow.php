@@ -11,14 +11,23 @@ class Slideshow implements iController {
 		
 		$this->load->model('design/banner');
 		$this->load->model('tool/image');
-		
-		$this->document->addScript('catalog/view/javascript/jquery/nivo-slider/jquery.nivo.slider.pack.js');
+
+
+        $this->document->addScript('catalog/view/plugins/revolution_slider/rs-plugin/js/jquery.themepunch.plugins.min.js');
+        $this->document->addScript('catalog/view/plugins/revolution_slider/rs-plugin/js/jquery.themepunch.revolution.min.js');
+        $this->document->addScript('catalog/view/plugins/flex-slider/jquery.flexslider.js');
+
+        $this->document->addStyle('catalog/view/plugins/revolution_slider/rs-plugin/css/settings.css');
+
+        $this->document->addStyle('catalog/view/plugins/flex-slider/flexslider.css');
+
+		/*$this->document->addScript('catalog/view/javascript/jquery/nivo-slider/jquery.nivo.slider.pack.js');
 		
 		if (file_exists('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/slideshow.css')) {
 			$this->document->addStyle('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/slideshow.css');
 		} else {
 			$this->document->addStyle('catalog/view/theme/default/stylesheet/slideshow.css');
-		}
+		}*/
 		
 		$this->data['width'] = $setting['width'];
 		$this->data['height'] = $setting['height'];

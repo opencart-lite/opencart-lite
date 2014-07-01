@@ -29,7 +29,7 @@ class Image {
 				}		
 			}
 			
-			$image = new Image(DIR_IMAGE . $old_image);
+			$image = new \Library\Image(DIR_IMAGE . $old_image);
 			$image->resize($width, $height);
 			$image->save(DIR_IMAGE . $new_image);
 		}
