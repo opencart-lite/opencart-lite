@@ -153,7 +153,7 @@ $('#button-register').live('click', function() {
 				location = json['redirect'];				
 			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<button data-dismiss="alert" class="close">×</button></div>');
 					
 					$('.warning').fadeIn('slow');
 				}
@@ -337,7 +337,7 @@ $('#button-guest').live('click', function() {
 				location = json['redirect'];
 			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<button data-dismiss="alert" class="close">×</button></div>');
 					
 					$('.warning').fadeIn('slow');
 				}
@@ -497,7 +497,7 @@ $('#button-guest-shipping').live('click', function() {
 				location = json['redirect'];
 			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#shipping-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#shipping-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<button data-dismiss="alert" class="close">×</button></div>');
 					
 					$('.warning').fadeIn('slow');
 				}
@@ -579,7 +579,7 @@ $('#button-shipping-method').live('click', function() {
 				location = json['redirect'];
 			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#shipping-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#shipping-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<button data-dismiss="alert" class="close">×</button></div>');
 					
 					$('.warning').fadeIn('slow');
 				}			
@@ -636,7 +636,7 @@ $('#button-payment-method').live('click', function() {
 				location = json['redirect'];
 			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#payment-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#payment-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<button data-dismiss="alert" class="close">×</button></div>');
 
 					$('.warning').fadeIn('slow');
 				}			

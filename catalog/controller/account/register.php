@@ -52,7 +52,9 @@ class Register implements iController {
     	$this->data['heading_title'] = $this->language->get('heading_title');
 		
 		$this->data['text_account_already'] = sprintf($this->language->get('text_account_already'), $this->url->link('account/login', '', 'SSL'));
+		$this->data['text_register'] = $this->language->get('text_register');
 		$this->data['text_your_details'] = $this->language->get('text_your_details');
+		$this->data['text_account_details'] = $this->language->get('text_account_details');
     	$this->data['text_your_address'] = $this->language->get('text_your_address');
     	$this->data['text_your_password'] = $this->language->get('text_your_password');
 		$this->data['text_newsletter'] = $this->language->get('text_newsletter');
@@ -300,12 +302,8 @@ class Register implements iController {
 		}
 		
 		$this->children = array(
-			'common/column_left',
-			'common/column_right',
-			'common/content_top',
-			'common/content_bottom',
-			'common/footer',
-			'common/header'	
+			'common/foot',
+			'common/head'
 		);
 				
 		$this->response->setOutput($this->render());	

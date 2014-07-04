@@ -354,7 +354,7 @@ $('#button-cart').bind('click', function() {
 			} 
 			
 			if (json['success']) {
-				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+				$('#notification').html('<div class="alert alert-success" style="display: none;">' + json['success'] + '<button data-dismiss="alert" class="close">×</button></div>');
 					
 				$('.success').fadeIn('slow');
 					
@@ -436,7 +436,7 @@ $('#button-review').bind('click', function() {
 			}
 			
 			if (data['success']) {
-				$('#review-title').after('<div class="success">' + data['success'] + '</div>');
+				$('#review-title').after('<div class="alert alert-success">' + data['success'] + '</div>');
 								
 				$('input[name=\'name\']').val('');
 				$('textarea[name=\'text\']').val('');

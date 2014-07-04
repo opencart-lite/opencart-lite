@@ -94,5 +94,6 @@
 <a id="scroll-top" href="#"><i class="fa fa-angle-up"></i></a>
 <!-- end: FOOTER -->
 <script src="catalog/view/javascript/main.js"></script>
+</div>
 </body>
 </html>

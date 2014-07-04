@@ -2870,7 +2870,7 @@ label {
 }
 
 .login, .register {
-    background-image: url("../images/bg_2.png");
+    background-image: url("../image/bg_2.png");
     background-color: rgba(255, 255, 255, 0);
 }
 .main-login {
@@ -3029,4 +3029,30 @@ select.form-control option {
 }
 .error {
     color: red;
+}
+.radio label.radio-inline, .checkbox label.checkbox-inline {
+    display: inline-block;
+}
+
+.radio-inline, .radio-inline + .radio-inline, .checkbox-inline, .checkbox-inline + .checkbox-inline {
+    margin-right: 10px !important;
+    margin-top: 5px !important;
+    margin-left: 0 !important;
+    margin-bottom: 10px !important;
+}
+.radio label, .checkbox label {
+    margin-bottom: 5px;
+}
+.checkbox-table {
+    display: inline-block;
+    margin: 2px 0 0 0;
+    padding-left: 20px;
+    line-height: 10px;
+}
+.checkbox-table label {
+    margin-bottom: 0;
+}
+[class^="icheckbox_"], [class*="icheckbox_"], [class^="iradio_"], [class*="iradio_"] {
+    float: left !important;
+    margin: 0 5px 0 -20px !important;
 }

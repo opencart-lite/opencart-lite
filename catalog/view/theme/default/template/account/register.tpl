@@ -1,269 +1,220 @@
-<?php echo $header; ?>
-<?php if ($error_warning) { ?>
-<div class="warning"><?php echo $error_warning; ?></div>
-<?php } ?>
-<?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <h1><?php echo $heading_title; ?></h1>
-  <p><?php echo $text_account_already; ?></p>
-  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-    <h2><?php echo $text_your_details; ?></h2>
-    <div class="content">
-      <table class="form">
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
-          <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
-            <?php if ($error_firstname) { ?>
-            <span class="error"><?php echo $error_firstname; ?></span>
-            <?php } ?></td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
-          <td><input type="text" name="lastname" value="<?php echo $lastname; ?>" />
-            <?php if ($error_lastname) { ?>
-            <span class="error"><?php echo $error_lastname; ?></span>
-            <?php } ?></td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_email; ?></td>
-          <td><input type="text" name="email" value="<?php echo $email; ?>" />
-            <?php if ($error_email) { ?>
-            <span class="error"><?php echo $error_email; ?></span>
-            <?php } ?></td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_telephone; ?></td>
-          <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" />
-            <?php if ($error_telephone) { ?>
-            <span class="error"><?php echo $error_telephone; ?></span>
-            <?php } ?></td>
-        </tr>
-        <tr>
-          <td><?php echo $entry_fax; ?></td>
-          <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
-        </tr>
-      </table>
-    </div>
-    <h2><?php echo $text_your_address; ?></h2>
-    <div class="content">
-      <table class="form">
-        <tr>
-          <td><?php echo $entry_company; ?></td>
-          <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
-        </tr>        
-        <tr style="display: <?php echo (count($customer_groups) > 1 ? 'table-row' : 'none'); ?>;">
-          <td><?php echo $entry_customer_group; ?></td>
-          <td><?php foreach ($customer_groups as $customer_group) { ?>
-            <?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
-            <input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group_id<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />
-            <label for="customer_group_id<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></label>
-            <br />
-            <?php } else { ?>
-            <input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group_id<?php echo $customer_group['customer_group_id']; ?>" />
-            <label for="customer_group_id<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></label>
-            <br />
+<?php echo $head; ?>
+<div class="main-login col-sm-4 col-sm-offset-4">
+    <div class="logo"><?php echo $heading_title; ?></div>
+    <!-- start: REGISTER BOX -->
+    <div class="box-register">
+        <h3><?php echo $text_register; ?></h3>
+        <p><?php echo $text_account_already; ?></p>
+        <p>
+            <?php echo $text_your_details; ?>
+        </p>
+        <form class="form-register" action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+            <?php if ($error_warning) { ?>
+            <div class="errorHandler alert alert-danger">
+                <i class="fa fa-remove-sign"></i> <?php echo $error_warning; ?>
+            </div>
             <?php } ?>
-            <?php } ?></td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_address; ?></td>
-          <td><input type="text" name="address" value="<?php echo $address; ?>" />
-            <?php if ($error_address) { ?>
-            <span class="error"><?php echo $error_address; ?></span>
-            <?php } ?></td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_city; ?></td>
-          <td><input type="text" name="city" value="<?php echo $city; ?>" />
-            <?php if ($error_city) { ?>
-            <span class="error"><?php echo $error_city; ?></span>
-            <?php } ?></td>
-        </tr>
-        <tr>
-          <td><span id="postcode-required" class="required">*</span> <?php echo $entry_postcode; ?></td>
-          <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" />
-            <?php if ($error_postcode) { ?>
-            <span class="error"><?php echo $error_postcode; ?></span>
-            <?php } ?></td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-          <td><select name="country_id">
-              <option value=""><?php echo $text_select; ?></option>
-              <?php foreach ($countries as $country) { ?>
-              <?php if ($country['country_id'] == $country_id) { ?>
-              <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-              <?php } else { ?>
-              <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-              <?php } ?>
-              <?php } ?>
-            </select>
-            <?php if ($error_country) { ?>
-            <span class="error"><?php echo $error_country; ?></span>
-            <?php } ?></td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
-          <td><select name="zone_id">
-            </select>
-            <?php if ($error_zone) { ?>
-            <span class="error"><?php echo $error_zone; ?></span>
-            <?php } ?></td>
-        </tr>
-      </table>
-    </div>
-    <h2><?php echo $text_your_password; ?></h2>
-    <div class="content">
-      <table class="form">
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_password; ?></td>
-          <td><input type="password" name="password" value="<?php echo $password; ?>" />
-            <?php if ($error_password) { ?>
-            <span class="error"><?php echo $error_password; ?></span>
-            <?php } ?></td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_confirm; ?></td>
-          <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" />
-            <?php if ($error_confirm) { ?>
-            <span class="error"><?php echo $error_confirm; ?></span>
-            <?php } ?></td>
-        </tr>
-      </table>
-    </div>
-    <h2><?php echo $text_newsletter; ?></h2>
-    <div class="content">
-      <table class="form">
-        <tr>
-          <td><?php echo $entry_newsletter; ?></td>
-          <td><?php if ($newsletter) { ?>
-            <input type="radio" name="newsletter" value="1" checked="checked" />
-            <?php echo $text_yes; ?>
-            <input type="radio" name="newsletter" value="0" />
-            <?php echo $text_no; ?>
-            <?php } else { ?>
-            <input type="radio" name="newsletter" value="1" />
-            <?php echo $text_yes; ?>
-            <input type="radio" name="newsletter" value="0" checked="checked" />
-            <?php echo $text_no; ?>
-            <?php } ?></td>
-        </tr>
-      </table>
-    </div>
-    <?php if ($text_agree) { ?>
-    <div class="buttons">
-      <div class="right"><?php echo $text_agree; ?>
-        <?php if ($agree) { ?>
-        <input type="checkbox" name="agree" value="1" checked="checked" />
-        <?php } else { ?>
-        <input type="checkbox" name="agree" value="1" />
-        <?php } ?>
-        <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
-      </div>
-    </div>
-    <?php } else { ?>
-    <div class="buttons">
-      <div class="right">
-        <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
-      </div>
-    </div>
-    <?php } ?>
-  </form>
-  <?php echo $content_bottom; ?></div>
-<script type="text/javascript"><!--
-$('input[name=\'customer_group_id\']:checked').live('change', function() {
-	var customer_group = [];
-	
-<?php foreach ($customer_groups as $customer_group) { ?>
-	customer_group[<?php echo $customer_group['customer_group_id']; ?>] = [];
-	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_display'] = '<?php echo $customer_group['company_id_display']; ?>';
-	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_required'] = '<?php echo $customer_group['company_id_required']; ?>';
-	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_display'] = '<?php echo $customer_group['tax_id_display']; ?>';
-	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_required'] = '<?php echo $customer_group['tax_id_required']; ?>';
-<?php } ?>	
+            <fieldset>
+                <div class="form-group">
+                    <span class="input-icon">
+                    <input type="text" class="form-control" name="firstname" placeholder="<?php echo $entry_firstname; ?>" value="<?php echo $firstname; ?>" required />
+                         <i class="fa fa-user"></i> </span>
+                    <?php if ($error_firstname) { ?>
+                    <span class="error"><?php echo $error_firstname; ?></span>
+                    <?php } ?>
+                </div>
+                <div class="form-group">
+                    <span class="input-icon">
+                    <input type="text" class="form-control" name="lastname" placeholder="<?php echo $entry_lastname; ?>" value="<?php echo $lastname; ?>" required />
+                         <i class="fa fa-users"></i> </span>
+                    <?php if ($error_lastname) { ?>
+                    <span class="error"><?php echo $error_lastname; ?></span>
+                    <?php } ?>
+                </div>
+                <div class="form-group">
+                    <span class="input-icon">
+                    <input type="text" class="form-control" name="telephone" placeholder="<?php echo $entry_telephone; ?>" value="<?php echo $telephone; ?>" required />
+                         <i class="fa fa-phone"></i> </span>
 
-	if (customer_group[this.value]) {
-		if (customer_group[this.value]['company_id_display'] == '1') {
-			$('#company-id-display').show();
-		} else {
-			$('#company-id-display').hide();
-		}
-		
-		if (customer_group[this.value]['company_id_required'] == '1') {
-			$('#company-id-required').show();
-		} else {
-			$('#company-id-required').hide();
-		}
-		
-		if (customer_group[this.value]['tax_id_display'] == '1') {
-			$('#tax-id-display').show();
-		} else {
-			$('#tax-id-display').hide();
-		}
-		
-		if (customer_group[this.value]['tax_id_required'] == '1') {
-			$('#tax-id-required').show();
-		} else {
-			$('#tax-id-required').hide();
-		}	
-	}
-});
+                    <?php if ($error_telephone) { ?>
+                    <span class="error"><?php echo $error_telephone; ?></span>
+                    <?php } ?>
+                </div>
+                <div class="form-group">
+                    <span class="input-icon">
+                    <input type="text" class="form-control" name="fax" placeholder="<?php echo $entry_fax; ?>" value="<?php echo $fax; ?>" />
+                         <i class="fa fa-print"></i> </span>
+                </div>
+                <div class="form-group">
+                    <span class="input-icon">
+                    <input type="text" class="form-control" name="city" placeholder="<?php echo $entry_city ?>" value="<?php echo $city; ?>" required />
+                     <i class="fa fa-building-o"></i> </span>
 
-$('input[name=\'customer_group_id\']:checked').trigger('change');
-//--></script> 
-<script type="text/javascript"><!--
-$('select[name=\'country_id\']').bind('change', function() {
-	$.ajax({
-		url: 'index.php?route=account/register/country&country_id=' + this.value,
-		dataType: 'json',
-		beforeSend: function() {
-			$('select[name=\'country_id\']').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
-		},
-		complete: function() {
-			$('.wait').remove();
-		},			
-		success: function(json) {
-			if (json['postcode_required'] == '1') {
-				$('#postcode-required').show();
-			} else {
-				$('#postcode-required').hide();
-			}
-			
-			html = '<option value=""><?php echo $text_select; ?></option>';
-			
-			if (json['zone'] != '') {
-				for (i = 0; i < json['zone'].length; i++) {
-        			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
-	    			
-					if (json['zone'][i]['zone_id'] == '<?php echo $zone_id; ?>') {
-	      				html += ' selected="selected"';
-	    			}
-	
-	    			html += '>' + json['zone'][i]['name'] + '</option>';
-				}
-			} else {
-				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
-			}
-			
-			$('select[name=\'zone_id\']').html(html);
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
-});
+                    <?php if ($error_city) { ?>
+                    <span class="error"><?php echo $error_city; ?></span>
+                    <?php } ?>
+                </div>
+                <div class="form-group">
+                     <span class="input-icon">
+                    <input type="text" class="form-control" name="address" placeholder="<?php echo $entry_address; ?>" value="<?php echo $address; ?>" required />
+                    <i class="fa fa-map-marker"></i> </span>
 
-$('select[name=\'country_id\']').trigger('change');
-//--></script> 
+                    <?php if ($error_address) { ?>
+                    <span class="error"><?php echo $error_address; ?></span>
+                    <?php } ?>
+                </div>
+                <div class="form-group">
+                    <span class="input-icon">
+                    <input type="text" class="form-control" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" required />
+                        <i class="fa fa-paperclip"></i> </span>
+                    <?php if ($error_postcode) { ?>
+                    <span class="error"><?php echo $error_postcode; ?></span>
+                    <?php } ?>
+                </div>
+                <div class="form-group">
+                    <label for="country_id"><?php echo $entry_country; ?></label>
+                    <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa  fa-flag"></i> </span>
+                    <select class="form-control" class="col-md-6" id="e1" name="country_id">
+                        <?php foreach ($countries as $country) { ?>
+                        <?php if ($country['country_id'] == $country_id) { ?>
+                        <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
+                        <?php } else { ?>
+                        <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
+                        <?php } ?>
+                        <?php } ?>
+                    </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="zone_id"><?php echo $entry_zone; ?></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"> <i class="fa  fa-flag-checkered"></i> </span>
+                    <select class="form-control" id="e2" name="zone_id">
+                    </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="zone_id"><?php echo $entry_newsletter; ?></label>
+                    <div>
+                        <?php if ($newsletter) { ?>
+                        <label class="radio-inline">
+                            <input type="radio" class="grey" name="newsletter" value="1" checked="checked" />
+                            <?php echo $text_yes; ?>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" class="grey" name="newsletter" value="0" />
+                            <?php echo $text_no; ?>
+                        </label>
+                        <?php } else { ?>
+                        <label class="radio-inline">
+                            <input type="radio" class="grey" name="newsletter" value="1" />
+                            <?php echo $text_yes; ?>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" class="grey" name="newsletter" value="0" checked="checked" />
+                            <?php echo $text_no; ?>
+                        </label>
+                        <?php } ?>
+                    </div>
+                </div>
+                <p>
+                    <?php echo $text_account_details; ?>
+                </p>
+                <div class="form-group">
+                    <span class="input-icon">
+                    <input type="email" class="form-control" name="email" placeholder="<?php echo $entry_email; ?>" value="<?php echo $email; ?>" required />
+                    <i class="fa fa-envelope"></i> </span>
+                    <?php if ($error_email) { ?>
+                    <span class="error"><?php echo $error_email; ?></span>
+                    <?php } ?>
+                </div>
+                <div class="form-group">
+							<span class="input-icon">
+								<input type="password" class="form-control" id="password" name="password" placeholder="<?php echo $entry_password; ?>" value="<?php echo $password; ?>" required />
+                                <?php if ($error_password) { ?>
+                                <span class="error"><?php echo $error_password; ?></span>
+                                <?php } ?></td>
+                                <i class="fa fa-lock"></i> </span>
+                </div>
+                <div class="form-group">
+							<span class="input-icon">
+								<input type="password" class="form-control" name="confirm" placeholder="<?php echo $entry_confirm; ?>" value="<?php echo $confirm; ?>" required />
+                                <?php if ($error_confirm) { ?>
+                                <span class="error"><?php echo $error_confirm; ?></span>
+                                <?php } ?></td>
+                                <i class="fa fa-lock"></i> </span>
+                </div>
+                <?php if ($text_agree) { ?>
+                <div class="form-group">
+                    <div>
+                        <label class="checkbox-inline">
+                            <?php if ($agree) { ?>
+                            <input type="checkbox" name="agree" class="grey agree" id="agree" value="1" checked="checked" required />
+                            <?php } else { ?>
+                            <input type="checkbox" name="agree" class="grey agree" id="agree" value="1" required />
+                            <?php } ?>
+                        </label>
+                        <span><?php echo $text_agree; ?></span>
+                    </div>
+                </div>
+                <?php } ?>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-bricky pull-right">
+                        <?php echo $button_continue; ?> <i class="fa fa-arrow-circle-right"></i>
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <!-- end: REGISTER BOX -->
 <script type="text/javascript"><!--
-$('.colorbox').colorbox({
-	width: 640,
-	height: 480
-});
-//--></script> 
-<?php echo $footer; ?>
+        $('select[name=\'country_id\']').bind('change', function() {
+            $.ajax({
+                url: 'index.php?route=account/register/country&country_id=' + this.value,
+                dataType: 'json',
+                beforeSend: function() {
+                    $('select[name=\'country_id\']').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+                },
+                complete: function() {
+                    $('.wait').remove();
+                },
+                success: function(json) {
+                    if (json['postcode_required'] == '1') {
+                        $('#postcode-required').show();
+                    } else {
+                        $('#postcode-required').hide();
+                    }
+
+                    html = '<option value=""><?php echo $text_select; ?></option>';
+
+                    if (json['zone'] != '') {
+                        for (i = 0; i < json['zone'].length; i++) {
+                            html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+
+                            if (json['zone'][i]['zone_id'] == '<?php echo $zone_id; ?>') {
+                                html += ' selected="selected"';
+                            }
+
+                            html += '>' + json['zone'][i]['name'] + '</option>';
+                        }
+                    } else {
+                        html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
+                    }
+
+                    $('select[name=\'zone_id\']').html(html);
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        });
+
+        $('select[name=\'country_id\']').trigger('change');
+//--></script>
+<script type="text/javascript">
+    jQuery(window).ready(function() {
+        Index.init();
+    });
+</script>
+<?php echo $foot; ?>

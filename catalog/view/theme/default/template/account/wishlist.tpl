@@ -1,6 +1,6 @@
 <?php echo $header; ?>
 <?php if ($success) { ?>
-<div class="success"><?php echo $success; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+<div class="alert alert-success"><?php echo $success; ?><button data-dismiss="alert" class="close">×</button></div>
 <?php } ?>
 <?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><?php echo $content_top; ?>
