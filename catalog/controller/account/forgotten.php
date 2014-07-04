@@ -76,6 +76,7 @@ class Forgotten implements iController {
 
 		$this->data['text_your_email'] = $this->language->get('text_your_email');
 		$this->data['text_email'] = $this->language->get('text_email');
+		$this->data['text_forgotten'] = $this->language->get('text_forgotten');
 
 		$this->data['entry_email'] = $this->language->get('entry_email');
 
@@ -99,12 +100,8 @@ class Forgotten implements iController {
 		}
 		
 		$this->children = array(
-			'common/column_left',
-			'common/column_right',
-			'common/content_top',
-			'common/content_bottom',
-			'common/footer',
-			'common/header'	
+			'common/foot',
+			'common/head'
 		);
 								
 		$this->response->setOutput($this->render());		

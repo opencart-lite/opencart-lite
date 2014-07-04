@@ -92,3 +92,34 @@ div.post-media h4 {
 	color: #FFFFFF;
 	border-bottom: 1px solid #007AFF;
 }
+.product-filter {
+    border-bottom: 1px solid #EEEEEE;
+    padding-bottom: 5px;
+    overflow: auto;
+}
+
+.product-filter .display {
+    margin-right: 15px;
+    float: left;
+
+    color: #333;
+}
+.product-filter .limit {
+    margin-left: 15px;
+    float: right;
+    color: #333;
+    padding-top: 4px;
+}
+.product-filter .sort {
+    float: right;
+    color: #333;
+    padding-top: 4px;
+}
+.product-filter .sort .input-group-addon {
+    clear: both;
+}
+.product-compare {
+    padding-top: 6px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}

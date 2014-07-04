@@ -1,6 +1,6 @@
 <?php echo $header; ?>
 <?php if ($success) { ?>
-<div class="success"><?php echo $success; ?></div>
+<div class="alert alert-success"><?php echo $success; ?></div>
 <?php } ?>
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?></div>

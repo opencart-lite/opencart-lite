@@ -79,7 +79,7 @@ $(document).ready(function() {
 		}
 	}
 	
-	$('.success img, .warning img, .attention img, .information img').live('click', function() {
+	$('.alert-success img, .warning img, .attention img, .information img').live('click', function() {
 		$(this).parent().fadeOut('slow', function() {
 			$(this).remove();
 		});
@@ -116,16 +116,16 @@ function addToCart(product_id, quantity) {
 		data: 'product_id=' + product_id + '&quantity=' + quantity,
 		dataType: 'json',
 		success: function(json) {
-			$('.success, .warning, .attention, .information, .error').remove();
+			$('.alert-success, .warning, .attention, .information, .error').remove();
 			
 			if (json['redirect']) {
 				location = json['redirect'];
 			}
 			
 			if (json['success']) {
-				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+				$('#notification').html('<div class="alert alert-success" style="display: none;">' + json['success'] + '<button data-dismiss="alert" class="close">×</button></div>');
 				
-				$('.success').fadeIn('slow');
+				$('.alert-success').fadeIn('slow');
 				
 				$('#cart-total').html(json['total']);
 				
@@ -141,12 +141,12 @@ function addToWishList(product_id) {
 		data: 'product_id=' + product_id,
 		dataType: 'json',
 		success: function(json) {
-			$('.success, .warning, .attention, .information').remove();
+			$('.alert-success, .warning, .attention, .information').remove();
 						
 			if (json['success']) {
-				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+				$('#notification').html('<div class="alert alert-success" style="display: none;">' + json['success'] + '<button data-dismiss="alert" class="close">×</button></div>');
 				
-				$('.success').fadeIn('slow');
+				$('.alert-success').fadeIn('slow');
 				
 				$('#wishlist-total').html(json['total']);
 				
@@ -163,12 +163,12 @@ function addToCompare(product_id) {
 		data: 'product_id=' + product_id,
 		dataType: 'json',
 		success: function(json) {
-			$('.success, .warning, .attention, .information').remove();
+			$('.alert-success, .warning, .attention, .information').remove();
 						
 			if (json['success']) {
-				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+				$('#notification').html('<div class="alert alert-success" style="display: none;">' + json['success'] + '<button data-dismiss="alert" class="close">×</button></div>');
 				
-				$('.success').fadeIn('slow');
+				$('.alert-success').fadeIn('slow');
 				
 				$('#compare-total').html(json['total']);
 				

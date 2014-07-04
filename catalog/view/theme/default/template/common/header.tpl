@@ -32,6 +32,7 @@
     <!-- end: MAIN CSS -->
     <!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
     <link rel="stylesheet" href="catalog/view/plugins/colorbox/example2/colorbox.css">
+    <link rel="stylesheet" href="catalog/view/plugins/bootstrap-switch/static/stylesheets/bootstrap-switch.css">
     <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
 <!--<link rel="stylesheet" type="text/css" href="catalog/view/theme/default/stylesheet/stylesheet.css" />-->
 <?php foreach ($styles as $style) { ?>
@@ -59,6 +60,7 @@
     <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
     <script src="catalog/view/plugins/stellar.js/jquery.stellar.min.js"></script>
     <script src="catalog/view/plugins/colorbox/jquery.colorbox-min.js"></script>
+    <script src="catalog/view/plugins/bootstrap-switch/static/js/bootstrap-switch.min.js"></script>
     <script src="catalog/view/javascript/index.js"></script>
     <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 <?php foreach ($scripts as $script) { ?>
@@ -195,7 +197,7 @@
         <?php if ($logo) { ?>
         <a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></a>
         <?php } else { ?>
-        <i class="clip-atom-2"></i><?php echo $store_name; ?>
+        <i class="clip-cart"></i> <?php echo $store_name; ?>
         <?php } ?>
     </a>
     <!-- end: LOGO -->
@@ -261,4 +263,3 @@
 </div>
 </header>
 <!-- end: HEADER -->
-<div id="notification"></div>

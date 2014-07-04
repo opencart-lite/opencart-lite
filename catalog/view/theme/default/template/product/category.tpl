@@ -24,41 +24,7 @@
             </div>
         </div>
     </section>
-    <section class="wrapper">
-        <?php if ($thumb || $description) { ?>
-        <div class="category-info">
-            <?php if ($thumb) { ?>
-            <div class="image"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" /></div>
-            <?php } ?>
-            <?php if ($description) { ?>
-            <?php echo $description; ?>
-            <?php } ?>
-        </div>
-        <?php } ?>
-        <?php if ($categories) { ?>
-        <h2><?php echo $text_refine; ?></h2>
-        <div class="category-list">
-            <?php if (count($categories) <= 5) { ?>
-            <ul>
-                <?php foreach ($categories as $category) { ?>
-                <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
-                <?php } ?>
-            </ul>
-            <?php } else { ?>
-            <?php for ($i = 0; $i < count($categories);) { ?>
-            <ul>
-                <?php $j = $i + ceil(count($categories) / 4); ?>
-                <?php for (; $i < $j; $i++) { ?>
-                <?php if (isset($categories[$i])) { ?>
-                <li><a href="<?php echo $categories[$i]['href']; ?>"><?php echo $categories[$i]['name']; ?></a></li>
-                <?php } ?>
-                <?php } ?>
-            </ul>
-            <?php } ?>
-            <?php } ?>
-        </div>
-        <?php } ?>
-    </section>
+    <section id="notification"></section>
     <section class="wrapper">
         <div class="container">
             <?php echo $content_top; ?>
@@ -66,13 +32,55 @@
                 <?php echo $column_left; ?>
                 <div class="col-md-9">
                     <div class="blog-posts">
-
+                        <div class="row">
+                            <?php if ($thumb || $description) { ?>
+                            <div class="category-info">
+                                <?php if ($thumb) { ?>
+                                <div class="image"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" /></div>
+                                <?php } ?>
+                                <?php if ($description) { ?>
+                                <?php echo $description; ?>
+                                <?php } ?>
+                            </div>
+                            <?php } ?>
+                            <?php if ($categories) { ?>
+                            <h2 class="col-md-9"><?php echo $text_refine; ?></h2>
+                            <div class="category-list col-md-9">
+                                <?php if (count($categories) <= 5) { ?>
+                                <ul>
+                                    <?php foreach ($categories as $category) { ?>
+                                    <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
+                                    <?php } ?>
+                                </ul>
+                                <?php } else { ?>
+                                <?php for ($i = 0; $i < count($categories);) { ?>
+                                <ul>
+                                    <?php $j = $i + ceil(count($categories) / 4); ?>
+                                    <?php for (; $i < $j; $i++) { ?>
+                                    <?php if (isset($categories[$i])) { ?>
+                                    <li><a href="<?php echo $categories[$i]['href']; ?>"><?php echo $categories[$i]['name']; ?></a></li>
+                                    <?php } ?>
+                                    <?php } ?>
+                                </ul>
+                                <?php } ?>
+                                <?php } ?>
+                            </div>
+                            <?php } ?>
+                        </div>
+                        <hr>
                         <?php if ($products) { ?>
                         <div class="row">
+
                             <div class="product-filter">
-                                <div class="display"><b><?php echo $text_display; ?></b> <?php echo $text_list; ?> <b>/</b> <a onclick="display('grid');"><?php echo $text_grid; ?></a></div>
-                                <div class="limit"><b><?php echo $text_limit; ?></b>
-                                    <select onchange="location = this.value;">
+
+                                <div class="input-group col-md-4 display">
+
+                                <div class="make-switch switch-large" data-label-icon="fa fa-desktop fa-large" data-on-label="<i class='fa fa-list fa-white'></i>" data-off-label="<i class='fa fa-th-large'></i>">
+                                    <input onclick="display('grid');alert('click');" type="checkbox" checked>
+                                </div>
+                                </div>
+                                <div class="input-group col-md-2 limit"><span class="input-group-addon"> <i class="fa fa-eye"></i> </span>
+                                    <select class="form-control" onchange="location = this.value;">
                                         <?php foreach ($limits as $limits) { ?>
                                         <?php if ($limits['value'] == $limit) { ?>
                                         <option value="<?php echo $limits['href']; ?>" selected="selected"><?php echo $limits['text']; ?></option>
@@ -82,8 +90,8 @@
                                         <?php } ?>
                                     </select>
                                 </div>
-                                <div class="sort"><b><?php echo $text_sort; ?></b>
-                                    <select onchange="location = this.value;">
+                                <div class="input-group col-md-3 sort"><span class="input-group-addon"> <i class="fa fa-sort-alpha-asc"></i> </span>
+                                    <select class="form-control date-range" onchange="location = this.value;">
                                         <?php foreach ($sorts as $sorts) { ?>
                                         <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
                                         <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
@@ -94,7 +102,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="product-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>
+                            <div class="product-compare col-md-3"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>
+                            <hr>
                         </div>
                         <?php foreach ($products as $product) { ?>
                         <article>
@@ -153,10 +162,6 @@
                                 <div class="col-md-12">
                                     <div class="post-meta">
                                         <span><i class="fa fa-calendar"></i> January 11, 2014 </span>
-												<span><i class="fa fa-user"></i> By
-													<a href="#">
-                                                        Peter Clark
-                                                    </a> </span>
                                         <?php if ($product['tags']) { ?>
                            <span><i class="fa fa-tag"></i>
                                <?php for ($i = 0; $i < count($product['tags']); $i++) { ?>

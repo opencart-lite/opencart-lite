@@ -1,12 +1,12 @@
 <?php echo $header; ?>
 <?php if ($attention) { ?>
-<div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+<div class="attention"><?php echo $attention; ?><button data-dismiss="alert" class="close">×</button></div>
 <?php } ?>
 <?php if ($success) { ?>
-<div class="success"><?php echo $success; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+<div class="alert alert-success"><?php echo $success; ?><button data-dismiss="alert" class="close">×</button></div>
 <?php } ?>
 <?php if ($error_warning) { ?>
-<div class="warning"><?php echo $error_warning; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+<div class="warning"><?php echo $error_warning; ?><button data-dismiss="alert" class="close">×</button></div>
 <?php } ?>
 <?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><?php echo $content_top; ?>
@@ -223,7 +223,7 @@ $('#button-quote').live('click', function() {
 						
 			if (json['error']) {
 				if (json['error']['warning']) {
-					$('#notification').html('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#notification').html('<div class="warning" style="display: none;">' + json['error']['warning'] + '<button data-dismiss="alert" class="close">×</button></div>');
 					
 					$('.warning').fadeIn('slow');
 					
