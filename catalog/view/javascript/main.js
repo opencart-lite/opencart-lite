@@ -27,6 +27,13 @@ var win = $(window), body = $('body'), scroll_top = win.scrollTop(), screen_heig
 })(jQuery, 'clipresize');
 //Main Function
 var Main = function() {
+    var runPreInit = function() {
+
+        var image = $('article').find('.post-image').html();
+        alert(image);
+
+    };
+
 	//function to detect mobile or explorer browser and its version
 	var runInit = function() {
 		if(/MSIE (\d+\.\d+);/.test(navigator.userAgent)) {

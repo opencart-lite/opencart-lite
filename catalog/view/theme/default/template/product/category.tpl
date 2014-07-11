@@ -70,16 +70,13 @@
                         <hr>
                         <?php if ($products) { ?>
                         <div class="row">
-
                             <div class="product-filter">
-
                                 <div class="input-group col-md-4 display">
-
                                 <div class="make-switch switch-large" data-label-icon="fa fa-desktop fa-large" data-on-label="<i class='fa fa-list fa-white'></i>" data-off-label="<i class='fa fa-th-large'></i>">
-                                    <input onclick="display('grid');alert('click');" type="checkbox" checked>
+                                    <input id="checkbox" type="checkbox">
                                 </div>
                                 </div>
-                                <div class="input-group col-md-2 limit"><span class="input-group-addon"> <i class="fa fa-eye"></i> </span>
+                                <div class="input-group col-md-2 limit tooltips" data-original-title="<?php echo $text_limit; ?>"><span class="input-group-addon"> <i class="fa fa-eye"></i> </span>
                                     <select class="form-control" onchange="location = this.value;">
                                         <?php foreach ($limits as $limits) { ?>
                                         <?php if ($limits['value'] == $limit) { ?>
@@ -90,7 +87,7 @@
                                         <?php } ?>
                                     </select>
                                 </div>
-                                <div class="input-group col-md-3 sort"><span class="input-group-addon"> <i class="fa fa-sort-alpha-asc"></i> </span>
+                                <div class="input-group col-md-3 sort tooltips" data-original-title="<?php echo $text_sort; ?>"><span class="input-group-addon"> <i class="fa fa-sort-alpha-asc"></i> </span>
                                     <select class="form-control date-range" onchange="location = this.value;">
                                         <?php foreach ($sorts as $sorts) { ?>
                                         <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
@@ -105,8 +102,9 @@
                             <div class="product-compare col-md-3"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>
                             <hr>
                         </div>
+                        <div class="product-list">
                         <?php foreach ($products as $product) { ?>
-                        <article>
+                        <article class="animate" data-animation-interval="100">
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="post-image">
@@ -130,11 +128,15 @@
                                         <h2>
                                             <a href="<?php echo $product['href']; ?>">
                                                 <?php echo $product['name']; ?>
-                                            </a></h2>
+                                            </a>
+                                        </h2>
                                         <p>
                                             <?php echo $product['description']; ?> [...]
                                         </p>
                                         <p>
+                                        <div class="cart">
+                                            <input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />
+                                        </div>
                                             <?php if ($product['price']) { ?>
                                         <div class="price">
                                             <?php if (!$product['special']) { ?>
@@ -144,20 +146,19 @@
                                             <?php } ?>
                                         </div>
                                         <?php } ?>
+
+                                        </p>
+                                        <p>
+
                                         <?php if ($product['rating']) { ?>
                                         <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
                                         <?php } ?>
-                                        <div class="cart">
-                                            <input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />
-                                        </div>
-                                        <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');"><?php echo $button_wishlist; ?></a></div>
-                                        <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');"><?php echo $button_compare; ?></a></div>
-
+                                        <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');"><i class="icon fa fa-heart fa-large tooltips" data-original-title="<?php echo $button_wishlist; ?>"></i></a></div>
+                                        <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');"><i class="icon fa fa-bar-chart-o fa-large tooltips" data-original-title="<?php echo $button_compare; ?>"></i></a></div>
                                         </p>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="post-meta">
@@ -185,6 +186,7 @@
                             </div>
                         </article>
                         <?php } ?>
+                        </div>
                         <?php echo $pagination; ?>
                         <?php } ?>
                         <?php if (!$categories && !$products) { ?>
@@ -193,7 +195,6 @@
                             <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
                         </div>
                         <?php } ?>
-
                     </div>
                 </div>
                 <?php echo $column_right; ?>
@@ -203,104 +204,87 @@
     </section>
 </div>
 <!-- end: MAIN CONTAINER -->
-<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 <script>
-    jQuery(document).ready(function() {
-        Main.init();
+    if($.cookie('display') == 'grid')
+        $('#checkbox').attr('checked', false);
+    else
+        $('#checkbox').attr('checked', true);
+
+    var checkbox = $('#checkbox');
+    var check = checkbox.prop("checked");
+    checkbox.on('change', function () {
+        if(checkbox.prop("checked") != check) {
+            check = checkbox.prop("checked");
+            if(check) display('list'); else display('grid');
+        }
     });
 </script>
-
 <script type="text/javascript"><!--
-    /*function display(view) {
+    var list = $('.product-list').html();
+    function display(view) {
         if (view == 'list') {
-            $('.product-grid').attr('class', 'product-list');
-
-            $('.product-list > div').each(function(index, element) {
-                html  = '<div class="right">';
-                html += '  <div class="cart">' + $(element).find('.cart').html() + '</div>';
-                html += '  <div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';
-                html += '  <div class="compare">' + $(element).find('.compare').html() + '</div>';
-                html += '</div>';
-
-                html += '<div class="left">';
-
-                var image = $(element).find('.image').html();
-
-                if (image != null) {
-                    html += '<div class="image">' + image + '</div>';
-                }
-
-                var price = $(element).find('.price').html();
-
-                if (price != null) {
-                    html += '<div class="price">' + price  + '</div>';
-                }
-
-                html += '  <div class="name">' + $(element).find('.name').html() + '</div>';
-                html += '  <div class="description">' + $(element).find('.description').html() + '</div>';
-
-                var rating = $(element).find('.rating').html();
-
-                if (rating != null) {
-                    html += '<div class="rating">' + rating + '</div>';
-                }
-
-                html += '</div>';
-
-
-                $(element).html(html);
-            });
-
-            $('.display').html('<b><?php echo $text_display; ?></b> <?php echo $text_list; ?> <b>/</b> <a onclick="display(\'grid\');"><?php echo $text_grid; ?></a>');
-
+            $('.product-grid').attr('class', 'product-list animate-group');
+            $('.product-list').html(list);
+            Main.init();
             $.cookie('display', 'list');
+
         } else {
-            $('.product-list').attr('class', 'product-grid');
+            $('.product-list').attr('class', 'product-grid grid-container animate-group');
+            $('.product-grid').attr('data-animation-interval', '100');
 
-            $('.product-grid > div').each(function(index, element) {
+            $('.product-grid > article').each(function(index, element){
+                var src = $(element).find('.post-image img').first().attr("src");
+                var rating = $(element).find('.post-content .rating').html();
+                var href = $(element).find('.post-content h2 a').attr("href");
                 html = '';
-
-                var image = $(element).find('.image').html();
-
-                if (image != null) {
-                    html += '<div class="image">' + image + '</div>';
+                html += '<div class="grid-item animate">';
+                html += '<a href="' + href + '">';
+                if (src) {
+                    html += '<div class="grid-image">';
+                    html += '<img src="' + src + '" class="img-responsive"/>';
+                    html += '<span class="image-overlay"> <i class="fa fa-mail-forward circle-icon circle-main-color"></i> </span>';
+                    html += '</div>';
                 }
-
-                html += '<div class="name">' + $(element).find('.name').html() + '</div>';
-                html += '<div class="description">' + $(element).find('.description').html() + '</div>';
-
-                var price = $(element).find('.price').html();
-
-                if (price != null) {
-                    html += '<div class="price">' + price  + '</div>';
-                }
-
-                var rating = $(element).find('.rating').html();
-
-                if (rating != null) {
+                html += '<div class="grid-content">';
+                html += '<div class="name">' + $(element).find('.post-content h2').html() + '</div>';
+                html += '<div class="price">' + $(element).find('.post-content .price').html() + '</div>';
+                if(rating) {
                     html += '<div class="rating">' + rating + '</div>';
                 }
-
-                html += '<div class="cart">' + $(element).find('.cart').html() + '</div>';
-                html += '<div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';
-                html += '<div class="compare">' + $(element).find('.compare').html() + '</div>';
+                html += '<div class="cart">' + $(element).find('.post-content .cart').html() + '</div>';
+                html += '<div class="wishlist">' + $(element).find('.post-content .wishlist').html() + '</div>';
+                html += '<div class="compare">' + $(element).find('.post-content .compare').html() + '</div>';
+                html += '</div>';
+                html += '</a>';
+                html += '</div>';
+                html += '</div>';
+                html += '</a>';
+                html += '</div>';
 
                 $(element).html(html);
-            });
 
-            $('.display').html('<b><?php echo $text_display; ?></b> <a onclick="display(\'list\');"><?php echo $text_list; ?></a> <b>/</b> <?php echo $text_grid; ?>');
-
+        });
+            Main.init();
             $.cookie('display', 'grid');
+
         }
+
+
+
     }
 
-    view = $.cookie('display');
+   view = $.cookie('display');
 
     if (view) {
         display(view);
     } else {
         display('list');
     }
-    */
-    //--></script>
+
+//--></script>
+<script>
+    jQuery(document).ready(function() {
+        Main.init();
+    });
+</script>
 <?php echo $footer; ?>

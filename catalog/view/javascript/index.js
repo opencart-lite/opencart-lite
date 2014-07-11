@@ -3,6 +3,7 @@ var Index = function () {
     //function to activate the iCheck Plugin
     var runCustomCheck = function () {
         if ($('input[type="checkbox"]').length || $('input[type="radio"]').length) {
+
             $('input[type="checkbox"].grey, input[type="radio"].grey').iCheck({
                 checkboxClass: 'icheckbox_minimal-grey',
                 radioClass: 'iradio_minimal-grey',
