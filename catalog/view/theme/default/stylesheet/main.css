@@ -3056,3 +3056,256 @@ select.form-control option {
     float: left !important;
     margin: 0 5px 0 -20px !important;
 }
+
+/* ---------------------------------------------------------------------- */
+/*  Navbar and navbar elements
+/* ---------------------------------------------------------------------- */
+.navbar-tools > ul {
+    list-style: none;
+}
+.navbar-tools > ul > li > a {
+    padding: 15px 15px 9px;
+    font-size: 16px;
+}
+.navbar-tools li.view-all a {
+    padding: 8px 8px 6px !important;
+}
+.navbar-tools > ul > li {
+    float: left;
+}
+.navbar-tools .dropdown-menu {
+    background: none repeat scroll 0 0 white;
+    border: 1px solid #C7CBD5;
+    border-radius: 0 0 4px 4px;
+    box-shadow: none;
+    list-style: none outside none;
+    margin: 0;
+    max-width: 300px;
+    min-width: 166px;
+    padding: 0;
+    position: absolute;
+    text-shadow: none;
+    top: 100%;
+    z-index: 1000;
+}
+.navbar-tools .drop-down-wrapper {
+    height: 250px;
+    width: 270px;
+    overflow: hidden;
+    position: relative;
+}
+.navbar-tools .drop-down-wrapper ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul.notifications li, ul.todo li, ul.posts li {
+    min-width: 260px;
+}
+.navbar-tools > ul > li.dropdown {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.navbar-tools .dropdown-menu > li > a:hover, .navbar-tools .dropdown-menu > li > a:focus, .navbar-tools .dropdown-submenu:hover > a, .navbar-tools .dropdown-submenu:focus > a, .navbar-tools .drop-down-wrapper li a:hover, .navbar-tools .drop-down-wrapper li a:focus {
+    background-color: #F4F6F9 !important;
+    background-image: none;
+    filter: none;
+    color: #000;
+    text-decoration: none;
+}
+.drop-down-wrapper ul > li:last-child a {
+    border-bottom: none;
+}
+.navbar-tools .dropdown-menu li .dropdown-menu-title {
+    display: block;
+    font-weight: bold;
+    margin: -1px;
+    padding: 5px 10px;
+}
+.navbar-tools .dropdown-menu li p, .navbar-tools .dropdown-menu li a, .navbar-tools .drop-down-wrapper li p, .navbar-tools .drop-down-wrapper li a {
+    color: #333333;
+    font-size: 12px;
+    font-weight: 300;
+    margin: 0;
+    padding: 8px 8px 6px;
+    border-bottom: 1px solid rgba(100, 100, 100, 0.22);
+    white-space: normal !important;
+    display: block;
+}
+.navbar-tools .dropdown-menu > li:last-child a {
+    border-bottom: none !important;
+    border-radius: 0 0 6px 6px;
+}
+li.dropdown.current-user .dropdown-toggle {
+    padding: 10px 4px 7px 9px;
+}
+li.dropdown.current-user .dropdown-menu li a {
+    border-bottom: none !important;
+}
+.navbar-tools .dropdown-menu li p {
+    font-weight: bold;
+}
+.navbar-tools .dropdown-menu li a .author {
+    color: #0362FD;
+    display: block;
+}
+.navbar-tools .dropdown-menu li a .preview {
+    display: block;
+}
+.navbar-tools .dropdown-menu li a .time {
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 600;
+    display: block;
+    float: right;
+}
+.navbar-tools .dropdown-menu li.view-all a i {
+    float: right;
+    margin-top: 4px;
+}
+.navbar-tools .dropdown-menu.notifications li > a > .label {
+    margin-right: 2px;
+    padding: 2px 4px;
+    text-align: center !important;
+}
+.navbar-tools .thread-image {
+    margin-right: 8px;
+    float: left;
+    height: 50px;
+    width: 50px;
+}
+.navbar-tools > ul > li.dropdown .dropdown-toggle .badge {
+    border-radius: 12px 12px 12px 12px !important;
+    font-size: 11px !important;
+    font-weight: 300;
+    padding: 3px 6px;
+    position: absolute;
+    right: 24px;
+    text-align: center;
+    text-shadow: none !important;
+    top: 8px;
+}
+.navbar-toggle {
+    border: none;
+    border-radius: 0;
+    margin-top: 5px;
+    margin-bottom: 4px;
+}
+.navbar-toggle span {
+    font-size: 16px;
+}
+.navbar-inverse {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #C8C7CC;
+}
+/* ie8 fixes */
+.ie8 .navbar-inverse {
+    background: #ffffff;
+}
+/**/
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-brand:hover, .navbar-inverse .nav > li > a {
+    color: #666666;
+}
+.navbar-inverse .navbar-brand i, .navbar-inverse .navbar-brand:hover i {
+    color: #007AFF;
+}
+
+.navbar-inverse .nav > li > a {
+    color: #999999;
+}
+.navbar-inverse .nav > li.current-user > a {
+    color: #666666 !important;
+}
+.navbar-inverse .nav > li.current-user > a i {
+    display: inline-block;
+    text-align: center;
+    width: 1.25em;
+    color: #007AFF !important;
+    font-size: 12px;
+}
+.navbar-inverse .nav > li:hover > a, .navbar-inverse .nav > li:active > a {
+    color: #555555;
+    background: #F5F5F5;
+}
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
+    background: #D9D9D9;
+    color: #555555;
+}
+
+.navbar-tools .dropdown-menu li .dropdown-menu-title {
+    background: #D9D9D9;
+    color: #555555;
+}
+.navbar-inverse .btn-navbar {
+    background-color: #D9D9D9;
+    background: -moz-linear-gradient(top, #34485e 0%, #283b52 100%); /* firefox */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#34485e), color-stop(100%,#283b52)); /* webkit */
+}
+
+.nav > li.dropdown .dropdown-toggle .badge {
+    background-color: #ff252a;
+    border: none;
+}
+.navbar-toggle {
+    background-color: #ffffff;
+}
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+    background-color: #D9D9D9;
+    -moz-box-shadow: 0 0 15px #fff;
+    -webkit-box-shadow: 0 0 15px #fff;
+    box-shadow: 0px 0px 15px #fff;
+}
+.navbar-toggle span {
+    color: #999999;
+}
+
+.wishlist, .compare{
+    cursor: pointer;
+    display: table-cell;
+
+}
+
+.wishlist i, .compare i{
+    margin: 5px;
+    font-size: 24px;
+}
+.wishlist:hover, .compare:hover{
+   text-decoration: underline;
+}
+.product-grid article{
+    width: 255px;
+    padding-left: 20px;
+    display: inline-block;
+    float: left;
+}
+.product-grid .description{
+    display: none;
+}
+
+.price{
+    font-size: large;
+    margin: 5px;
+}
+
+.product-grid .price{
+    text-align: center;
+}
+
+.product-list .price{
+    text-align: right;
+    font-size: x-large;
+}
+.product-list .cart{
+  float: left;
+}
+
+.price .price-old{
+    text-decoration: line-through;
+    color: #ff252a;
+}
+
+.results{
+    clear: both;
+}
+

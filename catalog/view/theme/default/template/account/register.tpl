@@ -5,9 +5,9 @@
     <div class="box-register">
         <h3><?php echo $text_register; ?></h3>
         <p><?php echo $text_account_already; ?></p>
-        <p>
-            <?php echo $text_your_details; ?>
-        </p>
+        <h4>
+           <?php echo $text_your_details; ?>
+        </h4>
         <form class="form-register" action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
             <?php if ($error_warning) { ?>
             <div class="errorHandler alert alert-danger">
@@ -118,9 +118,9 @@
                         <?php } ?>
                     </div>
                 </div>
-                <p>
+                <h4>
                     <?php echo $text_account_details; ?>
-                </p>
+                </h4>
                 <div class="form-group">
                     <span class="input-icon">
                     <input type="email" class="form-control" name="email" placeholder="<?php echo $entry_email; ?>" value="<?php echo $email; ?>" required />
