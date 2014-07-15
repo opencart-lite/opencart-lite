@@ -129,26 +129,26 @@
                                             <a href="<?php echo $product['href']; ?>">
                                                 <?php echo $product['name']; ?>
                                             </a>
+                                            <?php if ($product['price']) { ?>
+                                            <div class="price">
+                                                <?php if (!$product['special']) { ?>
+                                                <?php echo $product['price']; ?>
+                                                <?php } else { ?>
+                                                <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>
+                                                <?php } ?>
+                                            </div>
+                                            <?php } ?>
                                         </h2>
-                                        <p>
+                                        <blockquote>
                                             <?php echo $product['description']; ?> [...]
-                                        </p>
+                                        </blockquote>
                                         <p>
                                         <div class="cart">
-                                            <input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />
+                                            <button onclick="addToCart('<?php echo $product['product_id']; ?>');" class="btn btn-main-color btn-squared">
+                                                <i class="clip-cart"></i>
+                                                <?php echo $button_cart; ?>
+                                            </button>
                                         </div>
-                                            <?php if ($product['price']) { ?>
-                                        <div class="price">
-                                            <?php if (!$product['special']) { ?>
-                                            <?php echo $product['price']; ?>
-                                            <?php } else { ?>
-                                            <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>
-                                            <?php } ?>
-                                        </div>
-                                        <?php } ?>
-
-                                        </p>
-                                        <p>
 
                                         <?php if ($product['rating']) { ?>
                                         <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
@@ -246,8 +246,7 @@
                     html += '</div>';
                 }
                 html += '<div class="grid-content">';
-                html += '<div class="name">' + $(element).find('.post-content h2').html() + '</div>';
-                html += '<div class="price">' + $(element).find('.post-content .price').html() + '</div>';
+                html += '<h3 class="name">' + $(element).find('.post-content h2').html() + '</h3>';
                 if(rating) {
                     html += '<div class="rating">' + rating + '</div>';
                 }
@@ -268,9 +267,6 @@
             $.cookie('display', 'grid');
 
         }
-
-
-
     }
 
    view = $.cookie('display');

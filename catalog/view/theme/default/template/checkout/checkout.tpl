@@ -1,54 +1,220 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <h1><?php echo $heading_title; ?></h1>
-  <div class="checkout">
-    <div id="checkout">
-      <div class="checkout-heading"><?php echo $text_checkout_option; ?></div>
-      <div class="checkout-content"></div>
+<?php echo $header; ?>
+<!-- start: MAIN CONTAINER -->
+<div class="main-container">
+<section class="page-top">
+    <div class="container">
+        <div class="col-md-4 col-sm-4">
+            <h1><?php echo $heading_title; ?></h1>
+        </div>
+        <div class="col-md-8 col-sm-8">
+            <!-- BREADCRUMBS -->
+            <ul class="pull-right breadcrumb">
+                <?php $i=0; ?>
+                <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+                <?php if(isset($breadcrumb['href']) && $breadcrumb['href']) { ?>
+                <li>
+                    <a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
+                </li>
+                <?php } else { ?>
+                <li class="active"><?php echo $breadcrumb['text']; ?></li>
+                <?php } ?>
+                <?php } ?>
+            </ul>
+            <!-- /BREADCRUMBS -->
+        </div>
     </div>
-    <?php if ($shipping_required) { ?>
-    <div id="shipping-method">
-      <div class="checkout-heading"><?php echo $text_checkout_shipping_method; ?></div>
-      <div class="checkout-content"></div>
+</section>
+<section id="notification"></section>
+<section class="wrapper">
+<div class="container">
+<?php echo $content_top; ?>
+<div class="row">
+<?php echo $column_left; ?>
+<div class="col-md-12">
+<div class="row">
+    <div class="col-md-12">
+        <!-- start: TABLE WITH IMAGES PANEL -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-external-link-square"></i>
+            </div>
+            <div class="panel-body">
+
+
+
+                <form action="#" role="form" class="smart-wizard form-horizontal" id="form">
+                    <div id="wizard" class="swMain">
+                        <ul>
+                            <li>
+                                <a href="#checkout">
+                                    <div class="stepNumber">
+                                        1
+                                    </div>
+                                    <span class="stepDesc"> Step 1<br /><small><?php echo $text_checkout_option; ?></small> </span>
+                                </a>
+                            </li>
+                            <?php if ($shipping_required) { ?>
+                            <li>
+                                <a href="#shipping-method">
+                                    <div class="stepNumber">
+                                        2
+                                    </div>
+                                    <span class="stepDesc"> Step 2<br /><small><?php echo $text_checkout_shipping_method; ?></small> </span>
+                                </a>
+                            </li>
+                            <?php } ?>
+                            <li>
+                                <a href="#payment-method">
+                                    <div class="stepNumber">
+                                        3
+                                    </div>
+                                    <span class="stepDesc"> Step 3<br /><small><?php echo $text_checkout_payment_method; ?></small> </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#confirm">
+                                    <div class="stepNumber">
+                                        4
+                                    </div>
+                                    <span class="stepDesc"> Step 4<br /><small><?php echo $text_checkout_confirm; ?></small> </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="progress progress-striped active progress-sm">
+                            <div aria-valuemax="100" aria-valuemin="0" role="progressbar" class="progress-bar progress-bar-success step-bar">
+                                <span class="sr-only"> 0% Complete (success)</span>
+                            </div>
+                        </div>
+
+
+                        <div id="checkout">
+                            <div class="checkout-heading"><?php echo $text_checkout_option; ?></div>
+                            <div class="checkout-content"></div>
+                        </div>
+                        <div id="payment-address">
+                            <div class="checkout-heading"><?php echo $text_checkout_option; ?></div>
+                            <div class="checkout-content"></div>
+                        </div>
+                        <?php if ($shipping_required) { ?>
+                        <div id="shipping-method">
+                            <div class="checkout-heading"><?php echo $text_checkout_shipping_method; ?></div>
+                            <div class="checkout-content"></div>
+                        </div>
+                        <?php } ?>
+                        <div id="payment-method">
+                            <div class="checkout-heading"><?php echo $text_checkout_payment_method; ?></div>
+                            <div class="checkout-content"></div>
+                        </div>
+                        <div id="confirm">
+                            <div class="checkout-heading"><?php echo $text_checkout_confirm; ?></div>
+                            <div class="checkout-content"></div>
+                        </div>
+
+
+
+                    </div>
+            </div>
+            </form>
+
+
+
+            </div>
+        </div>
+        <!-- end: TABLE WITH IMAGES PANEL -->
     </div>
-    <?php } ?>
-    <div id="payment-method">
-      <div class="checkout-heading"><?php echo $text_checkout_payment_method; ?></div>
-      <div class="checkout-content"></div>
-    </div>
-    <div id="confirm">
-      <div class="checkout-heading"><?php echo $text_checkout_confirm; ?></div>
-      <div class="checkout-content"></div>
-    </div>
-  </div>
-  <?php echo $content_bottom; ?></div>
+</div>
+
+
+
+</div>
+<?php echo $column_right; ?>
+</div>
+<?php echo $content_bottom; ?>
+</div>
+</section>
+</div>
+<!-- end: MAIN CONTAINER -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script type="text/javascript"><!--
-$('.checkout-heading a').live('click', function() {
-	$('.checkout-content').slideUp('slow');
-	
-	$(this).parent().parent().find('.checkout-content').slideDown('slow');
-});
-<?php if (!$logged) { ?> 
+
+<?php if ($logged) { ?>
 $(document).ready(function() {
-	$.ajax({
-		url: 'index.php?route=checkout/login',
-		dataType: 'html',
-		success: function(html) {
-			$('#checkout .checkout-content').html(html);
-				
-			$('#checkout .checkout-content').slideDown('slow');
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});	
+	console.log('guest');
+    $.ajax({
+        url: 'index.php?route=checkout/address',
+        dataType: 'html',
+
+        success: function(html) {
+            //$('.warning, .error').remove();
+
+            $('#payment-address .checkout-content').html(html);
+            $('#payment-address').attr('style', 'display:block');
+
+            //$('#checkout .checkout-content').slideUp('slow');
+
+            //$('#payment-address .checkout-content').slideDown('slow');
+
+            //$('.checkout-heading a').remove();
+
+            //$('#checkout .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
 });		
-<?php } else { ?>
+<?php } else if ($shipping_required) { ?>
+    $.ajax({
+        url: 'index.php?route=checkout/shipping_method',
+        dataType: 'html',
+        success: function(html) {
+            alert(html);
+            $('#shipping-method .checkout-content').html(html);
+            $('#shipping-method').attr('style', 'display:block');
+
+            //$('#shipping-method .checkout-content').slideDown('slow');
+
+            //$('#shipping-method .checkout-heading a').remove();
+            //$('#payment-method .checkout-heading a').remove();
+
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+<?php }  else  { ?>
     $.ajax({
         url: 'index.php?route=checkout/shipping_method',
         dataType: 'html',
@@ -68,7 +234,7 @@ $(document).ready(function() {
 <?php } ?>
 
 // Checkout
-$('#button-account').live('click', function() {
+/*$('#button-account').live('click', function() {
 	$.ajax({
 		url: 'index.php?route=checkout/' + $('input[name=\'account\']:checked').attr('value'),
 		dataType: 'html',
@@ -97,223 +263,8 @@ $('#button-account').live('click', function() {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
 	});
-});
+});*/
 
-// Login
-$('#button-login').live('click', function() {
-	$.ajax({
-		url: 'index.php?route=checkout/login/validate',
-		type: 'post',
-		data: $('#checkout #login :input'),
-		dataType: 'json',
-		beforeSend: function() {
-			$('#button-login').attr('disabled', true);
-			$('#button-login').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
-		},	
-		complete: function() {
-			$('#button-login').attr('disabled', false);
-			$('.wait').remove();
-		},				
-		success: function(json) {
-			$('.warning, .error').remove();
-			
-			if (json['redirect']) {
-				location = json['redirect'];
-			} else if (json['error']) {
-				$('#checkout .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '</div>');
-				
-				$('.warning').fadeIn('slow');
-			}
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});	
-});
-
-// Register
-$('#button-register').live('click', function() {
-	$.ajax({
-		url: 'index.php?route=checkout/register/validate',
-		type: 'post',
-		data: $('#payment-address input[type=\'text\'], #payment-address input[type=\'password\'], #payment-address input[type=\'checkbox\']:checked, #payment-address input[type=\'radio\']:checked, #payment-address input[type=\'hidden\'], #payment-address select'),
-		dataType: 'json',
-		beforeSend: function() {
-			$('#button-register').attr('disabled', true);
-			$('#button-register').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
-		},	
-		complete: function() {
-			$('#button-register').attr('disabled', false); 
-			$('.wait').remove();
-		},			
-		success: function(json) {
-			$('.warning, .error').remove();
-						
-			if (json['redirect']) {
-				location = json['redirect'];				
-			} else if (json['error']) {
-				if (json['error']['warning']) {
-					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<button data-dismiss="alert" class="close">×</button></div>');
-					
-					$('.warning').fadeIn('slow');
-				}
-				
-				if (json['error']['firstname']) {
-					$('#payment-address input[name=\'firstname\'] + br').after('<span class="error">' + json['error']['firstname'] + '</span>');
-				}
-				
-				if (json['error']['lastname']) {
-					$('#payment-address input[name=\'lastname\'] + br').after('<span class="error">' + json['error']['lastname'] + '</span>');
-				}	
-				
-				if (json['error']['email']) {
-					$('#payment-address input[name=\'email\'] + br').after('<span class="error">' + json['error']['email'] + '</span>');
-				}
-				
-				if (json['error']['telephone']) {
-					$('#payment-address input[name=\'telephone\'] + br').after('<span class="error">' + json['error']['telephone'] + '</span>');
-				}	
-
-				if (json['error']['company_id']) {
-					$('#payment-address input[name=\'company_id\'] + br').after('<span class="error">' + json['error']['company_id'] + '</span>');
-				}
-
-				if (json['error']['tax_id']) {
-					$('#payment-address input[name=\'tax_id\'] + br').after('<span class="error">' + json['error']['tax_id'] + '</span>');
-				}
-
-				if (json['error']['address_1']) {
-					$('#payment-address input[name=\'address_1\'] + br').after('<span class="error">' + json['error']['address_1'] + '</span>');
-				}	
-				
-				if (json['error']['city']) {
-					$('#payment-address input[name=\'city\'] + br').after('<span class="error">' + json['error']['city'] + '</span>');
-				}	
-				
-				if (json['error']['postcode']) {
-					$('#payment-address input[name=\'postcode\'] + br').after('<span class="error">' + json['error']['postcode'] + '</span>');
-				}	
-				
-				if (json['error']['country']) {
-					$('#payment-address select[name=\'country_id\'] + br').after('<span class="error">' + json['error']['country'] + '</span>');
-				}	
-				
-				if (json['error']['zone']) {
-					$('#payment-address select[name=\'zone_id\'] + br').after('<span class="error">' + json['error']['zone'] + '</span>');
-				}
-				
-				if (json['error']['password']) {
-					$('#payment-address input[name=\'password\'] + br').after('<span class="error">' + json['error']['password'] + '</span>');
-				}	
-				
-				if (json['error']['confirm']) {
-					$('#payment-address input[name=\'confirm\'] + br').after('<span class="error">' + json['error']['confirm'] + '</span>');
-				}																																	
-			} else {
-				<?php if ($shipping_required) { ?>
-				var shipping_address = $('#payment-address input[name=\'shipping_address\']:checked').attr('value');
-
-				if (shipping_address) {
-					$.ajax({
-						url: 'index.php?route=checkout/shipping_method',
-						dataType: 'html',
-						success: function(html) {
-							$('#shipping-method .checkout-content').html(html);
-
-							$('#payment-address .checkout-content').slideUp('slow');
-
-							$('#shipping-method .checkout-content').slideDown('slow');
-
-							$('#checkout .checkout-heading a').remove();
-							$('#payment-address .checkout-heading a').remove();
-							$('#shipping-address .checkout-heading a').remove();
-							$('#shipping-method .checkout-heading a').remove();
-							$('#payment-method .checkout-heading a').remove();
-
-							$('#shipping-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
-							$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
-
-							$.ajax({
-								url: 'index.php?route=checkout/shipping_address',
-								dataType: 'html',
-								success: function(html) {
-									$('#shipping-address .checkout-content').html(html);
-								},
-								error: function(xhr, ajaxOptions, thrownError) {
-									alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-								}
-							});
-						},
-						error: function(xhr, ajaxOptions, thrownError) {
-							alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-						}
-					});
-				} else {
-					$.ajax({
-						url: 'index.php?route=checkout/shipping_address',
-						dataType: 'html',
-						success: function(html) {
-							$('#shipping-address .checkout-content').html(html);
-							
-							$('#payment-address .checkout-content').slideUp('slow');
-							
-							$('#shipping-address .checkout-content').slideDown('slow');
-							
-							$('#checkout .checkout-heading a').remove();
-							$('#payment-address .checkout-heading a').remove();
-							$('#shipping-address .checkout-heading a').remove();
-							$('#shipping-method .checkout-heading a').remove();
-							$('#payment-method .checkout-heading a').remove();							
-
-							$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');	
-						},
-						error: function(xhr, ajaxOptions, thrownError) {
-							alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-						}
-					});			
-				}
-				<?php } else { ?>
-				$.ajax({
-					url: 'index.php?route=checkout/payment_method',
-					dataType: 'html',
-					success: function(html) {
-						$('#payment-method .checkout-content').html(html);
-						
-						$('#payment-address .checkout-content').slideUp('slow');
-						
-						$('#payment-method .checkout-content').slideDown('slow');
-						
-						$('#checkout .checkout-heading a').remove();
-						$('#payment-address .checkout-heading a').remove();
-						$('#payment-method .checkout-heading a').remove();								
-						
-						$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');	
-					},
-					error: function(xhr, ajaxOptions, thrownError) {
-						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-					}
-				});					
-				<?php } ?>
-				
-				$.ajax({
-					url: 'index.php?route=checkout/payment_address',
-					dataType: 'html',
-					success: function(html) {
-						$('#address .checkout-content').html(html);
-							
-						$('#address .checkout-heading span').html('<?php echo $text_checkout_address; ?>');
-					},
-					error: function(xhr, ajaxOptions, thrownError) {
-						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-					}
-				});
-			}	 
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});	
-});
 
 // Guest
 $('#button-guest').live('click', function() {
@@ -667,5 +618,11 @@ $('#button-payment-method').live('click', function() {
 		}
 	});	
 });
-//--></script> 
+//--></script>
+<script>
+    jQuery(document).ready(function() {
+        Main.init();
+        FormWizard.init();
+    });
+</script>
 <?php echo $footer; ?>
