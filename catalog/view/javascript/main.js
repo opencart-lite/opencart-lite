@@ -518,6 +518,8 @@ var Main = function() {
 		}
 	};
 
+
+
 	return {
 		//main function to initiate template pages
 		init: function() {
@@ -551,11 +553,11 @@ var FormWizard = function () {
             selected: 0,
             keyNavigation: false,
             onLeaveStep: leaveAStepCallback,
-            onShowStep: onShowStep
+            onShowStep: onShowStep,
         });
         var numberOfSteps = 0;
         animateBar();
-        initValidator();
+        //initValidator();
     };
     var animateBar = function (val) {
         if ((typeof val == 'undefined') || val == "") {
@@ -567,7 +569,7 @@ var FormWizard = function () {
     };
     var initValidator = function () {
 
-
+        return true;
     };
     var displayConfirm = function () {
         $('.display-value', form).each(function () {

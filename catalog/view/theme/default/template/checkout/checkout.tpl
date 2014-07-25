@@ -42,7 +42,7 @@
 
 
 
-                <form action="#" role="form" class="smart-wizard form-horizontal" id="form">
+                <form action="javascript:void(0)" role="form" class="smart-wizard form-horizontal" id="form">
                     <div id="wizard" class="swMain">
                         <ul>
                             <li>
@@ -88,11 +88,11 @@
 
 
                         <div id="checkout">
-                            <div class="checkout-heading"><?php echo $text_checkout_option; ?></div>
+                            <div class="checkout-heading StepTitle"><?php echo $text_checkout_option; ?></div>
                             <div class="checkout-content"></div>
                         </div>
                         <div id="payment-address">
-                            <div class="checkout-heading"><?php echo $text_checkout_option; ?></div>
+                            <div class="checkout-heading StepTitle"><?php echo $text_checkout_option; ?></div>
                             <div class="checkout-content"></div>
                         </div>
                         <?php if ($shipping_required) { ?>
@@ -110,10 +110,17 @@
                             <div class="checkout-content"></div>
                         </div>
 
-
+                        <div class="form-group">
+                            <div class="col-sm-2 col-sm-offset-8">
+                                <button class="btn btn-blue next-step btn-block" id="button-checkout">
+                                    Continue<?php //echo $button_continue; ?> <i class="fa fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </div>
 
                     </div>
             </div>
+
             </form>
 
 
@@ -171,7 +178,6 @@
 
 <?php if ($logged) { ?>
 $(document).ready(function() {
-	console.log('guest');
     $.ajax({
         url: 'index.php?route=checkout/address',
         dataType: 'html',
@@ -179,9 +185,10 @@ $(document).ready(function() {
         success: function(html) {
             //$('.warning, .error').remove();
 
-            $('#payment-address .checkout-content').html(html);
-            $('#payment-address').attr('style', 'display:block');
-
+            $('#checkout .checkout-content').html(html);
+            $('#checkout').attr('style', 'display:block');
+            $('#button-checkout').attr('step', '2');
+            animateBar();
             //$('#checkout .checkout-content').slideUp('slow');
 
             //$('#payment-address .checkout-content').slideDown('slow');
@@ -194,7 +201,7 @@ $(document).ready(function() {
             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
         }
     });
-});		
+
 <?php } else if ($shipping_required) { ?>
     $.ajax({
         url: 'index.php?route=checkout/shipping_method',
@@ -233,39 +240,55 @@ $(document).ready(function() {
     });
 <?php } ?>
 
+
+
+
+var animateBar = function (val) {
+    if ((typeof val == 'undefined') || val == "") {
+        val = 1;
+    };
+    numberOfSteps = $('.swMain > ul > li').length;
+    var valueNow = Math.floor(100 / numberOfSteps * val);
+    $('.step-bar').css('width', valueNow + '%');
+};
+
 // Checkout
-/*$('#button-account').live('click', function() {
-	$.ajax({
+$('#button-checkout').on('click', function() {
+    var step =  $('#button-checkout').attr('step');
+    animateBar(step);
+    alert('sdfasdrf');
+	/*$.ajax({
 		url: 'index.php?route=checkout/' + $('input[name=\'account\']:checked').attr('value'),
 		dataType: 'html',
 		beforeSend: function() {
 			$('#button-account').attr('disabled', true);
 			$('#button-account').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
-		},		
+		},
 		complete: function() {
 			$('#button-account').attr('disabled', false);
 			$('.wait').remove();
-		},			
+		},
 		success: function(html) {
 			$('.warning, .error').remove();
-			
+
 			$('#payment-address .checkout-content').html(html);
-				
+
 			$('#checkout .checkout-content').slideUp('slow');
-				
+
 			$('#payment-address .checkout-content').slideDown('slow');
-				
+
 			$('.checkout-heading a').remove();
-				
+
 			$('#checkout .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
-	});
-});*/
+	});*/
+});
 
-
+});
+/*
 // Guest
 $('#button-guest').live('click', function() {
 	$.ajax({
@@ -618,11 +641,46 @@ $('#button-payment-method').live('click', function() {
 		}
 	});	
 });
+*/
 //--></script>
 <script>
     jQuery(document).ready(function() {
         Main.init();
-        FormWizard.init();
+        //FormWizard.init();
+
+        /*$('#wizard').smartWizard({
+            onLeaveStep:leaveAStepCallback,
+            onFinish:onFinishCallback
+        });
+
+        function leaveAStepCallback(obj, context){
+            alert("Leaving step " + context.fromStep + " to go to step " + context.toStep);
+            return validateSteps(context.fromStep); // return false to stay on step and true to continue navigation
+        }
+
+        function onFinishCallback(objs, context){
+            if(validateAllSteps()){
+                $('form').submit();
+            }
+        }
+
+        // Your Step validation logic
+        function validateSteps(stepnumber){
+            var isStepValid = true;
+            // validate step 1
+            if(stepnumber == 1){
+                // Your step validation logic
+                // set isStepValid = false if has errors
+                alert('dfsdgt');
+            }
+            // ...
+        }
+        function validateAllSteps(){
+            var isStepValid = true;
+            // all step validation logic
+            return isStepValid;
+        }*/
+
     });
 </script>
 <?php echo $footer; ?>

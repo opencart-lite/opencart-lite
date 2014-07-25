@@ -11,15 +11,11 @@
         <td class="right">
             <h3><?php echo $address['country'] ?></h3> <h3><?php echo $address['zone'] ?></h3> <h3><?php echo $address['city'] ?></h3><br>
             <h3><?php echo $address['address']; ?></h3>
+            <input type="hidden" value="address">
         </td>
     </tr>
     <tr>
         <td class="right"><h3><?php echo $address['postcode']; ?></h3></td>
     </tr>
-    <div class="buttons">
-        <div class="right">
-            <input type="button" value="<?php echo $button_continue; ?>" id="button-address" class="button" />
-        </div>
-    </div>
 </table>
 </div>
