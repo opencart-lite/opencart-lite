@@ -25,7 +25,8 @@ class Confirm implements iController {
 			
 			// Validate if shipping method has been set.	
 			if (!isset($this->session->data['shipping_method'])) {
-				$redirect = $this->url->link('checkout/checkout', '', 'SSL');
+				//$redirect = $this->url->link('checkout/checkout', '', 'SSL');
+               // var_dump($this->session->data);
 			}
 		} else {
 			unset($this->session->data['shipping_method']);
@@ -47,12 +48,12 @@ class Confirm implements iController {
 		
 		// Validate if payment method has been set.	
 		if (!isset($this->session->data['payment_method'])) {
-			$redirect = $this->url->link('checkout/checkout', '', 'SSL');
+			//$redirect = $this->url->link('checkout/checkout', '', 'SSL');
 		}
 					
 		// Validate cart has products and has stock.	
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
-			$redirect = $this->url->link('checkout/cart');				
+			//$redirect = $this->url->link('checkout/cart');
 		}	
 		
 		// Validate minimum quantity requirments.			
