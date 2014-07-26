@@ -11,7 +11,7 @@
         <td class="right">
             <h3><?php echo $address['country'] ?></h3> <h3><?php echo $address['zone'] ?></h3> <h3><?php echo $address['city'] ?></h3><br>
             <h3><?php echo $address['address']; ?></h3>
-            <input type="hidden" value="address">
+            <input type="hidden" name="address_id" value="<?php echo $address_id; ?>">
         </td>
     </tr>
     <tr>
