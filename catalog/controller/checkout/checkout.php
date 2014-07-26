@@ -10,7 +10,9 @@ class Checkout implements iController {
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
 	  		$this->redirect($this->url->link('checkout/cart'));
-    	}	
+    	}
+
+        //$this->document->addScript('catalog/view/plugins/jquery-validation/dist/jquery.validate.min.js');
 		
 		// Validate minimum quantity requirments.			
 		$products = $this->cart->getProducts();
@@ -54,7 +56,7 @@ class Checkout implements iController {
       	);
 					
 	    $this->data['heading_title'] = $this->language->get('heading_title');
-		
+
 		$this->data['text_checkout_option'] = $this->language->get('text_checkout_option');
 		$this->data['text_checkout_account'] = $this->language->get('text_checkout_account');
 		$this->data['text_checkout_address'] = $this->language->get('text_checkout_address');

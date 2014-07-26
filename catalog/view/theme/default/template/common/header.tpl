@@ -61,6 +61,7 @@
     <script src="catalog/view/plugins/stellar.js/jquery.stellar.min.js"></script>
     <script src="catalog/view/plugins/colorbox/jquery.colorbox-min.js"></script>
     <script src="catalog/view/plugins/bootstrap-switch/static/js/bootstrap-switch.min.js"></script>
+    <script src="catalog/view/plugins/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
     <script src="catalog/view/javascript/index.js"></script>
     <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 <?php foreach ($scripts as $script) { ?>

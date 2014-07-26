@@ -1,200 +1,263 @@
 <?php echo $header; ?>
-<?php if ($attention) { ?>
-<div class="attention"><?php echo $attention; ?><button data-dismiss="alert" class="close">×</button></div>
-<?php } ?>
-<?php if ($success) { ?>
-<div class="alert alert-success"><?php echo $success; ?><button data-dismiss="alert" class="close">×</button></div>
-<?php } ?>
-<?php if ($error_warning) { ?>
-<div class="warning"><?php echo $error_warning; ?><button data-dismiss="alert" class="close">×</button></div>
-<?php } ?>
-<?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <h1><?php echo $heading_title; ?>
-    <?php if ($weight) { ?>
-    &nbsp;(<?php echo $weight; ?>)
-    <?php } ?>
-  </h1>
-  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-    <div class="cart-info">
-      <table>
-        <thead>
-          <tr>
-            <td class="image"><?php echo $column_image; ?></td>
-            <td class="name"><?php echo $column_name; ?></td>
-            <td class="model"><?php echo $column_model; ?></td>
-            <td class="quantity"><?php echo $column_quantity; ?></td>
-            <td class="price"><?php echo $column_price; ?></td>
-            <td class="total"><?php echo $column_total; ?></td>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($products as $product) { ?>
-          <tr>
-            <td class="image"><?php if ($product['thumb']) { ?>
-              <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
-              <?php } ?></td>
-            <td class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
-              <?php if (!$product['stock']) { ?>
-              <span class="stock">***</span>
-              <?php } ?>
-              <div>
-                <?php foreach ($product['option'] as $option) { ?>
-                - <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small><br />
+<!-- start: MAIN CONTAINER -->
+<div class="main-container">
+<section class="page-top">
+    <div class="container">
+        <div class="col-md-4 col-sm-4">
+            <h1><?php echo $heading_title; ?>
+                <?php if ($weight) { ?>
+                &nbsp;(<?php echo $weight; ?>)
                 <?php } ?>
-              </div>
-              <?php if ($product['reward']) { ?>
-              <small><?php echo $product['reward']; ?></small>
-              <?php } ?></td>
-            <td class="model"><?php echo $product['model']; ?></td>
-            <td class="quantity"><input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" size="1" />
-              &nbsp;
-              <input type="image" src="catalog/view/theme/default/image/update.png" alt="<?php echo $button_update; ?>" title="<?php echo $button_update; ?>" />
-              &nbsp;<a href="<?php echo $product['remove']; ?>"><img src="catalog/view/theme/default/image/remove.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
-            <td class="price"><?php echo $product['price']; ?></td>
-            <td class="total"><?php echo $product['total']; ?></td>
-          </tr>
-          <?php } ?>
-          <?php foreach ($vouchers as $vouchers) { ?>
-          <tr>
-            <td class="image"></td>
-            <td class="name"><?php echo $vouchers['description']; ?></td>
-            <td class="model"></td>
-            <td class="quantity"><input type="text" name="" value="1" size="1" disabled="disabled" />
-              &nbsp;<a href="<?php echo $vouchers['remove']; ?>"><img src="catalog/view/theme/default/image/remove.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
-            <td class="price"><?php echo $vouchers['amount']; ?></td>
-            <td class="total"><?php echo $vouchers['amount']; ?></td>
-          </tr>
-          <?php } ?>
-        </tbody>
-      </table>
+            </h1>
+        </div>
+        <div class="col-md-8 col-sm-8">
+            <!-- BREADCRUMBS -->
+            <ul class="pull-right breadcrumb">
+                <?php $i=0; ?>
+                <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+                <?php if(isset($breadcrumb['href']) && $breadcrumb['href']) { ?>
+                <li>
+                    <a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
+                </li>
+                <?php } else { ?>
+                <li class="active"><?php echo $breadcrumb['text']; ?></li>
+                <?php } ?>
+                <?php } ?>
+            </ul>
+            <!-- /BREADCRUMBS -->
+        </div>
     </div>
-  </form>
-  <?php if ($coupon_status || $voucher_status || $reward_status || $shipping_status) { ?>
-  <h2><?php echo $text_next; ?></h2>
-  <div class="content">
-    <p><?php echo $text_next_choice; ?></p>
-    <table class="radio">
-      <?php if ($coupon_status) { ?>
-      <tr class="highlight">
-        <td><?php if ($next == 'coupon') { ?>
-          <input type="radio" name="next" value="coupon" id="use_coupon" checked="checked" />
-          <?php } else { ?>
-          <input type="radio" name="next" value="coupon" id="use_coupon" />
-          <?php } ?></td>
-        <td><label for="use_coupon"><?php echo $text_use_coupon; ?></label></td>
-      </tr>
-      <?php } ?>
-      <?php if ($voucher_status) { ?>
-      <tr class="highlight">
-        <td><?php if ($next == 'voucher') { ?>
-          <input type="radio" name="next" value="voucher" id="use_voucher" checked="checked" />
-          <?php } else { ?>
-          <input type="radio" name="next" value="voucher" id="use_voucher" />
-          <?php } ?></td>
-        <td><label for="use_voucher"><?php echo $text_use_voucher; ?></label></td>
-      </tr>
-      <?php } ?>
-      <?php if ($reward_status) { ?>
-      <tr class="highlight">
-        <td><?php if ($next == 'reward') { ?>
-          <input type="radio" name="next" value="reward" id="use_reward" checked="checked" />
-          <?php } else { ?>
-          <input type="radio" name="next" value="reward" id="use_reward" />
-          <?php } ?></td>
-        <td><label for="use_reward"><?php echo $text_use_reward; ?></label></td>
-      </tr>
-      <?php } ?>
-      <?php if ($shipping_status) { ?>
-      <tr class="highlight">
-        <td><?php if ($next == 'shipping') { ?>
-          <input type="radio" name="next" value="shipping" id="shipping_estimate" checked="checked" />
-          <?php } else { ?>
-          <input type="radio" name="next" value="shipping" id="shipping_estimate" />
-          <?php } ?></td>
-        <td><label for="shipping_estimate"><?php echo $text_shipping_estimate; ?></label></td>
-      </tr>
-      <?php } ?>
-    </table>
-  </div>
-  <div class="cart-module">
-    <div id="coupon" class="content" style="display: <?php echo ($next == 'coupon' ? 'block' : 'none'); ?>;">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-        <?php echo $entry_coupon; ?>&nbsp;
-        <input type="text" name="coupon" value="<?php echo $coupon; ?>" />
-        <input type="hidden" name="next" value="coupon" />
-        &nbsp;
-        <input type="submit" value="<?php echo $button_coupon; ?>" class="button" />
-      </form>
+</section>
+<section id="notification">
+    <?php if ($attention) { ?>
+    <div class="attention"><?php echo $attention; ?><button data-dismiss="alert" class="close">×</button></div>
+    <?php } ?>
+    <?php if ($success) { ?>
+    <div class="alert alert-success"><?php echo $success; ?><button data-dismiss="alert" class="close">×</button></div>
+    <?php } ?>
+    <?php if ($error_warning) { ?>
+    <div class="alert alert-warning"><?php echo $error_warning; ?><button data-dismiss="alert" class="close">×</button></div>
+    <?php } ?>
+</section>
+<section class="wrapper">
+    <div class="container">
+        <?php echo $content_top; ?>
+        <div class="row">
+            <?php echo $column_left; ?>
+            <div class="col-md-12">
+                <div class="row">
+                <div class="col-md-12">
+                <!-- start: TABLE WITH IMAGES PANEL -->
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-external-link-square"></i>
+                </div>
+                <div class="panel-body">
+                <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+                <div class="cart-info">
+                <table class="table table-striped table-bordered table-hover" id="sample-table-2">
+                <thead>
+                <tr>
+
+                    <th class="center"><?php echo $column_image; ?></th>
+                    <th><?php echo $column_name; ?></th>
+                    <th class="hidden-xs"><?php echo $column_model; ?></th>
+                    <th class="hidden-xs"><?php echo $column_quantity; ?></th>
+                    <th class="center"><?php echo $column_price; ?></th>
+                    <th class="hidden-xs"><?php echo $column_total; ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($products as $product) { ?>
+                <tr>
+                    <td class="center"><?php if ($product['thumb']) { ?>
+                        <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
+                        <?php } ?></td>
+                    <td><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+                        <?php if (!$product['stock']) { ?>
+                        <span class="stock">***</span>
+                        <?php } ?>
+                        <div>
+                            <?php foreach ($product['option'] as $option) { ?>
+                            - <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small><br />
+                            <?php } ?>
+                        </div>
+                        <?php if ($product['reward']) { ?>
+                        <small><?php echo $product['reward']; ?></small>
+                        <?php } ?></td>
+                    <td class="hidden-xs"><?php echo $product['model']; ?></td>
+                    <td class="center">
+                        <div class="col-md-3">
+                        <input class="form-control" type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" size="1" />
+                            </div>
+                        &nbsp;
+                        <!--<input type="image" src="catalog/view/theme/default/image/update.png" alt="<?php echo $button_update; ?>" title="<?php echo $button_update; ?>" />-->
+
+                        <a href="javascript:void(0)" onclick="$('#form').submit();" class="btn btn-xs btn-green tooltips" data-placement="top" data-original-title="<?php echo $button_update; ?>"><i class="fa fa-refresh"></i></a>
+                        <a href="<?php echo $product['remove']; ?>" class="btn btn-xs btn-bricky tooltips" data-placement="top" data-original-title="<?php echo $button_remove; ?>"><i class="fa fa-times fa fa-white"></i></a>
+
+                    </td>
+                    <td><?php echo $product['price']; ?></td>
+                    <td><?php echo $product['total']; ?></td>
+
+                </tr>
+                <?php } ?>
+
+                <?php foreach ($vouchers as $vouchers) { ?>
+                <tr>
+                    <td></td>
+                    <td><?php echo $vouchers['description']; ?></td>
+                    <td></td>
+                    <td>
+                        <input type="text" name="" value="1" size="1" disabled="disabled" />
+                        &nbsp;<a href="<?php echo $vouchers['remove']; ?>" class="btn btn-xs btn-bricky tooltips" data-placement="top" data-original-title="<?php echo $button_remove; ?>"><i class="fa fa-times fa fa-white"></i></a>
+                    </td>
+                    <td><?php echo $vouchers['amount']; ?></td>
+                    <td><?php echo $vouchers['amount']; ?></td>
+                </tr>
+                <?php } ?>
+                </tbody>
+                </table>
+                </div>
+                    </form>
+                </div>
+                </div>
+                <!-- end: TABLE WITH IMAGES PANEL -->
+                </div>
+                </div>
+                <?php if ($coupon_status || $voucher_status || $reward_status || $shipping_status) { ?>
+                <h2><?php echo $text_next; ?></h2>
+                <div class="content">
+                    <p><?php echo $text_next_choice; ?></p>
+                    <table class="radio">
+                        <?php if ($coupon_status) { ?>
+                        <tr class="highlight">
+                            <td><?php if ($next == 'coupon') { ?>
+                                <input type="radio" name="next" value="coupon" id="use_coupon" checked="checked" />
+                                <?php } else { ?>
+                                <input type="radio" name="next" value="coupon" id="use_coupon" />
+                                <?php } ?></td>
+                            <td><label for="use_coupon"><?php echo $text_use_coupon; ?></label></td>
+                        </tr>
+                        <?php } ?>
+                        <?php if ($voucher_status) { ?>
+                        <tr class="highlight">
+                            <td><?php if ($next == 'voucher') { ?>
+                                <input type="radio" name="next" value="voucher" id="use_voucher" checked="checked" />
+                                <?php } else { ?>
+                                <input type="radio" name="next" value="voucher" id="use_voucher" />
+                                <?php } ?></td>
+                            <td><label for="use_voucher"><?php echo $text_use_voucher; ?></label></td>
+                        </tr>
+                        <?php } ?>
+                        <?php if ($reward_status) { ?>
+                        <tr class="highlight">
+                            <td><?php if ($next == 'reward') { ?>
+                                <input type="radio" name="next" value="reward" id="use_reward" checked="checked" />
+                                <?php } else { ?>
+                                <input type="radio" name="next" value="reward" id="use_reward" />
+                                <?php } ?></td>
+                            <td><label for="use_reward"><?php echo $text_use_reward; ?></label></td>
+                        </tr>
+                        <?php } ?>
+                        <?php if ($shipping_status) { ?>
+                        <tr class="highlight">
+                            <td><?php if ($next == 'shipping') { ?>
+                                <input type="radio" name="next" value="shipping" id="shipping_estimate" checked="checked" />
+                                <?php } else { ?>
+                                <input type="radio" name="next" value="shipping" id="shipping_estimate" />
+                                <?php } ?></td>
+                            <td><label for="shipping_estimate"><?php echo $text_shipping_estimate; ?></label></td>
+                        </tr>
+                        <?php } ?>
+                    </table>
+                </div>
+                <div class="cart-module">
+                    <div id="coupon" class="content" style="display: <?php echo ($next == 'coupon' ? 'block' : 'none'); ?>;">
+                        <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+                            <?php echo $entry_coupon; ?>&nbsp;
+                            <input type="text" name="coupon" value="<?php echo $coupon; ?>" />
+                            <input type="hidden" name="next" value="coupon" />
+                            &nbsp;
+                            <input type="submit" value="<?php echo $button_coupon; ?>" class="button" />
+                        </form>
+                    </div>
+                    <div id="voucher" class="content" style="display: <?php echo ($next == 'voucher' ? 'block' : 'none'); ?>;">
+                        <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+                            <?php echo $entry_voucher; ?>&nbsp;
+                            <input type="text" name="voucher" value="<?php echo $voucher; ?>" />
+                            <input type="hidden" name="next" value="voucher" />
+                            &nbsp;
+                            <input type="submit" value="<?php echo $button_voucher; ?>" class="button" />
+                        </form>
+                    </div>
+                    <div id="reward" class="content" style="display: <?php echo ($next == 'reward' ? 'block' : 'none'); ?>;">
+                        <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+                            <?php echo $entry_reward; ?>&nbsp;
+                            <input type="text" name="reward" value="<?php echo $reward; ?>" />
+                            <input type="hidden" name="next" value="reward" />
+                            &nbsp;
+                            <input type="submit" value="<?php echo $button_reward; ?>" class="button" />
+                        </form>
+                    </div>
+                    <div id="shipping" class="content" style="display: <?php echo ($next == 'shipping' ? 'block' : 'none'); ?>;">
+                        <p><?php echo $text_shipping_detail; ?></p>
+                        <table>
+                            <tr>
+                                <td><span class="required">*</span> <?php echo $entry_country; ?></td>
+                                <td><select name="country_id">
+                                        <option value=""><?php echo $text_select; ?></option>
+                                        <?php foreach ($countries as $country) { ?>
+                                        <?php if ($country['country_id'] == $country_id) { ?>
+                                        <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
+                                        <?php } else { ?>
+                                        <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
+                                        <?php } ?>
+                                        <?php } ?>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
+                                <td><select name="zone_id">
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td><span id="postcode-required" class="required">*</span> <?php echo $entry_postcode; ?></td>
+                                <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" /></td>
+                            </tr>
+                        </table>
+                        <input type="button" value="<?php echo $button_quote; ?>" id="button-quote" class="button" />
+                    </div>
+                </div>
+                <?php } ?>
+                <div class="cart-total">
+                    <table id="total" class="table table-condensed table-hover">
+                        <?php foreach ($totals as $total) { ?>
+                        <tr>
+                            <td class="right"><b><?php echo $total['title']; ?>:</b></td>
+                            <td class="right"><?php echo $total['text']; ?></td>
+                        </tr>
+                        <?php } ?>
+                    </table>
+                </div>
+                <div class="buttons">
+                    <div class="right"><a href="<?php echo $checkout; ?>" class="btn btn-primary"><?php echo $button_checkout; ?></a></div>
+                    <div class="center"><a href="<?php echo $continue; ?>" class="btn btn-primary"><?php echo $button_shopping; ?></a></div>
+                </div>
+
+            </div>
+            <?php echo $column_right; ?>
+        </div>
+        <?php echo $content_bottom; ?>
     </div>
-    <div id="voucher" class="content" style="display: <?php echo ($next == 'voucher' ? 'block' : 'none'); ?>;">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-        <?php echo $entry_voucher; ?>&nbsp;
-        <input type="text" name="voucher" value="<?php echo $voucher; ?>" />
-        <input type="hidden" name="next" value="voucher" />
-        &nbsp;
-        <input type="submit" value="<?php echo $button_voucher; ?>" class="button" />
-      </form>
-    </div>
-    <div id="reward" class="content" style="display: <?php echo ($next == 'reward' ? 'block' : 'none'); ?>;">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-        <?php echo $entry_reward; ?>&nbsp;
-        <input type="text" name="reward" value="<?php echo $reward; ?>" />
-        <input type="hidden" name="next" value="reward" />
-        &nbsp;
-        <input type="submit" value="<?php echo $button_reward; ?>" class="button" />
-      </form>
-    </div>
-    <div id="shipping" class="content" style="display: <?php echo ($next == 'shipping' ? 'block' : 'none'); ?>;">
-      <p><?php echo $text_shipping_detail; ?></p>
-      <table>
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-          <td><select name="country_id">
-              <option value=""><?php echo $text_select; ?></option>
-              <?php foreach ($countries as $country) { ?>
-              <?php if ($country['country_id'] == $country_id) { ?>
-              <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-              <?php } else { ?>
-              <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-              <?php } ?>
-              <?php } ?>
-            </select></td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
-          <td><select name="zone_id">
-            </select></td>
-        </tr>
-        <tr>
-          <td><span id="postcode-required" class="required">*</span> <?php echo $entry_postcode; ?></td>
-          <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" /></td>
-        </tr>
-      </table>
-      <input type="button" value="<?php echo $button_quote; ?>" id="button-quote" class="button" />
-    </div>
-  </div>
-  <?php } ?>
-  <div class="cart-total">
-    <table id="total">
-      <?php foreach ($totals as $total) { ?>
-      <tr>
-        <td class="right"><b><?php echo $total['title']; ?>:</b></td>
-        <td class="right"><?php echo $total['text']; ?></td>
-      </tr>
-      <?php } ?>
-    </table>
-  </div>
-  <div class="buttons">
-    <div class="right"><a href="<?php echo $checkout; ?>" class="button"><?php echo $button_checkout; ?></a></div>
-    <div class="center"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_shopping; ?></a></div>
-  </div>
-  <?php echo $content_bottom; ?></div>
+</section>
+</div>
+<!-- end: MAIN CONTAINER -->
+<script>
+    jQuery(document).ready(function() {
+        Main.init();
+    });
+</script>
 <script type="text/javascript"><!--
 $('input[name=\'next\']').bind('change', function() {
 	$('.cart-module > div').hide();
