@@ -4,28 +4,12 @@ $_['heading_title']                  = 'Checkout';
 
 // Text
 $_['text_cart']                      = 'Shopping Cart';
-$_['text_checkout_option']           = 'Step 1: Checkout Options';
-$_['text_checkout_account']          = 'Step 2: Account &amp; Billing Details';
-$_['text_checkout_address']          = 'Step 2: Billing Details';
-$_['text_checkout_shipping_address'] = 'Step 3: Delivery Details';
-$_['text_checkout_shipping_method']  = 'Step 4: Delivery Method';
-$_['text_checkout_payment_method']   = 'Step 5: Payment Method';
-$_['text_checkout_confirm']          = 'Step 6: Confirm Order';
-$_['text_modify']                    = 'Modify &raquo;';
-$_['text_new_customer']              = 'New Customer';
-$_['text_returning_customer']        = 'Returning Customer';
-$_['text_checkout']                  = 'Checkout Options:';
-$_['text_i_am_returning_customer']   = 'I am a returning customer';
-$_['text_register']                  = 'Register Account';
+$_['text_checkout_address']          = 'Step 1: <br /><small>Billing Details</small>';
+$_['text_checkout_shipping_method']  = 'Step 2: <br /><small>Delivery Method</small>';
+$_['text_checkout_payment_method']   = 'Step 3: <br /><small>Payment Method</small>';
+$_['text_checkout_confirm']          = 'Step 4: <br /><small>Confirm Order</small>';
 $_['text_guest']                     = 'Guest Checkout';
-$_['text_register_account']          = 'By creating an account you will be able to shop faster, be up to date on an order\'s status, and keep track of the orders you have previously made.';
-$_['text_forgotten']                 = 'Forgotten Password';
-$_['text_your_details']              = 'Your Personal Details';
-$_['text_your_address']              = 'Your Address';
-$_['text_your_password']             = 'Your Password';
 $_['text_agree']                     = 'I have read and agree to the <a class="colorbox" href="%s" alt="%s"><b>%s</b></a>';
-$_['text_address_new']               = 'I want to use a new address';
-$_['text_address_existing']          = 'I want to use an existing address';
 $_['text_shipping_method']           = 'Please select the preferred shipping method to use on this order.';
 $_['text_payment_method']            = 'Please select the preferred payment method to use on this order.';
 $_['text_comments']                  = 'Add Comments About Your Order';
@@ -40,20 +24,14 @@ $_['column_total']                   = 'Total';
 // Entry
 $_['entry_email_address']            = 'E-Mail Address:';
 $_['entry_email']                    = 'E-Mail:';
-$_['entry_password']                 = 'Password:';
-$_['entry_confirm']                  = 'Password Confirm:';
 $_['entry_firstname']                = 'First Name:';
 $_['entry_lastname']                 = 'Last Name:';
 $_['entry_telephone']                = 'Telephone:';
-$_['entry_fax']                      = 'Fax:';
-$_['entry_company']                  = 'Company:';
-$_['entry_customer_group']           = 'Business Type:';
 $_['entry_address']                = 'Address:';
 $_['entry_postcode']                 = 'Post Code:';
 $_['entry_city']                     = 'City:';
 $_['entry_country']                  = 'Country:';
 $_['entry_zone']                     = 'Region / State:';
-$_['entry_newsletter']               = 'I wish to subscribe to the %s newsletter.';
 $_['entry_shipping'] 	             = 'My delivery and billing addresses are the same.';
 
 // Error
@@ -65,8 +43,6 @@ $_['error_firstname']                = 'First Name must be between 1 and 32 char
 $_['error_lastname']                 = 'Last Name must be between 1 and 32 characters!';
 $_['error_email']                    = 'E-Mail Address does not appear to be valid!';
 $_['error_telephone']                = 'Telephone must be between 3 and 32 characters!';
-$_['error_password']                 = 'Password must be between 3 and 20 characters!';
-$_['error_confirm']                  = 'Password confirmation does not match password!';
 $_['error_address']                = 'Address must be between 3 and 128 characters!';
 $_['error_city']                     = 'City must be between 2 and 128 characters!';
 $_['error_postcode']                 = 'Postcode must be between 2 and 10 characters!';

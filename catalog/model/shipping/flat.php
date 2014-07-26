@@ -6,7 +6,7 @@ class Flat {
     use Model;
     public function getQuote() {
 		$this->load->language('shipping/flat');
-		
+
 
 		if (!$this->config->get('flat_geo_zone_id')) {
 			$status = true;
@@ -15,10 +15,10 @@ class Flat {
 		}
 
 		$method_data = array();
-	
+
 		if ($status) {
 			$quote_data = array();
-			
+
       		$quote_data['flat'] = array(
         		'code'         => 'flat.flat',
         		'title'        => $this->language->get('text_description'),
@@ -34,8 +34,9 @@ class Flat {
         		'error'      => false
       		);
 		}
-	
+
 		return $method_data;
 	}
+
 }
 ?>

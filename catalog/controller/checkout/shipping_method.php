@@ -10,7 +10,7 @@ class Shipping_method implements iController {
 		$this->language->load('checkout/checkout');
 		
 		$this->load->model('account/address');
-		
+
 		if ($this->customer->isLogged() && isset($this->session->data['shipping_address_id'])) {
 			$shipping_address = $this->model_account_address->getAddress($this->session->data['shipping_address_id']);		
 		} elseif (isset($this->session->data['guest'])) {

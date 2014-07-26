@@ -1,5 +1,5 @@
 <?php if ($error_warning) { ?>
-<div class="warning"><?php echo $error_warning; ?></div>
+<div class="alert alert-warning"><?php echo $error_warning; ?></div>
 <?php } ?>
 <?php if ($payment_methods) { ?>
 <p><?php echo $text_payment_method; ?></p>
@@ -23,20 +23,13 @@
 <br />
 <br />
 <?php if ($text_agree) { ?>
-<div class="buttons">
+<div >
   <div class="right"><?php echo $text_agree; ?>
     <?php if ($agree) { ?>
     <input type="checkbox" name="agree" value="1" checked="checked" />
     <?php } else { ?>
     <input type="checkbox" name="agree" value="1" />
     <?php } ?>
-    <input type="button" value="<?php echo $button_continue; ?>" id="button-payment-method" class="button" />
-  </div>
-</div>
-<?php } else { ?>
-<div class="buttons">
-  <div class="right">
-    <input type="button" value="<?php echo $button_continue; ?>" id="button-payment-method" class="button" />
   </div>
 </div>
 <?php } ?>

@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="zone_id"><?php echo $entry_newsletter; ?></label>
+                    <label><?php echo $entry_newsletter; ?></label>
                     <div>
                         <?php if ($newsletter) { ?>
                         <label class="radio-inline">

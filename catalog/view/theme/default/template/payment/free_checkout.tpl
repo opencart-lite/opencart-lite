@@ -1,11 +1,7 @@
-<div class="buttons">
-  <div class="right">
-    <input type="button" value="<?php echo $button_confirm; ?>" id="button-confirm" class="button" />
-  </div>
-</div>
 <script type="text/javascript"><!--
-$('#button-confirm').bind('click', function() {
-	$.ajax({ 
+    $('#button').html('<button class="btn btn-blue next-step btn-block" id="button-confirm"><?php echo $button_confirm; ?> <i class="fa fa-arrow-circle-right"></i></button>');
+$('#button-confirm').on('click', function() {
+	$.ajax({
 		type: 'get',
 		url: 'index.php?route=payment/free_checkout/confirm',
 		success: function() {
