@@ -138,7 +138,7 @@ class Payment implements iController {
 
 			require_once(DIR_APPLICATION . 'controller/payment/' . $this->request->get['extension'] . '.php');
 			
-			$class = 'ControllerPayment' . str_replace('_', '', $this->request->get['extension']);
+			$class = '\Controller\Payment\\' . $this->request->get['extension'];
 			$class = new $class($this->registry);
 			
 			if (method_exists($class, 'install')) {
@@ -166,7 +166,7 @@ class Payment implements iController {
 		
 			require_once(DIR_APPLICATION . 'controller/payment/' . $this->request->get['extension'] . '.php');
 			
-			$class = 'ControllerPayment' . str_replace('_', '', $this->request->get['extension']);
+			$class = '\\Controller\Payment\\' . $this->request->get['extension'];
 			$class = new $class($this->registry);
 			
 			if (method_exists($class, 'uninstall')) {

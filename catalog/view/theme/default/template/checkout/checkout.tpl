@@ -42,37 +42,37 @@
                     <div id="wizard" class="swMain">
                         <ul>
                             <li>
-                                <a href="#checkout">
+                                <a href="javascript:void(0)" class="selected" id="address">
                                     <div class="stepNumber">
                                         1
                                     </div>
-                                    <span class="stepDesc"> Step 1<br /><small><?php echo $text_checkout_option; ?></small> </span>
+                                    <span class="stepDesc"><?php echo $text_checkout_address; ?></span>
                                 </a>
                             </li>
                             <?php if ($shipping_required) { ?>
                             <li>
-                                <a href="#shipping-method">
+                                <a href="javascript:void(0)" id="shipping_method">
                                     <div class="stepNumber">
                                         2
                                     </div>
-                                    <span class="stepDesc"> Step 2<br /><small><?php echo $text_checkout_shipping_method; ?></small> </span>
+                                    <span class="stepDesc"><?php echo $text_checkout_shipping_method; ?></span>
                                 </a>
                             </li>
                             <?php } ?>
                             <li>
-                                <a href="#payment-method">
+                                <a href="javascript:void(0)" id="payment_method">
                                     <div class="stepNumber">
                                         3
                                     </div>
-                                    <span class="stepDesc"> Step 3<br /><small><?php echo $text_checkout_payment_method; ?></small> </span>
+                                    <span class="stepDesc"><?php echo $text_checkout_payment_method; ?></span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#confirm">
+                                <a href="javascript:void(0)" id="confirm">
                                     <div class="stepNumber">
                                         4
                                     </div>
-                                    <span class="stepDesc"> Step 4<br /><small><?php echo $text_checkout_confirm; ?></small> </span>
+                                    <span class="stepDesc"><?php echo $text_checkout_confirm; ?></span>
                                 </a>
                             </li>
                         </ul>
@@ -86,7 +86,7 @@
                         <div id="checkout-content"></div>
 
                         <div class="form-group">
-                            <div class="col-sm-2 col-sm-offset-8">
+                            <div class="col-sm-2 col-sm-offset-8" id="button">
                                 <button class="btn btn-blue next-step btn-block" id="button-next">
                                     Continue<?php //echo $button_continue; ?> <i class="fa fa-arrow-circle-right"></i>
                                 </button>
@@ -111,12 +111,21 @@
 </div>
 <!-- end: MAIN CONTAINER -->
 <script type="text/javascript"><!--
+
+   /* $(document).keyup(function(e){
+        if(e.which==39){ // Right Arrow
+            $this.goForward();
+        }else if(e.which==37){ // Left Arrow
+            $this.goBackward();
+        }
+    });*/
+    $('#wizard ul li a').css('cursor', 'default');
+
 <?php if ($logged) { ?>
 $(document).ready(function() {
     $.ajax({
         url: 'index.php?route=checkout/address',
         dataType: 'html',
-
         success: function(html) {
             animateBar();
             $('#checkout-content').html(html);
@@ -152,26 +161,53 @@ var animateBar = function (val) {
     $('.step-bar').css('width', valueNow + '%');
 };
 
-var getStepNumber = function (step) {
-    var numberStep = 1;
-    if(step == 'shipping_method'){
-        numberStep = 2;
-    }else if(step == 'payment_method'){
-        numberStep = 3;
-    }else if(step == 'confirm'){
-        numberStep = 4;
-    }
-    return numberStep;
-};
+var nextSteps = {
+<?php if($shipping_required){ ?>
+    'address' : {
+         'curr' : 1,
+         'id' : 2,
+         'name' : 'shipping_method',
+     },
+<?php } else{ ?>
+      'address' : {
+          'curr' : 1,
+          'id' : 3,
+          'name' : 'payment_method',
+      },
+<?php } ?>
+    'shipping_method' : {
+         'curr' : 2,
+         'id' : 3,
+         'name' : 'payment_method',
+     },
+    'payment_method' : {
+           'curr' : 3,
+           'id' : 4,
+           'name' : 'confirm',
+    },
+    'confirm' : {
+        'curr' : 4,
+        'id' : 4,
+        'name' : 'confirm',
+    },
+ }
 
-var applyMethod = function (method, next) {
+var runStep = function (step, next) {
     $.ajax({
-        url: 'index.php?route=checkout/' + method + '/validate',
+        url: 'index.php?route=checkout/' + step + '/validate',
         type: 'post',
-        data: $('#checkout-content input[type=\'text\'],#checkout-content input[type=\'hidden\'], #checkout-content input[type=\'checkbox\']:checked, #checkout-content input[type=\'radio\']:checked, #checkout-content select'),
+        data: $(
+            '#checkout-content input[type=\'text\'],' +
+            '#checkout-content input[type=\'hidden\'],' +
+            '#checkout-content input[type=\'mail\'],' +
+            '#checkout-content input[type=\'checkbox\']:checked,' +
+            '#checkout-content input[type=\'radio\']:checked,' +
+            '#checkout-content select,' +
+            '#checkout-content textarea'
+        ),
         dataType: 'json',
         success: function(json) {
-            //alert(json['error']);
+
             if (json['redirect']) {
                 location = json['redirect'];
             } else if (json['error']) {
@@ -186,6 +222,9 @@ var applyMethod = function (method, next) {
                     url: 'index.php?route=checkout/' + next,
                     dataType: 'html',
                     success: function(html) {
+                        animateBar(nextSteps[step].id);
+                        $('#' + step).attr('class', 'done').css('cursor', 'pointer');
+                        $('#' + next).attr('class', 'selected').css('cursor', 'pointer');
                         $('#checkout-content').html(html);
                         $('#button-next').attr('step', next);
                     },
@@ -201,24 +240,38 @@ var applyMethod = function (method, next) {
     });
 };
 
+    var viewStep = function (step, next) {
+        $.ajax({
+            url: 'index.php?route=checkout/' + step,
+            dataType: 'html',
+            success: function(html) {
+                animateBar(nextSteps[step].curr);
+                $('#' + step).attr('class', 'selected').css('cursor', 'pointer');
+                $('#checkout-content').html(html);
+                $('#button-next').attr('step', step);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+};
+
 // Checkout
 $('#button-next').on('click', function() {
     var step = $('#button-next').attr('step');
 
-    animateBar(getStepNumber(step));
-
-    switch (step){
-        <?php if($shipping_required){ ?>
-        case 'address': applyMethod('address' , 'shipping_method');break;
-        <?php } else { ?>
-        case 'address': applyMethod('address' , 'payment_method');break;
-        <?php } ?>
-        case 'shipping_method' : applyMethod('shipping_method' , 'payment_method'); break;
-        case 'payment_method' : applyMethod('payment_method' , 'confirm'); break;
-        case 'confirm' :  applyMethod('confirm' , ''); break;
-    }
+    runStep(step , nextSteps[step].name);
 
 });
+    $('#wizard ul li a').on('click', function() {
+        var step = $(this).attr('id');
+        var sClass = $(this).attr('class');
+        if(sClass == 'selected' || sClass == 'done'){
+            viewStep(step , nextSteps[step].name);
+        }
+        return false;
+    });
+
 });
 //--></script>
 <script>

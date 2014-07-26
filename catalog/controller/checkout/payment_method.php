@@ -11,13 +11,7 @@ class Payment_method implements iController {
 		
 		$this->load->model('account/address');
 		
-		/*if ($this->customer->isLogged() && isset($this->session->data['payment_address_id'])) {
-			$payment_address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);		
-		} elseif (isset($this->session->data['guest'])) {
-			$payment_address = $this->session->data['guest']['payment'];
-		}*/
-		
-		//if (!empty($payment_address)) {
+
 			// Totals
 			$total_data = array();					
 			$total = 0;
@@ -48,29 +42,28 @@ class Payment_method implements iController {
 			$this->load->model('setting/extension');
 			
 			$results = $this->model_setting_extension->getExtensions('payment');
-	
+
 			foreach ($results as $result) {
 				if ($this->config->get($result['code'] . '_status')) {
 					$this->load->model('payment/' . $result['code']);
 					
 					$method = $this->{'model_payment_' . $result['code']}->getMethod($total);
-					
+
 					if ($method) {
 						$method_data[$result['code']] = $method;
 					}
 				}
 			}
 						 
-			$sort_order = array(); 
-		  
+			$sort_order = array();
+
 			foreach ($method_data as $key => $value) {
 				$sort_order[$key] = $value['sort_order'];
 			}
-	
-			array_multisort($sort_order, SORT_ASC, $method_data);			
+
+			array_multisort($sort_order, SORT_ASC, $method_data);
 			
-			$this->session->data['payment_methods'] = $method_data;			
-		//}
+			$this->session->data['payment_methods'] = $method_data;
 		
 		$this->data['text_payment_method'] = $this->language->get('text_payment_method');
 		$this->data['text_comments'] = $this->language->get('text_comments');
@@ -137,16 +130,6 @@ class Payment_method implements iController {
 		
 		// Validate if payment address has been set.
 		$this->load->model('account/address');
-		
-		/*if ($this->customer->isLogged() && isset($this->session->data['payment_address_id'])) {
-			$payment_address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);		
-		} elseif (isset($this->session->data['guest'])) {
-			$payment_address = $this->session->data['guest']['payment'];
-		}
-				
-		if (empty($payment_address)) {
-			$json['redirect'] = $this->url->link('checkout/checkout', '', 'SSL');
-		}*/
 		
 		// Validate cart has products and has stock.			
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
