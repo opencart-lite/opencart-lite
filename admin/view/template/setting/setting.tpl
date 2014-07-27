@@ -42,6 +42,10 @@
                 <span class="error"><?php echo $error_address; ?></span>
                 <?php } ?></td>
             </tr>
+              <tr>
+              <td><span class="required">*</span> <?php echo $entry_about; ?></td>
+              <td><textarea name="config_about" cols="40" rows="5"><?php echo $config_about; ?></textarea></td>
+            </tr>
             <tr>
               <td><span class="required">*</span> <?php echo $entry_email; ?></td>
               <td><input type="text" name="config_email" value="<?php echo $config_email; ?>" size="40" />

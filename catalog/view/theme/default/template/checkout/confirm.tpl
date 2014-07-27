@@ -1,13 +1,19 @@
+<div class="col-md-12">
+    <!-- start: BORDERED TABLE PANEL -->
+    <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-external-link-square"></i>
+            </div>
 <?php if (!isset($redirect)) { ?>
-<div class="checkout-product">
-  <table>
+<div class="panel-body checkout-product">
+    <table class="table table-bordered" id="sample-table-3">
     <thead>
       <tr>
-        <td class="name"><?php echo $column_name; ?></td>
-        <td class="model"><?php echo $column_model; ?></td>
-        <td class="quantity"><?php echo $column_quantity; ?></td>
-        <td class="price"><?php echo $column_price; ?></td>
-        <td class="total"><?php echo $column_total; ?></td>
+        <th class="name"><?php echo $column_name; ?></th>
+        <th class="model"><?php echo $column_model; ?></th>
+        <th class="quantity"><?php echo $column_quantity; ?></th>
+        <th class="price"><?php echo $column_price; ?></th>
+        <th class="total"><?php echo $column_total; ?></th>
       </tr>
     </thead>
     <tbody>
@@ -50,3 +56,6 @@
 location = '<?php echo $redirect; ?>';
 //--></script> 
 <?php } ?>
+        </div>
+    </div>
+</div>

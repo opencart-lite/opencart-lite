@@ -78,35 +78,32 @@
     <div id="slidingbar">
         <!-- start: SLIDING BAR FIRST COLUMN -->
         <div class="col-md-4 col-sm-4">
-            <h2>About <?php echo $store_name; ?></h2>
+            <h2><?php echo $text_about; ?><?php echo $store_name; ?></h2>
             <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-                Nulla consequat massa quis enim.
-                Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.
-                In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+                <?php echo $store_about; ?>
             </p>
         </div>
         <!-- end: SLIDING BAR FIRST COLUMN -->
         <!-- start: SLIDING BAR THIRD COLUMN -->
         <div class="col-md-4 col-sm-4">
-            <h2>Contact Us</h2>
+            <h2><?php echo $text_contact; ?></h2>
             <address class="margin-bottom-40">
-                Clip-One
+                <?php echo $store_owner; ?>
                 <br>
-                12345 Street Name, City Name, United States
+                <?php echo $store_address; ?>
                 <br>
-                P: (641)-734-4763
+                <?php echo $store_telephone; ?>
                 <br>
-                Email:
-                <a href="#">
-                    info@example.com
+                <?php echo $text_email; ?>
+                <a href="mailto:<?php echo $store_email; ?>">
+                    <?php echo $store_email; ?>
                 </a>
             </address>
         </div>
         <!-- end: SLIDING BAR THIRD COLUMN -->
     </div>
     <!-- start: SLIDING BAR TOGGLE BUTTON -->
-    <a href="#" class="sb_toggle">
+    <a href="javascript:void(0)" class="sb_toggle">
     </a>
     <!-- end: SLIDING BAR TOGGLE BUTTON -->
 </div>
@@ -127,51 +124,6 @@
                 <!-- end: TOP BAR CALL US -->
             </div>
             <div class="col-sm-6">
-                <!-- start: TOP BAR SOCIAL ICONS -->
-                <div class="social-icons">
-                    <ul>
-                        <li class="social-twitter tooltips" data-original-title="Twitter" data-placement="bottom">
-                            <a target="_blank" href="http://www.twitter.com">
-                                Twitter
-                            </a>
-                        </li>
-                        <li class="social-dribbble tooltips" data-original-title="Dribbble" data-placement="bottom">
-                            <a target="_blank" href="http://dribbble.com">
-                                Dribbble
-                            </a>
-                        </li>
-                        <li class="social-facebook tooltips" data-original-title="Facebook" data-placement="bottom">
-                            <a target="_blank" href="http://facebook.com">
-                                Facebook
-                            </a>
-                        </li>
-                        <li class="social-google tooltips" data-original-title="Google" data-placement="bottom">
-                            <a target="_blank" href="http://google.com">
-                                Google+
-                            </a>
-                        </li>
-                        <li class="social-linkedin tooltips" data-original-title="LinkedIn" data-placement="bottom">
-                            <a target="_blank" href="http://linkedin.com">
-                                LinkedIn
-                            </a>
-                        </li>
-                        <li class="social-youtube tooltips" data-original-title="YouTube" data-placement="bottom">
-                            <a target="_blank" href="http://youtube.com/">
-                                YouTube
-                            </a>
-                        </li>
-                        <li class="social-rss tooltips" data-original-title="RSS" data-placement="bottom">
-                            <a target="_blank" href="#" >
-                                RSS
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- end: TOP BAR SOCIAL ICONS -->
-
-
-
-
 
                 <div class="navbar-tools">
                 <!-- start: TOP NAVIGATION MENU -->
@@ -186,44 +138,73 @@
                     <?php echo $cart; ?>
 
 
+                    <li class="links tooltips dropdown" data-original-title="<?php echo $text_account; ?>" data-placement="bottom">
+                        <a class="dropdown-toggle" href="<?php echo $account; ?>">
+                            <i class="clip-user-3"></i>
+                        </a>
+                    </li>
+                    <li class="links tooltips dropdown" data-original-title="<?php echo $text_wishlist; ?>" data-placement="bottom">
+                        <a class="dropdown-toggle" href="<?php echo $wishlist; ?>">
+                            <i class="fa fa-heart"></i>
+                            <?php if ($wishlist_count) { ?>
+                            <span class="badge"> <?php echo $wishlist_count; ?></span>
+                            <?php } ?>
+                        </a>
+                    </li>
+                    <li class="links tooltips dropdown" data-original-title="<?php echo $text_checkout; ?>" data-placement="bottom">
+                        <a class="dropdown-toggle" href="<?php echo $checkout; ?>">
+                            <i class="fa fa-check"></i>
+                        </a>
+                    </li>
+
                 <!-- start: USER DROPDOWN -->
-                <li class="dropdown current-user">
+                <!--<li class="dropdown current-user">
                     <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
-                        <img src="assets/images/avatar-1-small.jpg" class="circle-img" alt="">
-                        <span class="username">Peter Clark</span>
+                        <i class="clip-user-3"></i>
+                        <span class="username"><?php echo $login_name; ?></span>
                         <i class="clip-chevron-down"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="pages_user_profile.html">
-                                <i class="clip-user-2"></i>
-                                &nbsp;My Profile
+                            <a href="<?php echo $account; ?>">
+                                <i class="fa fa-gear"></i>
+                                &nbsp;<?php echo $text_account; ?>
                             </a>
                         </li>
                         <li>
-                            <a href="pages_calendar.html">
-                                <i class="clip-calendar"></i>
-                                &nbsp;My Calendar
+                            <a href="<?php echo $wishlist; ?>">
+                                <i class="fa fa-heart"></i>
+                                &nbsp;<?php echo $text_wishlist; ?>
                             </a>
                         </li><li>
-                            <a href="pages_messages.html">
-                                <i class="clip-bubble-4"></i>
-                                &nbsp;My Messages (3)
+                            <a href="<?php echo $shopping_cart; ?>">
+                                <i class="fa fa-shopping-cart"></i>
+                                &nbsp;<?php echo $text_shopping_cart; ?>
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="utility_lock_screen.html"><i class="clip-locked"></i>
-                                &nbsp;Lock Screen </a>
-                        </li>
-                        <li>
-                            <a href="login_example1.html">
-                                <i class="clip-exit"></i>
-                                &nbsp;Log Out
+                            <a href="<?php echo $checkout; ?>">
+                                <i class="fa fa-file-text"></i>
+                                &nbsp;<?php echo $text_checkout; ?>
                             </a>
                         </li>
+                        <li>
+                            <?php if (!$logged) { ?>
+                            <a href="<?php echo $login ?>">
+                                <i class="fa fa-sign-in"></i>
+                                &nbsp;<?php echo $text_login ?>
+                            </a>
+                            <?php } else { ?>
+                            <a href="<?php echo $logout ?>">
+                                <i class="fa fa-power-off"></i>
+                                &nbsp;<?php echo $text_logout ?>
+                            </a>
+                            <?php } ?>
+
+                        </li>
                     </ul>
-                </li>
+                </li>-->
                 <!-- end: USER DROPDOWN -->
                 </ul>
                 <!-- end: TOP NAVIGATION MENU -->
@@ -262,8 +243,8 @@
 <div class="navbar-collapse collapse">
 <ul class="nav navbar-nav navbar-right">
 <li class="<?php //echo $home['active']; ?>">
-    <a href="<?php //echo $home['href']; ?>">
-        <?php //echo $text_home; ?>
+    <a href="<?php echo $home; ?>">
+        <?php echo $text_home; ?>
     </a>
 </li>
 <?php if ($categories) { ?>

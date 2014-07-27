@@ -243,7 +243,7 @@ hr.fade-left {
 	background: #FFFFFF;
 	border-bottom: 1px solid #EFEFEF;
 	font-size: 10px;
-	height: 40px;
+	height: 47px;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -251,25 +251,24 @@ hr.fade-left {
 	z-index: 1031;
 }
 #topbar .callus {
-	color: #999999;
-	line-height: 40px;
+	color: #ffffff;
+	line-height: 47px;
 	font-size: 11px;
 	font-weight: normal;
 	padding: 0 10px;
 }
+#topbar .current-user {
+	line-height: 30px;
+}
 #topbar .callus a {
-	color: #999999;
+	color: #fff30c;
+    font-weight: bold;
 }
 
 #topbar .social-icons ul {
 	float: right !important;
 }
-.colored-top-bar #topbar .callus, .colored-top-bar #topbar .callus a {
-	color: #FFFFFF;
-}
-.colored-top-bar .social-icons ul li a:before {
-	color: #FFFFFF;
-}
+
 /* ---------------------------------------------------------------------- */
 /*	Social Icons
 /* ---------------------------------------------------------------------- */
@@ -341,6 +340,7 @@ hr.fade-left {
 	content: "\f099";
 	background: #48C4D2;
 }
+
 .social-icons ul li.social-dribbble a:before {
 	content: "\f17d";
 }
@@ -631,7 +631,7 @@ ul.social-icons li.vk:hover {
 	top: 0;
 }
 .ie8 .navbar-default.space-top {
-	top: 40px;
+	top: 47px;
 }
 body.isMobile .navbar-default {
 	position: absolute !important;
@@ -3439,3 +3439,39 @@ li.dropdown.current-user .dropdown-menu li a {
     display: none;
 }
 
+.checkout-product thead .name, .checkout-product thead .model {
+    text-align: left;
+}
+.checkout-product thead .quantity, .checkout-product thead .price, .checkout-product thead .total {
+    text-align: right;
+}
+.checkout-product tbody td {
+    vertical-align: top;
+    border-bottom: 1px solid #DDDDDD;
+}
+.checkout-product tbody .name, .checkout-product tbody .model {
+    text-align: left;
+}
+.checkout-product tbody .quantity, .checkout-product tbody .price, .checkout-product tbody .total {
+    text-align: right;
+}
+.checkout-product tfoot td {
+    text-align: right;
+    border-bottom: 1px solid #DDDDDD;
+}
+.checkout-product .price {
+    font-size: 13px;
+}
+.nav li a {
+    color: #000;
+}
+
+.links a:hover {
+    color: #006ADF;
+    border-bottom: 1px solid #eedf43 !important;
+}
+
+.links i {
+    margin: 0px;
+    font-size: 18px;
+}

@@ -81,10 +81,7 @@
                                 <span class="sr-only"> 0% Complete (success)</span>
                             </div>
                         </div>
-
-
                         <div id="checkout-content"></div>
-
                         <div class="form-group">
                             <div class="col-sm-2 col-sm-offset-8" id="button">
                                 <button class="btn btn-blue next-step btn-block" id="button-next">
@@ -99,9 +96,6 @@
         <!-- end: TABLE WITH IMAGES PANEL -->
     </div>
 </div>
-
-
-
 </div>
 <?php echo $column_right; ?>
 </div>
@@ -111,7 +105,6 @@
 </div>
 <!-- end: MAIN CONTAINER -->
 <script type="text/javascript"><!--
-
    /* $(document).keyup(function(e){
         if(e.which==39){ // Right Arrow
             $this.goForward();
@@ -119,7 +112,7 @@
             $this.goBackward();
         }
     });*/
-    $('#wizard ul li a').css('cursor', 'default');
+$('#wizard ul li a').css('cursor', 'default');
 
 <?php if ($logged) { ?>
 $(document).ready(function() {
@@ -192,6 +185,7 @@ var nextSteps = {
     },
  }
 
+
 var runStep = function (step, next) {
     $.ajax({
         url: 'index.php?route=checkout/' + step + '/validate',
@@ -240,37 +234,37 @@ var runStep = function (step, next) {
     });
 };
 
-    var viewStep = function (step, next) {
-        $.ajax({
-            url: 'index.php?route=checkout/' + step,
-            dataType: 'html',
-            success: function(html) {
-                animateBar(nextSteps[step].curr);
-                $('#' + step).attr('class', 'selected').css('cursor', 'pointer');
-                $('#checkout-content').html(html);
-                $('#button-next').attr('step', step);
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-            }
-        });
+var viewStep = function (step, next) {
+   $.ajax({
+        url: 'index.php?route=checkout/' + step,
+        dataType: 'html',
+        success: function(html) {
+        animateBar(nextSteps[step].curr);
+            $('#' + step).attr('class', 'selected').css('cursor', 'pointer');
+            $('#checkout-content').html(html);
+            $('#button-next').attr('step', step);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
 };
-
-// Checkout
+// Next
 $('#button-next').on('click', function() {
     var step = $('#button-next').attr('step');
 
     runStep(step , nextSteps[step].name);
 
 });
-    $('#wizard ul li a').on('click', function() {
-        var step = $(this).attr('id');
-        var sClass = $(this).attr('class');
-        if(sClass == 'selected' || sClass == 'done'){
-            viewStep(step , nextSteps[step].name);
-        }
-        return false;
-    });
+
+$('#wizard ul li a').on('click', function() {
+    var step = $(this).attr('id');
+    var sClass = $(this).attr('class');
+    if(sClass == 'selected' || sClass == 'done'){
+        //viewStep(step , nextSteps[step].name);
+    }
+    return false;
+});
 
 });
 //--></script>

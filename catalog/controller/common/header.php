@@ -79,16 +79,35 @@ class Header implements iController {
 		$this->data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account', '', 'SSL'), $this->customer->getFirstName(), $this->url->link('account/logout', '', 'SSL'));
 		$this->data['text_account'] = $this->language->get('text_account');
     	$this->data['text_checkout'] = $this->language->get('text_checkout');
-				
+    	$this->data['text_contact'] = $this->language->get('text_contact');
+    	$this->data['text_about'] = $this->language->get('text_about');
+    	$this->data['text_email'] = $this->language->get('text_email');
+
+    	$this->data['text_login'] = $this->language->get('text_login');
+    	$this->data['text_logout'] = $this->language->get('text_logout');
+
+        $this->data['login'] = $this->url->link('account/login', '', 'SSL');
+        $this->data['logout'] = $this->url->link('account/logout', '', 'SSL');
+        if($this->customer->isLogged())
+            $this->data['login_name'] = $this->customer->getFirstName();
+        else
+            $this->data['login_name'] = $this->language->get('text_guest');
+
 		$this->data['home'] = $this->url->link('common/home');
 		$this->data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
-		$this->data['logged'] = $this->customer->isLogged();
+        $this->data['wishlist_count'] = isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0;
+        $this->data['logged'] = $this->customer->isLogged();
 		$this->data['account'] = $this->url->link('account/account', '', 'SSL');
 		$this->data['shopping_cart'] = $this->url->link('checkout/cart');
 		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
 
         $this->data['store_name'] = $this->config->get('config_name');
-		
+        $this->data['store_owner'] = $this->config->get('config_owner');
+        $this->data['store_address'] = $this->config->get('config_address');
+        $this->data['store_about'] = $this->config->get('config_about');
+        $this->data['store_telephone'] = $this->config->get('config_telephone');
+        $this->data['store_email'] = $this->config->get('config_email');
+
 		if (isset($this->request->get['filter_name'])) {
 			$this->data['filter_name'] = $this->request->get['filter_name'];
 		} else {
