@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="catalog/view/plugins/animate.css/animate.min.css">
     <link rel="stylesheet" href="catalog/view/theme/default/stylesheet/main.css">
     <link rel="stylesheet" href="catalog/view/theme/default/stylesheet/main-responsive.css">
+    <link rel="stylesheet" href="catalog/view/plugins/flex-slider/flexslider.css">
     <link rel="stylesheet" href="catalog/view/theme/default/stylesheet/theme_blue.css" type="text/css" id="skin_color">
     <!-- end: MAIN CSS -->
     <!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
@@ -56,6 +57,7 @@
     <script src="catalog/view/plugins/jquery.appear/jquery.appear.js"></script>
     <script src="catalog/view/plugins/blockUI/jquery.blockUI.js"></script>
     <script src="catalog/view/plugins/jquery-cookie/jquery.cookie.js"></script>
+    <script src="catalog/view/plugins/flex-slider/jquery.flexslider.js"></script>
     <!-- end: MAIN JAVASCRIPTS -->
     <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
     <script src="catalog/view/plugins/stellar.js/jquery.stellar.min.js"></script>
