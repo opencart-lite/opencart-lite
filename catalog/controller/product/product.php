@@ -159,6 +159,7 @@ class Product implements iController {
 			$this->data['text_share'] = $this->language->get('text_share');
 			$this->data['text_wait'] = $this->language->get('text_wait');
 			$this->data['text_tags'] = $this->language->get('text_tags');
+            $this->data['text_review'] = $this->language->get('text_review');
 			
 			$this->data['entry_name'] = $this->language->get('entry_name');
 			$this->data['entry_review'] = $this->language->get('entry_review');
@@ -197,26 +198,26 @@ class Product implements iController {
 			
 			$this->load->model('tool/image');
 
+            $this->data['images'] = array();
+
 			if ($product_info['image']) {
-				$this->data['popup'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
-			} else {
-				$this->data['popup'] = '';
+
+
+                $this->data['images'][] = array(
+                    'popup' => $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')),
+                    'thumb' => $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height')),
+                    'mini_thumb' => $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'))
+                );
+
 			}
-			
-			if ($product_info['image']) {
-				$this->data['thumb'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height'));
-			} else {
-				$this->data['thumb'] = '';
-			}
-			
-			$this->data['images'] = array();
-			
+
 			$results = $this->model_catalog_product->getProductImages($this->request->get['product_id']);
 			
 			foreach ($results as $result) {
 				$this->data['images'][] = array(
 					'popup' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')),
-					'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'))
+					'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height')),
+					'mini_thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'))
 				);
 			}	
 						
@@ -295,7 +296,7 @@ class Product implements iController {
 			}
 			
 			$this->data['review_status'] = $this->config->get('config_review_status');
-			$this->data['reviews'] = sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']);
+			$this->data['reviews'] = (int)$product_info['reviews'];
 			$this->data['rating'] = (int)$product_info['rating'];
 			$this->data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
 			$this->data['attribute_groups'] = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);

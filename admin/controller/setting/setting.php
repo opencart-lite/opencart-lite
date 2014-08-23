@@ -55,6 +55,7 @@ class Setting implements iController {
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_owner'] = $this->language->get('entry_owner');
 		$this->data['entry_address'] = $this->language->get('entry_address');
+		$this->data['entry_about'] = $this->language->get('entry_about');
 		$this->data['entry_email'] = $this->language->get('entry_email');
 		$this->data['entry_telephone'] = $this->language->get('entry_telephone');
 		$this->data['entry_fax'] = $this->language->get('entry_fax');		
@@ -320,6 +321,12 @@ class Setting implements iController {
 			$this->data['config_address'] = $this->request->post['config_address'];
 		} else {
 			$this->data['config_address'] = $this->config->get('config_address');
+		}
+
+        if (isset($this->request->post['config_about'])) {
+			$this->data['config_about'] = $this->request->post['config_about'];
+		} else {
+			$this->data['config_about'] = $this->config->get('config_about');
 		}
 		
 		if (isset($this->request->post['config_email'])) {

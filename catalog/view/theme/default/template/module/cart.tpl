@@ -1,8 +1,10 @@
 <!-- start: CART DROPDOWN -->
-<li class="dropdown">
+<li class= "links dropdown">
     <a class="dropdown-toggle" data-close-others="true" data-hover="dropdown" data-toggle="dropdown" href="#">
         <i class="clip-cart"></i>
-        <span class="badge"> <?php echo $text_items; ?></span>
+        <?php if ($items) { ?>
+        <span class="badge"> <?php echo $items; ?></span>
+        <?php } ?>
     </a>
     <ul class="dropdown-menu posts">
         <li>

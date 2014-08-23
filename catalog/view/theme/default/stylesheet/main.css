@@ -243,7 +243,7 @@ hr.fade-left {
 	background: #FFFFFF;
 	border-bottom: 1px solid #EFEFEF;
 	font-size: 10px;
-	height: 40px;
+	height: 47px;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -251,25 +251,24 @@ hr.fade-left {
 	z-index: 1031;
 }
 #topbar .callus {
-	color: #999999;
-	line-height: 40px;
+	color: #ffffff;
+	line-height: 47px;
 	font-size: 11px;
 	font-weight: normal;
 	padding: 0 10px;
 }
+#topbar .current-user {
+	line-height: 30px;
+}
 #topbar .callus a {
-	color: #999999;
+	color: #fff30c;
+    font-weight: bold;
 }
 
 #topbar .social-icons ul {
 	float: right !important;
 }
-.colored-top-bar #topbar .callus, .colored-top-bar #topbar .callus a {
-	color: #FFFFFF;
-}
-.colored-top-bar .social-icons ul li a:before {
-	color: #FFFFFF;
-}
+
 /* ---------------------------------------------------------------------- */
 /*	Social Icons
 /* ---------------------------------------------------------------------- */
@@ -341,6 +340,7 @@ hr.fade-left {
 	content: "\f099";
 	background: #48C4D2;
 }
+
 .social-icons ul li.social-dribbble a:before {
 	content: "\f17d";
 }
@@ -631,7 +631,7 @@ ul.social-icons li.vk:hover {
 	top: 0;
 }
 .ie8 .navbar-default.space-top {
-	top: 40px;
+	top: 47px;
 }
 body.isMobile .navbar-default {
 	position: absolute !important;
@@ -1392,6 +1392,11 @@ div.flexslider {
 /* ---------------------------------------------------------------------- */
 .tabbable {
 	margin-bottom: 15px;
+}
+
+.product .tabbable {
+    margin-bottom: 0px;
+    margin-top: 15px;
 }
 .nav-tabs {
 	border-color: #DDDDDD;
@@ -3438,4 +3443,214 @@ li.dropdown.current-user .dropdown-menu li a {
 .swMain .close {
     display: none;
 }
+
+.checkout-product thead .name, .checkout-product thead .model {
+    text-align: left;
+}
+.checkout-product thead .quantity, .checkout-product thead .price, .checkout-product thead .total {
+    text-align: right;
+}
+.checkout-product tbody td {
+    vertical-align: top;
+    border-bottom: 1px solid #DDDDDD;
+}
+.checkout-product tbody .name, .checkout-product tbody .model {
+    text-align: left;
+}
+.checkout-product tbody .quantity, .checkout-product tbody .price, .checkout-product tbody .total {
+    text-align: right;
+}
+.checkout-product tfoot td {
+    text-align: right;
+    border-bottom: 1px solid #DDDDDD;
+}
+.checkout-product .price {
+    font-size: 13px;
+}
+.nav li a {
+    color: #000;
+}
+
+.links a:hover {
+    color: #006ADF;
+    border-bottom: 1px solid #eedf43 !important;
+}
+
+.links i {
+    margin: 0px;
+    font-size: 18px;
+}
+
+.product .cart {
+    border-top: 1px solid #E7E7E7;
+    border-bottom: 1px solid #E7E7E7;
+    padding: 10px 5px 10px 5px;
+    margin-bottom: 20px;
+    color: #4D4D4D;
+    overflow: auto;
+}
+.product .cart div {
+    float: left;
+    vertical-align: middle;
+}
+.product .cart div > span {
+    padding-top: 7px;
+    display: block;
+    color: #999;
+}
+.product .cart .minimum {
+    padding-top: 5px;
+    font-size: 11px;
+    color: #999;
+    clear: both;
+}
+.product .price {
+     text-align: left;
+     font-size: 22px;
+     margin-left: 0;
+     margin-right: 0;
+     margin-bottom: 0;
+     line-height: 46px;
+    background: url("../image/bg/bg_4.png");
+    color: #f0f7fd;
+
+    border-radius: 5px 5px 0 0;
+    border: solid 1px #2d2d2d;
+     clear: both;
+ }
+
+.product .price .price-new, .product .price .price-clear {
+     margin-left: 40px;
+ }
+
+.product .qty {
+     float: right;
+    padding-top: 6px;
+ }
+.product .discount {
+     clear: both;
+    text-align: center;
+ }
+.product .points {
+    color: #000000;
+    display: flex;
+    line-height: 26px;
+    text-align: center;
+    vertical-align: middle;
+ }
+.product .minimum {
+   text-align: right;
+ }
+.product .description {
+    background: url("../image/bg/bg_5.png");
+    border-radius: 0 0 5px 5px;
+    border: solid 1px #000000;
+ }
+.product .manufacturer {
+    font-size: 14px ;
+    position: relative;
+    left: -15px;
+ }
+
+.product .points .badge {
+    color: #007AFF;
+    cursor: default;
+    margin: 20px;
+    font-size: 24px ;
+    text-align: center;
+    background-color: #323336;
+ }
+.product .model {
+    color: #77797A;
+    font-size: 18px;
+ }
+.product input[type=radio], .product input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+ }
+.product label {
+    font-size: 12px;
+    line-height: 30px;
+    vertical-align: top;
+ }
+
+.product .badge.price-old {
+    position: relative;
+    top:20px;
+    left: -20px;
+    text-decoration: line-through;
+    color: #ededed;
+    line-height: 24px;
+    background-color: #d51313;
+    font-style: italic;
+    font-weight: bold;
+ }
+.product .discount {
+    margin-top: 20px;
+    color: #000000;
+    line-height: 26px;
+    background: url("../image/bg/bg_5.png");
+    text-align: center;
+    vertical-align: middle;
+    border-radius:5px;
+    border: solid 1px #595959;
+ }
+.product .discount div {
+    display: block;
+    font-style: italic;
+    text-align: center;
+ }
+.product #button-cart {
+   float: right;
+ }
+
+.product .description .review {
+    border-top: 1px solid #a3a3a3;
+    line-height: 22px;
+    padding: 5px;
+    margin-bottom: 3px;
+   position: relative;
+
+ }
+.product .description .review div {
+   /*text-align: center;*/
+  margin-left: 5px;
+ }
+.product .description .review .write {
+float: right;
+    margin-right: 20px;
+    cursor: pointer;
+ }
+
+.product .description .review .reviews .badge {
+    background-color: #006ADF;
+    cursor: pointer;
+ }
+.related ul li{
+   margin-left: 10px;
+ }
+
+.related .price {
+
+    color: inherit;
+    background: inherit;
+    border: inherit;
+    padding: 0;
+    margin: 0;
+}
+.related .cart {
+    border: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+.related #carousel li img {
+  border: none;border-bottom: 1px solid #D0D0D0;
+
+}
+.related #carousel .grid-item {
+  border-top: 1px solid #D0D0D0;
+}
+
 
