@@ -49,7 +49,8 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <![endif]-->
     <!--[if gte IE 9]><!-->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.3.min.js"></script>-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <!--<![endif]-->
     <script src="catalog/view/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="catalog/view/plugins/jquery.transit/jquery.transit.js"></script>
@@ -58,6 +59,7 @@
     <script src="catalog/view/plugins/blockUI/jquery.blockUI.js"></script>
     <script src="catalog/view/plugins/jquery-cookie/jquery.cookie.js"></script>
     <script src="catalog/view/plugins/flex-slider/jquery.flexslider.js"></script>
+    <script src="catalog/view/plugins/iCheck/jquery.icheck.min.js"></script>
     <!-- end: MAIN JAVASCRIPTS -->
     <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
     <script src="catalog/view/plugins/stellar.js/jquery.stellar.min.js"></script>

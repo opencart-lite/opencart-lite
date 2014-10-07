@@ -59,3 +59,10 @@ location = '<?php echo $redirect; ?>';
         </div>
     </div>
 </div>
+<div class="form-group">
+    <div class="col-sm-2 col-sm-offset-8" id="button">
+        <button class="btn btn-blue next-step btn-block" id="button-confirm">
+            Continue<?php //echo $button_continue; ?> <i class="fa fa-arrow-circle-right"></i>
+        </button>
+    </div>
+</div>

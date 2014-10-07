@@ -63,6 +63,13 @@ var Main = function() {
 			$('.dropdown-toggle').dropdownHover({
 				delay: 0
 			});
+
+            $('.links.dropdown').dropdownHover(false);
+            //$('.links.dropdown').dropdown(false);
+
+           // $('.links.dropdown').on('click', function(){
+             //   $(this).addClass('open');
+            //});
 		}
 	};
 	//Window Resize Function
