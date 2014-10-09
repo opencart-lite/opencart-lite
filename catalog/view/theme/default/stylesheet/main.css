@@ -3071,6 +3071,7 @@ select.form-control option {
 .navbar-tools > ul > li > a {
     padding: 15px 15px 9px;
     font-size: 16px;
+    height: 47px;
 }
 .navbar-tools li.view-all a {
     padding: 8px 8px 6px !important;
@@ -3113,7 +3114,7 @@ ul.notifications li, ul.todo li, ul.posts li {
 }
 
 .navbar-tools .dropdown-menu > li > a:hover, .navbar-tools .dropdown-menu > li > a:focus, .navbar-tools .dropdown-submenu:hover > a, .navbar-tools .dropdown-submenu:focus > a, .navbar-tools .drop-down-wrapper li a:hover, .navbar-tools .drop-down-wrapper li a:focus {
-    background-color: #F4F6F9 !important;
+    background-color: #F4F6F9 ;
     background-image: none;
     filter: none;
     color: #000;
@@ -3473,7 +3474,7 @@ li.dropdown.current-user .dropdown-menu li a {
 
 .links a:hover {
     color: #006ADF;
-    border-bottom: 1px solid #eedf43 !important;
+    /*border-bottom: 1px solid #eedf43 !important;*/
 }
 
 .links i {
@@ -3652,5 +3653,83 @@ float: right;
 .related #carousel .grid-item {
   border-top: 1px solid #D0D0D0;
 }
+.related #carousel .cart, .related #carousel h4, .related #carousel .price {
+  text-align: center;
+}
 
+.related #carousel .price-old, .related #carousel .price-new {
+    margin: 0;
+}
+
+.navbar-tools .dropdown-menu .view-all a {
+    text-align: center;
+    float: left;
+    display: inline-block;
+    width: 50%;
+    clear: none;
+}
+
+.navbar-tools .dropdown-menu.posts .thread-content a{
+    float: left;
+ width: auto;
+    border: none;
+    margin: 1px;
+}
+.navbar-tools .dropdown-menu.posts .thread-content{
+    width: 100%;
+    display: table;
+}
+.navbar-tools .dropdown-menu.posts .thread-content img{
+    border: 1px solid #EEEEEE;
+}
+.navbar-tools .dropdown-menu.posts .thread-content .name{
+    height: 20px;
+    color: #0000FF;
+    padding-bottom: 0px;
+    text-decoration: underline;
+}
+.navbar-tools .dropdown-menu.posts .thread-content .name:hover{
+    background-color: #fff;
+    text-decoration:none;
+}
+.navbar-tools .dropdown-menu.posts .quantity, .navbar-tools .dropdown-menu.posts .total{
+    float: left;
+    color: #000;
+    display: table;
+    font-size: 12px;
+    font-weight: 300;
+    margin: 1px;
+    padding: 8px 8px 0px;
+    line-height: 23px;
+    max-width: none;
+    min-height: 23px;
+}
+.navbar-tools .dropdown-menu.posts i{
+    margin-top: 1px;
+   font-size: inherit;
+}
+.navbar-tools .dropdown-menu.posts .label{
+    float:right;
+    margin: 11px;
+    cursor: pointer;
+}
+#mini-cart-total table{
+    float: right;
+    font-size: 12px;
+   width: 50%;
+    margin: 10px;
+
+}
+
+
+#mini-cart-total{
+    text-align: right;
+    color: #000;
+}
+.thread-content .option{
+    clear: both;
+    display: inline-block;
+    color: #000;
+   margin-left: 20px;
+}
 

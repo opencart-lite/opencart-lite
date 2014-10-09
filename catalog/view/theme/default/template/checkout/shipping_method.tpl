@@ -34,3 +34,10 @@
 <textarea name="comment" rows="8" style="width: 98%;"><?php echo $comment; ?></textarea>
 <br />
 <br />
+<div class="form-group">
+    <div class="col-sm-2 col-sm-offset-8" id="button">
+        <button class="btn btn-blue next-step btn-block" id="button-next">
+            Continue<?php //echo $button_continue; ?> <i class="fa fa-arrow-circle-right"></i>
+        </button>
+    </div>
+</div>

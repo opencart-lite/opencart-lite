@@ -354,11 +354,11 @@
                                             <div id="review"></div>
                                             <h2 id="review-title"><?php echo $text_write; ?></h2>
                                             <b><?php echo $entry_name; ?></b><br />
-                                            <input type="text" name="name" value="" />
+                                            <input class="form-control" type="text" name="name" value="" />
                                             <br />
                                             <br />
                                             <b><?php echo $entry_review; ?></b>
-                                            <textarea name="text" cols="40" rows="8" style="width: 98%;"></textarea>
+                                            <textarea class="form-control" name="text" cols="40" rows="8" style="width: 98%;"></textarea>
                                             <span style="font-size: 11px;"><?php echo $text_note; ?></span><br />
                                             <br />
                                             <b><?php echo $entry_rating; ?></b> <span><?php echo $entry_bad; ?></span>&nbsp;
@@ -374,12 +374,12 @@
                                             &nbsp;<span><?php echo $entry_good; ?></span><br />
                                             <br />
                                             <b><?php echo $entry_captcha; ?></b><br />
-                                            <input type="text" name="captcha" value="" />
+                                            <input class="form-control" type="text" name="captcha" value="" />
                                             <br />
                                             <img src="index.php?route=product/product/captcha" alt="" id="captcha" /><br />
                                             <br />
                                             <div class="buttons">
-                                                <div class="right"><a id="button-review" class="button"><?php echo $button_continue; ?></a></div>
+                                                <button id="button-review" class="btn btn-default right" class="button"><?php echo $button_continue; ?></button>
                                             </div>
                                         </div>
                                     </div>
@@ -406,7 +406,7 @@
                                                                     </div>
                                                                     <?php } ?>
                                                                     <div class="grid-content">
-                                                                        <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
+                                                                            <h4 class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
                                                                         <?php if ($product['price']) { ?>
                                                                         <div class="price">
                                                                             <?php if (!$product['special']) { ?>
@@ -419,7 +419,15 @@
                                                                         <?php if ($product['rating']) { ?>
                                                                         <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
                                                                         <?php } ?>
-                                                                        <div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>
+
+                                                                        <div class="cart">
+                                                                            <button onclick="addToCart('<?php echo $product['product_id']; ?>');" class="btn btn-main-color btn-squared">
+                                                                                <i class="clip-cart"></i>
+                                                                                <?php echo $button_cart; ?>
+                                                                            </button>
+                                                                        </div>
+
+
                                                                     </div>
                                                                 </a>
 
@@ -533,7 +541,7 @@
 <?php } ?>
 <?php } ?>
 <script type="text/javascript">
-    /*$('#review .pagination a').live('click', function() {
+    $('#review .pagination a').on('click', function() {
         $('#review').fadeOut('slow');
 
         $('#review').load(this.href);
@@ -552,7 +560,7 @@
             dataType: 'json',
             data: 'name=' + encodeURIComponent($('input[name=\'name\']').val()) + '&text=' + encodeURIComponent($('textarea[name=\'text\']').val()) + '&rating=' + encodeURIComponent($('input[name=\'rating\']:checked').val() ? $('input[name=\'rating\']:checked').val() : '') + '&captcha=' + encodeURIComponent($('input[name=\'captcha\']').val()),
             beforeSend: function() {
-                $('.success, .warning').remove();
+                $('.success, .warning, .alert').remove();
                 $('#button-review').attr('disabled', true);
                 $('#review-title').after('<div class="attention"><img src="catalog/view/theme/default/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
             },
@@ -562,7 +570,7 @@
             },
             success: function(data) {
                 if (data['error']) {
-                    $('#review-title').after('<div class="warning">' + data['error'] + '</div>');
+                    $('#review-title').after('<div class="alert alert-warning">' + data['error'] + '</div>');
                 }
 
                 if (data['success']) {
@@ -575,13 +583,13 @@
                 }
             }
         });
-    });*/
+    });
     </script>
 <script type="text/javascript">
     //$('#tabs a').tabs();
     </script>
-<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript"><!--
+<!--<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script>-->
+<script type="text/javascript">
     /*if ($.browser.msie && $.browser.version == 6) {
         $('.date, .datetime, .time').bgIframe();
     }

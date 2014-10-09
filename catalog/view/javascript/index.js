@@ -240,7 +240,7 @@ function addToCart(product_id, quantity) {
         dataType: 'json',
         success: function(json) {
             $('.alert-success, .warning, .attention, .information, .error').remove();
-
+console.log(json);
             if (json['redirect']) {
                 location = json['redirect'];
             }
@@ -250,7 +250,7 @@ function addToCart(product_id, quantity) {
 
                 $('.alert-success').fadeIn('slow');
 
-                $('#cart-total').html(json['total']);
+                $('#cart-total').html('<i id="cart-total" class="clip-cart"></i><span id="cart-total" class="badge"> ' + json['total'] + '</span>');
 
                 $('html, body').animate({ scrollTop: 0 }, 'slow');
             }

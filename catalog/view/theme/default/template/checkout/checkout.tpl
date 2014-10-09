@@ -82,13 +82,6 @@
                             </div>
                         </div>
                         <div id="checkout-content"></div>
-                        <div class="form-group">
-                            <div class="col-sm-2 col-sm-offset-8" id="button">
-                                <button class="btn btn-blue next-step btn-block" id="button-next">
-                                    Continue<?php //echo $button_continue; ?> <i class="fa fa-arrow-circle-right"></i>
-                                </button>
-                            </div>
-                        </div>
                     </div>
             </div>
             </div>
@@ -250,7 +243,7 @@ var viewStep = function (step, next) {
     });
 };
 // Next
-$('#button-next').on('click', function() {
+$('#checkout-content').on('click', '#button-next', function() {
     var step = $('#button-next').attr('step');
 
     runStep(step , nextSteps[step].name);
@@ -261,7 +254,7 @@ $('#wizard ul li a').on('click', function() {
     var step = $(this).attr('id');
     var sClass = $(this).attr('class');
     if(sClass == 'selected' || sClass == 'done'){
-        //viewStep(step , nextSteps[step].name);
+        viewStep(step , nextSteps[step].name);
     }
     return false;
 });

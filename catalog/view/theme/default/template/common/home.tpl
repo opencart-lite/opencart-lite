@@ -1,4 +1,5 @@
 <?php echo $header; ?>
+<section id="notification"></section>
 <?php echo $column_left; ?>
 <?php echo $column_right; ?>
 <!-- start: MAIN CONTAINER -->
